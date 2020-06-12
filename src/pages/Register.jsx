@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import {  MDBRow, MDBCol} from 'mdbreact';
 import Button from './../components/button'
+import {connect} from 'react-redux'
+import {RegisterUser} from './../redux/actions'
 
 
-const Register = () => {
+const Register = ({RegisterUser}) => {
 
     const [data,setdata]=useState({
         firstname:'',
@@ -20,12 +22,12 @@ const Register = () => {
     })
     const changeHandler=(e)=>{
         setdata({...data,[e.target.name]:e.target.value})
-        console.log(data)
+        // console.log(data)
     }
 
     const submitHandler=(e)=>{
         e.preventDefault()  
-        // props.RegisterUser(data)
+        RegisterUser(data)
     }
 
     return ( 
@@ -278,13 +280,8 @@ const Register = () => {
                     </div>
                 </div>
             </div>
-            
-
-
-            
-        
      );
 }
- 
-export default Register;
+
+export default connect(null,{RegisterUser})(Register);
 
