@@ -7,7 +7,7 @@ import {
         USER_LOGIN_SUCCESS
     } from './type'
 import Axios from 'axios'
-import { API_URL } from '../../supports/Apiurl'
+import { API_URL } from './../../support/Apiurl'
 
 
 export const RegisterUser=(
