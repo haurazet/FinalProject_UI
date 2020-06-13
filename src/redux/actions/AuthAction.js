@@ -39,57 +39,36 @@ export const RegisterUser=(
             email===''||
             confirmpassword===''
             ){
-            dispatch({type:USER_REGISTER_FAILED,payload:'Please fill in all field'})
+            dispatch({type:USER_REGISTER_FAILED,payload:{isComplete:false,errormes:'Please fill all field'}})
 
         }else{
             if(password!==confirmpassword){
-                dispatch({type:USER_REGISTER_FAILED,payload:'Password and confirm password does not match'})
+                dispatch({type:USER_REGISTER_FAILED,payload:{isConfirmTrue:false,errormes:'Password and confirm password does not match'}})
             }else{
-                var hilangstring=password.replace(' ','')
-                if (hilangstring.length>=6){
-                    var huruf=false
-                    var angka=false
-                    for(var i=0;i<hilangstring.length;i++){
-                        if(hilangstring[i]>=0){
-                            angka=true
-                        }else{
-                            huruf=true
-                        }
-                    }
-                    if (angka&&huruf){
-                        //disini langsung post datanya
-                        var data={
-                            firstname,
-                            lastname,
-                            username,
-                            address,
-                            city,
-                            state,
-                            zipcode,
-                            phonenumber,
-                            email,
-                            password,
-                            confirmpassword
-                        }
-                        Axios.post(`${API_URL}/users/register`,data)
-                        .then((res)=>{
-                            if(res.data.status){
-                                localStorage.setItem('token',res.data.token)
-                                dispatch({type:USER_REGISTER_SUCCESS,payload:'Register successful!'})
-                            }else{
-                                dispatch({type:USER_REGISTER_FAILED,payload:'Username already exist'})
-                            }
-                        }).catch((err)=>{
-                            dispatch({type:USER_REGISTER_FAILED,payload:err.message})
-                        })
-                    }else if (huruf){
-                        dispatch({type:USER_REGISTER_FAILED,payload:'Password should contain number'})
-                    }else{
-                        dispatch({type:USER_REGISTER_FAILED,payload:'Password should contain alphabet'})
-                    }
-                }else{
-                    dispatch({type:USER_REGISTER_FAILED,payload:'Password should have more than 6 characters'})
+                var data={
+                    firstname,
+                    lastname,
+                    username,
+                    address,
+                    city,
+                    state,
+                    zipcode,
+                    phonenumber,
+                    email,
+                    password,
+                    confirmpassword
                 }
+                Axios.post(`${API_URL}/users/register`,data)
+                .then((res)=>{
+                    if(res.data.status){
+                        localStorage.setItem('token',res.data.token)
+                        dispatch({type:USER_REGISTER_SUCCESS,payload:'Register successful!'})
+                    }else{
+                        dispatch({type:USER_REGISTER_FAILED,payload:{isUsername:false,errormes:'Username already exist'}})
+                    }
+                }).catch((err)=>{
+                    dispatch({type:USER_REGISTER_FAILED,payload:err.message})
+                })
             }
         }
     }

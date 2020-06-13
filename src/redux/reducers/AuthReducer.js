@@ -18,16 +18,20 @@ const INITIAL_STATE={
     successmes:'',
     token:'',
     isVerified:0,
+    // Register Validation
+    isConfirmTrue:true,
+    isUsername:true,
+    submitClicked:false
 }
 
 export default (state=INITIAL_STATE,action)=>{
     switch(action.type){
         case USER_REGISTER_START:
-            return{...state,loading:true}
+            return{...state,loading:true, errormes:'', submitClicked:false, isConfirmTrue:true}
         case USER_REGISTER_SUCCESS:
             return{...state,loading:false,successmes:action.payload}
         case USER_REGISTER_FAILED:
-            return{...state,loading:false,errormes:action.payload}
+            return{...state,loading:false,...action.payload,submitClicked:true}
         case USER_LOGIN_START:
             return{...state,loading:true}
         case USER_LOGIN_SUCCESS:
