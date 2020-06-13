@@ -5,6 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import {BrowserRouter} from "react-router-dom";
+import '@sweetalert2/themes/wordpress-admin'
 
 ReactDOM.render(
   <React.StrictMode>
