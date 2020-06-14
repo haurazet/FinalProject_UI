@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import {  MDBRow, MDBCol} from 'mdbreact';
 import Button from './../components/button'
+import {connect} from 'react-redux'
+import {RegisterUser} from './../redux/actions'
 
 
-const Register = () => {
+const Register = ({RegisterUser, isPassword, submitClicked, isConfirmTrue, errormes, Auth}) => {
 
     const [data,setdata]=useState({
         firstname:'',
@@ -20,12 +22,13 @@ const Register = () => {
     })
     const changeHandler=(e)=>{
         setdata({...data,[e.target.name]:e.target.value})
-        console.log(data)
+        // console.log(data)
     }
 
     const submitHandler=(e)=>{
         e.preventDefault()  
-        // props.RegisterUser(data)
+        e.target.className += " was-validated";
+        RegisterUser(data)
     }
 
     return ( 
@@ -48,7 +51,7 @@ const Register = () => {
                                         htmlFor="defaultFormRegisterNameEx"
                                         className="grey-text"
                                     >
-                                        First name <span>*</span>
+                                        First name
                                     </label>
                                     <input
                                         value={data.firstname}
@@ -59,7 +62,10 @@ const Register = () => {
                                         className="form-control"
                                         required
                                     />
-                                    <div className="valid-tooltip">Looks good!</div>
+                                    <div className="invalid-tooltip">
+                                            Please provide first name.
+                                    </div>
+                                    {/* <div className="valid-tooltip"></div> */}
                                     </MDBCol>
                                 </MDBRow>
                                 <MDBRow>
@@ -68,7 +74,7 @@ const Register = () => {
                                             htmlFor="defaultFormRegisterEmailEx2"
                                             className="grey-text"
                                         >
-                                            Last name <span>*</span>
+                                            Last name
                                         </label>
                                         <input
                                             value={data.lastname}
@@ -79,7 +85,10 @@ const Register = () => {
                                             className="form-control"
                                             required
                                         />
-                                        <div className="valid-tooltip">Looks good!</div>
+                                        <div className="invalid-tooltip">
+                                            Please provide last name.
+                                        </div>
+                                        {/* <div className="valid-tooltip">Looks good!</div> */}
                                     </MDBCol>
                                 </MDBRow>
                                 
@@ -89,7 +98,7 @@ const Register = () => {
                                             htmlFor="defaultFormRegisterEmailEx2"
                                             className="grey-text"
                                         >
-                                            Username <span>*</span>
+                                            Username
                                         </label>
                                         <input
                                             value={data.username}
@@ -97,10 +106,14 @@ const Register = () => {
                                             onChange={changeHandler}
                                             type="text"
                                             id="defaultFormRegisterEmailEx2"
-                                            className="form-control"
+                                            className={Auth.submitClicked?(Auth.isUsername?"form-control is-valid":"form-control is-invalid"):"form-control"}
                                             required
                                         />
-                                        <div className="valid-tooltip">Looks good!</div>
+                                        <div className="invalid-tooltip">
+                                            {Auth.isUsername?"Please provide username.":"Username is not available."}
+                                            
+                                        </div>
+                                        {/* <div className="valid-tooltip">Looks good!</div> */}
                                     </MDBCol>
                                 </MDBRow>
                                 <MDBRow>
@@ -120,7 +133,10 @@ const Register = () => {
                                             className="form-control"
                                             required
                                         />
-                                        <div className="valid-tooltip">Looks good!</div>
+                                        <div className="invalid-tooltip">
+                                            Please provide address.
+                                        </div>
+                                        {/* <div className="valid-tooltip">Looks good!</div> */}
                                     </MDBCol>
                                 </MDBRow>
                                 <MDBRow>
@@ -143,7 +159,7 @@ const Register = () => {
                                         <div className="invalid-tooltip">
                                             Please provide a valid city.
                                         </div>
-                                        <div className="valid-tooltip">Looks good!</div>
+                                        {/* <div className="valid-tooltip">Looks good!</div> */}
                                     </MDBCol>
                                 </MDBRow>
                                 <MDBRow>
@@ -166,7 +182,7 @@ const Register = () => {
                                         <div className="invalid-tooltip">
                                             Please provide a valid state.
                                         </div>
-                                        <div className="valid-tooltip">Looks good!</div>
+                                        {/* <div className="valid-tooltip">Looks good!</div> */}
                                     </MDBCol>
                                 </MDBRow>
                                 <MDBRow>
@@ -189,7 +205,7 @@ const Register = () => {
                                         <div className="invalid-tooltip">
                                             Please provide a valid zip.
                                         </div>
-                                        <div className="valid-tooltip">Looks good!</div>
+                                        {/* <div className="valid-tooltip">Looks good!</div> */}
                                     </MDBCol>
                                 </MDBRow>
                                 <MDBRow>
@@ -209,7 +225,10 @@ const Register = () => {
                                             className="form-control"
                                             required
                                         />
-                                        <div className="valid-tooltip">Looks good!</div>
+                                        <div className="invalid-tooltip">
+                                            Please provide phonenumber.
+                                        </div>
+                                        {/* <div className="valid-tooltip">Looks good!</div> */}
                                     </MDBCol>
                                 </MDBRow>
                                 <div className="my-5 h4 form-header"> Account Information </div>
@@ -219,7 +238,7 @@ const Register = () => {
                                             htmlFor="defaultFormRegisterConfirmEx3"
                                             className="grey-text"
                                         >
-                                            Email <span>*</span>
+                                            Email
                                         </label>
                                         <input
                                             value={data.email}
@@ -228,7 +247,11 @@ const Register = () => {
                                             id="defaultFormRegisterConfirmEx3"
                                             className="form-control"
                                             name="email"
+                                            required
                                         />
+                                        <div className="invalid-tooltip">
+                                            Please provide valid email.
+                                        </div>
                                     </MDBCol>
                                 </MDBRow>
                                 <MDBRow>
@@ -237,16 +260,21 @@ const Register = () => {
                                             htmlFor="defaultFormRegisterConfirmEx3"
                                             className="grey-text"
                                         >
-                                            Password <span>*</span>
+                                            Password
                                         </label>
                                         <input
                                             value={data.password}
                                             onChange={changeHandler}
                                             type="password"
                                             id="defaultFormRegisterConfirmEx3"
-                                            className="form-control"
+                                            className= "form-control"
                                             name="password"
+                                            pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$"
+                                            required
                                         />
+                                        <div className="invalid-tooltip">
+                                            {data.password?"Password must contain minimum eight characters, at least one letter and one number":"Please provide password."}
+                                        </div>
                                     </MDBCol>
                                 </MDBRow>
                                 <MDBRow>
@@ -255,16 +283,21 @@ const Register = () => {
                                             htmlFor="defaultFormRegisterConfirmEx3"
                                             className="grey-text"
                                         >
-                                            Confirm Password <span>*</span>
+                                            Confirm Password
                                         </label>
                                         <input
                                             value={data.confirmpassword}
                                             onChange={changeHandler}
                                             type="password"
                                             id="defaultFormRegisterConfirmEx3"
-                                            className="form-control"
+                                            className={Auth.submitClicked?(Auth.isConfirmTrue?"form-control is-valid":"form-control is-invalid"):"form-control"}
                                             name="confirmpassword"
+                                            // pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$"
+                                            required
                                         />
+                                        <div className="invalid-tooltip">
+                                            {!Auth.isConfirmTrue?"Password and confirm password do not match":"Please provide confirm password."}
+                                        </div>
                                     </MDBCol>
                                 </MDBRow>
                                 <Button text='Sign Up'/>
@@ -278,13 +311,16 @@ const Register = () => {
                     </div>
                 </div>
             </div>
-            
-
-
-            
-        
      );
 }
- 
-export default Register;
+
+const MapstatetoProps=({Auth})=>{
+    console.log(Auth)
+    return{
+        Auth
+    }
+
+}
+
+export default connect(MapstatetoProps,{RegisterUser})(Register);
 
