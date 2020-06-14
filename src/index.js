@@ -6,9 +6,7 @@ import 'mdbreact/dist/css/mdb.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import {BrowserRouter} from "react-router-dom";
-<<<<<<< HEAD
 import '@sweetalert2/themes/wordpress-admin'
-=======
 import {createStore, applyMiddleware} from 'redux';
 import {Provider} from 'react-redux';
 import ReduxThunk from 'redux-thunk';
@@ -16,7 +14,6 @@ import reducers from './redux/reducers/index';
 
 const store=createStore(reducers,{},applyMiddleware(ReduxThunk))
 
->>>>>>> haura
 
 ReactDOM.render(
   <Provider store={store}>
