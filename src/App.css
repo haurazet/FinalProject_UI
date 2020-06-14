@@ -49,7 +49,7 @@
   text-transform: uppercase;
 }
 
-label span{
+.form-header span{
   color: red;
   font-weight: bold;
 }

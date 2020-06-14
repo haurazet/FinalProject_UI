@@ -5,7 +5,7 @@ import {connect} from 'react-redux'
 import {RegisterUser} from './../redux/actions'
 
 
-const Register = ({RegisterUser, isPassword, submitClicked, isConfirmTrue, errormes, Auth}) => {
+const Register = ({RegisterUser, Auth}) => {
 
     const [data,setdata]=useState({
         firstname:'',
@@ -43,7 +43,7 @@ const Register = ({RegisterUser, isPassword, submitClicked, isConfirmTrue, error
                                 onSubmit={submitHandler}
                                 noValidate
                                 >
-                                <div className="mb-5 h4 form-header"> Contact Information </div>
+                                <div className="mb-5 h4 form-header"> Contact Information <span>*</span> </div>
                                 
                                 <MDBRow>
                                     <MDBCol md="12" className="mb-3">
@@ -71,7 +71,7 @@ const Register = ({RegisterUser, isPassword, submitClicked, isConfirmTrue, error
                                 <MDBRow>
                                     <MDBCol md="12" className="mb-3">
                                         <label
-                                            htmlFor="defaultFormRegisterEmailEx2"
+                                            htmlFor="defaultFormRegisterNameEx1"
                                             className="grey-text"
                                         >
                                             Last name
@@ -81,7 +81,7 @@ const Register = ({RegisterUser, isPassword, submitClicked, isConfirmTrue, error
                                             name="lastname"
                                             onChange={changeHandler}
                                             type="text"
-                                            id="defaultFormRegisterEmailEx2"
+                                            id="defaultFormRegisterNameEx1"
                                             className="form-control"
                                             required
                                         />
@@ -95,7 +95,7 @@ const Register = ({RegisterUser, isPassword, submitClicked, isConfirmTrue, error
                                 <MDBRow>
                                     <MDBCol md="12" className="mb-3">
                                         <label
-                                            htmlFor="defaultFormRegisterEmailEx2"
+                                            htmlFor="defaultFormRegisterNameEx2"
                                             className="grey-text"
                                         >
                                             Username
@@ -105,7 +105,7 @@ const Register = ({RegisterUser, isPassword, submitClicked, isConfirmTrue, error
                                             name="username"
                                             onChange={changeHandler}
                                             type="text"
-                                            id="defaultFormRegisterEmailEx2"
+                                            id="defaultFormRegisterNameEx2"
                                             className={Auth.submitClicked?(Auth.isUsername?"form-control is-valid":"form-control is-invalid"):"form-control"}
                                             required
                                         />
@@ -119,7 +119,7 @@ const Register = ({RegisterUser, isPassword, submitClicked, isConfirmTrue, error
                                 <MDBRow>
                                     <MDBCol md="12" className="mb-3">
                                         <label
-                                            htmlFor="defaultFormRegisterEmailEx2"
+                                            htmlFor="defaultFormRegisterNameEx3"
                                             className="grey-text"
                                         >
                                             Address
@@ -129,7 +129,7 @@ const Register = ({RegisterUser, isPassword, submitClicked, isConfirmTrue, error
                                             name="address"
                                             onChange={changeHandler}
                                             type="text"
-                                            id="defaultFormRegisterEmailEx2"
+                                            id="defaultFormRegisterNameEx3"
                                             className="form-control"
                                             required
                                         />
@@ -142,7 +142,7 @@ const Register = ({RegisterUser, isPassword, submitClicked, isConfirmTrue, error
                                 <MDBRow>
                                     <MDBCol md="12" className="mb-3">
                                         <label
-                                            htmlFor="defaultFormRegisterPasswordEx4"
+                                            htmlFor="defaultFormRegisterNameEx4"
                                             className="grey-text"
                                         >
                                             City
@@ -151,7 +151,7 @@ const Register = ({RegisterUser, isPassword, submitClicked, isConfirmTrue, error
                                             value={data.city}
                                             onChange={changeHandler}
                                             type="text"
-                                            id="defaultFormRegisterPasswordEx4"
+                                            id="defaultFormRegisterNameEx4"
                                             className="form-control"
                                             name="city"
                                             required
@@ -165,7 +165,7 @@ const Register = ({RegisterUser, isPassword, submitClicked, isConfirmTrue, error
                                 <MDBRow>
                                     <MDBCol md="12" className="mb-3">
                                         <label
-                                            htmlFor="defaultFormRegisterPasswordEx4"
+                                            htmlFor="defaultFormRegisterNameEx5"
                                             className="grey-text"
                                         >
                                             State
@@ -174,7 +174,7 @@ const Register = ({RegisterUser, isPassword, submitClicked, isConfirmTrue, error
                                             value={data.state}
                                             onChange={changeHandler}
                                             type="text"
-                                            id="defaultFormRegisterPasswordEx4"
+                                            id="defaultFormRegisterNameEx5"
                                             className="form-control"
                                             name="state"
                                             required
@@ -188,7 +188,7 @@ const Register = ({RegisterUser, isPassword, submitClicked, isConfirmTrue, error
                                 <MDBRow>
                                     <MDBCol md="12" className="mb-3">
                                         <label
-                                            htmlFor="defaultFormRegisterPasswordEx4"
+                                            htmlFor="defaultFormRegisterNameEx6"
                                             className="grey-text"
                                         >
                                             Zip
@@ -197,7 +197,7 @@ const Register = ({RegisterUser, isPassword, submitClicked, isConfirmTrue, error
                                             value={data.zipcode}
                                             onChange={changeHandler}
                                             type="text"
-                                            id="defaultFormRegisterPasswordEx4"
+                                            id="defaultFormRegisterNameEx6"
                                             className="form-control"
                                             name="zipcode"
                                             required
@@ -211,7 +211,7 @@ const Register = ({RegisterUser, isPassword, submitClicked, isConfirmTrue, error
                                 <MDBRow>
                                     <MDBCol md="12" className="mb-3">
                                         <label
-                                            htmlFor="defaultFormRegisterEmailEx2"
+                                            htmlFor="defaultFormRegisterNameEx7"
                                             className="grey-text"
                                         >
                                             Phone Number
@@ -220,22 +220,23 @@ const Register = ({RegisterUser, isPassword, submitClicked, isConfirmTrue, error
                                             value={data.phonenumber}
                                             name="phonenumber"
                                             onChange={changeHandler}
-                                            type="text"
-                                            id="defaultFormRegisterEmailEx2"
+                                            type="number"
+                                            id="defaultFormRegisterNameEx7"
                                             className="form-control"
+                                            pattern="\+?([ -]?\d+)+|\(\d+\)([ -]\d+)"
                                             required
                                         />
                                         <div className="invalid-tooltip">
-                                            Please provide phonenumber.
+                                            Please provide valid phonenumber. Example 62 811338429196
                                         </div>
                                         {/* <div className="valid-tooltip">Looks good!</div> */}
                                     </MDBCol>
                                 </MDBRow>
-                                <div className="my-5 h4 form-header"> Account Information </div>
+                                <div className="my-5 h4 form-header"> Account Information  <span>*</span></div>
                                 <MDBRow>
                                     <MDBCol md="12" className="mb-3">
                                         <label
-                                            htmlFor="defaultFormRegisterConfirmEx3"
+                                            htmlFor="defaultFormRegisterNameEx8"
                                             className="grey-text"
                                         >
                                             Email
@@ -244,7 +245,7 @@ const Register = ({RegisterUser, isPassword, submitClicked, isConfirmTrue, error
                                             value={data.email}
                                             onChange={changeHandler}
                                             type="email"
-                                            id="defaultFormRegisterConfirmEx3"
+                                            id="defaultFormRegisterNameEx8"
                                             className="form-control"
                                             name="email"
                                             required
@@ -257,7 +258,7 @@ const Register = ({RegisterUser, isPassword, submitClicked, isConfirmTrue, error
                                 <MDBRow>
                                     <MDBCol md="12" className="mb-3">
                                         <label
-                                            htmlFor="defaultFormRegisterConfirmEx3"
+                                            htmlFor="defaultFormRegisterNameEx9"
                                             className="grey-text"
                                         >
                                             Password
@@ -266,7 +267,7 @@ const Register = ({RegisterUser, isPassword, submitClicked, isConfirmTrue, error
                                             value={data.password}
                                             onChange={changeHandler}
                                             type="password"
-                                            id="defaultFormRegisterConfirmEx3"
+                                            id="defaultFormRegisterNameEx9"
                                             className= "form-control"
                                             name="password"
                                             pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$"
@@ -280,7 +281,7 @@ const Register = ({RegisterUser, isPassword, submitClicked, isConfirmTrue, error
                                 <MDBRow>
                                     <MDBCol md="12" className="mb-3">
                                         <label
-                                            htmlFor="defaultFormRegisterConfirmEx3"
+                                            htmlFor="defaultFormRegisterNameEx10"
                                             className="grey-text"
                                         >
                                             Confirm Password
@@ -289,7 +290,7 @@ const Register = ({RegisterUser, isPassword, submitClicked, isConfirmTrue, error
                                             value={data.confirmpassword}
                                             onChange={changeHandler}
                                             type="password"
-                                            id="defaultFormRegisterConfirmEx3"
+                                            id="defaultFormRegisterNameEx10"
                                             className={Auth.submitClicked?(Auth.isConfirmTrue?"form-control is-valid":"form-control is-invalid"):"form-control"}
                                             name="confirmpassword"
                                             // pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$"
@@ -315,7 +316,7 @@ const Register = ({RegisterUser, isPassword, submitClicked, isConfirmTrue, error
 }
 
 const MapstatetoProps=({Auth})=>{
-    console.log(Auth)
+    // console.log(Auth)
     return{
         Auth
     }

@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import { Route, Switch, useLocation } from "react-router-dom";
+import { Route, Switch} from "react-router-dom";
 import Axios from 'axios';
 import Login from './pages/Login'
 import Register from './pages/Register'
