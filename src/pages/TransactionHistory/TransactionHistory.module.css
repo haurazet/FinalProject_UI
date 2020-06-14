@@ -1,6 +1,13 @@
-.container{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.descriptionbox {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  /* align-items: center; */
 }
