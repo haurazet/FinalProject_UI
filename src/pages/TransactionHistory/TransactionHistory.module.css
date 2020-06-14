@@ -1,0 +1,27 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  
+}
+
+.descriptionbox {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  /* align-items: center; */
+}
+.flexboxTitle{
+  flex-direction: row;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 1px solid #9ac84a;
+}
+
+.marginTop{
+  margin-top: 100px;
+  height: 100vh;
+  /* background-color: seagreen; */
+}

@@ -1,0 +1,84 @@
+.containers{
+            display: flex;
+            flex-direction: column;
+            background-color:'black';
+            background-size: cover;
+            /* border: 2px solid black; */
+            width: 100%;
+            margin-top: 150px;
+
+}
+
+/* TABLE CSS */
+.contenttable{
+    border-collapse: collapse;
+    font-size: 0.9em;
+    width: 80%;
+    border-radius: 5px 5px 0 0;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(0,0,0,0.15);
+  
+}
+
+.contenttable thead tr {
+    background-color: #9ac84a;
+    color: #ffffff;
+    text-align: left;
+    font-weight: bold;
+}
+
+.contenttable th,
+.contenttable td{
+    padding: 12px 15px;
+}
+
+.contenttable tbody tr {
+    border-bottom: 1px solid #dddddd;
+}
+
+.contenttable tbody tr:nth-of-type(even){
+    background-color: #f3f3f3;
+}
+
+.contenttable tbody tr:last-of-type{
+        border-bottom: 2px solid #9ac84a;
+}
+
+/* END TABLE CSS */
+
+/* MANAGE USER */
+.manageUser{
+
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    /* border: 2px solid black; */
+ 
+}
+
+.table_container{
+    display: flex;
+    flex-direction: column;
+}
+.table_search_filter{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    padding-bottom: 0;
+    margin-bottom: 0;
+    
+}
+
+.table_box{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    /* border: 2px solid black; */
+}
+
+.buttonRed{
+    background-color:  #f1300c ;
+    color: white;
+    border-radius:  4px 4px 4px 4px;
+}
+

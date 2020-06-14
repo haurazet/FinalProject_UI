@@ -7,6 +7,8 @@ import Register from './pages/Register'
 import RegisterEmailVerify from './pages/RegisterEmailVerify'
 import Notfound from './pages/NotFound'
 import Home from './pages/Home'
+import ManageUser from './pages/ManageUser/ManageUser'
+import TransactionHistory from './pages/TransactionHistory/TransactionHistory'
 
 
 function App() {
@@ -17,6 +19,10 @@ function App() {
       <Route path="/register" component={Register} exact/>
       <Route path="/registeremailverify" component={RegisterEmailVerify}/>
       <Route component={Notfound} />
+      <Route path='/manageuser' component={ManageUser} exact/>
+      <Route path='/transactionhistory' component={TransactionHistory} exact/>
+
+      {/* <Route component={Notfound} /> */}
     </Switch>
   );
 }
