@@ -3,6 +3,7 @@ import {  MDBRow, MDBCol} from 'mdbreact';
 import Button from './../components/button'
 import {connect} from 'react-redux'
 import {RegisterUser} from './../redux/actions'
+import {Redirect} from 'react-router-dom'
 
 
 const Register = ({RegisterUser, Auth}) => {
@@ -29,6 +30,10 @@ const Register = ({RegisterUser, Auth}) => {
         e.preventDefault()  
         e.target.className += " was-validated";
         RegisterUser(data)
+    }
+
+    if(Auth.isRegister){
+        return <Redirect to='/registeremailverify' />
     }
 
     return ( 

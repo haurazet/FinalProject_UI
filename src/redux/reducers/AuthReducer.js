@@ -10,6 +10,7 @@ import {
 const INITIAL_STATE={
     username:'',
     password:'',
+    email:'',
     id:0,
     role:'',
     loading:false,
@@ -18,6 +19,7 @@ const INITIAL_STATE={
     successmes:'',
     token:'',
     isVerified:0,
+    isRegister:false,
     // Register Validation
     isConfirmTrue:true,
     isUsername:true,
@@ -29,7 +31,7 @@ export default (state=INITIAL_STATE,action)=>{
         case USER_REGISTER_START:
             return{...state,loading:true, errormes:'', submitClicked:false, isConfirmTrue:true}
         case USER_REGISTER_SUCCESS:
-            return{...state,loading:false,successmes:action.payload}
+            return{...state,loading:false,isRegister:true, email:action.payload}
         case USER_REGISTER_FAILED:
             return{...state,loading:false,...action.payload,submitClicked:true}
         case USER_LOGIN_START:

@@ -62,7 +62,7 @@ export const RegisterUser=(
                 .then((res)=>{
                     if(res.data.status){
                         localStorage.setItem('token',res.data.token)
-                        dispatch({type:USER_REGISTER_SUCCESS,payload:'Register successful!'})
+                        dispatch({type:USER_REGISTER_SUCCESS,payload:email})
                     }else{
                         dispatch({type:USER_REGISTER_FAILED,payload:{isUsername:false,errormes:'Username already exist'}})
                     }
