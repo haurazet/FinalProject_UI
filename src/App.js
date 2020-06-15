@@ -6,6 +6,7 @@ import Login from './pages/Login'
 import Register from './pages/Register'
 import ManageUser from './pages/ManageUser/ManageUser'
 import TransactionHistory from './pages/TransactionHistory/TransactionHistory'
+import ManageTransaksi from './pages/ManageTransaksi/ManageTransaksi';
 
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
       <Route path="/register" component={Register} exact/>
       <Route path='/manageuser' component={ManageUser} exact/>
       <Route path='/transactionhistory' component={TransactionHistory} exact/>
+      <Route  path='/managetransaksi'  component={ManageTransaksi} exact />
 
       {/* <Route component={Notfound} /> */}
     </Switch>

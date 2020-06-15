@@ -2,6 +2,7 @@ import React,{useState,useEffect,useContext} from "react";
 import styles from "./TransactionHistory.module.css";
 import { Container, Row, Col } from "reactstrap";
 import {Table,DropdownMenu,DropdownItem,ButtonDropdown,DropdownToggle} from 'reactstrap'
+import Pagination from '../../components/Pagination/Pagination'
 import Axios from 'axios'
 import {MDBInput} from 'mdbreact'
 
@@ -15,30 +16,57 @@ const TransactionHistory = () => {
   },
   {
     status:'Pending',
-    transactionId:1235123,
+    transactionId:21345,
+    program:'TEST'
+
+  },
+  {
+    status:'Pending',
+    transactionId:21345,
+    program:'TEST'
+
+  },
+  {
+    status:'Pending',
+    transactionId:21345,
+    program:'TEST'
+
+  },
+  {
+    status:'Pending',
+    transactionId:21345,
+    program:'TEST'
+
+  },
+  {
+    status:'Pending',
+    transactionId:21345,
     program:'TEST'
 
   }
-
+  
 ])
   const [filterstatus,setfilterstatus]=useState('All')
-  const [search,setsearch]=useState(null)
-  
+  const [search,setsearch]=useState([])
+  const [loading,setLoading]=useState(false)
+  const [currentPage,setCurrentPage]=useState(1)
+  const [userPerPage]=useState(5)
+
 
   const renderData=()=>{
     if(filterstatus==='All'){
-     return data.map((value,index)=>{
+     return currentUser.map((value,index)=>{
+       console.log(index)
         return(
           <tr key={index}>
-          <th scope="row">{index+1}</th>
+        <td>{value.transactionId}</td>
         <td>{value.status==='Pending'?
         <button className='badge badge-info' disabled>Pending</button>:value.status==='Failed'?
-        <button className='badge badge-danger'>Failed</button>:value.status==='Onprocess'?
-        <button className='badge badge-primary'>On Process</button>:value.status==='Completed'?
-        <button className='badge badge-success'>Completed</button>:null
+        <button className='badge badge-danger' disabled>Failed</button>:value.status==='Onprocess'?
+        <button className='badge badge-primary' disabled>On Process</button>:value.status==='Completed'?
+        <button className='badge badge-success' disabled>Completed</button>:null
           
         }</td>
-        <td>{value.transactionId}</td>
         <td>{value.program}</td>
              <td><button className='btn btn-primary mt-0'>Detail</button></td>
         </tr>
@@ -52,40 +80,57 @@ const TransactionHistory = () => {
      return filteredData.map((value,index)=>{
           return(
             <tr key={index}>
-            <th scope="row">{index+1}</th>
+                       <td>{value.transactionId}</td>
                       <td>{value.status==='Pending'?
         <button className='badge badge-info' disabled>Pending</button>:value.status==='Failed'?
-        <button className='badge badge-danger'>Failed</button>:value.status==='Onprocess'?
-        <button className='badge badge-primary'>On Process</button>:value.status==='Completed'?
-        <button className='badge badge-success'>Completed</button>:null
+        <button className='badge badge-danger' disabled>Failed</button>:value.status==='Onprocess'?
+        <button className='badge badge-primary' disabled>On Process</button>:value.status==='Completed'?
+        <button className='badge badge-success' disabled>Completed</button>:null
           
         }</td>
-                       <td>{value.transactionId}</td>
-                      <td>{value.program}</td>
-               <td><button className='btn btn-primary mt-0'>Detail</button></td>
+          <td>{value.program}</td>
+          <td><button className='btn btn-primary mt-0'>Detail</button></td>
           </tr>
           )
       })
     }
   }
+  
+ 
 
   const HandleFilter=(e)=>{
-      e.preventDefault()
       setfilterstatus(e.target.name)
   }
 
   const HandleSearch=(e)=>{
-    e.preventDefault()
     setsearch(e.target.value)
+    if(e.target.value===''){
+      setsearch(data)
+    }
+    else{
+      let stringify=e.target.value.toString()
+      let transactionFilter=data.filter((data)=>data.transactionId.toString().includes(stringify))
+      setsearch(transactionFilter) 
+
+    }
 
   }
-
-
-
  useEffect(()=>{
+        setsearch(data)
+        console.log(currentUser)
       },[])
+
+  
   
   const toggle = () => setOpen(!dropdownOpen);
+
+// Get Current Post
+const indexOfLastUser=currentPage*userPerPage
+const indexOfFirstUser=indexOfLastUser-userPerPage
+const currentUser=search.slice(indexOfFirstUser,indexOfLastUser)
+// Change page
+const paginate = (pageNumber) => setCurrentPage(pageNumber)
+
 
   return (
     <div className={styles.marginTop}>
@@ -127,9 +172,8 @@ const TransactionHistory = () => {
              <Table responsive dark>
       <thead>
         <tr>
-          <th>No.</th>
+        <th>Transaction Id</th>
           <th>Status</th>
-          <th>Transaction Id</th>
           <th>Program Name</th>
           <th>Detail</th>
         </tr>
@@ -138,6 +182,11 @@ const TransactionHistory = () => {
           {renderData()}
       </tbody>
     </Table>
+             </Col>
+           </Row>
+           <Row>
+             <Col className='d-flex justify-content-center'>
+                    <Pagination  userPerPage={userPerPage} totalUser={search.length} paginate={paginate} />
              </Col>
            </Row>
       </Container>
