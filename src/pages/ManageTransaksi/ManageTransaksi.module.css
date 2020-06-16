@@ -1,0 +1,14 @@
+.marginTop{
+    margin-top: 100px;
+    height: 100vh;
+    /* background-color: seagreen; */
+
+    padding: 0;
+  }
+
+  .toMiddle{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+  }

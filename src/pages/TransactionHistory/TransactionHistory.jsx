@@ -76,7 +76,8 @@ const TransactionHistory = () => {
     }else if(filterstatus==='Pending'||'Onprocess'||'Completed'||'Failed'){
      const filteredData=data.filter((val)=>{
        return val.status===filterstatus
-     })
+     }
+     )
      return filteredData.map((value,index)=>{
           return(
             <tr key={index}>

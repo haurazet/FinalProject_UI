@@ -9,6 +9,7 @@ import Pagination from '../../components/Pagination/Pagination'
 
 
 const ManageUser =()=>{
+    const [filter,setfilter]=useState('')
     const [count,setcount]=useState(false)
     const [inputid,setinputid]=useState(null)
     const [search,setsearch]=useState([])
@@ -18,7 +19,7 @@ const ManageUser =()=>{
     const [data,setdata]=useState([{   
         userId:123,
         username:'Fuadariqoh',
-        report:5
+        report:3
             
     },{   
         userId:123,
@@ -29,7 +30,7 @@ const ManageUser =()=>{
     {   
         userId:123,
         username:'Fuadariqoh',
-        report:4
+        report:1
             
     },
     {   
@@ -51,6 +52,11 @@ const ManageUser =()=>{
             
     },
 ])
+
+const handleFilter=(e)=>{
+        setfilter(e.target.value)
+
+}
     
 
 
@@ -72,6 +78,7 @@ const ManageUser =()=>{
     
 
     const renderData=()=>{
+
         return currentUser.map((val,index)=>{
             return(
                 <tr key={index+1}>
@@ -96,13 +103,6 @@ const ManageUser =()=>{
             val.userId.toString().includes(stringify)
         ))
         setsearch(userFilter)
-        // else{
-        //     var string=e.target.value.toString()
-        //     let userFilter=data.filter((user)=>(
-        //         user.userId.toString().includes(string)
-        //     ))
-        //  setsearch(userFilter)
-        // }
     }
 
     const onClickBanUser=()=>{
@@ -145,14 +145,14 @@ const paginate = (pageNumber) => setCurrentPage(pageNumber)
                                      <input placeholder='Search..' onChange={handleSearch}/>
                                     <button ><FaSearch/></button>
                             </div>
-                        <div>
+                        {/* <div>
                             <b>Filter By:</b>
-                           <select name="Filter" id="1">
+                           <select name="Filter" id="1" onChange={handleFilter}>
                                <option placeholder='Filter by' value=''/>
                                <option value='report' >Report</option>
                                <option value='name'>Name</option>
                             </select>
-                        </div>
+                        </div> */}
                         </div>
                         <div className={styles.table_box}>
                         <table className={styles.contenttable}>
