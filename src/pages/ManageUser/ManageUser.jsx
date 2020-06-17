@@ -84,7 +84,7 @@ const handleFilter=(e)=>{
                 <tr key={index+1}>
             <td>{val.userId}</td>
             <td>{val.username}</td>
-            <td>{val.report}</td>
+            {/* <td>{val.report}</td> */}
             <td><button className={styles.buttonRed}  onClick={onClickBanUser}>Ban User</button></td>
             </tr>
             )
@@ -168,8 +168,8 @@ const paginate = (pageNumber) => setCurrentPage(pageNumber)
                     </tbody>
                 </table>
                         </div>
-                        <div className='d-flex justify-content-center'>
-                                <Pagination userPerPage={userPerPage} totalUser={search.length} paginate={paginate} />
+                        <div className='d-flex justify-content-center mt-4'>
+                                <Pagination className='color_pagination' userPerPage={userPerPage} totalUser={search.length} paginate={paginate} />
                         </div>
                     </div>
               

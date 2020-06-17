@@ -12,8 +12,8 @@ const Pagination=({userPerPage,totalUser,paginate})=>{
             <ul className='pagination pagination-lg'>
                 {PageNumbers.map((number)=>{
                     return(
-                        <li key={number} className='page-item'>
-                                <a onClick={()=> paginate(number)} >
+                        <li key={number} className='page-item' >
+                                <a className='color_pagination' onClick={()=> paginate(number)} >
                                     {number}
                                 </a>
                         </li>

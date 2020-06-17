@@ -187,7 +187,7 @@ const paginate = (pageNumber) => setCurrentPage(pageNumber)
            </Row>
            <Row>
              <Col className='d-flex justify-content-center'>
-                    <Pagination  userPerPage={userPerPage} totalUser={search.length} paginate={paginate} />
+                    <Pagination className='color_pagination'  userPerPage={userPerPage} totalUser={search.length} paginate={paginate} />
              </Col>
            </Row>
       </Container>

@@ -1,6 +1,7 @@
 import React from 'react'
 import styles from './NiceCard.module.css'
 import { MDBBtn } from 'mdbreact'
+import ButtonNeon from '../ButtonNeon/ButtonNeon'
 
 
 export const NiceCard=({onClick,title,description,about,price,priceDescription,type,typeDescription})=>{
@@ -10,7 +11,7 @@ export const NiceCard=({onClick,title,description,about,price,priceDescription,t
 
             </div>
             <div className={styles.cardText}>
-    <span className={styles.date}>{about}</span>
+    <span className={styles.date}>{about} Recycly Points</span>
             <h2>{title}</h2>
                 <p>{description}</p>
             </div>
@@ -22,11 +23,11 @@ export const NiceCard=({onClick,title,description,about,price,priceDescription,t
             </div>
             <div className={styles.cardStats}>
                 <div className={styles.stats}>
-    <div className={styles.value}>{price}</div>
-    <div className={styles.type}>{priceDescription}</div>
+                <div className={styles.value}>{price}</div>
+                <div className={styles.type}>Rp.{priceDescription}</div>
                 </div>
                 <div className={styles.stats}>
-                <div className={styles.value}><MDBBtn onClick={onClick}>BUY</MDBBtn></div>
+                <div className={styles.value}><ButtonNeon  text='BUY' onClick={onClick}  /></div>
                 <div className={styles.type}></div>
                 </div>
                 <div className={styles.stats}>

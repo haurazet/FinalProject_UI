@@ -35,7 +35,7 @@ const ManageTransaksi=()=>{
         {
             transaksiId:123,
             program:'asd',
-            username:'fuad',
+            username:'zxc',
         },
         {
             transaksiId:123,
@@ -194,8 +194,8 @@ const paginate = (pageNumber) => setCurrentPage(pageNumber)
                                 </MDBCol>
                             </MDBRow>
                                 <MDBRow>
-                                    <MDBCol>
-                                        {confirm?  <Pagination userPerPage={userPerPage} totalUser={search.length} paginate={paginate}  />:null}
+                                    <MDBCol className='d-flex justify-content-center'>
+                                        {confirm?  <Pagination className='color_pagination' userPerPage={userPerPage} totalUser={search.length} paginate={paginate}  />:null}
                                        
                                     </MDBCol>
                                 </MDBRow>
