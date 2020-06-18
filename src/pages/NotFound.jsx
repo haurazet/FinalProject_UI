@@ -11,7 +11,7 @@ class Notfound extends Component{
                 <h1>404</h1>
                 <h2>Page not found</h2>
               </div>
-              <a href="./">Homepage</a>
+              <a className="notfound-link" href="./">Homepage</a>
             </div>
           </div>
 

@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import {  MDBRow, MDBCol} from 'mdbreact';
-import Button from './../components/button'
+import Button from '../../components/button'
 import {connect} from 'react-redux'
-import {RegisterUser} from './../redux/actions'
-import {Redirect} from 'react-router-dom'
+import {RegisterUser} from '../../redux/actions'
+import {Redirect, useHistory} from 'react-router-dom'
 
 
 const Register = ({RegisterUser, Auth}) => {
@@ -32,9 +32,12 @@ const Register = ({RegisterUser, Auth}) => {
         RegisterUser(data)
     }
 
+    const history = useHistory()
+
     if(Auth.isRegister){
         return <Redirect to='/registeremailverify' />
     }
+
 
     return ( 
             <div className='register-container'>
@@ -65,6 +68,7 @@ const Register = ({RegisterUser, Auth}) => {
                                         type="text"
                                         id="defaultFormRegisterNameEx"
                                         className="form-control"
+                                        // pattern="/^[A-Za-z]+$/"
                                         required
                                     />
                                     <div className="invalid-tooltip">
@@ -88,6 +92,7 @@ const Register = ({RegisterUser, Auth}) => {
                                             type="text"
                                             id="defaultFormRegisterNameEx1"
                                             className="form-control"
+                                            // pattern = "[A-Za-z]"
                                             required
                                         />
                                         <div className="invalid-tooltip">
@@ -205,6 +210,7 @@ const Register = ({RegisterUser, Auth}) => {
                                             id="defaultFormRegisterNameEx6"
                                             className="form-control"
                                             name="zipcode"
+                                            pattern="^[0-9]*$"
                                             required
                                         />
                                         <div className="invalid-tooltip">
@@ -251,12 +257,12 @@ const Register = ({RegisterUser, Auth}) => {
                                             onChange={changeHandler}
                                             type="email"
                                             id="defaultFormRegisterNameEx8"
-                                            className="form-control"
+                                            className={Auth.submitClicked?(Auth.isEmail?"form-control is-valid":"form-control is-invalid"):"form-control"}
                                             name="email"
                                             required
                                         />
                                         <div className="invalid-tooltip">
-                                            Please provide valid email.
+                                        {Auth.isEmail?"Please provide email.":'Email already registered, please sign in or use another email.'}
                                         </div>
                                     </MDBCol>
                                 </MDBRow>
@@ -313,7 +319,7 @@ const Register = ({RegisterUser, Auth}) => {
                     </div>
                     <div className="col-md-5 py-5 px-2 register-right-container">
                         <div>Already have an Account?</div>
-                        <div className="my-5"><Button text='Sign in here'/></div>
+                        <div className="my-5"><Button text='Sign in here' onclick={()=> history.push('/login')}/></div>
                     </div>
                 </div>
             </div>
@@ -321,7 +327,7 @@ const Register = ({RegisterUser, Auth}) => {
 }
 
 const MapstatetoProps=({Auth})=>{
-    // console.log(Auth)
+    console.log(Auth)
     return{
         Auth
     }

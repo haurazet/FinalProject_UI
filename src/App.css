@@ -42,7 +42,6 @@
 }
 
 .register label{
-  
   font-size: 1.2em;
   color: #25656d;
   padding-left: 1% !important;
@@ -52,6 +51,21 @@
 .form-header span{
   color: red;
   font-weight: bold;
+}
+
+/* ============= */
+/*      LOGIN    */
+/* ============= */
+
+.error-message{
+  background-color: rgba(247, 151, 151, 0.479);
+  border: 1px solid rgba(233, 88, 88, 0.808);
+  border-radius: 2px;
+  width: fit-content;
+  padding: 2%;
+  font-size: 0.9em;
+  margin-bottom: 4%;
+  color: #030005c9;
 }
 
 /* ================ */
@@ -97,6 +111,23 @@
   -webkit-box-shadow: 0px 0px 35px -17px rgba(0,0,0,0.75);
   -moz-box-shadow: 0px 0px 35px -17px rgba(0,0,0,0.75);
   box-shadow: 0px 0px 35px -17px rgba(0,0,0,0.75);
+}
+
+.go-back-link{
+  color: #007bff !important;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-transform: none;
+  letter-spacing: normal;
+  margin: 0 0;
+  padding: 0 0;
+}
+
+.go-back-link:hover{
+  color: #007bff !important;
+  background-color: unset;
+  font-weight: 400;
 }
 
 /* ================ */
@@ -151,7 +182,6 @@
   letter-spacing: -20px;
 }
 
-
 .notfound .notfound-404 h2 {
   font-family: 'Montserrat', sans-serif;
   position: absolute;
@@ -167,7 +197,7 @@
   margin: 0;
 }
 
-.notfound a {
+.notfound-link {
   font-family: 'Montserrat', sans-serif;
   display: inline-block;
   text-transform: uppercase;
@@ -182,7 +212,7 @@
   transition: 0.2s all;
 }
 
-.notfound a:hover {
+.notfound-link:hover {
   color: #8400ff;
 }
 
