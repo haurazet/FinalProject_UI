@@ -3,14 +3,18 @@
   padding: 0;
   margin: 0;
 }
-
+/* Small Screen */
 @media only screen and (max-width: 600px) {
   .register-right-container{
     text-align: center;
     padding-top: 0 !important;
   }
 }
-
+ 
+/* Large Screen */
+@media only screen and (min-width: 600px) {
+  
+}
 /* ============= */
 /*    REGISTER   */
 /* ============= */
@@ -88,3 +92,5 @@ label span{
   color: white !important;
   background-color: black;
 }
+
+

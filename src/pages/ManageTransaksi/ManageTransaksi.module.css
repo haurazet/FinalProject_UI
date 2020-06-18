@@ -2,8 +2,9 @@
     margin-top: 100px;
     height: 100vh;
     /* background-color: seagreen; */
-
+    margin-left: auto;
     padding: 0;
+    /* margin-right: 100px; */
   }
 
   .toMiddle{
