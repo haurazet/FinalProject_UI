@@ -4,12 +4,24 @@ import {
     USER_REGISTER_START,
     USER_LOGIN_START, 
     USER_LOGIN_FAILED, 
-    USER_LOGIN_SUCCESS
+    USER_LOGIN_SUCCESS,
+    SEND_EMAIL_START,
+    SEND_EMAIL_SUCCESS,
+    VERIFY_START,
+    VERIFY_SUCCESS,
+    VERIFY_FAILED,
+    SEND_EMAIL_PASSWORD_START,
+    SEND_EMAIL_PASSWORD_FAILED,
+    SEND_EMAIL_PASSWORD_SUCCESS,
+    RESET_PASSWORD_START,
+    RESET_PASSWORD_FAILED,
+    RESET_PASSWORD_SUCCESS
 } from '../actions/type'
 
 const INITIAL_STATE={
     username:'',
     password:'',
+    email:'',
     id:0,
     role:'',
     loading:false,
@@ -18,10 +30,21 @@ const INITIAL_STATE={
     successmes:'',
     token:'',
     isVerified:0,
+    isRegister:false,
     // Register Validation
     isConfirmTrue:true,
     isUsername:true,
-    submitClicked:false
+    submitClicked:false,
+    isEmail:true,
+    // Send Email Verification
+    isEmailSent:false,
+    // Verify
+    isVerifySuccess:false,
+    // Send Email Password
+    isEmailPasswordSent:false,
+    // Reset Password
+    isResetSuccess:false,
+    isResetLinkExpired:false
 }
 
 export default (state=INITIAL_STATE,action)=>{
@@ -29,17 +52,37 @@ export default (state=INITIAL_STATE,action)=>{
         case USER_REGISTER_START:
             return{...state,loading:true, errormes:'', submitClicked:false, isConfirmTrue:true}
         case USER_REGISTER_SUCCESS:
-            return{...state,loading:false,successmes:action.payload}
+            return{...state,loading:false,isRegister:true, ...action.payload}
         case USER_REGISTER_FAILED:
             return{...state,loading:false,...action.payload,submitClicked:true}
         case USER_LOGIN_START:
             return{...state,loading:true}
         case USER_LOGIN_SUCCESS:
-            return{...state,loading:false,...action.payload,islogin:true}
+            return{...state,loading:false,...action.payload,isLogin:true}
         case USER_LOGIN_FAILED:
             return{...state,loading:false,errormes:action.payload}
-        case 'ErrorClear':
-            return state
+        case SEND_EMAIL_START:
+            return{...state,loading:true}
+        case SEND_EMAIL_SUCCESS:
+            return{...state,loading:false,isEmailSent:true}
+        case VERIFY_START:
+            return{...state,loading:true}
+        case VERIFY_SUCCESS:
+            return{...state,loading:false,...action.payload,isVerifySuccess:true, isLogin:true}
+        case VERIFY_FAILED:
+            return{...state,loading:false,isVerifySuccess:false}
+        case SEND_EMAIL_PASSWORD_START:
+            return{...state,loading:true, errormes:''}
+        case SEND_EMAIL_PASSWORD_SUCCESS:
+            return{...state,loading:false,isEmailPasswordSent:true, errormes:''}
+        case SEND_EMAIL_PASSWORD_FAILED:
+            return{...state,loading:false,errormes:action.payload}
+        case RESET_PASSWORD_START:
+            return{...state,loading:true, submitClicked:false, isConfirmTrue:true}
+        case RESET_PASSWORD_SUCCESS:
+            return{...state,loading:false,...action.payload,isResetSuccess:true}
+        case RESET_PASSWORD_FAILED:
+            return{...state,loading:false,...action.payload,submitClicked:true}
         default:
             return state
     }
