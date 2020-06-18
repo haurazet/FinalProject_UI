@@ -1,0 +1,18 @@
+.marginTop{
+    margin-top: 100px;
+    height: 100vh;
+    /* background-color: seagreen; */
+    font-family: 'sanfransisco';
+    /* background-image: url('../../images//annagolant180502049.jpg'); */
+    /* background-size: 2000px 2000px; */
+    /* background-size: contain; */
+  /* background-image: url('../../images//annagolant180502049.jpg'); */
+  /* background-repeat: no-repeat; */
+  /* background-size: cover; */
+  
+  }
+.container{
+  background-image: url('../../images//annagolant180502049.jpg');
+  background-size: cover;
+
+}

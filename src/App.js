@@ -12,6 +12,10 @@ import TransactionHistory from './pages/TransactionHistory/TransactionHistory'
 import Verified from './pages/Auth/Verified'
 import ForgotPassword from './pages/Auth/ForgotPassword'
 import ResetPassword from './pages/Auth/ResetPassword'
+import ManageTransaksi from './pages/ManageTransaksi/ManageTransaksi';
+import Reward from './pages/Reward/Reward';
+import Dashboard from './pages/Dashboard/Dashboard';
+import Report from './pages/Report/Report';
 
 
 function App() {
@@ -26,7 +30,14 @@ function App() {
       <Route path="/resetpassword" component={ResetPassword} exact/>
       <Route path='/manageuser' component={ManageUser} exact/>
       <Route path='/transactionhistory' component={TransactionHistory} exact/>
+      <Route  path='/managetransaksi'  component={ManageTransaksi} exact />
+      <Route  path='/reward' component={Reward} exact />
+      <Route  path='/dashboard' component={Dashboard} exact />
+      <Route  path='/report' component={Report} exact />
       <Route component={Notfound} />
+
+
+      {/* <Route component={Notfound} /> */}
     </Switch>
   );
 }
