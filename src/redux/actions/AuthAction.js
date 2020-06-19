@@ -15,7 +15,9 @@ import {
         SEND_EMAIL_PASSWORD_SUCCESS,
         RESET_PASSWORD_START,
         RESET_PASSWORD_FAILED,
-        RESET_PASSWORD_SUCCESS
+        RESET_PASSWORD_SUCCESS,
+        TOKEN_EXIST,
+        TOKEN_NOT_EXIST
     } from './type'
 import Axios from 'axios'
 import { API_URL } from './../../support/Apiurl'
@@ -200,7 +202,7 @@ export const ResetPasswordAction=({props,data})=>{
                     password
                 }
             }
-            // console.log(obj)
+            console.log(obj)
             Axios.get(`${API_URL}/users/resetpassword`,databody)
             .then((res)=>{ //kalo token masih aktif
                 console.log(res.data)
@@ -209,6 +211,19 @@ export const ResetPasswordAction=({props,data})=>{
                 console.log(err)
                 dispatch({type:RESET_PASSWORD_FAILED,payload:{isResetLinkExpired:true}})
             })
+        }
+    }
+}
+
+export const CheckToken = (props) =>{
+    return(dispatch)=>{
+        var obj=querystring.parse(props.location.search)
+        console.log(obj.token)
+        if(obj.token){
+            console.log('masuk if')
+            dispatch({type:TOKEN_EXIST})
+        }else{
+            dispatch({type:TOKEN_NOT_EXIST})
         }
     }
 }

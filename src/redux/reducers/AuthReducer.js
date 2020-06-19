@@ -15,7 +15,9 @@ import {
     SEND_EMAIL_PASSWORD_SUCCESS,
     RESET_PASSWORD_START,
     RESET_PASSWORD_FAILED,
-    RESET_PASSWORD_SUCCESS
+    RESET_PASSWORD_SUCCESS,
+    TOKEN_EXIST,
+    TOKEN_NOT_EXIST
 } from '../actions/type'
 
 const INITIAL_STATE={
@@ -44,7 +46,9 @@ const INITIAL_STATE={
     isEmailPasswordSent:false,
     // Reset Password
     isResetSuccess:false,
-    isResetLinkExpired:false
+    isResetLinkExpired:false,
+    // Check Existing Token
+    isTokenExist:false
 }
 
 export default (state=INITIAL_STATE,action)=>{
@@ -83,6 +87,10 @@ export default (state=INITIAL_STATE,action)=>{
             return{...state,loading:false,...action.payload,isResetSuccess:true}
         case RESET_PASSWORD_FAILED:
             return{...state,loading:false,...action.payload,submitClicked:true}
+        case TOKEN_EXIST:
+            return{...state,isTokenExist:true}
+        case TOKEN_NOT_EXIST:
+            return{...state,isTokenExist:false}
         default:
             return state
     }
