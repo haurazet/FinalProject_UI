@@ -13,10 +13,10 @@ const Report=()=>{
                 <MDBRow className={styles.toMiddle}>
                     <MDBCol><h1>Transaction Report</h1></MDBCol>
                 </MDBRow>
-                <MDBRow className='ml-4 mt-4'>
+                <MDBRow className='mt-4'>
                     <MDBCol><h1> Program Report</h1></MDBCol>
                 </MDBRow>
-                <MDBRow  className='ml-4 mt-4'>
+                <MDBRow  className=' mt-4'>
                     <MDBCol><b style={{fontSize:20}}>Filter By: </b>
                     <div>
                         <select className="browser-default custom-select">
@@ -27,15 +27,15 @@ const Report=()=>{
                   </div>
                     </MDBCol>
                 </MDBRow>
-                <MDBRow className='ml-4 mt-4'>
+                <MDBRow className=' mt-4'>
                     <MDBCol>
                         <Chart />
                     </MDBCol>
                 </MDBRow>
-                <MDBRow className='ml-4 mt-4'>
+                <MDBRow className=' mt-4'>
                     <MDBCol><h1> Reward Report</h1></MDBCol>
                 </MDBRow>
-                <MDBRow  className='ml-4 mt-4'>
+                <MDBRow  className=' mt-4'>
                     <MDBCol><b style={{fontSize:20}}>Filter By: </b>
                     <div>
                         <select className="browser-default custom-select">
@@ -46,7 +46,7 @@ const Report=()=>{
                   </div>
                     </MDBCol>
                 </MDBRow>
-                <MDBRow className='ml-4 mt-4'>
+                <MDBRow className=' mt-4'>
                     <MDBCol>
                         <ChartLine />
                     </MDBCol>

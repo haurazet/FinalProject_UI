@@ -56,7 +56,7 @@ const renderData=()=>{
             <td>{transaction.transaksiId}</td>
         <td>{transaction.program}</td>
         <td>{transaction.username}</td>
-            <td className='d-flex justify-content-center'> <MDBBtn outline color="danger" className='btn btn-sm' onClick={declineButton}>Decline</MDBBtn> 
+            <td > <MDBBtn outline color="danger" className='btn btn-sm' onClick={declineButton}>Decline</MDBBtn> 
             <MDBBtn outline color="success" className='btn btn-sm' onClick={acceptButton} >Accept</MDBBtn></td>
             </tr>
         ))
@@ -172,8 +172,8 @@ const paginate = (pageNumber) => setCurrentPage(pageNumber)
                     </MDBRow>
                     <MDBRow>
                         <MDBCol className='md-12'>
-                        <MDBTable responsive>
-                                <MDBTableHead color="default-color-dark" textWhite>
+                           <MDBTable responsive>
+                                    <MDBTableHead color="default-color-dark" textWhite>
                                 {confirm?    <tr>
                                             <th>Id Transaksi</th>
                                             <th>Nama Program</th>
@@ -188,15 +188,15 @@ const paginate = (pageNumber) => setCurrentPage(pageNumber)
                                             </tr>
                                             
                                             }
-                                </MDBTableHead>
-                                <MDBTableBody>
+                                    </MDBTableHead>
+                                     <MDBTableBody>
                                     {confirm? renderData():null}
                                     {/* Transaction Status get data dari hasil fetch trus status nya ongoing */}
                                          
-                                </MDBTableBody>
-                                    </MDBTable>
-                                </MDBCol>
-                            </MDBRow>
+                                    </MDBTableBody>
+                            </MDBTable>
+                            </MDBCol>
+                    </MDBRow>
                                 <MDBRow>
                                     <MDBCol className='d-flex justify-content-center'>
                                         {confirm?  <Pagination className='color_pagination' userPerPage={userPerPage} totalUser={search.length} paginate={paginate}  />:null}
