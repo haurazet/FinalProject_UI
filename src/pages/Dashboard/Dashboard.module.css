@@ -1,0 +1,77 @@
+.wrappers{
+    margin: 0;
+    /* background-color: #a2e5c3; */
+}
+.sideBar{
+    display: flex;
+    margin: 0;
+    /* justify-content: center; */
+    flex-direction: column;
+    
+    height:100vh;
+    /* align-content: center; */
+    /* border: 2px solid salmon; */
+    background-color: #9ac84a;
+    box-shadow: rgba(0,0,0,0.6);
+    
+}
+.ContentBox{
+    border: 2px saddlebrown;
+}
+.adminDashboardText{
+    font-size: 2em;
+    font-style: italic;
+    display: block;
+}
+.Box1{
+    /* border: 2px solid gold; */
+}
+.Box1:hover{
+    cursor: pointer;
+}
+
+.Box2{
+    display: flex;
+    /* margin-top: 10em; */
+    /* align-content: center; */
+    font-weight: bold;
+    align-items: center;
+    height: 100px;
+    justify-content: center;
+    flex-direction: 'column';
+    /* border: 2px solid blue; */
+    background-color: #c8b54a;
+    transition: 0.5s ease;
+    cursor: pointer;
+    border: 0.4px solid salmon;
+    /* margin:30px; */
+    
+}
+.Box2:hover{
+    
+cursor: pointer;
+transform: scale(1.15);
+box-shadow: 5px 5px 15px rgba(0,0,0,0.6);
+}
+@media only screen and (max-width: 980px) {
+    /* .register-right-container{
+      text-align: center;
+      padding-top: 0 !important;
+    } */
+    .sideBar{
+        display: flex;
+        /* justify-content: center; */
+        flex-direction: column;
+        height:20vh;
+        /* align-content: center; */
+        /* border: 2px solid salmon;   */
+  }
+  .adminDashboardText{
+    font-size: 1em;
+    font-style: italic;
+    display: flex;
+    justify-content: center;
+}
+    
+}
+

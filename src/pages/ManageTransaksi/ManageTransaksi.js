@@ -3,7 +3,8 @@ import styles from './ManageTransaksi.module.css'
 import { MDBTable, MDBTableBody, MDBTableHead,MDBContainer,MDBRow,MDBCol,MDBBtn ,MDBBtnGroup,MDBInput} from 'mdbreact';
 import Pagination from '../../components/Pagination/Pagination'
 import Swal from 'sweetalert2'
-import withReactContent from 'sweetalert2-react-content'
+
+
 
 const ManageTransaksi=()=>{
     const [currentPage,setCurrentPage]=useState(1)
@@ -55,8 +56,8 @@ const renderData=()=>{
             <td>{transaction.transaksiId}</td>
         <td>{transaction.program}</td>
         <td>{transaction.username}</td>
-            <td className='d-flex justify-content-center'> <MDBBtn outline color="danger" onClick={declineButton}>Decline</MDBBtn> 
-            <MDBBtn outline color="success" onClick={acceptButton} >Accept</MDBBtn></td>
+            <td > <MDBBtn outline color="danger" className='btn btn-sm' onClick={declineButton}>Decline</MDBBtn> 
+            <MDBBtn outline color="success" className='btn btn-sm' onClick={acceptButton} >Accept</MDBBtn></td>
             </tr>
         ))
 
@@ -139,6 +140,9 @@ const currentUser=search.slice(indexOfFirstUser,indexOfLastUser)
 // Change page
 const paginate = (pageNumber) => setCurrentPage(pageNumber)
     return(
+        <div>
+            {/* <SideBar/> */}
+            {/* <SideNavPage/> */}
         <div className={styles.marginTop}>
             <MDBContainer fluid>
                     <MDBRow className={styles.toMiddle}>
@@ -168,13 +172,13 @@ const paginate = (pageNumber) => setCurrentPage(pageNumber)
                     </MDBRow>
                     <MDBRow>
                         <MDBCol className='md-12'>
-                        <MDBTable responsive>
-                                <MDBTableHead color="default-color-dark" textWhite>
+                           <MDBTable responsive>
+                                    <MDBTableHead color="default-color-dark" textWhite>
                                 {confirm?    <tr>
                                             <th>Id Transaksi</th>
                                             <th>Nama Program</th>
                                             <th>Username</th>
-                                            <th className='d-flex justify-content-center'>Action</th>
+                                            <th >Action</th>
                                             </tr> 
                                             :
                                             <tr>
@@ -184,15 +188,15 @@ const paginate = (pageNumber) => setCurrentPage(pageNumber)
                                             </tr>
                                             
                                             }
-                                </MDBTableHead>
-                                <MDBTableBody>
+                                    </MDBTableHead>
+                                     <MDBTableBody>
                                     {confirm? renderData():null}
                                     {/* Transaction Status get data dari hasil fetch trus status nya ongoing */}
                                          
-                                </MDBTableBody>
-                                    </MDBTable>
-                                </MDBCol>
-                            </MDBRow>
+                                    </MDBTableBody>
+                            </MDBTable>
+                            </MDBCol>
+                    </MDBRow>
                                 <MDBRow>
                                     <MDBCol className='d-flex justify-content-center'>
                                         {confirm?  <Pagination className='color_pagination' userPerPage={userPerPage} totalUser={search.length} paginate={paginate}  />:null}
@@ -203,6 +207,8 @@ const paginate = (pageNumber) => setCurrentPage(pageNumber)
             </MDBContainer>
 
         </div>
+        </div>
+        
     )
 }
 export default ManageTransaksi

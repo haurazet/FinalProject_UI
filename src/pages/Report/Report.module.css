@@ -1,0 +1,20 @@
+.marginTop{
+    /* margin-top: 100px; */
+    /* height: 100vh; */
+    /* background-color: seagreen; */
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    padding: 0;
+    /* border: 2px solid salmon; */
+    /* background-color: salmon; */
+    margin-bottom: 200px;
+  }
+
+  
+  .toMiddle{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+  }
