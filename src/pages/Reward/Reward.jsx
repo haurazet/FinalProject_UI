@@ -48,15 +48,16 @@ const Reward = () => {
     );
     return currentUser.map((val, index) => (
       <NiceCard
-        key={index}
-        onClick={OnClickCard}
+        key={val.id}
+        onClick={OnClickCard(val.id)}
         title={val.title}
         description={val.description}
-        about={val.about}
-        price={val.price}
+        // about={val.about}
+        imageAdress={"../../images/registertop.jpg"}
+        price="Price"
         priceDescription={val.priceDescription}
-        type={val.type}
-        typeDescription={val.typeDescription}
+        type="Type"
+        typeDescription={val.type === 0 ? "Satuan" : "Paketan"}
       />
     ));
   };
@@ -92,15 +93,16 @@ const Reward = () => {
       const currentUser = filteredData.slice(indexOfFirstUser, indexOfLastUser);
       return currentUser.map((val, index) => (
         <NiceCard
-          key={index}
-          onClick={OnClickCard}
+          key={val.id}
+          onClick={OnClickCard(val.id)}
           title={val.title}
           description={val.description}
           // about={val.about}
+          imageAdress={"../../images/registertop.jpg"}
           price="Price"
-          priceDescription={val.priceDescription + "Recycly Points"}
+          priceDescription={val.priceDescription}
           type="Type"
-          typeDescription={val.typeDescription === 0 ? "Satuan" : "Paketan"}
+          typeDescription={val.type === 0 ? "Satuan" : "Paketan"}
         />
       ));
     } else if (filterPaket === "paketan") {
@@ -110,15 +112,16 @@ const Reward = () => {
       const currentUser = filteredData.slice(indexOfFirstUser, indexOfLastUser);
       return currentUser.map((val, index) => (
         <NiceCard
-          key={index}
-          onClick={OnClickCard}
+          key={val.id}
+          onClick={OnClickCard(val.id)}
           title={val.title}
           description={val.description}
-          about={val.about}
-          price={val.price}
+          // about={val.about}
+          imageAdress={"../../images/registertop.jpg"}
+          price="Price"
           priceDescription={val.priceDescription}
-          type={val.type}
-          typeDescription={val.typeDescription}
+          type="Type"
+          typeDescription={val.type === 0 ? "Satuan" : "Paketan"}
         />
       ));
     }
@@ -146,15 +149,16 @@ const Reward = () => {
       const currentUser = sortedItem.slice(indexOfFirstUser, indexOfLastUser);
       return currentUser.map((val, index) => (
         <NiceCard
-          key={index}
-          onClick={OnClickCard}
+          key={val.id}
+          onClick={OnClickCard(val.id)}
           title={val.title}
           description={val.description}
-          about={val.about}
-          price={val.price}
+          // about={val.about}
+          imageAdress={"../../images/registertop.jpg"}
+          price="Price"
           priceDescription={val.priceDescription}
-          type={val.type}
-          typeDescription={val.typeDescription}
+          type="Type"
+          typeDescription={val.type === 0 ? "Satuan" : "Paketan"}
         />
       ));
     } else if (filter === "mostexpensive") {
@@ -172,15 +176,16 @@ const Reward = () => {
       const currentUser = sortedItem.slice(indexOfFirstUser, indexOfLastUser);
       return currentUser.map((val, index) => (
         <NiceCard
-          key={index}
-          onClick={OnClickCard}
+          key={val.id}
+          onClick={OnClickCard(val.id)}
           title={val.title}
           description={val.description}
-          about={val.about}
-          price={val.price}
+          // about={val.about}
+          imageAdress={"../../images/registertop.jpg"}
+          price="Price"
           priceDescription={val.priceDescription}
-          type={val.type}
-          typeDescription={val.typeDescription}
+          type="Type"
+          typeDescription={val.type === 0 ? "Satuan" : "Paketan"}
         />
       ));
     } else if (filter === "nameza") {
@@ -197,15 +202,16 @@ const Reward = () => {
       const currentUser = sortedItem.slice(indexOfFirstUser, indexOfLastUser);
       return currentUser.map((val, index) => (
         <NiceCard
-          key={index}
-          onClick={OnClickCard}
+          key={val.id}
+          onClick={OnClickCard(val.id)}
           title={val.title}
           description={val.description}
-          about={val.about}
-          price={val.price}
+          // about={val.about}
+          imageAdress={"../../images/registertop.jpg"}
+          price="Price"
           priceDescription={val.priceDescription}
-          type={val.type}
-          typeDescription={val.typeDescription}
+          type="Type"
+          typeDescription={val.type === 0 ? "Satuan" : "Paketan"}
         />
       ));
     } else if (filter === "nameaz") {
@@ -222,15 +228,16 @@ const Reward = () => {
       const currentUser = sortedItem.slice(indexOfFirstUser, indexOfLastUser);
       return currentUser.map((val, index) => (
         <NiceCard
-          key={index}
-          onClick={OnClickCard}
+          key={val.id}
+          onClick={OnClickCard(val.id)}
           title={val.title}
           description={val.description}
-          about={val.about}
-          price={val.price}
+          // about={val.about}
+          imageAdress={"../../images/registertop.jpg"}
+          price="Price"
           priceDescription={val.priceDescription}
-          type={val.type}
-          typeDescription={val.typeDescription}
+          type="Type"
+          typeDescription={val.type === 0 ? "Satuan" : "Paketan"}
         />
       ));
     }
@@ -238,15 +245,16 @@ const Reward = () => {
       return data.map((val, index) => (
         // <MDBCol >
         <NiceCard
-          key={index}
-          onClick={OnClickCard}
+          key={val.id}
+          onClick={OnClickCard(val.id)}
           title={val.title}
           description={val.description}
-          about={val.about}
-          price={val.price}
+          // about={val.about}
+          imageAdress={"../../images/registertop.jpg"}
+          price="Price"
           priceDescription={val.priceDescription}
-          type={val.type}
-          typeDescription={val.typeDescription}
+          type="Type"
+          typeDescription={val.type === 0 ? "Satuan" : "Paketan"}
         />
         // </MDBCol>
       ));
@@ -265,12 +273,12 @@ const Reward = () => {
       //   typeDescription={val.typeDescription}
       // />
       <NiceCard
-        key={index}
-        onClick={OnClickCard}
+        key={val.id}
+        onClick={OnClickCard(val.id)}
         title={val.title}
         description={val.description}
         // about={val.about}
-        imageAdress={"../../images/registertop.jpg"}
+        imageAdress={API_URL + val.image}
         price="Price"
         priceDescription={val.priceDescription}
         type="Type"
@@ -341,7 +349,7 @@ const Reward = () => {
           <MDBCol className="d-flex justify-content-center mt-4">
             <Pagination
               userPerPage={userPerPage}
-              totalUser={data.length}
+              totalUser={search.length}
               paginate={paginate}
             />
           </MDBCol>

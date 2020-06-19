@@ -20,7 +20,7 @@ export const NiceCard = ({
         <img width="100%" height="99%" src={imageAdress} />
       </div>
       <div className={styles.cardText}>
-        <span className={styles.date}>{about} Recycly Points</span>
+        <span className={styles.date}></span>
         <h2>{title}</h2>
         <p>{description}</p>
       </div>
