@@ -1,16 +1,23 @@
 import React, { useEffect } from 'react';
 import Button from '../../components/button'
-import {connect} from 'react-redux'
-import {useHistory} from 'react-router-dom'
-import {Verify} from '../../redux/actions'
+import { connect} from 'react-redux'
+import { useHistory} from 'react-router-dom'
+import { Redirect } from 'react-router-dom'
+import { Verify, CheckToken } from '../../redux/actions'
 
 const Verified = (props) => {
 
     useEffect(()=>{
+        // props.CheckToken(props)
         props.Verify(props)
     },[])
 
     const history = useHistory()
+
+    // if(!props.Auth.isTokenExist){
+    //     return <Redirect to='/notfound'/>
+    // }
+
 
     return ( 
         <div>
@@ -50,4 +57,4 @@ const MapstatetoProps=({Auth})=>{
 
 }
  
-export default connect(MapstatetoProps,{Verify})(Verified);
+export default connect(MapstatetoProps,{Verify, CheckToken})(Verified);

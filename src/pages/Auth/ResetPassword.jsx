@@ -1,11 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Button from '../../components/button'
 import { MDBRow, MDBCol} from 'mdbreact';
 import { connect } from 'react-redux'
 import { useHistory } from 'react-router-dom'
-import { ResetPasswordAction } from '../../redux/actions'
+// import { Redirect } from 'react-router-dom'
+import { ResetPasswordAction, CheckToken } from '../../redux/actions'
 
 const ResetPassword = (props) => {
+
+    // useEffect(()=>{
+    //     props.CheckToken(props)
+    //     if(!props.Auth.isTokenExist){
+    //         return <Redirect to='/notfound'/>
+    //     }
+    // },[])
 
     const [data,setdata]=useState({
         password:'',
@@ -22,8 +30,11 @@ const ResetPassword = (props) => {
         e.target.className += " was-validated";
         props.ResetPasswordAction({props,data})
     }
-    
+
     const history = useHistory()
+
+   
+
 
     return ( 
         <div>
@@ -113,9 +124,10 @@ const ResetPassword = (props) => {
 }
 
 const MapstatetoProps=({Auth})=>{
+    console.log(Auth)
     return{
         Auth
     }
 }
  
-export default connect(MapstatetoProps,{ResetPasswordAction})(ResetPassword);
+export default connect(MapstatetoProps,{ResetPasswordAction, CheckToken})(ResetPassword);

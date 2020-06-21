@@ -1,4 +1,11 @@
 
+:root {
+  --main-bg-color:rgb(255, 255, 255);
+  --main-green-color:#3797a4;
+  --main-tosca-color:#25656d;
+  --main-grey-color:#abacad;
+}
+
 *{
   padding: 0;
   margin: 0;
@@ -9,6 +16,14 @@
   .register-right-container{
     text-align: center;
     padding-top: 0 !important;
+  }
+
+  .program-top-title{
+    font-size: 1.2em;
+  }
+
+  .program-top-subtitle{
+    font-size: 0.9em;
   }
 }
  
@@ -127,12 +142,100 @@
   letter-spacing: normal;
   margin: 0 0;
   padding: 0 0;
+  background-color: transparent;
+  height: unset;
 }
 
 .go-back-link:hover{
   color: #007bff !important;
   background-color: unset;
   font-weight: 400;
+}
+
+/* ================ */
+/*   PROGRAMPAGE    */
+/* ================ */
+
+
+
+.program-top-container{
+  height: 60vh;
+  margin: 0;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.program-top-title{
+  text-align: center;
+  margin-bottom: 5vh;
+}
+
+.program-top-subtitle{
+  margin: 0 auto;
+  width: 50vw;
+}
+
+.program-bottom-container{
+ /* height: 100vh; */
+ background-color: #e4e4e4;
+}
+
+.searchbar-container{
+  height: 20vh;
+
+}
+
+.input-group.md-form.form-sm.form-2 input.lime-border {
+  border: 1px solid var(--main-green-color);
+  height: 48px;
+  background-color: white;
+}
+
+.input-group-text {
+  background-color: var(--main-green-color) !important;
+  height: 7vh;
+  border: 1px solid var(--main-green-color);
+}
+
+.program-picture{
+  width: 100%;
+  height: 250px;
+  margin: 0 auto;
+  /* margin: 20px 0 20px 0 ; */
+}
+
+.program-card-bottom{
+  text-decoration: none;
+  color: var(--main-green-color);
+  margin-bottom: 9%;
+}
+
+.program-card-bottom:hover{
+  color: var(--main-tosca-color);
+}
+
+.program-price{
+  color: white;
+  background-color:  var(--main-green-color) ;
+  height: 40px;
+  line-height: 40px;
+  padding: 0 2%;
+  border-radius: 3px;
+  /* width: fit-content; */
+  font-size: 0.8em;
+}
+
+.program-reward{
+  color: white;
+  background-color:  rgb(216, 188, 62) ;
+  height: 40px;
+  line-height: 40px;
+  padding: 0 2%;
+  border-radius: 3px;
+  font-size: 0.8em;
+  /* width: fit-content; */
 }
 
 /* ================ */

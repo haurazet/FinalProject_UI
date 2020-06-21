@@ -34,6 +34,7 @@ const RegisterEmailVerify = ({Auth, ResendEmailVerification}) => {
 }
 
 const MapstatetoProps=({Auth})=>{
+    console.log(Auth)
     return{
         Auth
     }
