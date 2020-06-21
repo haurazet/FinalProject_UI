@@ -55,6 +55,7 @@ const ForgotPassword = ({Auth,SendEmailPassword}) => {
 }
 
 const MapstatetoProps=({Auth})=>{
+    console.log(Auth)
     return{
         Auth
     }

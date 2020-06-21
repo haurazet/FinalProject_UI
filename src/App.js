@@ -1,7 +1,8 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import './App.css';
 import { Route, Switch} from "react-router-dom";
-// import Axios from 'axios';
+import { connect } from 'react-redux';
+import Axios from 'axios';
 import Login from './pages/Auth/Login'
 import Register from './pages/Auth/Register'
 import RegisterEmailVerify from './pages/Auth/RegisterEmailVerify'
@@ -16,9 +17,39 @@ import ManageTransaksi from './pages/ManageTransaksi/ManageTransaksi';
 import Reward from './pages/Reward/Reward';
 import Dashboard from './pages/Dashboard/Dashboard';
 import Report from './pages/Report/Report';
+import Program from './pages/Program/ProgramPage'
+import {KeepLogin} from './redux/actions'
+import { API_URL } from './support/Apiurl'
 
 
 function App() {
+
+  const [Loading, setLoading]=useState(true)
+
+  useEffect(()=>{
+    var token = localStorage.getItem('token')
+    if(token){
+      Axios.get(`${API_URL}/users/keeplogin`,{
+        headers:{
+          'Authorization' :  `Bearer ${token}`
+        }
+      })
+      .then(res=>{
+        console.log('berhasil get data keep login')
+        console.log(res.data)
+        KeepLogin(res.data)
+      })
+      .catch(err=>{
+        console.log(err.message)
+      })
+      .finally(()=>{
+        setLoading(false)
+      })
+    }else{
+      setLoading(false)
+    }
+    },[])
+
   return (
     <Switch>
       <Route path="/" component={Home} exact/>
@@ -29,7 +60,8 @@ function App() {
       <Route path="/forgotpassword" component={ForgotPassword} exact/>
       <Route path="/resetpassword" component={ResetPassword} exact/>
       <Route  path='/reward' component={Reward} exact />
-      <Route  path='/dashboard' component={Dashboard} exact />
+      <Route  path='/program' component={Program} exact />
+      {/* <Route  path='/dashboard' component={Dashboard} exact /> */}
       <Route component={Notfound} />
       {/* <Route  path='/report' component={Report} exact /> */}  
       {/* <Route path='/manageuser' component={ManageUser} exact/> */}
@@ -40,4 +72,12 @@ function App() {
   );
 }
 
-export default App;
+
+const MapstatetoProps=({Auth})=>{
+  console.log(Auth)
+  return{
+    isLogin:Auth.isLogin
+  }
+}
+
+export default connect(MapstatetoProps,{KeepLogin}) (App);

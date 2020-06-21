@@ -3,7 +3,7 @@ import Button from '../../components/button'
 import { MDBRow, MDBCol} from 'mdbreact';
 import { connect } from 'react-redux'
 import { useHistory } from 'react-router-dom'
-import { Redirect } from 'react-router-dom'
+// import { Redirect } from 'react-router-dom'
 import { ResetPasswordAction, CheckToken } from '../../redux/actions'
 
 const ResetPassword = (props) => {

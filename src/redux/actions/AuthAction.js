@@ -227,3 +227,10 @@ export const CheckToken = (props) =>{
         }
     }
 }
+
+export const KeepLogin=(data)=>{
+    return{
+        type:USER_LOGIN_SUCCESS,
+        payload:data
+    }
+}
