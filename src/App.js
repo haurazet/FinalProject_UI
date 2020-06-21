@@ -64,6 +64,7 @@ function App() {
       <Route path="/reward" component={Reward} exact />
       <Route path="/program" component={Program} exact />
       <Route path="/dashboard" component={Dashboard} exact />
+      <Route path="/transactionhistory" component={TransactionHistory} exact />
       <Route component={Notfound} />
 
       {/* <Route path='/manageuser' component={ManageUser} exact/> */}
