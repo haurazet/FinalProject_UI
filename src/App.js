@@ -16,6 +16,7 @@ import ManageTransaksi from "./pages/ManageTransaksi/ManageTransaksi";
 import Reward from "./pages/Reward/Reward";
 import Dashboard from "./pages/Dashboard/Dashboard";
 import Report from "./pages/Report/Report";
+import ManageReward from "./pages/ManageReward/ManageReward";
 
 function App() {
   return (
@@ -34,8 +35,10 @@ function App() {
       <Route path="/transactionhistory" component={TransactionHistory} exact />
       <Route path="/reward" component={Reward} exact />
       <Route path="/dashboard" component={Dashboard} exact />
+      <Route path="/ManageReward" component={ManageReward} exact />
+
       <Route component={Notfound} />
-      {/* <Route  path='/report' component={Report} exact /> */}
+
       {/* <Route path='/manageuser' component={ManageUser} exact/> */}
       {/* <Route  path='/managetransaksi'  component={ManageTransaksi} exact /> */}
       {/* <Route component={Notfound} /> */}

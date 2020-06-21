@@ -5,8 +5,11 @@ import { NiceCard } from "../../components/NiceCard/NiceCard";
 import Pagination from "../../components/Pagination/Pagination";
 import { API_URL } from "../../support/Apiurl";
 import Axios from "axios";
+import { connect } from "react-redux";
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
 
-const Reward = () => {
+const Reward = ({ Auth }) => {
   const [filterPaket, setFilterPaket] = useState([]);
   const [filter, setfilter] = useState([]);
   const [search, setsearch] = useState([]);
@@ -16,6 +19,7 @@ const Reward = () => {
 
   useEffect(() => {
     getData();
+    console.log(Auth.username);
   }, []);
 
   const getData = () => {
@@ -29,7 +33,44 @@ const Reward = () => {
       });
   };
 
-  const OnClickCard = () => {};
+  const OnClickCard = (id, title, price) => {
+    Swal.fire({
+      // title: `How many piece do you want?`,
+      text: `Quantity of ${title}`,
+      input: "number",
+      showCancelButton: true,
+      confirmButtonText: "Ok",
+      cancelButtonText: "Cancel",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire({
+          title: "Checkout",
+          text: `Detail redeemed reward:
+                  ${result.value}x${price} Points =${
+            result.value * price
+          } RECYCLY POINTS `,
+          showCancelButton: true,
+          cancelButtonText: "Cancel",
+          confirmButtonText: "Redeem",
+        }).then((result1) => {
+          let obj = {
+            rewardId: id,
+            userId: localStorage.getItem("iduser"),
+            status: "waiting_send",
+            decreasedPoints: result.value * price,
+            decreasedStock: result.value,
+          };
+          Axios.put(`${API_URL}/users/buyreward`, obj)
+            .then((result) => {
+              console.log(result);
+            })
+            .catch((error) => {
+              console.log(error);
+            });
+        });
+      }
+    });
+  };
   const handleSearch = (e) => {
     e.preventDefault();
     setsearch(e.target.value);
@@ -49,15 +90,14 @@ const Reward = () => {
     return currentUser.map((val, index) => (
       <NiceCard
         key={val.id}
-        onClick={OnClickCard(val.id)}
+        onClick={() => OnClickCard(val.id, val.title, val.priceDescription)}
         title={val.title}
         description={val.description}
-        // about={val.about}
-        imageAdress={"../../images/registertop.jpg"}
+        imageAdress={API_URL + val.image}
         price="Price"
         priceDescription={val.priceDescription}
-        type="Type"
-        typeDescription={val.type === 0 ? "Satuan" : "Paketan"}
+        type="Stock"
+        typeDescription={val.stok}
       />
     ));
   };
@@ -94,15 +134,14 @@ const Reward = () => {
       return currentUser.map((val, index) => (
         <NiceCard
           key={val.id}
-          onClick={OnClickCard(val.id)}
+          onClick={() => OnClickCard(val.id, val.title, val.priceDescription)}
           title={val.title}
           description={val.description}
-          // about={val.about}
-          imageAdress={"../../images/registertop.jpg"}
+          imageAdress={API_URL + val.image}
           price="Price"
           priceDescription={val.priceDescription}
-          type="Type"
-          typeDescription={val.type === 0 ? "Satuan" : "Paketan"}
+          type="Stock"
+          typeDescription={val.stok}
         />
       ));
     } else if (filterPaket === "paketan") {
@@ -113,15 +152,14 @@ const Reward = () => {
       return currentUser.map((val, index) => (
         <NiceCard
           key={val.id}
-          onClick={OnClickCard(val.id)}
+          onClick={() => OnClickCard(val.id, val.title, val.priceDescription)}
           title={val.title}
           description={val.description}
-          // about={val.about}
-          imageAdress={"../../images/registertop.jpg"}
+          imageAdress={API_URL + val.image}
           price="Price"
           priceDescription={val.priceDescription}
-          type="Type"
-          typeDescription={val.type === 0 ? "Satuan" : "Paketan"}
+          type="Stock"
+          typeDescription={val.stok}
         />
       ));
     }
@@ -150,15 +188,14 @@ const Reward = () => {
       return currentUser.map((val, index) => (
         <NiceCard
           key={val.id}
-          onClick={OnClickCard(val.id)}
+          onClick={() => OnClickCard(val.id, val.title, val.priceDescription)}
           title={val.title}
           description={val.description}
-          // about={val.about}
-          imageAdress={"../../images/registertop.jpg"}
+          imageAdress={API_URL + val.image}
           price="Price"
           priceDescription={val.priceDescription}
-          type="Type"
-          typeDescription={val.type === 0 ? "Satuan" : "Paketan"}
+          type="Stock"
+          typeDescription={val.stok}
         />
       ));
     } else if (filter === "mostexpensive") {
@@ -177,15 +214,14 @@ const Reward = () => {
       return currentUser.map((val, index) => (
         <NiceCard
           key={val.id}
-          onClick={OnClickCard(val.id)}
+          onClick={() => OnClickCard(val.id, val.title, val.priceDescription)}
           title={val.title}
           description={val.description}
-          // about={val.about}
-          imageAdress={"../../images/registertop.jpg"}
+          imageAdress={API_URL + val.image}
           price="Price"
           priceDescription={val.priceDescription}
-          type="Type"
-          typeDescription={val.type === 0 ? "Satuan" : "Paketan"}
+          type="Stock"
+          typeDescription={val.stok}
         />
       ));
     } else if (filter === "nameza") {
@@ -203,15 +239,14 @@ const Reward = () => {
       return currentUser.map((val, index) => (
         <NiceCard
           key={val.id}
-          onClick={OnClickCard(val.id)}
+          onClick={() => OnClickCard(val.id, val.title, val.priceDescription)}
           title={val.title}
           description={val.description}
-          // about={val.about}
-          imageAdress={"../../images/registertop.jpg"}
+          imageAdress={API_URL + val.image}
           price="Price"
           priceDescription={val.priceDescription}
-          type="Type"
-          typeDescription={val.type === 0 ? "Satuan" : "Paketan"}
+          type="Stock"
+          typeDescription={val.stok}
         />
       ));
     } else if (filter === "nameaz") {
@@ -229,62 +264,44 @@ const Reward = () => {
       return currentUser.map((val, index) => (
         <NiceCard
           key={val.id}
-          onClick={OnClickCard(val.id)}
+          onClick={() => OnClickCard(val.id, val.title, val.priceDescription)}
           title={val.title}
           description={val.description}
-          // about={val.about}
-          imageAdress={"../../images/registertop.jpg"}
+          imageAdress={API_URL + val.image}
           price="Price"
           priceDescription={val.priceDescription}
-          type="Type"
-          typeDescription={val.type === 0 ? "Satuan" : "Paketan"}
+          type="Stock"
+          typeDescription={val.stok}
         />
       ));
     }
     if (filterPaket === "" && filter === "" && search === "") {
       return data.map((val, index) => (
-        // <MDBCol >
         <NiceCard
           key={val.id}
-          onClick={OnClickCard(val.id)}
+          onClick={() => OnClickCard(val.id, val.title, val.priceDescription)}
           title={val.title}
           description={val.description}
-          // about={val.about}
-          imageAdress={"../../images/registertop.jpg"}
+          imageAdress={API_URL + val.image}
           price="Price"
           priceDescription={val.priceDescription}
-          type="Type"
-          typeDescription={val.type === 0 ? "Satuan" : "Paketan"}
+          type="Stock"
+          typeDescription={val.stok}
         />
-        // </MDBCol>
       ));
     }
     return currentUser.map((val, index) => (
-      // <MDBCol >
-      // <NiceCard
-      //   key={index}
-      //   onClick={OnClickCard}
-      //   title={val.title}
-      //   description={val.description}
-      //   about={val.about}
-      //   price={val.price}
-      //   priceDescription={val.priceDescription}
-      //   type={val.type}
-      //   typeDescription={val.typeDescription}
-      // />
       <NiceCard
         key={val.id}
-        onClick={OnClickCard(val.id)}
+        onClick={() => OnClickCard(val.id, val.title, val.priceDescription)}
         title={val.title}
         description={val.description}
-        // about={val.about}
         imageAdress={API_URL + val.image}
         price="Price"
         priceDescription={val.priceDescription}
-        type="Type"
-        typeDescription={val.type === 0 ? "Satuan" : "Paketan"}
+        type="Stock"
+        typeDescription={val.stok}
       />
-      // </MDBCol>
     ));
   };
 
@@ -359,4 +376,11 @@ const Reward = () => {
   );
 };
 
-export default Reward;
+const MapstatetoProps = ({ Auth }) => {
+  console.log(Auth);
+  return {
+    Auth,
+  };
+};
+
+export default connect(MapstatetoProps, null)(Reward);
