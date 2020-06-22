@@ -22,7 +22,7 @@ const TransactionHistory = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [userPerPage] = useState(5);
   const [uploaded, setuploaded] = useState(true);
-  const [image, setImage] = useState({ preview: "", raw: "" });
+  const [image, setImage] = useState({ preview: "", raw: null });
 
   const onClickUploadButton = (e) => {
     e.preventDefault();

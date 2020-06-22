@@ -417,3 +417,11 @@
     transform: translateY(0px);
   }
 }
+
+/* FONTS */
+@font-face {
+  font-family: "sanfransisco";
+  src: url("./fonts/SFProDisplay-Regular.ttf") format("truetype");
+  font-family: "sanfransiscobold";
+  src: url("./fonts/SFProText-Bold.ttf") format("truetype");
+}

@@ -5,8 +5,10 @@
 .wrappers {
   margin: 0;
   /* background-color: #a2e5c3; */
+  font-family: "sanfransisco";
 }
 .sideBar {
+  font-family: "sanfransisco";
   display: flex;
   margin: 0;
   padding: 0;
@@ -16,13 +18,16 @@
   height: 100vh;
   /* align-content: center; */
   /* border: 2px solid salmon; */
-  background-color: #9ac84a;
+  background-color: #488658;
   box-shadow: rgba(0, 0, 0, 0.6);
 }
 .ContentBox {
   border: 2px saddlebrown;
+  /* background-color: #e7eeab; */
 }
 .adminDashboardText {
+  /* font-family: "sanfransisco"; */
+
   font-size: 2em;
   font-style: italic;
   display: block;
@@ -44,10 +49,12 @@
   justify-content: center;
   flex-direction: "column";
   /* border: 2px solid blue; */
-  background-color: #c8b54a;
+  background-color: #72b387;
   transition: 0.5s ease;
   cursor: pointer;
-  border: 0.4px solid salmon;
+  border-bottom: 1px solid gray;
+  /* border: 0.4px solid salmon; */
+
   /* margin:30px; */
 }
 .Box2:hover {
