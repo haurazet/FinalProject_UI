@@ -8,288 +8,108 @@ import Axios from "axios";
 import { connect } from "react-redux";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
+import { text } from "@fortawesome/fontawesome-svg-core";
+import { KeepLogin } from "../../redux/actions";
 
 const Reward = ({ Auth }) => {
-  const [filterPaket, setFilterPaket] = useState([]);
-  const [filter, setfilter] = useState([]);
-  const [search, setsearch] = useState([]);
+  const [page, setpage] = useState(0);
+  const [totalreward, settotalreward] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
   const [userPerPage] = useState(6);
   const [data, setdata] = useState([]);
 
   useEffect(() => {
     getData();
-    console.log(Auth.username);
-  }, []);
+    console.log(Auth.points);
+  }, [totalreward]);
 
   const getData = () => {
-    Axios.get(`${API_URL}/users/getreward`)
+    Axios.get(`${API_URL}/reward/getreward`)
       .then((result) => {
         console.log(result.data);
-        setsearch(result.data);
+        setdata(result.data);
       })
       .catch((error) => {
         console.log(error);
       });
   };
+  // const getData = () => {
+  // //   Axios.get(`${API_URL}`).then((res) => {
+  // //     console.log(res);
+  // //   });
+  // // };
+
+  // const getData = (search) => {
+  //   Axios.get(
+  //     search
+  //       ? `${API_URL}/reward/totalreward?search=${search}`
+  //       : `${API_URL}/reward/totalreward`,
+  //     {}
+  //   )
+  //     .then((res) => {
+  //       console.log(res);
+  //       settotalreward(res.data.total);
+  //       Axios.get(
+  //         search
+  //           ? `${API_URL}/reward/getrewarduser?search=${search}&page=${page}`
+  //           : `${API_URL}/reward/getrewarduser?page=${page}`
+  //       )
+  //         .then((res1) => {
+  //           // window.scrollTo(0, 0);
+  //           console.log(res1);
+  //           setdata(res1.data);
+  //           // setisloading(false);
+  //         })
+  //         .catch((err) => {
+  //           console.log(err);
+  //         });
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // };
 
   const OnClickCard = (id, title, price) => {
-    Swal.fire({
-      // title: `How many piece do you want?`,
-      text: `Quantity of ${title}`,
-      input: "number",
-      showCancelButton: true,
-      confirmButtonText: "Ok",
-      cancelButtonText: "Cancel",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        Swal.fire({
-          title: "Checkout",
-          text: `Detail redeemed reward:
-                  ${result.value}x${price} Points =${
-            result.value * price
-          } RECYCLY POINTS `,
-          showCancelButton: true,
-          cancelButtonText: "Cancel",
-          confirmButtonText: "Redeem",
-        }).then((result1) => {
-          let obj = {
-            rewardId: id,
-            userId: localStorage.getItem("iduser"),
-            status: "waiting_send",
-            decreasedPoints: result.value * price,
-            decreasedStock: result.value,
-          };
-          Axios.put(`${API_URL}/users/buyreward`, obj)
-            .then((result) => {
-              console.log(result);
-            })
-            .catch((error) => {
-              console.log(error);
-            });
-        });
-      }
-    });
-  };
-  const handleSearch = (e) => {
-    e.preventDefault();
-    setsearch(e.target.value);
-    if (e.target.value === "") {
-      setsearch(data);
+    console.log(Auth.isLogin);
+    console.log(Auth.points);
+    if (Auth.isLogin === false) {
+      Swal.fire({
+        title: "Please Login your account before redeem the reward",
+      });
     }
-
-    let stringify = e.target.value.toLowerCase();
-    let transactionFilter = data.filter((data) =>
-      data.title.toLowerCase().includes(stringify)
-    );
-    setsearch(transactionFilter);
-    const currentUser = transactionFilter.slice(
-      indexOfFirstUser,
-      indexOfLastUser
-    );
-    return currentUser.map((val, index) => (
-      <NiceCard
-        key={val.id}
-        onClick={() => OnClickCard(val.id, val.title, val.priceDescription)}
-        title={val.title}
-        description={val.description}
-        imageAdress={API_URL + val.image}
-        price="Price"
-        priceDescription={val.priceDescription}
-        type="Stock"
-        typeDescription={val.stok}
-      />
-    ));
-  };
-  useEffect(() => {
-    setsearch(data);
-  }, []);
-
-  const handleFilter = (e) => {
-    setFilterPaket(e.target.value);
-    console.log(filterPaket);
-  };
-
-  const handleSortBy = (e) => {
-    setfilter(e.target.value);
-    setsearch("");
-    console.log(filter);
+    if (Auth.points < price) {
+      Swal.fire({
+        title: "Sorry, your RECYCLY Points is not enough.",
+      });
+    }
+    if (Auth.points >= price) {
+      Swal.fire({
+        title: `Redeem`,
+        text: `This reward will cost you ${price} points.
+                Do you want to proceed? `,
+        confirmButtonText: "Yes",
+        showCancelButton: true,
+      }).then((result) => {
+        if (result.isConfirmed) {
+          let obj = {
+            status: "completed",
+            userId: Auth.id,
+            rewardId: id,
+            decreasedPoints: price,
+          };
+          Axios.post(`${API_URL}/reward/buyreward`, obj).then((result) => {
+            Swal.fire(
+              "Redeem Success!",
+              "Thank you for helping us to make world a better place.",
+              "success"
+            );
+          });
+        }
+      });
+    }
   };
 
   const renderCard = () => {
-    // if(filterPaket==''){
-    //     return currentUser.map((val,index)=>(
-    //         // <MDBCol >
-    //                 <NiceCard key={index} onClick={OnClickCard} title={val.title} description={val.description}
-    //                         about={val.about} price={val.price} priceDescription={val.priceDescription} type={val.type} typeDescription={val.typeDescription} />
-    //         // </MDBCol>
-
-    //     ))
-    // }
-    if (filterPaket === "satuan") {
-      const filteredData = data.filter(
-        (val) => val.typeDescription === "Satuan"
-      );
-      const currentUser = filteredData.slice(indexOfFirstUser, indexOfLastUser);
-      return currentUser.map((val, index) => (
-        <NiceCard
-          key={val.id}
-          onClick={() => OnClickCard(val.id, val.title, val.priceDescription)}
-          title={val.title}
-          description={val.description}
-          imageAdress={API_URL + val.image}
-          price="Price"
-          priceDescription={val.priceDescription}
-          type="Stock"
-          typeDescription={val.stok}
-        />
-      ));
-    } else if (filterPaket === "paketan") {
-      const filteredData = data.filter(
-        (val) => val.typeDescription === "Paketan"
-      );
-      const currentUser = filteredData.slice(indexOfFirstUser, indexOfLastUser);
-      return currentUser.map((val, index) => (
-        <NiceCard
-          key={val.id}
-          onClick={() => OnClickCard(val.id, val.title, val.priceDescription)}
-          title={val.title}
-          description={val.description}
-          imageAdress={API_URL + val.image}
-          price="Price"
-          priceDescription={val.priceDescription}
-          type="Stock"
-          typeDescription={val.stok}
-        />
-      ));
-    }
-
-    // if(filter==''){
-    //     return currentUser.map((val,index)=>(
-    //         // <MDBCol >
-    //                 <NiceCard key={index} onClick={OnClickCard} title={val.title} description={val.description}
-    //                         about={val.about} price={val.price} priceDescription={val.priceDescription} type={val.type} typeDescription={val.typeDescription} />
-    //         // </MDBCol>
-
-    //     ))
-    else if (filter === "cheapest") {
-      console.log("masuk");
-      function compare(a, b) {
-        if (a.priceDescription < b.priceDescription) {
-          return -1;
-        }
-        if (a.priceDescription > b.priceDescription) {
-          return 1;
-        }
-        return 0;
-      }
-      const sortedItem = data.sort(compare);
-      const currentUser = sortedItem.slice(indexOfFirstUser, indexOfLastUser);
-      return currentUser.map((val, index) => (
-        <NiceCard
-          key={val.id}
-          onClick={() => OnClickCard(val.id, val.title, val.priceDescription)}
-          title={val.title}
-          description={val.description}
-          imageAdress={API_URL + val.image}
-          price="Price"
-          priceDescription={val.priceDescription}
-          type="Stock"
-          typeDescription={val.stok}
-        />
-      ));
-    } else if (filter === "mostexpensive") {
-      console.log("masuk");
-      function compare(a, b) {
-        if (a.priceDescription < b.priceDescription) {
-          return 1;
-        }
-        if (a.priceDescription > b.priceDescription) {
-          return -1;
-        }
-        return 0;
-      }
-      const sortedItem = data.sort(compare);
-      const currentUser = sortedItem.slice(indexOfFirstUser, indexOfLastUser);
-      return currentUser.map((val, index) => (
-        <NiceCard
-          key={val.id}
-          onClick={() => OnClickCard(val.id, val.title, val.priceDescription)}
-          title={val.title}
-          description={val.description}
-          imageAdress={API_URL + val.image}
-          price="Price"
-          priceDescription={val.priceDescription}
-          type="Stock"
-          typeDescription={val.stok}
-        />
-      ));
-    } else if (filter === "nameza") {
-      function compare(a, b) {
-        if (a.title < b.title) {
-          return 1;
-        }
-        if (a.title > b.title) {
-          return -1;
-        }
-        return 0;
-      }
-      const sortedItem = data.sort(compare);
-      const currentUser = sortedItem.slice(indexOfFirstUser, indexOfLastUser);
-      return currentUser.map((val, index) => (
-        <NiceCard
-          key={val.id}
-          onClick={() => OnClickCard(val.id, val.title, val.priceDescription)}
-          title={val.title}
-          description={val.description}
-          imageAdress={API_URL + val.image}
-          price="Price"
-          priceDescription={val.priceDescription}
-          type="Stock"
-          typeDescription={val.stok}
-        />
-      ));
-    } else if (filter === "nameaz") {
-      function compare(a, b) {
-        if (a.title < b.title) {
-          return -1;
-        }
-        if (a.title > b.title) {
-          return 1;
-        }
-        return 0;
-      }
-      const sortedItem = data.sort(compare);
-      const currentUser = sortedItem.slice(indexOfFirstUser, indexOfLastUser);
-      return currentUser.map((val, index) => (
-        <NiceCard
-          key={val.id}
-          onClick={() => OnClickCard(val.id, val.title, val.priceDescription)}
-          title={val.title}
-          description={val.description}
-          imageAdress={API_URL + val.image}
-          price="Price"
-          priceDescription={val.priceDescription}
-          type="Stock"
-          typeDescription={val.stok}
-        />
-      ));
-    }
-    if (filterPaket === "" && filter === "" && search === "") {
-      return data.map((val, index) => (
-        <NiceCard
-          key={val.id}
-          onClick={() => OnClickCard(val.id, val.title, val.priceDescription)}
-          title={val.title}
-          description={val.description}
-          imageAdress={API_URL + val.image}
-          price="Price"
-          priceDescription={val.priceDescription}
-          type="Stock"
-          typeDescription={val.stok}
-        />
-      ));
-    }
     return currentUser.map((val, index) => (
       <NiceCard
         key={val.id}
@@ -306,19 +126,28 @@ const Reward = ({ Auth }) => {
   };
 
   // Get Current Post
-  const indexOfLastUser = currentPage * userPerPage;
-  const indexOfFirstUser = indexOfLastUser - userPerPage;
-  const currentUser = search.slice(indexOfFirstUser, indexOfLastUser);
+
+  console.log(data);
+  const indexOfLastUser = currentPage * userPerPage; // 6
+  const indexOfFirstUser = indexOfLastUser - userPerPage; //0
+  const currentUser = data.slice(indexOfFirstUser, indexOfLastUser);
   // Change page
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
   return (
     <div className={styles.marginTop}>
       <MDBContainer className={styles.container}>
-        <MDBRow>
-          <MDBCol className="d-flex justify-content-center">
-            <h1>Reward</h1>
+        <MDBRow className={styles.RowReward}>
+          <MDBCol lg="5" className={styles.flexDir}>
+            <div className={styles.redeemBox}>Redeem Your Points</div>
+            <div className={styles.descBox}>
+              Through many of our programs, we reward you with TerraCycle points
+              for qualifying waste. These points are redeemable for a cash
+              payment to the non-profit organization or school of your choice
+              and other charitable gifts.
+            </div>
           </MDBCol>
         </MDBRow>
+        <MDBRow></MDBRow>
         <MDBRow>
           <MDBCol>
             {" "}
@@ -328,28 +157,15 @@ const Reward = ({ Auth }) => {
                 type="text"
                 placeholder="Search by Name "
                 aria-label="Search"
-                onChange={handleSearch}
+                // onChange={handleSearch}
               />
             </div>
           </MDBCol>
           <MDBCol>
-            {" "}
             <div>
               <select
                 className="browser-default custom-select"
-                onChange={handleFilter}
-              >
-                <option value="">Filter By</option>
-                <option value="satuan">Satuan</option>
-                <option value="paketan">Paket</option>
-              </select>
-            </div>
-          </MDBCol>
-          <MDBCol>
-            <div>
-              <select
-                className="browser-default custom-select"
-                onChange={handleSortBy}
+                // onChange={handleSortBy}
                 defaultValue=""
               >
                 <option value="">Sort By</option>
@@ -366,8 +182,9 @@ const Reward = ({ Auth }) => {
           <MDBCol className="d-flex justify-content-center mt-4">
             <Pagination
               userPerPage={userPerPage}
-              totalUser={search.length}
+              totalUser={data.length}
               paginate={paginate}
+              // name="page"
             />
           </MDBCol>
         </MDBRow>
@@ -383,4 +200,4 @@ const MapstatetoProps = ({ Auth }) => {
   };
 };
 
-export default connect(MapstatetoProps, null)(Reward);
+export default connect(MapstatetoProps, { KeepLogin })(Reward);

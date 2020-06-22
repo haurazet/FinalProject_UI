@@ -109,7 +109,7 @@ const Dashboard = () => {
                 name="manageprogram"
               >
                 <FontAwesomeIcon icon={faCalendar} style={{ fontSize: 20 }} />{" "}
-                Manage Program
+                Manage Reward
               </div>
             </div>
           </div>

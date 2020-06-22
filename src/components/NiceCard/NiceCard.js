@@ -37,7 +37,7 @@ export const NiceCard = ({
         </div>
         <div className={styles.stats}>
           <div className={styles.value}>
-            <ButtonNeon text="BUY" onClick={onClick} />
+            <ButtonNeon text="REDEEM" onClick={onClick} />
           </div>
           <div className={styles.type}></div>
         </div>

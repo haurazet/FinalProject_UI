@@ -1,18 +1,50 @@
-.marginTop{
-    margin-top: 100px;
-    height: 100vh;
-    /* background-color: seagreen; */
-    font-family: 'sanfransisco';
-    /* background-image: url('../../images//annagolant180502049.jpg'); */
-    /* background-size: 2000px 2000px; */
-    /* background-size: contain; */
+* {
+  padding: 0;
+  margin: 0;
+}
+.marginTop {
+  /* margin-top: 100px; */
+  height: "500px";
+  background-color: seagreen;
+  font-family: "sanfransisco";
+  margin-left: 0;
+  padding: 0;
+  /* background-image: url('../../images//annagolant180502049.jpg'); */
+  /* background-size: 2000px 2000px; */
+  /* background-size: contain; */
   /* background-image: url('../../images//annagolant180502049.jpg'); */
   /* background-repeat: no-repeat; */
   /* background-size: cover; */
-  
-  }
-.container{
-  background-image: url('../../images//annagolant180502049.jpg');
-  background-size: cover;
+  /* background-image: url("../../images//annagolant180502049.jpg"); */
+  /* background-repeat: no-repeat; */
+}
+.container {
+  /* background-image: url("../../images//annagolant180502049.jpg"); */
+  /* background-size: cover; */
+}
+.rewardDescription {
+  height: 20vh;
 
+  /* background-color: whitesmoke; */
+}
+
+.RowReward {
+  height: 50vh;
+}
+.flexDir {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  justify-content: center;
+  color: whitesmoke;
+  /* background-color: whitesmoke; */
+}
+.descBox {
+  width: 500px;
+  font-family: "sanfransisco";
+  font-size: 20px;
+}
+.redeemBox {
+  font-family: "sanfransiscobold";
+  font-size: 30px;
 }

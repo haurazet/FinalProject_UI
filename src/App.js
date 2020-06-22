@@ -74,11 +74,16 @@ function App({ KeepLogin }) {
         <Route path="/resetpassword" component={ResetPassword} exact />
         <Route path="/reward" component={Reward} exact />
         <Route path="/program" component={Program} exact />
-        {/* <Route  path='/dashboard' component={Dashboard} exact /> */}
+        <Route path="/dashboard" component={Dashboard} exact />
+        <Route
+          path="/transactionhistory"
+          component={TransactionHistory}
+          exact
+        />
         <Route component={Notfound} />
         {/* <Route  path='/report' component={Report} exact /> */}
         {/* <Route path='/manageuser' component={ManageUser} exact/> */}
-        {/* <Route path='/transactionhistory' component={TransactionHistory} exact/> */}
+
         {/* <Route  path='/managetransaksi'  component={ManageTransaksi} exact /> */}
         {/* <Route component={Notfound} /> */}
       </Switch>

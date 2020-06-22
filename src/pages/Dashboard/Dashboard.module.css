@@ -32,9 +32,7 @@
   font-style: italic;
   display: block;
 }
-.Box1 {
-  /* border: 2px solid gold; */
-}
+
 .Box1:hover {
   cursor: pointer;
 }
