@@ -319,7 +319,7 @@ const Register = ({RegisterUser, Auth}) => {
                     </div>
                     <div className="col-md-5 py-5 px-2 register-right-container">
                         <div>Already have an Account?</div>
-                        <div className="my-5"><Button text='Sign in here' onclick={()=> history.push('/login')}/></div>
+                        <div className="my-5"><Button text='Sign in here' onclick={event => window.location.href='/login'}/></div>
                     </div>
                 </div>
             </div>
