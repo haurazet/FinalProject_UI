@@ -17,7 +17,7 @@ import ManageTransaksi from './pages/ManageTransaksi/ManageTransaksi';
 import Reward from './pages/Reward/Reward';
 import Dashboard from './pages/Dashboard/Dashboard';
 import Report from './pages/Report/Report';
-import Program from './pages/ProgramPage'
+import Program from './pages/Program/ProgramPage'
 import {KeepLogin} from './redux/actions'
 import { API_URL } from './support/Apiurl'
 
@@ -41,8 +41,6 @@ function App({KeepLogin}) {
         console.log(err.message)
       })
         .then((res) => {
-          console.log("berhasil get data keep login");
-          console.log(res.data);
           KeepLogin(res.data);
         })
         .catch((err) => {
