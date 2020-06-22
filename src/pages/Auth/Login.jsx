@@ -3,7 +3,7 @@ import {  MDBRow, MDBCol} from 'mdbreact';
 import Button from '../../components/button'
 import { connect } from 'react-redux'
 import { LoginUser } from '../../redux/actions'
-import { useHistory } from 'react-router-dom'
+import { Redirect } from 'react-router-dom'
 
 
 const Login = ({LoginUser, Auth}) => {
@@ -22,8 +22,11 @@ const Login = ({LoginUser, Auth}) => {
         LoginUser(data)
     }
 
+    if(Auth.isLogin){
+        return <Redirect to='/' />
+    }
 
-    const history = useHistory()
+    // const history = useHistory()
 
     return ( 
             <div className='register-container'>
@@ -100,7 +103,7 @@ const Login = ({LoginUser, Auth}) => {
                     </div>
                     <div className="col-md-5 py-5 px-2 register-right-container">
                         <div>Does not have an Account?</div>
-                        <div className="my-5"><Button text='Sign up here' onclick={()=> history.push('/register')}/></div>
+                        <div className="my-5"><Button text='Sign up here' onclick={event => window.location.href='/register'}/></div>
                     </div>
                 </div>
             </div>

@@ -87,10 +87,10 @@ export default (state=INITIAL_STATE,action)=>{
             return{...state,loading:false,...action.payload,isResetSuccess:true}
         case RESET_PASSWORD_FAILED:
             return{...state,loading:false,...action.payload,submitClicked:true}
-        case TOKEN_EXIST:
-            return{...state,isTokenExist:true}
-        case TOKEN_NOT_EXIST:
-            return{...state,isTokenExist:false}
+        // case TOKEN_EXIST:
+        //     return{...state,isTokenExist:true}
+        // case TOKEN_NOT_EXIST:
+        //     return{...state,isTokenExist:false}
         default:
             return state
     }

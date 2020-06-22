@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Button from '../../components/button'
 import {
     Card, CardImg, CardText, CardBody,
-    CardTitle, CardSubtitle
+    CardTitle, CardSubtitle, Spinner
   } from 'reactstrap';
   import { MDBPagination, MDBPageItem, MDBPageNav, MDBCol, MDBRow ,MDBBtn } from "mdbreact";
 import Axios from 'axios';
@@ -14,23 +14,53 @@ const ProgramPage = (props) => {
 
     const [program,setprogram]= useState({})
     const [isloading, setisloading] = useState(true)
-    const [page, setpage] = useState(6)
+    const [page, setpage] = useState(0)
     const [totalprogram, settotalprogram] = useState(0)
     
 
     useEffect(()=>{ //component didmount
-        Axios.get(`${API_URL}/programs/getprogram`)
-        .then((res)=>{
-            setprogram(res.data)
-            setisloading(false)
-        }).catch((err)=>{
-            console.log(err)
-        })
+        // Axios.get(`${API_URL}/programs/getprogram`)
+        // .then((res)=>{
+        //     setprogram(res.data)
+        //     setisloading(false)
+        // }).catch((err)=>{
+        //     console.log(err)
+        // })
+        getData()
     },[])
 
-    const renderpagination=()=>{
+    const getData=(search,filter)=>{
+        Axios.get(  search?`${API_URL}/programs/totalprogram?search=${search}`:
+                    filter?`${API_URL}/programs/totalprogram?filter=${filter}`:
+                            `${API_URL}/programs/totalprogram`,{}
+                    ).then((res)=>{
+                    settotalprogram(res.data.total)
+                    Axios.get(  search?`${API_URL}/programs/getprogramuser?search=${search}&page=${page}`:
+                                filter?`${API_URL}/programs/getprogramuser?filter=${filter}&page=${page}`:
+                                        `${API_URL}/programs/getprogramuser?page=${page}`
+                                ).then((res1)=>{
+                                window.scrollTo(0,0)
+                                setprogram(res1.data)
+                                setisloading(false)
+                            }).catch((err)=>{
+                                console.log(err)
+                            })
+                }).catch((err)=>{
+                    console.log(err)
+                })
+    }
+
+    const getpaginationdata=(val)=>{
+        setisloading(false)
+        setpage(val*6)
+        getData()
+    }
+
+
+    const renderpagination=()=>{ //untuk render ada brp pagination
         console.log('masuk pagination')
-        var totalpage = Math.ceil(this.state.totalproduct/8)
+        console.log(page)
+        var totalpage = Math.ceil(totalprogram/6)
         var arr=[]
         for ( var i = 0; i < totalpage; i++){
             arr.push(i)
@@ -38,8 +68,8 @@ const ProgramPage = (props) => {
         return arr.map((val,index)=>{
             return(
                 <div key={index}>
-                    <MDBPageItem active={this.state.page/8===val} >
-                        <MDBPageNav onClick={()=>this.getpaginationdata(val)}>{val+1}</MDBPageNav>
+                    <MDBPageItem active={page/6===val} >
+                        <MDBPageNav onClick={()=>getpaginationdata(val)}>{val+1}</MDBPageNav>
                     </MDBPageItem>
                 </div>
             )
@@ -48,6 +78,13 @@ const ProgramPage = (props) => {
 
     const renderPrograms=()=>{
         console.log(program)
+        if(isloading){
+            return(
+                <div className='tocenter mt-3'>
+                    <Spinner style={{ width: '3rem', height: '3rem' }} />{' '}
+                </div>
+            )
+        }
         return program.map((val,index)=>{
             return(
                 <div key={index} className="p-4 col-md-4 " >
@@ -101,16 +138,16 @@ const ProgramPage = (props) => {
                     <MDBCol>
                         <MDBPagination className="mb-5 float-right" color='red'>
                         <MDBPageItem disabled={page===0} 
-                        // onClick={()=>this.getpaginationdata((page/8)-1)}
+                        onClick={()=>getpaginationdata((page/6)-1)}
                         >
                             <MDBPageNav aria-label="Previous">
                             <span aria-hidden="true">Previous</span>
                             </MDBPageNav>
                         </MDBPageItem>
-                            {/* {this.renderpagination()} */}
+                            {renderpagination()}
                         <MDBPageItem 
-                            // disabled={Math.ceil(totalproduct/8)===(page/8)+1} 
-                            // onClick={()=>this.getpaginationdata((page/8)+1)}
+                            disabled={Math.ceil(totalprogram/6)===(page/6)+1} 
+                            onClick={()=>getpaginationdata((page/6)+1)}
                             >
                             <MDBPageNav aria-label="Previous">
                             <span aria-hidden="true">Next</span>

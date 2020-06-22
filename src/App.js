@@ -17,12 +17,12 @@ import ManageTransaksi from './pages/ManageTransaksi/ManageTransaksi';
 import Reward from './pages/Reward/Reward';
 import Dashboard from './pages/Dashboard/Dashboard';
 import Report from './pages/Report/Report';
-import Program from './pages/Program/ProgramPage'
+import Program from './pages/ProgramPage'
 import {KeepLogin} from './redux/actions'
 import { API_URL } from './support/Apiurl'
 
 
-function App() {
+function App({KeepLogin}) {
 
   const [Loading, setLoading]=useState(true)
 
@@ -35,8 +35,6 @@ function App() {
         }
       })
       .then(res=>{
-        console.log('berhasil get data keep login')
-        console.log(res.data)
         KeepLogin(res.data)
       })
       .catch(err=>{
@@ -48,36 +46,34 @@ function App() {
     }else{
       setLoading(false)
     }
-    },[])
+    },[KeepLogin])
+
+    if(Loading){
+      return <div>loading....</div>
+    }
 
   return (
-    <Switch>
-      <Route path="/" component={Home} exact/>
-      <Route path="/login" component={Login} exact/>
-      <Route path="/register" component={Register} exact/>
-      <Route path="/registeremailverify" component={RegisterEmailVerify} exact/>
-      <Route path="/verified" component={Verified} exact/>
-      <Route path="/forgotpassword" component={ForgotPassword} exact/>
-      <Route path="/resetpassword" component={ResetPassword} exact/>
-      <Route  path='/reward' component={Reward} exact />
-      <Route  path='/program' component={Program} exact />
-      {/* <Route  path='/dashboard' component={Dashboard} exact /> */}
-      <Route component={Notfound} />
-      {/* <Route  path='/report' component={Report} exact /> */}  
-      {/* <Route path='/manageuser' component={ManageUser} exact/> */}
-      {/* <Route path='/transactionhistory' component={TransactionHistory} exact/> */}
-      {/* <Route  path='/managetransaksi'  component={ManageTransaksi} exact /> */}
-      {/* <Route component={Notfound} /> */}
-    </Switch>
+    <div>
+      <Switch>
+        <Route path="/" component={Home} exact/>
+        <Route path="/login" component={Login} exact/>
+        <Route path="/register" component={Register} exact/>
+        <Route path="/registeremailverify" component={RegisterEmailVerify} exact/>
+        <Route path="/verified" component={Verified} exact/>
+        <Route path="/forgotpassword" component={ForgotPassword} exact/>
+        <Route path="/resetpassword" component={ResetPassword} exact/>
+        <Route  path='/reward' component={Reward} exact />
+        <Route  path='/program' component={Program} exact />
+        {/* <Route  path='/dashboard' component={Dashboard} exact /> */}
+        <Route component={Notfound} />
+        {/* <Route  path='/report' component={Report} exact /> */}  
+        {/* <Route path='/manageuser' component={ManageUser} exact/> */}
+        {/* <Route path='/transactionhistory' component={TransactionHistory} exact/> */}
+        {/* <Route  path='/managetransaksi'  component={ManageTransaksi} exact /> */}
+        {/* <Route component={Notfound} /> */}
+      </Switch>
+    </div>
   );
 }
 
-
-const MapstatetoProps=({Auth})=>{
-  console.log(Auth)
-  return{
-    isLogin:Auth.isLogin
-  }
-}
-
-export default connect(MapstatetoProps,{KeepLogin}) (App);
+export default connect(null,{KeepLogin})(App);

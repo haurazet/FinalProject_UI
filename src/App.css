@@ -156,7 +156,9 @@
 /*   PROGRAMPAGE    */
 /* ================ */
 
-
+.program-page-container{
+  overflow: hidden;
+}
 
 .program-top-container{
   height: 60vh;
@@ -238,7 +240,22 @@
   /* width: fit-content; */
 }
 
+.program-card-filter-container{
+  /* border: 1px solid black; */
+  margin: 2% 0 0 0;
+}
+
+.category-name{
+  color: var(--main-green-color);
+  font-weight: bold;
+}
+
+.sort-container{
+  /* border: 1px solid black; */
+  padding: 0 4%;
+}
 /* ================ */
+
 /*      NOTFOUND    */
 /* ================ */
 
