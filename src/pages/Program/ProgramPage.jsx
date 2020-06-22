@@ -39,8 +39,8 @@ class Productpage extends Component {
 
     getData=()=>{
         const {search,filter,sort,page} = this.state
-        console.log(this.state)
-        console.log('masuk get data')
+        // console.log(this.state)
+        // console.log('masuk get data')
         window.scrollTo(0,400)
         Axios.get(  search&&filter?`${API_URL}/programs/totalprogram?search=${search}&filter=${filter}`:
                     search?`${API_URL}/programs/totalprogram?search=${search}`:
@@ -84,7 +84,7 @@ class Productpage extends Component {
         return products.map((val,index)=>{
             return(
                 <div key={index} className="p-4 col-md-4 " >
-                    {/* <Link> */}
+                    <Link to={`/programdetail/${val.id}`}>
                         <Card>
                             <div className="program-picture p-3 row align-items-center">
                                 <img src={API_URL+val.image}  width="100%" height="100%"></img>
@@ -97,7 +97,7 @@ class Productpage extends Component {
                                 </div>
                             </CardBody>
                         </Card>
-                    {/* </Link> */}
+                    </Link>
                 </div>
             )
         })

@@ -18,6 +18,7 @@ import Reward from './pages/Reward/Reward';
 import Dashboard from './pages/Dashboard/Dashboard';
 import Report from './pages/Report/Report';
 import Program from './pages/Program/ProgramPage'
+import ProgramDetail from './pages/Program/ProgramDetail'
 import {KeepLogin} from './redux/actions'
 import { API_URL } from './support/Apiurl'
 
@@ -72,6 +73,7 @@ function App({KeepLogin}) {
         <Route  path='/program' component={Program} exact />
         <Route path="/dashboard" component={Dashboard} exact />
         <Route path="/transactionhistory" component={TransactionHistory} exact />
+        <Route path="/programdetail/:idprog" exact component={ProgramDetail}/>
         <Route component={Notfound} />
       </Switch>
     </div>
