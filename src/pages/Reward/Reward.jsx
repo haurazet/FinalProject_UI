@@ -1,6 +1,13 @@
 import React, { useEffect, useState, useReducer } from "react";
 import styles from "./Reward.module.css";
-import { MDBContainer, MDBRow, MDBCol } from "mdbreact";
+import {
+  MDBContainer,
+  MDBRow,
+  MDBCol,
+  MDBPageNav,
+  MDBPageItem,
+  MDBPagination,
+} from "mdbreact";
 import { NiceCard } from "../../components/NiceCard/NiceCard";
 import Pagination from "../../components/Pagination/Pagination";
 import { API_URL } from "../../support/Apiurl";
@@ -13,25 +20,74 @@ import { KeepLogin } from "../../redux/actions";
 
 const Reward = ({ Auth }) => {
   const [page, setpage] = useState(0);
-  const [totalreward, settotalreward] = useState(0);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [userPerPage] = useState(6);
   const [data, setdata] = useState([]);
+  const [totalreward, setotalreward] = useState(0);
+  const [search, setsearch] = useState("");
+  const [sort, setsort] = useState("");
 
   useEffect(() => {
     getData();
     console.log(Auth.points);
-  }, [totalreward]);
+  }, [data]);
 
   const getData = () => {
-    Axios.get(`${API_URL}/reward/getreward`)
+    Axios.get(
+      search
+        ? `${API_URL}/reward/totalreward?search=${search}`
+        : `${API_URL}/reward/totalreward`,
+      {}
+    )
       .then((result) => {
-        console.log(result.data);
-        setdata(result.data);
+        setotalreward(result.data.total);
+        console.log(sort);
+        Axios.get(
+          search
+            ? `${API_URL}/reward/getrewarduser?search=${search}&page=${page}`
+            : search && sort
+            ? `${API_URL}/reward/getrewarduser?search=${search}&sort=${sort}&page=${page}`
+            : sort
+            ? `${API_URL}/reward/getrewarduser?sort=${sort}&page=${page}`
+            : `${API_URL}/reward/getrewarduser?page=${page}`
+        )
+          .then((result1) => {
+            console.log(result1);
+            setdata(result1.data);
+          })
+          .catch((error1) => error1);
       })
       .catch((error) => {
         console.log(error);
       });
+  };
+
+  const getpaginationdata = (val) => {
+    setpage(val * 6);
+    getData();
+  };
+  const handleSearch = (e) => {
+    let search = e.target.value;
+    setsearch(search);
+    getData();
+  };
+
+  const renderpagination = () => {
+    // console.log('masuk pagination')
+    var totalpage = Math.ceil(totalreward / 6);
+    var arr = [];
+    for (var i = 0; i < totalpage; i++) {
+      arr.push(i);
+    }
+    return arr.map((val, index) => {
+      return (
+        <div key={index}>
+          <MDBPageItem active={page / 6 === val}>
+            <MDBPageNav onClick={() => getpaginationdata(val)}>
+              {val + 1}
+            </MDBPageNav>
+          </MDBPageItem>
+        </div>
+      );
+    });
   };
   // const getData = () => {
   // //   Axios.get(`${API_URL}`).then((res) => {
@@ -109,8 +165,15 @@ const Reward = ({ Auth }) => {
     }
   };
 
+  const handleSortBy = (e) => {
+    console.log(e.target.value);
+    let sort = e.target.value;
+    setsort(sort);
+    getData();
+  };
+
   const renderCard = () => {
-    return currentUser.map((val, index) => (
+    return data.map((val, index) => (
       <NiceCard
         key={val.id}
         onClick={() => OnClickCard(val.id, val.title, val.priceDescription)}
@@ -119,20 +182,12 @@ const Reward = ({ Auth }) => {
         imageAdress={API_URL + val.image}
         price="Price"
         priceDescription={val.priceDescription}
-        type="Stock"
-        typeDescription={val.stok}
+        // type="Stock"
+        // typeDescription={val.stok}
       />
     ));
   };
 
-  // Get Current Post
-
-  console.log(data);
-  const indexOfLastUser = currentPage * userPerPage; // 6
-  const indexOfFirstUser = indexOfLastUser - userPerPage; //0
-  const currentUser = data.slice(indexOfFirstUser, indexOfLastUser);
-  // Change page
-  const paginate = (pageNumber) => setCurrentPage(pageNumber);
   return (
     <div className={styles.marginTop}>
       <MDBContainer className={styles.container}>
@@ -140,7 +195,7 @@ const Reward = ({ Auth }) => {
           <MDBCol lg="5" className={styles.flexDir}>
             <div className={styles.redeemBox}>Redeem Your Points</div>
             <div className={styles.descBox}>
-              Through many of our programs, we reward you with TerraCycle points
+              Through many of our programs, we reward you with RECYCLY points
               for qualifying waste. These points are redeemable for a cash
               payment to the non-profit organization or school of your choice
               and other charitable gifts.
@@ -157,6 +212,7 @@ const Reward = ({ Auth }) => {
                 type="text"
                 placeholder="Search by Name "
                 aria-label="Search"
+                onChange={handleSearch}
                 // onChange={handleSearch}
               />
             </div>
@@ -165,14 +221,11 @@ const Reward = ({ Auth }) => {
             <div>
               <select
                 className="browser-default custom-select"
-                // onChange={handleSortBy}
-                defaultValue=""
+                onChange={handleSortBy}
               >
                 <option value="">Sort By</option>
-                <option value="cheapest">Cheapest</option>
-                <option value="mostexpensive">Most Expensive</option>
-                <option value="nameaz">Name A-Z</option>
-                <option value="nameza">Name Z-A</option>
+                <option value="priceDescription DESC">Most Expensive</option>
+                <option value="priceDescription ASC">Cheapest</option>
               </select>
             </div>
           </MDBCol>
@@ -180,12 +233,32 @@ const Reward = ({ Auth }) => {
         <MDBRow>{renderCard()}</MDBRow>
         <MDBRow>
           <MDBCol className="d-flex justify-content-center mt-4">
-            <Pagination
-              userPerPage={userPerPage}
-              totalUser={data.length}
-              paginate={paginate}
-              // name="page"
-            />
+            <MDBRow>
+              <MDBCol>
+                <MDBPagination
+                  className="mb-5 mr-5 pr-5 float-right"
+                  color="teal"
+                >
+                  <MDBPageItem
+                    disabled={page === 0}
+                    onClick={() => getpaginationdata(page / 6 - 1)}
+                  >
+                    {/* <MDBPageNav aria-label="Previous">
+                  <span aria-hidden="true">Previous</span>
+                </MDBPageNav> */}
+                  </MDBPageItem>
+                  {renderpagination()}
+                  <MDBPageItem
+                    disabled={Math.ceil(totalreward / 6) === page / 6 + 1}
+                    onClick={() => getpaginationdata(page / 6 + 1)}
+                  >
+                    {/* <MDBPageNav aria-label="Previous">
+                  <span aria-hidden="true">Next</span>
+                </MDBPageNav> */}
+                  </MDBPageItem>
+                </MDBPagination>
+              </MDBCol>
+            </MDBRow>
           </MDBCol>
         </MDBRow>
       </MDBContainer>
