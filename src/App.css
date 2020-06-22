@@ -237,7 +237,6 @@
 }
 
 .program-card-filter-container {
-  /* border: 1px solid black; */
   margin: 2% 0 0 0;
 }
 
@@ -247,11 +246,27 @@
 }
 
 .sort-container {
-  /* border: 1px solid black; */
   padding: 0 4%;
 }
-/* ================ */
 
+/* ================= */
+/*   PROGRAMDETAIL   */
+/* ================= */
+
+.program-detail-container {
+  /* height: 100vh; */
+  overflow: hidden;
+  /* background-color: #e4e4e4; */
+}
+.program-detail-top {
+  height: 70vh;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url("./images/registertop.jpg");
+  background-size: cover;
+  margin: 0 auto;
+}
+
+/* ================ */
 /*      NOTFOUND    */
 /* ================ */
 
@@ -367,10 +382,6 @@
   margin-right: 2px;
   width: 140px;
   border: 1px solid black;
-}
-.pagination {
-  /* width: 20px; */
-  /* font-size: 200px; */
 }
 
 /* FONTS */

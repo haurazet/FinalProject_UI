@@ -17,7 +17,8 @@ import ManageTransaksi from "./pages/ManageTransaksi/ManageTransaksi";
 import Reward from "./pages/Reward/Reward";
 import Dashboard from "./pages/Dashboard/Dashboard";
 import Report from "./pages/Report/Report";
-import Program from "./pages/ProgramPage";
+import Program from "./pages/Program/ProgramPage";
+import ProgramDetail from "./pages/Program/ProgramDetail";
 import { KeepLogin } from "./redux/actions";
 import { API_URL } from "./support/Apiurl";
 
@@ -39,8 +40,6 @@ function App({ KeepLogin }) {
           console.log(err.message);
         })
         .then((res) => {
-          console.log("berhasil get data keep login");
-          console.log(res.data);
           KeepLogin(res.data);
         })
         .catch((err) => {
@@ -80,12 +79,8 @@ function App({ KeepLogin }) {
           component={TransactionHistory}
           exact
         />
+        <Route path="/programdetail/:idprog" exact component={ProgramDetail} />
         <Route component={Notfound} />
-        {/* <Route  path='/report' component={Report} exact /> */}
-        {/* <Route path='/manageuser' component={ManageUser} exact/> */}
-
-        {/* <Route  path='/managetransaksi'  component={ManageTransaksi} exact /> */}
-        {/* <Route component={Notfound} /> */}
       </Switch>
     </div>
   );
