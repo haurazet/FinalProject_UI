@@ -40,11 +40,19 @@ function App({KeepLogin}) {
       .catch(err=>{
         console.log(err.message)
       })
-      .finally(()=>{
-        setLoading(false)
-      })
-    }else{
-      setLoading(false)
+        .then((res) => {
+          console.log("berhasil get data keep login");
+          console.log(res.data);
+          KeepLogin(res.data);
+        })
+        .catch((err) => {
+          console.log(err.message);
+        })
+        .finally(() => {
+          setLoading(false);
+        });
+    } else {
+      setLoading(false);
     }
     },[KeepLogin])
 
@@ -64,16 +72,13 @@ function App({KeepLogin}) {
         <Route path="/resetpassword" component={ResetPassword} exact/>
         <Route  path='/reward' component={Reward} exact />
         <Route  path='/program' component={Program} exact />
-        {/* <Route  path='/dashboard' component={Dashboard} exact /> */}
+        <Route path="/dashboard" component={Dashboard} exact />
+        <Route path="/transactionhistory" component={TransactionHistory} exact />
         <Route component={Notfound} />
-        {/* <Route  path='/report' component={Report} exact /> */}  
-        {/* <Route path='/manageuser' component={ManageUser} exact/> */}
-        {/* <Route path='/transactionhistory' component={TransactionHistory} exact/> */}
-        {/* <Route  path='/managetransaksi'  component={ManageTransaksi} exact /> */}
-        {/* <Route component={Notfound} /> */}
       </Switch>
     </div>
   );
 }
 
-export default connect(null,{KeepLogin})(App);
+
+export default connect(null, { KeepLogin })(App);

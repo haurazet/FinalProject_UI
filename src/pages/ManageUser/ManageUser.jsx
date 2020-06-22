@@ -41,13 +41,6 @@ const ManageUser = () => {
     console.log(count);
   };
 
-  const renderUser = () => {
-    Axios.get(`API_URL`)
-
-      .then((result) => {})
-      .catch((error) => {});
-  };
-
   const renderData = () => {
     return currentUser.map((val, index) => {
       return (
@@ -136,14 +129,6 @@ const ManageUser = () => {
               <FaSearch />
             </button>
           </div>
-          {/* <div>
-                            <b>Filter By:</b>
-                           <select name="Filter" id="1" onChange={handleFilter}>
-                               <option placeholder='Filter by' value=''/>
-                               <option value='report' >Report</option>
-                               <option value='name'>Name</option>
-                            </select>
-                        </div> */}
         </div>
         <div className={styles.table_box}>
           <table className={styles.contenttable}>
