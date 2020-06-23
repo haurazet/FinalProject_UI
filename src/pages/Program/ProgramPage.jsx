@@ -83,7 +83,7 @@ class Productpage extends Component {
         }
         return products.map((val,index)=>{
             return(
-                <div key={index} className="p-4 col-md-4 " >
+                <div key={index} className="py-4 px-2 col-md-4 " >
                     <Link to={`/programdetail/${val.id}`}>
                         <Card>
                             <div className="program-picture p-3 row align-items-center">

@@ -19,6 +19,8 @@ import Dashboard from './pages/Dashboard/Dashboard';
 import Report from './pages/Report/Report';
 import Program from './pages/Program/ProgramPage'
 import ProgramDetail from './pages/Program/ProgramDetail'
+import JoinProgram from './pages/Program/JoinProgram'
+import ScrollToTop from './components/scrolltop'
 import {KeepLogin} from './redux/actions'
 import { API_URL } from './support/Apiurl'
 
@@ -61,6 +63,7 @@ function App({KeepLogin}) {
 
   return (
     <div>
+      <ScrollToTop/>
       <Switch>
         <Route path="/" component={Home} exact/>
         <Route path="/login" component={Login} exact/>
@@ -74,6 +77,7 @@ function App({KeepLogin}) {
         <Route path="/dashboard" component={Dashboard} exact />
         <Route path="/transactionhistory" component={TransactionHistory} exact />
         <Route path="/programdetail/:idprog" exact component={ProgramDetail}/>
+        <Route path="/joinprogram/:idprog" exact component={JoinProgram}/>
         <Route component={Notfound} />
       </Switch>
     </div>

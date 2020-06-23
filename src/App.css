@@ -266,6 +266,19 @@
   margin: 0 auto;
 }
 
+/* ================= */
+/*   JOIN PROGRAM    */
+/* ================= */
+
+.join-section-title{
+  color: var(--main-green-color);
+  font-weight: bolder;
+}
+
+.join-section-container{
+  border-bottom: 1px solid rgb(202, 202, 202) ;
+}
+
 
 /* ================ */
 /*      NOTFOUND    */
