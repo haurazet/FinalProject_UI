@@ -8,12 +8,13 @@ const ButtonNeon=({text,onClick})=>{
 
         return(
      
-  <a onClick={onClick}> 
+  <a className={style.aElement} onClick={onClick}> 
         <span></span>
         <span></span>
         <span></span>
         <span></span>
             {text}
+                    
     </a>
 
      

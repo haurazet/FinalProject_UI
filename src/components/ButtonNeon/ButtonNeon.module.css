@@ -1,18 +1,20 @@
 
-a{
+.aElement{
     position: relative;
     display: inline-block;
-    padding: 25px 30px;
-    margin: 40px 0;
-    background-color: white;
-    color: #719640 !important;
+    /* padding: 25px 30px; */
+    padding: 20px 20px;
+    /* margin: 40px 0; */
+    background-color: #e9d700;
+    color: white !important;
     text-decoration: none;
     text-transform: uppercase;
     transition: 0.5s;
     letter-spacing: 4px;
     overflow: hidden;
+    height: 65px;
 }
-a:hover{
+.aElement:hover{
     cursor: pointer;
     background-color: #719640;
     color: white !important;
@@ -23,12 +25,12 @@ a:hover{
 
 
 }
-a span{
+.aElement span{
     position: absolute;
     display: block;
 }
 
-a span:nth-child(1){
+.aElement span:nth-child(1){
     top: 0;
     left: 0;
     width: 100%;
@@ -46,7 +48,7 @@ a span:nth-child(1){
         left: 100%;
     }
 }
-a span:nth-child(2){
+.aElement span:nth-child(2){
     top: -100%;
     right: 0;
     /* left: 0; */
@@ -66,7 +68,7 @@ a span:nth-child(2){
         top: 100%;
     }
 }
-a span:nth-child(3){
+.aElement span:nth-child(3){
     bottom: 0%;
     right: -100%;
     /* left: 0; */
@@ -86,10 +88,11 @@ a span:nth-child(3){
         right: 100%;
     }
 }
-a span:nth-child(4){
+.aElement span:nth-child(4){
     bottom: -100%;
     left: 0;
     /* left: 0; */
+    /* margin-bottom: 0; */
     width: 2px;
     height: 100%;
     background: linear-gradient(360deg,transparent,#719640);
@@ -106,3 +109,4 @@ a span:nth-child(4){
         bottom: 100%;
     }
 }
+

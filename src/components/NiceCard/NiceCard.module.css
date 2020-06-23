@@ -1,0 +1,85 @@
+@font-face {
+  font-family: "sanfransisco";
+  src: url("../../fonts/SanFranciscoDisplay-Medium.otf") format("opentype");
+}
+
+.card {
+  display: grid;
+  grid-template-columns: 300px;
+  grid-template-rows: 210px 210px 80px;
+  grid-template-areas: "image" "text" "stats";
+
+  font-family: "sanfransisco";
+  border-radius: 18px;
+  background: white;
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.9);
+  text-align: center;
+
+  transition: 0.5s ease;
+  cursor: pointer;
+  margin: 30px;
+}
+
+.cardImage {
+  grid-area: image;
+  /* background: url('../../images/registertop.jpg'); */
+  width: 100%;
+  height: 90%;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  background-size: cover;
+}
+.cardText {
+  grid-area: text;
+}
+.cardStats {
+  grid-area: stats;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr;
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+  background: #9ac84a;
+}
+.date {
+  color: turquoise;
+  font-size: 13px;
+}
+
+.cardText p {
+  color: gray;
+  font-size: 15px;
+  font-weight: 300;
+}
+
+.cardText h2 {
+  margin-top: 0px;
+  font-size: 28px;
+}
+.stats {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 10px;
+  color: white;
+}
+.value {
+  font-size: 22px;
+  font-weight: 500;
+}
+.type {
+  font-size: 13px;
+  font-weight: bolder;
+  text-transform: uppercase;
+}
+
+.card:hover {
+  transform: scale(1.15);
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.6);
+}
+
+.cardStats .border {
+  border-left: 1px solid salmon;
+  border-right: 1px solid salmon;
+}

@@ -1,6 +1,154 @@
-.container{
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.descriptionbox {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  /* align-items: center; */
+}
+.flexboxTitle {
+  flex-direction: row;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 1px solid #9ac84a;
+}
+
+.marginTop {
+  margin-top: 100px;
+  height: 100vh;
+  /* background-color: seagreen; */
+}
+
+.horizontalCard {
+  size: 80vh;
+  border: 1px solid #9ac84a;
+  height: 10vw;
+  display: flex;
+  flex-direction: row;
+  border-radius: 10px;
+}
+
+.CardBoxLeft {
+  border-right: #dddddd 0.5px solid;
+  width: 30%;
+}
+.CardBoxMid {
+  border-right: #dddddd 0.5px solid;
+  width: 30%;
+}
+.CardBoxRight {
+  /* width: 40%; */
+  width: 500px;
+  height: 100%;
+  display: flex;
+  /* border: 2px solid blue; */
+  margin-left: 20px;
+}
+.imageStyles {
+  width: "100px";
+  height: "90px";
+}
+.boxLeft {
+  width: 50%;
+  /* border: 2px solid brown; */
+}
+.boxRight {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+}
+.spaceBetween {
+  width: 120px;
+  height: 24px;
+  /* border: 2px solid green; */
+  justify-content: space-evenly;
+  display: flex;
+  flex-direction: row;
+  /* align-content: space-between; */
+}
+.dot {
+  height: 24px;
+  width: 25px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  text-align: center;
+}
+.dotColor {
+  height: 24px;
+  width: 25px;
+  background-color: #9ac84a;
+  border-radius: 50%;
+  display: inline-block;
+  text-align: center;
+}
+.statusBar {
+  margin-top: 10px;
+  color: whitesmoke;
+  font-weight: bolder;
+  /* border: 1px solid gray; */
+  width: 190px;
+  background-color: gray;
+  border-radius: 2px;
+}
+.button {
+  border-radius: 2px;
+}
+.uploadButton {
+  height: 30px;
+  display: flex;
+  /* justify-content: center; */
+  align-items: center;
+  /* text-align: center; */
+  /* border: 2px solid saddlebrown; */
+  background-color: #e9ecef;
+  border-radius: 5px;
+  font-weight: bolder;
+  /* border: 1px solid gray; */
+}
+.uploadButton:hover {
+  cursor: pointer;
+}
+
+@media only screen and (max-width: 980px) {
+  /* .CardBoxLeft .CardBoxMid .CardBoxRight {
+    
+  } */
+  .horizontalCard {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+    flex-direction: column;
+    /* justify-content: center; */
+    align-content: center;
+    width: 100%;
+    height: 65vh;
+  }
+  .CardBoxLeft {
+    border-bottom: gray 0.5px solid;
+    width: 100%;
+    height: 30%;
+    /* display: flex;
+    flex-direction: row; */
+  }
+  .CardBoxMid {
+    border-bottom: gray 0.5px solid;
+    width: 100%;
+    height: 30%;
+  }
+  .CardBoxRight {
+    display: flex;
+    /* flex-direction: row; */
+    /* justify-content: center; */
+    /* align-items: center; */
+    margin-top: 30px;
+    width: 400px;
+    height: 90px;
+  }
+  .spaceBetween {
+  }
 }
