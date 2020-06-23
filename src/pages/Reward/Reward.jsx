@@ -19,111 +19,33 @@ import { text } from "@fortawesome/fontawesome-svg-core";
 import { KeepLogin } from "../../redux/actions";
 
 const Reward = ({ Auth }) => {
-  const [page, setpage] = useState(0);
-  const [data, setdata] = useState([]);
-  const [totalreward, setotalreward] = useState(0);
-  const [search, setsearch] = useState("");
-  const [sort, setsort] = useState("");
+  const [datacat1, setdatacat1] = useState([]);
+  const [datacat2, setdatacat2] = useState([]);
+  const [datacat3, setdatacat3] = useState([]);
+  const [datacat4, setdatacat4] = useState([]);
 
   useEffect(() => {
     getData();
     console.log(Auth.points);
-  }, [data]);
+  }, []);
 
   const getData = () => {
-    Axios.get(
-      search
-        ? `${API_URL}/reward/totalreward?search=${search}`
-        : `${API_URL}/reward/totalreward`,
-      {}
-    )
-      .then((result) => {
-        setotalreward(result.data.total);
-        console.log(sort);
-        Axios.get(
-          search
-            ? `${API_URL}/reward/getrewarduser?search=${search}&page=${page}`
-            : search && sort
-            ? `${API_URL}/reward/getrewarduser?search=${search}&sort=${sort}&page=${page}`
-            : sort
-            ? `${API_URL}/reward/getrewarduser?sort=${sort}&page=${page}`
-            : `${API_URL}/reward/getrewarduser?page=${page}`
-        )
-          .then((result1) => {
-            console.log(result1);
-            setdata(result1.data);
-          })
-          .catch((error1) => error1);
+    Axios.all([
+      Axios.get(`${API_URL}/reward/getrewarduser?categoryid=${1}`),
+      Axios.get(`${API_URL}/reward/getrewarduser?categoryid=${2}`),
+      Axios.get(`${API_URL}/reward/getrewarduser?categoryid=${3}`),
+      Axios.get(`${API_URL}/reward/getrewarduser?categoryid=${4}`),
+    ])
+      .then((result1) => {
+        setdatacat1(result1[0].data);
+        setdatacat2(result1[1].data);
+        setdatacat3(result1[2].data);
+        setdatacat4(result1[3].data);
       })
-      .catch((error) => {
-        console.log(error);
+      .catch((err) => {
+        console.log(err);
       });
   };
-
-  const getpaginationdata = (val) => {
-    setpage(val * 6);
-    getData();
-  };
-  const handleSearch = (e) => {
-    let search = e.target.value;
-    setsearch(search);
-    getData();
-  };
-
-  const renderpagination = () => {
-    // console.log('masuk pagination')
-    var totalpage = Math.ceil(totalreward / 6);
-    var arr = [];
-    for (var i = 0; i < totalpage; i++) {
-      arr.push(i);
-    }
-    return arr.map((val, index) => {
-      return (
-        <div key={index}>
-          <MDBPageItem active={page / 6 === val}>
-            <MDBPageNav onClick={() => getpaginationdata(val)}>
-              {val + 1}
-            </MDBPageNav>
-          </MDBPageItem>
-        </div>
-      );
-    });
-  };
-  // const getData = () => {
-  // //   Axios.get(`${API_URL}`).then((res) => {
-  // //     console.log(res);
-  // //   });
-  // // };
-
-  // const getData = (search) => {
-  //   Axios.get(
-  //     search
-  //       ? `${API_URL}/reward/totalreward?search=${search}`
-  //       : `${API_URL}/reward/totalreward`,
-  //     {}
-  //   )
-  //     .then((res) => {
-  //       console.log(res);
-  //       settotalreward(res.data.total);
-  //       Axios.get(
-  //         search
-  //           ? `${API_URL}/reward/getrewarduser?search=${search}&page=${page}`
-  //           : `${API_URL}/reward/getrewarduser?page=${page}`
-  //       )
-  //         .then((res1) => {
-  //           // window.scrollTo(0, 0);
-  //           console.log(res1);
-  //           setdata(res1.data);
-  //           // setisloading(false);
-  //         })
-  //         .catch((err) => {
-  //           console.log(err);
-  //         });
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // };
 
   const OnClickCard = (id, title, price) => {
     console.log(Auth.isLogin);
@@ -165,15 +87,53 @@ const Reward = ({ Auth }) => {
     }
   };
 
-  const handleSortBy = (e) => {
-    console.log(e.target.value);
-    let sort = e.target.value;
-    setsort(sort);
-    getData();
+  const renderCardCat1 = () => {
+    return datacat1.map((val, index) => (
+      <NiceCard
+        key={val.id}
+        onClick={() => OnClickCard(val.id, val.title, val.priceDescription)}
+        title={val.title}
+        description={val.description}
+        imageAdress={API_URL + val.image}
+        price="Price"
+        priceDescription={val.priceDescription}
+        // type="Stock"
+        // typeDescription={val.stok}
+      />
+    ));
   };
-
-  const renderCard = () => {
-    return data.map((val, index) => (
+  const renderCardCat2 = () => {
+    return datacat2.map((val, index) => (
+      <NiceCard
+        key={val.id}
+        onClick={() => OnClickCard(val.id, val.title, val.priceDescription)}
+        title={val.title}
+        description={val.description}
+        imageAdress={API_URL + val.image}
+        price="Price"
+        priceDescription={val.priceDescription}
+        // type="Stock"
+        // typeDescription={val.stok}
+      />
+    ));
+  };
+  const renderCardCat3 = () => {
+    return datacat3.map((val, index) => (
+      <NiceCard
+        key={val.id}
+        onClick={() => OnClickCard(val.id, val.title, val.priceDescription)}
+        title={val.title}
+        description={val.description}
+        imageAdress={API_URL + val.image}
+        price="Price"
+        priceDescription={val.priceDescription}
+        // type="Stock"
+        // typeDescription={val.stok}
+      />
+    ));
+  };
+  const renderCardCat4 = () => {
+    return datacat4.map((val, index) => (
       <NiceCard
         key={val.id}
         onClick={() => OnClickCard(val.id, val.title, val.priceDescription)}
@@ -189,80 +149,86 @@ const Reward = ({ Auth }) => {
   };
 
   return (
-    <div className={styles.marginTop}>
-      <MDBContainer className={styles.container}>
-        <MDBRow className={styles.RowReward}>
-          <MDBCol lg="5" className={styles.flexDir}>
-            <div className={styles.redeemBox}>Redeem Your Points</div>
-            <div className={styles.descBox}>
-              Through many of our programs, we reward you with RECYCLY points
-              for qualifying waste. These points are redeemable for a cash
-              payment to the non-profit organization or school of your choice
-              and other charitable gifts.
-            </div>
-          </MDBCol>
-        </MDBRow>
-        <MDBRow></MDBRow>
-        <MDBRow>
-          <MDBCol>
-            {" "}
-            <div className="active-pink-3 active-pink-4 mb-4">
-              <input
-                className="form-control"
-                type="text"
-                placeholder="Search by Name "
-                aria-label="Search"
-                onChange={handleSearch}
-                // onChange={handleSearch}
-              />
-            </div>
-          </MDBCol>
-          <MDBCol>
-            <div>
-              <select
-                className="browser-default custom-select"
-                onChange={handleSortBy}
-              >
-                <option value="">Sort By</option>
-                <option value="priceDescription DESC">Most Expensive</option>
-                <option value="priceDescription ASC">Cheapest</option>
-              </select>
-            </div>
-          </MDBCol>
-        </MDBRow>
-        <MDBRow>{renderCard()}</MDBRow>
-        <MDBRow>
-          <MDBCol className="d-flex justify-content-center mt-4">
+    <MDBContainer fluid>
+      <MDBRow className={styles.RowReward}>
+        <MDBCol lg="5" className={styles.flexDir}>
+          <div className={styles.redeemBox}>Redeem Your Points</div>
+          <div className={styles.descBox}>
+            Through many of our programs, we reward you with RECYCLY points for
+            qualifying waste. These points are redeemable for a cash payment to
+            the non-profit organization or school of your choice and other
+            charitable gifts.
+          </div>
+          <div className={styles.pointBox}>
+            Your Current RECYCLY Points:{Auth.points ? Auth.points : 0}
+          </div>
+        </MDBCol>
+      </MDBRow>
+      <MDBRow className={styles.rewardDescriptions}>
+        <MDBCol className="d-flex justify-content-center">
+          <div className={styles.boxtoMiddle}>
             <MDBRow>
-              <MDBCol>
-                <MDBPagination
-                  className="mb-5 mr-5 pr-5 float-right"
-                  color="teal"
-                >
-                  <MDBPageItem
-                    disabled={page === 0}
-                    onClick={() => getpaginationdata(page / 6 - 1)}
-                  >
-                    {/* <MDBPageNav aria-label="Previous">
-                  <span aria-hidden="true">Previous</span>
-                </MDBPageNav> */}
-                  </MDBPageItem>
-                  {renderpagination()}
-                  <MDBPageItem
-                    disabled={Math.ceil(totalreward / 6) === page / 6 + 1}
-                    onClick={() => getpaginationdata(page / 6 + 1)}
-                  >
-                    {/* <MDBPageNav aria-label="Previous">
-                  <span aria-hidden="true">Next</span>
-                </MDBPageNav> */}
-                  </MDBPageItem>
-                </MDBPagination>
+              <MDBCol className={styles.colorHelp}>Help the Environment</MDBCol>
+            </MDBRow>
+            <MDBRow>
+              <MDBCol className={styles.descriptionText}>
+                Donate your points to protect the atmosphere and promote
+                environmental research and appreciation.
               </MDBCol>
             </MDBRow>
-          </MDBCol>
-        </MDBRow>
-      </MDBContainer>
-    </div>
+          </div>
+        </MDBCol>
+      </MDBRow>
+      <MDBRow className={styles.BoxMiddle}>{renderCardCat1()}</MDBRow>
+      <MDBRow className={styles.rewardDescriptions}>
+        <MDBCol className="d-flex justify-content-center">
+          <div className={styles.boxtoMiddle}>
+            <MDBRow>
+              <MDBCol className={styles.colorHelp}>Animal</MDBCol>
+            </MDBRow>
+            <MDBRow>
+              <MDBCol className={styles.descriptionText}>
+                Donate your points to provide people in need with direct
+                services.
+              </MDBCol>
+            </MDBRow>
+          </div>
+        </MDBCol>
+      </MDBRow>
+      <MDBRow className={styles.BoxMiddle}>{renderCardCat2()}</MDBRow>
+      <MDBRow className={styles.rewardDescriptions}>
+        <MDBCol className="d-flex justify-content-center">
+          <div className={styles.boxtoMiddle}>
+            <MDBRow>
+              <MDBCol className={styles.colorHelp}>Human Services</MDBCol>
+            </MDBRow>
+            <MDBRow>
+              <MDBCol className={styles.descriptionText}>
+                Donate your points to provide people in need with direct
+                services.
+              </MDBCol>
+            </MDBRow>
+          </div>
+        </MDBCol>
+      </MDBRow>
+      <MDBRow className={styles.BoxMiddle}>{renderCardCat3()}</MDBRow>
+      <MDBRow className={styles.rewardDescriptions}>
+        <MDBCol className="d-flex justify-content-center">
+          <div className={styles.boxtoMiddle}>
+            <MDBRow>
+              <MDBCol className={styles.colorHelp}>Education</MDBCol>
+            </MDBRow>
+            <MDBRow>
+              <MDBCol className={styles.descriptionText}>
+                Donate your points to create education opportunities for
+                students and provide ongoing support for our schools.
+              </MDBCol>
+            </MDBRow>
+          </div>
+        </MDBCol>
+      </MDBRow>
+      <MDBRow className={styles.BoxMiddle}>{renderCardCat4()}</MDBRow>
+    </MDBContainer>
   );
 };
 

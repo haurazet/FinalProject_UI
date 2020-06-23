@@ -74,6 +74,9 @@ function App({ KeepLogin }) {
         <Route path="/reward" component={Reward} exact />
         <Route path="/program" component={Program} exact />
         <Route path="/dashboard" component={Dashboard} exact />
+        <Route path="/managetransaksi" component={ManageTransaksi} exact />
+        <Route path="/manageuser" component={ManageUser} exact />
+
         <Route
           path="/transactionhistory"
           component={TransactionHistory}

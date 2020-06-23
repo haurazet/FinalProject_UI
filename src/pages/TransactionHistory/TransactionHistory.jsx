@@ -12,12 +12,13 @@ import Pagination from "../../components/Pagination/Pagination";
 import Axios from "axios";
 import { MDBBtn } from "mdbreact";
 import { API_URL } from "../../support/Apiurl";
+import Swal from "sweetalert2";
 
 const TransactionHistory = () => {
   const [dropdownOpen, setOpen] = useState(false);
   const [data, setdata] = useState([
     {
-      id: 12313,
+      id: 1,
       image: `${API_URL}/REWARD/REWARD1.jpg`,
       programName: "Save Earth",
       firstName: "asd",
@@ -25,69 +26,69 @@ const TransactionHistory = () => {
       phoneNumber: "1123123",
       status: "payment",
     },
-    {
-      id: 12313,
-      image: `${API_URL}/REWARD/REWARD1.jpg`,
-      programName: "Save Earth",
-      firstName: "asd",
-      address: "asd",
-      phoneNumber: "1123123",
-      status: "payment",
-    },
-    {
-      id: 12313,
-      image: `${API_URL}/REWARD/REWARD1.jpg`,
-      programName: "Save Earth",
-      firstName: "asd",
-      address: "asd",
-      phoneNumber: "1123123",
-      status: "payment",
-    },
-    {
-      id: 12313,
-      image: `${API_URL}/REWARD/REWARD1.jpg`,
-      programName: "Save Earth",
-      firstName: "asd",
-      address: "asd",
-      phoneNumber: "1123123",
-      status: "payment",
-    },
-    {
-      id: 12313,
-      image: `${API_URL}/REWARD/REWARD1.jpg`,
-      programName: "Save Earth",
-      firstName: "asd",
-      address: "asd",
-      phoneNumber: "1123123",
-      status: "payment",
-    },
-    {
-      id: 12313,
-      image: `${API_URL}/REWARD/REWARD1.jpg`,
-      programName: "Save Earth",
-      firstName: "asd",
-      address: "asd",
-      phoneNumber: "1123123",
-      status: "payment",
-    },
-    {
-      id: 12313,
-      image: `${API_URL}/REWARD/REWARD1.jpg`,
-      programName: "Save Earth",
-      firstName: "asd",
-      address: "asd",
-      phoneNumber: "1123123",
-      status: "payment",
-    },
+    // {
+    //   id: 12313,
+    //   image: `${API_URL}/REWARD/REWARD1.jpg`,
+    //   programName: "Save Earth",
+    //   firstName: "asd",
+    //   address: "asd",
+    //   phoneNumber: "1123123",
+    //   status: "payment",
+    // },
+    // {
+    //   id: 12313,
+    //   image: `${API_URL}/REWARD/REWARD1.jpg`,
+    //   programName: "Save Earth",
+    //   firstName: "asd",
+    //   address: "asd",
+    //   phoneNumber: "1123123",
+    //   status: "payment",
+    // },
+    // {
+    //   id: 12313,
+    //   image: `${API_URL}/REWARD/REWARD1.jpg`,
+    //   programName: "Save Earth",
+    //   firstName: "asd",
+    //   address: "asd",
+    //   phoneNumber: "1123123",
+    //   status: "payment",
+    // },
+    // {
+    //   id: 12313,
+    //   image: `${API_URL}/REWARD/REWARD1.jpg`,
+    //   programName: "Save Earth",
+    //   firstName: "asd",
+    //   address: "asd",
+    //   phoneNumber: "1123123",
+    //   status: "payment",
+    // },
+    // {
+    //   id: 12313,
+    //   image: `${API_URL}/REWARD/REWARD1.jpg`,
+    //   programName: "Save Earth",
+    //   firstName: "asd",
+    //   address: "asd",
+    //   phoneNumber: "1123123",
+    //   status: "payment",
+    // },
+    // {
+    //   id: 12313,
+    //   image: `${API_URL}/REWARD/REWARD1.jpg`,
+    //   programName: "Save Earth",
+    //   firstName: "asd",
+    //   address: "asd",
+    //   phoneNumber: "1123123",
+    //   status: "payment",
+    // },
   ]);
   const [search, setsearch] = useState([]);
   const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [userPerPage] = useState(5);
   const [uploaded, setuploaded] = useState(true);
-  const [image, setImage] = useState({ preview: "", raw: null });
+  const [image, setImage] = useState({ preview: "", raw: undefined });
 
-  const onClickUploadButton = (e) => {
+  const onClickUploadButton = (e, id) => {
     e.preventDefault();
 
     const formData = new FormData();
@@ -96,20 +97,30 @@ const TransactionHistory = () => {
     var Headers = {
       headers: {
         "Content-Type": "multipart/form-data",
-        Authorization: `Bearer ${token}`,
+        // Authorization: `Bearer ${token}`,
       },
     };
-    Axios.post(`${API_URL}/users/proofimage`, formData, Headers)
-      .then((result) => console.log(result))
+    Axios.post(`${API_URL}/users/proofimage?id=${id}`, formData, Headers)
+      .then((result) =>
+        Swal.fire({
+          title: "Image has been uploaded",
+        })
+      )
       .catch((err) => console.log(err));
   };
   const imageInput = (e) => {
+    console.log(e.target.files[0]);
     if (e.target.files.length) {
       setImage({
         preview: URL.createObjectURL(e.target.files[0]),
         raw: e.target.files[0],
       });
       console.log(image);
+    } else {
+      setImage({
+        preview: "",
+        raw: undefined,
+      });
     }
   };
 
@@ -182,7 +193,7 @@ const TransactionHistory = () => {
                         <span className={styles.uploadButton}>
                           <div
                             style={{ fontWeight: "bolder" }}
-                            onClick={onClickUploadButton}
+                            onClick={(e) => onClickUploadButton(e, val.id)}
                           >
                             Upload
                           </div>
@@ -191,8 +202,9 @@ const TransactionHistory = () => {
                       <div>
                         <input
                           type="file"
+                          defaultValue={Image}
                           style={{ width: 200 }}
-                          onChange={imageInput}
+                          onChange={(e) => imageInput(e)}
                         />
                         {image.preview ? (
                           <img width="30px" height="30px" src={image.preview} />
@@ -224,46 +236,40 @@ const TransactionHistory = () => {
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   return (
-    <div className={styles.marginTop}>
-      <Container fluid>
-        <Row>
-          <Col>
-            <div className="d-flex justify-content-center align-items-center border">
-              <h1>History</h1>
-            </div>
-          </Col>
-        </Row>
-        <Row>
-          <Col>
-            <div
-              className="d-flex justify-content-center btn-group btn-group-lg mb-4"
-              role="group"
-              aria-label="Basic example"
-            >
-              <button type="button" className="btn btn-primary btn-lg">
-                Confirm Payment
-              </button>
-              <button type="button" className="btn btn-warning btn-lg">
-                Confirm Received items
-              </button>
-              <button type="button" className="btn btn-danger btn-lg">
-                History
-              </button>
-            </div>
-          </Col>
-        </Row>
-        {renderCard()}
-        <Row>
-          <Col className="d-flex justify-content-center">
-            <Pagination
-              userPerPage={userPerPage}
-              totalUser={data.length}
-              paginate={paginate}
-            />
-          </Col>
-        </Row>
-      </Container>
-    </div>
+    <Container fluid>
+      <Row>
+        <Col className={styles.Title_box}>Transaction History</Col>
+      </Row>
+      <Row>
+        <Col>
+          <div
+            className="d-flex justify-content-center btn-group btn-group-lg mb-4"
+            role="group"
+            aria-label="Basic example"
+          >
+            <button type="button" className="btn btn-success btn-md">
+              Payment
+            </button>
+            <button type="button" className="btn btn-success btn-md">
+              Confirm Pick Up
+            </button>
+            <button type="button" className="btn btn-success btn-md">
+              History
+            </button>
+          </div>
+        </Col>
+      </Row>
+      {renderCard()}
+      <Row>
+        <Col className="d-flex justify-content-center">
+          <Pagination
+            userPerPage={userPerPage}
+            totalUser={data.length}
+            paginate={paginate}
+          />
+        </Col>
+      </Row>
+    </Container>
   );
 };
 

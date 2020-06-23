@@ -9,27 +9,42 @@
   font-family: "sanfransisco";
   margin-left: 0;
   padding: 0;
-  /* background-image: url('../../images//annagolant180502049.jpg'); */
-  /* background-size: 2000px 2000px; */
-  /* background-size: contain; */
-  /* background-image: url('../../images//annagolant180502049.jpg'); */
-  /* background-repeat: no-repeat; */
-  /* background-size: cover; */
-  /* background-image: url("../../images//annagolant180502049.jpg"); */
-  /* background-repeat: no-repeat; */
 }
 .container {
-  /* background-image: url("../../images//annagolant180502049.jpg"); */
-  /* background-size: cover; */
 }
 .rewardDescription {
   height: 20vh;
 
   /* background-color: whitesmoke; */
 }
+.rewardDescriptions {
+  height: 20vh;
+  background-color: white;
+}
+
+.boxtoMiddle {
+  width: 600px;
+  /* background-color: whitesmoke; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.colorHelp {
+  color: #9ac84a;
+  font-family: "sanfransiscobold";
+  font-size: 27px;
+}
+.descriptionText {
+  font-family: "sanfransisco";
+  color: black;
+  font-size: 20px;
+  margin-top: 10px;
+}
 
 .RowReward {
   height: 50vh;
+  margin-bottom: 15px;
+  background-color: #3797a4;
 }
 .flexDir {
   display: flex;
@@ -47,4 +62,16 @@
 .redeemBox {
   font-family: "sanfransiscobold";
   font-size: 30px;
+}
+.pointBox {
+  font-family: "sanfransiscobold";
+  font-size: 20px;
+}
+.BoxMiddle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* border: 2px solid salmon; */
+  background-color: whitesmoke;
+  /* margin: 1px 0 1px 0; */
 }

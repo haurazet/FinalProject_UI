@@ -1,10 +1,32 @@
+* {
+  padding: 0;
+  margin: 0;
+}
 .container {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
+  padding: 0;
+  margin: 0;
 
   /* font-family: "sanfransisco"; */
+}
+.Title_box {
+  display: flex;
+  justify-content: center;
+  font-family: "sanfransiscobold";
+  align-items: flex-end;
+  font-size: 40px;
+  height: 20vh;
+  background-color: #abacad;
+  color: whitesmoke;
+  margin-bottom: 10px;
+  /* border: 2px solid salmon; */
+  border-bottom: 3px solid slategray;
+  padding: 0;
+  margin-top: 10vh;
+  /* margin: 0; */
 }
 
 .descriptionbox {
