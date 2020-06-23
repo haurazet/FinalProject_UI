@@ -1,0 +1,62 @@
+/* CSS FOOTER */
+
+.f-containersatu{
+    display: flex;
+    justify-content: space-between;
+    font-family: 'Roboto', sans-serif; 
+    background-color: #3c3c3c;
+}
+
+.f-containerdua{
+    text-align: center;
+    font-family:'GothamLight';
+    background-color: #3c3c3c;
+    font-size: 18px;
+    color: white;
+    width: 100%;
+    height: 10vh;
+}
+
+.footer-body{
+    font-weight: bolder;
+    color: #8ec84a;
+}
+
+.f-header{
+    margin: 50px;
+}
+
+.f-header a{
+    color: black;
+}
+
+.f-header.satu{
+    flex: 2;
+}
+.f-header.dua{
+    flex: 1;
+}
+.f-header.tiga{
+    flex: 1;
+}
+.f-header.empat{
+    flex: 1;
+}
+
+.f.footersatu{
+    text-align: center;
+}
+
+.f.footerdua{
+    flex: 1;
+}
+
+@media (max-width:600px){
+    .f-containersatu{
+        display: flex;
+        flex-direction: column;
+    }
+    .footer-body{
+        text-align: center;
+    }
+}

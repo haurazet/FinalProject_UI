@@ -1,0 +1,152 @@
+
+
+
+/* HOME CSS */
+
+.headermenu{
+    display: flex;
+}
+
+.headerhomeimg{
+    background-image: 
+        url('https://2.bp.blogspot.com/-UxmovzvzXiI/Tq7JLXvkhOI/AAAAAAAAAUA/4iRb1Bv2qbE/s1600/Recycle.jpg');
+    width: 100%;
+    height: 100%;
+    min-height: 80vh;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    z-index: 1;
+    opacity: 0.6;
+}
+
+.headerhometext{
+    padding-top: 100px;
+    position: relative; 
+    width:100%;
+    color: white;
+    font-size:46px;
+    text-align: center;
+    /* border-color: white;
+    border-style: solid;
+    border-width: 1px; */
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    letter-spacing: 2px;
+    z-index: 9999;
+    padding-bottom: 50px;
+}
+
+
+
+.headersearch-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.headersearch-item.satu{
+    border-width: 1px;
+    border-style: solid;
+    border-color: blue;
+}
+
+.headersearch-item.dua{
+    
+}
+
+.headersearch-item.tiga{
+}
+
+
+.headerhometext2{
+    padding-top: 30px;
+    color: #9ac84a;
+    font-size:20px;
+    text-align: center;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    z-index: 9999;
+}
+
+.headerhometext2:hover{
+    color: #1567c5;
+}
+
+@media (max-width:600px){
+    .headersearch-container{
+        flex-direction: column;
+        text-align: center;
+        box-sizing: border-box;
+    }
+}
+
+
+/* // HEADER BODY SATU + DUA */
+
+.headerbody-container{
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 50px;
+}
+
+.headerbodytext{
+    padding-top: 50px;
+    padding-bottom: 50px;
+    width:100%;
+    color: black;
+    font-size:40px;
+    text-align: center;
+    /* border-color: white;
+    border-style: solid;
+    border-width: 1px; */
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-weight: bold;
+}
+
+.headerbodytext2{
+    padding-top: 50px;
+    padding-bottom: 20px;
+    width:100%;
+    color: black;
+    font-size:40px;
+    text-align: center;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.bodytext{
+    padding-left:25%;
+    padding-right:25%;
+    padding-bottom: 10px;
+    font-size:23px;
+    text-align: center;
+}
+
+.icontext{
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: 17px;
+    font-weight: bold;
+}
+
+.icontext2{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 18px;
+    font-weight: bold;
+    color: rgb(68, 67, 67);
+}
+
+.headerbodyicon-container{
+    margin-top: 30px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    text-align: center;
+}
+
+@media (max-width:600px){
+    .bodytext{
+        padding-left:5%;
+        padding-right:5%;
+        padding-bottom: 10px;
+        font-size:23px;
+        text-align: center;
+    }
+}
