@@ -21,6 +21,7 @@ import Program from "./pages/Program/ProgramPage";
 import ProgramDetail from "./pages/Program/ProgramDetail";
 import { KeepLogin } from "./redux/actions";
 import { API_URL } from "./support/Apiurl";
+import RewardDetail from "./pages/RewardDetail/RewardDetail";
 
 function App({ KeepLogin }) {
   const [Loading, setLoading] = useState(true);
@@ -76,7 +77,7 @@ function App({ KeepLogin }) {
         <Route path="/dashboard" component={Dashboard} exact />
         <Route path="/managetransaksi" component={ManageTransaksi} exact />
         <Route path="/manageuser" component={ManageUser} exact />
-
+        <Route path="/rewarddetails/:idreward" component={RewardDetail} exact />
         <Route
           path="/transactionhistory"
           component={TransactionHistory}

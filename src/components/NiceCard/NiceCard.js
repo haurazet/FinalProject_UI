@@ -2,6 +2,7 @@ import React from "react";
 import styles from "./NiceCard.module.css";
 import { MDBBtn } from "mdbreact";
 import ButtonNeon from "../ButtonNeon/ButtonNeon";
+import { Link, Redirect } from "react-router-dom";
 
 export const NiceCard = ({
   onClick,
@@ -37,7 +38,11 @@ export const NiceCard = ({
         </div>
         <div className={styles.stats}>
           <div className={styles.value}>
-            <ButtonNeon text="REDEEM" onClick={onClick} />
+            {/* <Link to={onClick}> */}
+            <a href={onClick}>
+              <ButtonNeon text="REDEEM" />
+            </a>
+            {/* </Link> */}
           </div>
           <div className={styles.type}></div>
         </div>

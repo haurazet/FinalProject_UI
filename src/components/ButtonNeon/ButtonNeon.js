@@ -1,28 +1,17 @@
-import React from 'react'
+import React from "react";
 
-import style from './ButtonNeon.module.css'
+import style from "./ButtonNeon.module.css";
 
-
-
-const ButtonNeon=({text,onClick})=>{
-
-        return(
-     
-  <a className={style.aElement} onClick={onClick}> 
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-            {text}
-                    
+const ButtonNeon = ({ text, onClick }) => {
+  return (
+    <a className={style.aElement} onClick={onClick}>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      {text}
     </a>
+  );
+};
 
-     
-  
-
-    
-
-        )
-}
-
-export default ButtonNeon
+export default ButtonNeon;

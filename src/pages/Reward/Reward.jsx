@@ -1,22 +1,10 @@
-import React, { useEffect, useState, useReducer } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./Reward.module.css";
-import {
-  MDBContainer,
-  MDBRow,
-  MDBCol,
-  MDBPageNav,
-  MDBPageItem,
-  MDBPagination,
-} from "mdbreact";
+import { MDBContainer, MDBRow, MDBCol } from "mdbreact";
 import { NiceCard } from "../../components/NiceCard/NiceCard";
-import Pagination from "../../components/Pagination/Pagination";
 import { API_URL } from "../../support/Apiurl";
 import Axios from "axios";
 import { connect } from "react-redux";
-import Swal from "sweetalert2";
-import withReactContent from "sweetalert2-react-content";
-import { text } from "@fortawesome/fontawesome-svg-core";
-import { KeepLogin } from "../../redux/actions";
 
 const Reward = ({ Auth }) => {
   const [datacat1, setdatacat1] = useState([]);
@@ -47,51 +35,51 @@ const Reward = ({ Auth }) => {
       });
   };
 
-  const OnClickCard = (id, title, price) => {
-    console.log(Auth.isLogin);
-    console.log(Auth.points);
-    if (Auth.isLogin === false) {
-      Swal.fire({
-        title: "Please Login your account before redeem the reward",
-      });
-    }
-    if (Auth.points < price) {
-      Swal.fire({
-        title: "Sorry, your RECYCLY Points is not enough.",
-      });
-    }
-    if (Auth.points >= price) {
-      Swal.fire({
-        title: `Redeem`,
-        text: `This reward will cost you ${price} points.
-                Do you want to proceed? `,
-        confirmButtonText: "Yes",
-        showCancelButton: true,
-      }).then((result) => {
-        if (result.isConfirmed) {
-          let obj = {
-            status: "completed",
-            userId: Auth.id,
-            rewardId: id,
-            decreasedPoints: price,
-          };
-          Axios.post(`${API_URL}/reward/buyreward`, obj).then((result) => {
-            Swal.fire(
-              "Redeem Success!",
-              "Thank you for helping us to make world a better place.",
-              "success"
-            );
-          });
-        }
-      });
-    }
-  };
+  // const OnClickCard = (id, title, price) => {
+  //   console.log(Auth.isLogin);
+  //   console.log(Auth.points);
+  //   if (Auth.isLogin === false) {
+  //     Swal.fire({
+  //       title: "Please Login your account before redeem the reward",
+  //     });
+  //   }
+  //   if (Auth.points < price) {
+  //     Swal.fire({
+  //       title: "Sorry, your RECYCLY Points is not enough.",
+  //     });
+  //   }
+  //   if (Auth.points >= price) {
+  //     Swal.fire({
+  //       title: `Redeem`,
+  //       text: `This reward will cost you ${price} points.
+  //               Do you want to proceed? `,
+  //       confirmButtonText: "Yes",
+  //       showCancelButton: true,
+  //     }).then((result) => {
+  //       if (result.isConfirmed) {
+  //         let obj = {
+  //           status: "completed",
+  //           userId: Auth.id,
+  //           rewardId: id,
+  //           decreasedPoints: price,
+  //         };
+  //         Axios.post(`${API_URL}/reward/buyreward`, obj).then((result) => {
+  //           Swal.fire(
+  //             "Redeem Success!",
+  //             "Thank you for helping us to make world a better place.",
+  //             "success"
+  //           );
+  //         });
+  //       }
+  //     });
+  //   }
+  // };
 
   const renderCardCat1 = () => {
     return datacat1.map((val, index) => (
       <NiceCard
         key={val.id}
-        onClick={() => OnClickCard(val.id, val.title, val.priceDescription)}
+        onClick={`/rewarddetails/${val.id}`}
         title={val.title}
         description={val.description}
         imageAdress={API_URL + val.image}
@@ -106,7 +94,7 @@ const Reward = ({ Auth }) => {
     return datacat2.map((val, index) => (
       <NiceCard
         key={val.id}
-        onClick={() => OnClickCard(val.id, val.title, val.priceDescription)}
+        onClick={`/rewarddetails/${val.id}`}
         title={val.title}
         description={val.description}
         imageAdress={API_URL + val.image}
@@ -121,7 +109,7 @@ const Reward = ({ Auth }) => {
     return datacat3.map((val, index) => (
       <NiceCard
         key={val.id}
-        onClick={() => OnClickCard(val.id, val.title, val.priceDescription)}
+        onClick={`/rewarddetails/${val.id}`}
         title={val.title}
         description={val.description}
         imageAdress={API_URL + val.image}
@@ -136,7 +124,7 @@ const Reward = ({ Auth }) => {
     return datacat4.map((val, index) => (
       <NiceCard
         key={val.id}
-        onClick={() => OnClickCard(val.id, val.title, val.priceDescription)}
+        onClick={`/rewarddetails/${val.id}`}
         title={val.title}
         description={val.description}
         imageAdress={API_URL + val.image}
@@ -239,4 +227,4 @@ const MapstatetoProps = ({ Auth }) => {
   };
 };
 
-export default connect(MapstatetoProps, { KeepLogin })(Reward);
+export default connect(MapstatetoProps, null)(Reward);
