@@ -22,6 +22,8 @@ import ProgramDetail from "./pages/Program/ProgramDetail";
 import { KeepLogin } from "./redux/actions";
 import { API_URL } from "./support/Apiurl";
 import RewardDetail from "./pages/RewardDetail/RewardDetail";
+import Cart from "./pages/Cart/Cart";
+import RewardCheckout from "./pages/RewardCheckout/RewardCheckout";
 
 function App({ KeepLogin }) {
   const [Loading, setLoading] = useState(true);
@@ -74,6 +76,8 @@ function App({ KeepLogin }) {
         <Route path="/resetpassword" component={ResetPassword} exact />
         <Route path="/reward" component={Reward} exact />
         <Route path="/program" component={Program} exact />
+        <Route path="/cart/:userid" component={Cart} exact />
+        <Route path="/rewardcheckout" component={RewardCheckout} exact />
         <Route path="/dashboard" component={Dashboard} exact />
         <Route path="/managetransaksi" component={ManageTransaksi} exact />
         <Route path="/manageuser" component={ManageUser} exact />

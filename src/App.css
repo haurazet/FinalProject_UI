@@ -391,3 +391,17 @@
   font-family: "sanfransiscobold";
   src: url("./fonts/SFProText-Bold.ttf") format("truetype");
 }
+
+/* BUTTON MANAGE TRANSAKSI */
+.manage_transaksi_button {
+  font-family: "sanfransiscobold";
+  font-size: 18px;
+  text-decoration: none;
+  border-bottom: aqua;
+}
+.manage_transaksi_button:hover {
+  cursor: pointer;
+  border-bottom: var(--main-tosca-color) 1.8px solid;
+  transition: ease 0.1s;
+  color: #9ac84a;
+}

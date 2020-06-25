@@ -1,0 +1,41 @@
+.HeaderContainer {
+  height: 30vh;
+  background-color: cadetblue;
+}
+.thankYouBox {
+  display: flex;
+  justify-content: center;
+}
+.boxFlex {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  justify-content: flex-end;
+}
+.flexContent {
+  display: flex;
+  justify-content: center;
+  height: 70vh;
+}
+.wrapperContent {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  width: 500px;
+  border: 1px solid black;
+}
+.flexContents {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  width: 100%;
+}
+.flextoCorner {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  height: 70px;
+  align-items: flex-end;
+  justify-content: space-between;
+}

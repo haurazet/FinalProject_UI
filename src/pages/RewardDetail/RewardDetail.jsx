@@ -7,9 +7,11 @@ import Axios from "axios";
 import { API_URL } from "../../support/Apiurl";
 import { Link, Redirect, BrowserRouter } from "react-router-dom";
 import { connect } from "react-redux";
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
 
 const RewardDetail = ({
-  Auth: { points },
+  Auth: { points, id },
   match: {
     params: { idreward },
   },
@@ -50,19 +52,50 @@ const RewardDetail = ({
     });
   };
 
+  const onClickRedeem = () => {
+    Swal.fire({
+      title: "Add this item to cart?",
+      showCancelButton: true,
+      confirmButtonText: "Yes",
+      cancelButtonText: "No",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        let obj = {
+          rewardId: idreward,
+          userId: id,
+          status: "oncart",
+          categoryid: Data.categoryid,
+          decreasedPoints: Data.priceDescription,
+          qty: 1,
+        };
+        Axios.post(`${API_URL}/reward/buyreward`, obj)
+          .then((result) =>
+            Swal.fire({
+              position: "top-end",
+              icon: "success",
+              title: "Your reward has been added to cart!",
+              showConfirmButton: false,
+              timer: 1500,
+            })
+          )
+          .catch((err) => console.log(err));
+      }
+    });
+  };
+
   return (
     <MDBContainer fluid>
       <MDBRow>
         <MDBCol className={styles.containerTitleBox}>
           <div className={styles.TitleBox}>
-            {/* <MDBRow className={styles.lineHeight}>
+            <MDBRow className={styles.lineHeight}>
               <MDBCol className={styles.fontsizetitle}>
                 Back to{" "}
-                <a style={{ color: "#9ac84a" }} href="/reward">
+                <a style={{ color: "#e9d700" }} href="/reward">
                   Reward
                 </a>
               </MDBCol>
-            </MDBRow> */}
+            </MDBRow>
             <MDBRow>
               <MDBCol md="12" sm="12">
                 <div className={styles.boxTtileandphotos}>
@@ -82,7 +115,12 @@ const RewardDetail = ({
                       </div>
                       <div>
                         {/* <ButtonNeon text="REDEEM" /> */}
-                        <button className="btn btn-success bt">REDEEM</button>
+                        <button
+                          className="btn btn-success "
+                          onClick={onClickRedeem}
+                        >
+                          REDEEM
+                        </button>
                       </div>
                     </div>
                   </div>
