@@ -1,7 +1,6 @@
 import React from 'react';
-import { FaPaw } from "react-icons/fa";
 import './footer.css'
-import logoheader from './../images/recyly_whitenobg.png'
+import logoheader from './../../images/recyly_whitenobg.png'
 
 const Footer=()=>{
 return (
@@ -15,14 +14,14 @@ return (
                 
                 <div className='f-header dua'>
                     <p className='footer-body'>SUPPORT</p>
-                    <p><a href='/aboutus' className='clickable'>About Us</a></p>
-                    <p><a href='/contactus'className='clickable'>Contact Us</a></p>
+                    <p><a href='/aboutus' className='clickable' style={{color:'white'}}>About Us</a></p>
+                    <p><a href='/contactus'className='clickable' style={{color:'white'}}>Contact Us</a></p>
                 </div>
 
                 <div className='f-header tiga'>
                     <p className='footer-body'>SHOP </p>
-                    <p><a href='/terms' className='clickable'>Terms</a></p>
-                    <p><a href='/privacypolicy' className='clickable'>Privacy Policy</a></p>
+                    <p><a href='/terms' className='clickable' style={{color:'white'}}>Terms</a></p>
+                    <p><a href='/privacypolicy' className='clickable' style={{color:'white'}}>Privacy Policy</a></p>
                 </div>
 
                 <div className='f-header empat'>

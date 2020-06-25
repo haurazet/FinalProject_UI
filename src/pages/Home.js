@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useState } from 'react';
 import './Home.css'
 import {FaPlusCircle} from 'react-icons/fa'
 import {FaUsers} from 'react-icons/fa'
@@ -9,6 +9,23 @@ import { MDBCarousel, MDBCarouselInner, MDBCarouselItem, MDBView, MDBContainer }
 
 const Home=()=>{
 
+  //Onchange untuk Waste
+  const onChangeSearchWaste=(e)=>{
+    setSearch({...search,[e.target.name]:e.target.value})
+    console.log(search)
+  }
+
+  //Onchange untuk Location
+  const onChangeSearchLocation=(e)=>{
+    setSearch({...search,[e.target.name]:e.target.value})
+    console.log(search)
+  }
+
+  const [search,setSearch] = useState({
+    searchInputWaste:'',
+    searchInputLocation:''
+  })
+
     return(
         <div className='headerhome'>
 
@@ -16,7 +33,7 @@ const Home=()=>{
             <div className='headerhomeimg'>
 
                 <div className='headerhometext'>
-                    Recycle everything with Recycly®
+                    Recycle everything with Recycly <span style={{fontSize:'40px'}}>®</span>
                 </div>
 
                 <div className='headersearch-container'>
@@ -24,16 +41,16 @@ const Home=()=>{
                     <Fragment>
                         <div className="headersearch-item.satu">
                             <label style={{color:'#7dbe4a', textAlign:"left", fontWeight:'bolder'}}>WASTE STREAM</label>
-                            <input type="text" id="example2" className="form-control form-control-md" style={{width:'300px'}}/>
+                            <input type="text" name='searchInputWaste' onChange={onChangeSearchWaste} className="form-control form-control-md" style={{width:'300px'}}/>
                         </div>
 
                         <div className="headersearch-item.dua">
                             <label style={{color:'#7dbe4a', textAlign:"left", fontWeight:'bolder' }}>LOCATION</label>
-                            <input type="text" id="example2" className="form-control form-control-md" style={{width:'300px'}}/>
+                            <input type="text" name='searchInputLocation' onChange={onChangeSearchLocation} className="form-control form-control-md" style={{width:'300px'}}/>
                         </div>
 
                         <div className="headersearch-item.tiga">
-                            <button style={{width:'100px', height:'50px'}}>
+                            <button className="buttonsearch">
                                 SEARCH
                             </button>
                         </div>
@@ -41,8 +58,12 @@ const Home=()=>{
                 </div>
 
                 <div className='headerhometext2'>
-                    <p>See all</p>
-                    <p><FaPlusCircle/></p>
+                    <div className='headerhometext3'>
+                            <a className='a' href='/program'>
+                                See all
+                                <p><FaPlusCircle/></p>
+                            </a>
+                    </div> 
                 </div>
 
             </div>
