@@ -23,6 +23,7 @@ import JoinProgram from './pages/Program/JoinProgram'
 import ScrollToTop from './components/scrolltop'
 import {KeepLogin} from './redux/actions'
 import { API_URL } from './support/Apiurl'
+import TransactionDetail from './pages/Program/TransactionDetail'
 
 
 function App({KeepLogin}) {
@@ -78,6 +79,7 @@ function App({KeepLogin}) {
         <Route path="/transactionhistory" component={TransactionHistory} exact />
         <Route path="/programdetail/:idprog" exact component={ProgramDetail}/>
         <Route path="/joinprogram/:idprog" exact component={JoinProgram}/>
+        <Route path="/transactiondetail/:idtrans" exact component={TransactionDetail}/>
         <Route component={Notfound} />
       </Switch>
     </div>

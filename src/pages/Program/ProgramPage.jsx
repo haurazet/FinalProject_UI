@@ -25,7 +25,7 @@ class Productpage extends Component {
         // filter, search, sort
         filter:'',
         search:'',
-        sort:''
+        sort:'purchased DESC'
      }
 
     componentDidMount(){
@@ -147,7 +147,7 @@ class Productpage extends Component {
                 <div className="mr-1 font-weight-bold">{totalproduct} {totalproduct>1?"Programs":"Program"} | </div>
                 <div className="sort-title mr-2"> Sort by </div>
                 <select onChange={this.onSortClick}>
-                    <option value="purchased" >Popularity</option>
+                    <option value="purchased DESC" >Popularity</option>
                     <option value="create_time" >Newest Program</option>
                     <option value="price DESC">Price: High to Low</option>
                     <option value="price ASC">Price: Low to High</option>
@@ -183,8 +183,9 @@ class Productpage extends Component {
     }
 
     onCategoryClear=()=>{
-        this.setState({page:0,activecategory:0})
-        this.getData()
+        this.setState({page:0,activecategory:0, filter:''}, ()=>{
+            this.getData()
+        })
     }
 
     render() { 
