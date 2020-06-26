@@ -1,12 +1,28 @@
-import React from 'react';
+import React,{useEffect,useState} from 'react';
 import './../PersonalInfo/PersonalInfo.css'
+import Axios from 'axios'
+import {API_URL} from './../../support/Apiurl'
 import {useSelector} from 'react-redux'
 
 const PersonalInfo = () => {
 
+    useEffect(()=>{
+        let id = Auth.id
+        Axios.get(`${API_URL}/users/getaddress/${id}`)
+            .then((res)=>{
+                setData(res.data[0])
+            }).catch((err)=>{
+                console.log(err)
+            })
+    },[])
+
+    const [data,setData]=useState([])
+
     const Auth = useSelector(state=> state.Auth)
+   
 
     return ( 
+        
         <div>
             {/* PROFILENAME HEADER */}
             <div className='profilename-container'>
@@ -71,7 +87,7 @@ const PersonalInfo = () => {
                             First name
                         </div>
                         <div className='showdata-emaildata' >
-                            {Auth.firstname}
+                            {data.first_name}
                         </div>
                     </div>
                     <div className='showdata-bodycontainer'>
@@ -79,7 +95,7 @@ const PersonalInfo = () => {
                             Last name
                         </div>
                         <div className='showdata-emaildata' >
-                            {Auth.lastname}
+                            {data.last_name}
                         </div>
                     </div>
                     <div className='showdata-bodycontainer'>
@@ -98,7 +114,7 @@ const PersonalInfo = () => {
                             Phone number
                         </div>
                         <div className='showdata-emaildata' >
-                            6281236046472
+                            {data.phonenumber}
                         </div>
                     </div>
                     <div className='showdata-bodycontainer'>
@@ -106,7 +122,7 @@ const PersonalInfo = () => {
                             State
                         </div>
                         <div className='showdata-emaildata' >
-                            Connecticut
+                            {data.state}
                         </div>
                     </div>
                     <div className='showdata-bodycontainer'>
@@ -114,7 +130,7 @@ const PersonalInfo = () => {
                             ZIP code
                         </div>
                         <div className='showdata-emaildata' >
-                            80114
+                            {data.zipcode}
                         </div>
                     </div>
                 </div>
@@ -125,7 +141,7 @@ const PersonalInfo = () => {
                             City
                         </div>
                         <div className='showdata-emaildata' >
-                            denpasar
+                            {data.city}
                         </div>
                     </div>
                     <div className='showdata-bodycontainer'>
@@ -133,7 +149,7 @@ const PersonalInfo = () => {
                             Address
                         </div>
                         <div className='showdata-emaildata' >
-                            Connecticut
+                            {data.address}
                         </div>
                     </div>
                 </div>
