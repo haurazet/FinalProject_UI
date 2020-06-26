@@ -51,6 +51,20 @@
     flex: 1;
 }
 
+.footer-bodyicon{
+    display:flex;
+    flex-direction:row;
+}
+
+.footer-icon{
+    color: white;
+    padding-right: 10px;
+}
+
+.footer-icon:hover{
+    color:#9ac84a;
+}
+
 @media (max-width:600px){
     .f-containersatu{
         display: flex;
@@ -60,6 +74,9 @@
     }
     .footer-body{
         text-align: center;
+    }
+    .footer-bodyicon{
+        justify-content: center;
     }
     
 }

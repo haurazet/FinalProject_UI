@@ -5,6 +5,10 @@ import {FaUsers} from 'react-icons/fa'
 import {FaRecycle} from 'react-icons/fa'
 import {FaHeart} from 'react-icons/fa'
 import { MDBCarousel, MDBCarouselInner, MDBCarouselItem, MDBView, MDBContainer } from "mdbreact";
+import slide1 from './../images/slide1.PNG'
+import slide2 from './../images/slide2.PNG'
+import slide3 from './../images/slide3.PNG'
+
 
 
 const Home=()=>{
@@ -40,12 +44,12 @@ const Home=()=>{
                     
                     <Fragment>
                         <div className="headersearch-item.satu">
-                            <label style={{color:'#7dbe4a', textAlign:"left", fontWeight:'bolder'}}>WASTE STREAM</label>
+                            <label style={{color:'#7dbe4a', textAlign:"left", fontWeight:'bold', fontFamily:'Verdana'}}>WASTE STREAM</label>
                             <input type="text" name='searchInputWaste' onChange={onChangeSearchWaste} className="form-control form-control-md" style={{width:'300px'}}/>
                         </div>
 
                         <div className="headersearch-item.dua">
-                            <label style={{color:'#7dbe4a', textAlign:"left", fontWeight:'bolder' }}>LOCATION</label>
+                            <label style={{color:'#7dbe4a', textAlign:"left", fontWeight:'bold',fontFamily:'Verdana' }}>LOCATION</label>
                             <input type="text" name='searchInputLocation' onChange={onChangeSearchLocation} className="form-control form-control-md" style={{width:'300px'}}/>
                         </div>
 
@@ -104,45 +108,79 @@ const Home=()=>{
 
         {/* BODY CAROUSEL 1 */}
         <div style={{width:'100%', paddingTop:'50px'}}>
-        <MDBContainer>
-            <MDBCarousel
-                activeItem={1}
-                length={3}
-                showControls={false}
-                showIndicators={true}
-                className="z-depth-1"
-            >
-                <MDBCarouselInner>
-                <MDBCarouselItem itemId="1">
-                    <MDBView>
-                    <img
-                        className="d-block w-100"
-                        src="https://mdbootstrap.com/img/Photos/Slides/img%20(130).jpg"
-                        alt="First slide"
-                    />
-                    </MDBView>
-                </MDBCarouselItem>
-                <MDBCarouselItem itemId="2">
-                    <MDBView>
-                    <img
-                        className="d-block w-100"
-                        src="https://mdbootstrap.com/img/Photos/Slides/img%20(129).jpg"
-                        alt="Second slide"
-                    />
-                    </MDBView>
-                </MDBCarouselItem>
-                <MDBCarouselItem itemId="3">
-                    <MDBView>
-                    <img
-                        className="d-block w-100"
-                        src="https://mdbootstrap.com/img/Photos/Slides/img%20(70).jpg"
-                        alt="Third slide"
-                    />
-                    </MDBView>
-                </MDBCarouselItem>
-                </MDBCarouselInner>
-            </MDBCarousel>
-    </MDBContainer>
+            <MDBContainer>
+                <MDBCarousel
+                    activeItem={1}
+                    length={3}
+                    showControls={false}
+                    showIndicators={true}
+                    className="z-depth-1"
+                >
+                    <MDBCarouselInner>
+                    <MDBCarouselItem itemId="1">
+                        <MDBView>
+                        <div className='carousel-container'>
+                            <div className='carousel-image'>
+                                <img
+                                src={slide1}
+                                alt="First slide"
+                                width='100%'
+                                height='100%'
+                                />
+                            </div>
+
+                            <div className='carouseltext-container'>
+                                <p className='carouseltext-header'>STAY SAFE AND SUSTAINABLE WITH ZERO WASTE BOX™</p>
+                                <p className='carouseltext-body'>Take care of the health and safety of your loved ones and leave the recycling to us!</p>
+                                <a href='/program' style={{color:'inherit'}}><p style={{color:'white', fontSize:'15px', fontWeight:'bold', textAlign:'right', paddingRight:'30px'}}>SHOP NOW</p></a>
+                            </div>
+                        </div>
+
+                        </MDBView>
+                    </MDBCarouselItem>
+                    <MDBCarouselItem itemId="2">
+                        <MDBView>
+                        <div className='carousel-container'>
+                            <div className='carousel-image'>
+                                <img
+                                src={slide2}
+                                alt="First slide"
+                                width='100%'
+                                height='100%'
+                                />
+                            </div>
+
+                            <div className='carouseltext-container'>
+                                <p className='carouseltext-header'>TERRACYCLE GLOBAL FOUNDATION</p>
+                                <p className='carouseltext-body'>The TerraCycle Global Foundation addresses the complex challenges of collecting and recycling waste in emerging countries. To achieve this end, the Foundation collaborates with local communities to offer innovative collection and recycling platforms for waste, with special emphasis on preventing plastic pollution from entering our oceans. The Foundation works with local government entities to install marine debris capture technology to intercept waste from rivers and smaller waterways before it flows into oceans.</p>    
+                                <a href='https://www.terracyclefoundation.org/' style={{color:'inherit'}}><p style={{color:'white', fontSize:'15px', fontWeight:'bold', textAlign:'right', paddingRight:'30px'}}>LEARN MORE</p></a>
+                            </div>
+                        </div>
+                        </MDBView>
+                    </MDBCarouselItem>
+                    <MDBCarouselItem itemId="3">
+                        <MDBView>
+                        <div className='carousel-container'>
+                            <div className='carousel-image'>
+                                <img
+                                src={slide3}
+                                alt="First slide"
+                                width='100%'
+                                height='100%'
+                                />
+                            </div>
+
+                            <div className='carouseltext-container'>
+                                <p className='carouseltext-header'>PACK IT FOR RECYCLING</p>
+                                <p className='carouseltext-body'>Ready, Set, Pack! We are awarding TerraCycle users who are preparing ahead of time to send in their recycling. Check the reward available!</p>
+                                <a href='/reward' style={{color:'inherit'}}><p style={{color:'white', fontSize:'15px', fontWeight:'bold', textAlign:'right', paddingRight:'30px'}}>CHECK REWARD</p></a>
+                            </div>
+                        </div>
+                        </MDBView>
+                    </MDBCarouselItem>
+                    </MDBCarouselInner>
+                </MDBCarousel>
+        </MDBContainer>
 
         </div>
 

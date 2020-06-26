@@ -1,6 +1,7 @@
 import React from 'react';
 import './footer.css'
 import logoheader from './../../images/recyly_whitenobg.png'
+import {FaFacebook, FaYoutube, FaInstagram, FaTwitter} from 'react-icons/fa'
 
 const Footer=()=>{
 return (
@@ -25,7 +26,14 @@ return (
                 </div>
 
                 <div className='f-header empat'>
-                    <p className='footer-body' >MORE</p>            
+                    <p className='footer-body' >MORE</p>  
+                    <div className='footer-bodyicon'>
+                        <a href='https://www.facebook.com/RethinkReuseIt' style={{color:'inherit'}}><p className='footer-icon'><FaFacebook/></p></a>
+                        <a href='https://twitter.com/Recyclebank' style={{color:'inherit'}}><p className='footer-icon'><FaTwitter/></p></a>
+                        <a href='https://www.instagram.com/recycleandplay/' style={{color:'inherit'}}><p className='footer-icon'><FaInstagram/></p></a>
+                        <a href='https://www.youtube.com/channel/UCCLVg6BI7NxDIp6GFKfFGFw' style={{color:'inherit'}}><p className='footer-icon'><FaYoutube/></p></a>
+                    </div>
+                             
                 </div>
                 
             </div>
