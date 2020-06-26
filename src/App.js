@@ -43,6 +43,7 @@ function App({KeepLogin}) {
         }
       })
       .then(res=>{
+        console.log(res.data)
         KeepLogin(res.data)
       })
       .catch(err=>{
@@ -96,6 +97,7 @@ function App({KeepLogin}) {
       </Switch>
 
       <Footer/>
+
     </div>
   );
 }

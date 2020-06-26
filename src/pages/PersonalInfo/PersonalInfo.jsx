@@ -1,7 +1,11 @@
 import React from 'react';
 import './../PersonalInfo/PersonalInfo.css'
+import {useSelector} from 'react-redux'
 
 const PersonalInfo = () => {
+
+    const Auth = useSelector(state=> state.Auth)
+
     return ( 
         <div>
             {/* PROFILENAME HEADER */}
@@ -11,7 +15,7 @@ const PersonalInfo = () => {
                     src={'https://www.pngitem.com/pimgs/m/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png'} 
                     alt="Logo"
                     />
-                    <span className='profilename-name'>angga wijaya</span>
+                    <span className='profilename-name'>{Auth.username}</span>
                     <button className="buttonsearch">
                         <a href='/program' className='profilename-getstarted'>GET STARTED</a>
                     </button>
@@ -35,7 +39,7 @@ const PersonalInfo = () => {
             <div className='editprofile-container'>
             
                 <div className='editprofile-text'>
-                    Welcome, <span style={{color: '#b4c84a'}}>angga wijaya</span>
+                    Welcome, <span style={{color: '#b4c84a'}}>{Auth.username}</span>
                 </div>
                 <div>
                     <button className="editprofile-button">
@@ -56,7 +60,7 @@ const PersonalInfo = () => {
                             Email address
                         </div>
                         <div className='showdata-emaildata' >
-                            anggaa_wijaya@yahoo.com
+                            {Auth.email}
                         </div>
                     </div>
                 </div>
@@ -67,7 +71,7 @@ const PersonalInfo = () => {
                             First name
                         </div>
                         <div className='showdata-emaildata' >
-                            dewa gede
+                            {Auth.firstname}
                         </div>
                     </div>
                     <div className='showdata-bodycontainer'>
@@ -75,7 +79,7 @@ const PersonalInfo = () => {
                             Last name
                         </div>
                         <div className='showdata-emaildata' >
-                            angga wijaya
+                            {Auth.lastname}
                         </div>
                     </div>
                     <div className='showdata-bodycontainer'>
@@ -83,7 +87,7 @@ const PersonalInfo = () => {
                             Nickname
                         </div>
                         <div className='showdata-emaildata' >
-                            anggaawijaya
+                            {Auth.username}
                         </div>
                     </div>
                 </div>
@@ -138,70 +142,11 @@ const PersonalInfo = () => {
         
         <div style={{borderTopStyle:'solid', borderTopWidth:'0.5px', borderTopColor:'#ececec', marginTop:'30px'}}></div>
 
-        <div className='showdata-container'>
-            <div className='showdata-title2'>
-                    Additional information
-            </div>
-
-            <div style={{display:'flex',flexDirection:'row', justifyContent:'space-between'}}>
-                    <div className='showdata-bodycontainer2'>
-                        <div className='showdata-1'>
-                            Age
-                        </div>
-                        <div className='showdata-emaildata' >
-                            25
-                        </div>
-                    </div>
-                    <div className='showdata-bodycontainer'>
-                        <div className='showdata-2'>
-                            Gender
-                        </div>
-                        <div className='showdata-emaildata' >
-                            male
-                        </div>
-                    </div>
-                    <div className='showdata-bodycontainer'>
-                        <div className='showdata-3'>
-                            Referred by
-                        </div>
-                        <div className='showdata-emaildata' >
-                            
-                        </div>
-                    </div>
-                </div>
-
-                <div style={{display:'flex',flexDirection:'row', justifyContent:'space-between'}}>
-                    <div className='showdata-bodycontainer2'>
-                        <div className='showdata-1'>
-                            Organization Name
-                        </div>
-                        <div className='showdata-emaildata' >
-                            
-                        </div>
-                    </div>
-                    <div className='showdata-bodycontainer'>
-                        <div className='showdata-2'>
-                            Organization Type
-                        </div>
-                        <div className='showdata-emaildata' >
-                            Individual
-                        </div>
-                    </div>
-                    <div className='showdata-bodycontainer'>
-                        <div className='showdata-3'>
-                            People Connecting
-                        </div>
-                        <div className='showdata-emaildata' >
-                            200
-                        </div>
-                    </div>
-                </div>
-        
         <div style={{marginTop:'60px'}}></div>
             
         </div>
 
-        </div>
+
      );
 }
  

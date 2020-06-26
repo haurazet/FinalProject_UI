@@ -1,5 +1,6 @@
 
 
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;500&display=swap');
 
 /* HOME CSS */
 
@@ -34,7 +35,8 @@
     color: white;
     font-size:60px;
     text-align: center;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-family: 'Roboto', sans-serif;
+    font-weight: bold;
     letter-spacing: 2px;
     z-index: 2;
     opacity: 1;

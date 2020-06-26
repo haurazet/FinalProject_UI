@@ -1,8 +1,12 @@
 import React from 'react';
 import '../MyImpact/MyImpact.css'
 import {Table,thead,tr,td} from 'reactstrap'
+import {useSelector} from 'react-redux'
 
 const MyImpact = () => {
+
+    const Auth = useSelector(state=> state.Auth)
+
     return ( 
         <div>
             {/* PROFILENAME HEADER */}
@@ -12,7 +16,7 @@ const MyImpact = () => {
                     src={'https://www.pngitem.com/pimgs/m/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png'} 
                     alt="Logo"
                     />
-                    <span className='profilename-name'>angga wijaya</span>
+                    <span className='profilename-name'>{Auth.username}</span>
                     <button className="buttonsearch">
                         <a href='/program' className='profilename-getstarted'>GET STARTED</a>
                     </button>

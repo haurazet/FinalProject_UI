@@ -5,7 +5,6 @@ import {connect} from 'react-redux'
 import {RegisterUser} from '../../redux/actions'
 import {Redirect, useHistory} from 'react-router-dom'
 
-
 const Register = ({RegisterUser, Auth}) => {
 
     const [data,setdata]=useState({
