@@ -16,113 +16,13 @@ import Swal from "sweetalert2";
 
 const TransactionHistory = () => {
   const [dropdownOpen, setOpen] = useState(false);
-  const [data, setdata] = useState([
-    {
-      id: 1,
-      image: `${API_URL}/REWARD/REWARD1.jpg`,
-      programName: "Save Earth",
-      firstName: "asd",
-      address: "asd",
-      phoneNumber: "1123123",
-      status: "payment",
-    },
-    // {
-    //   id: 12313,
-    //   image: `${API_URL}/REWARD/REWARD1.jpg`,
-    //   programName: "Save Earth",
-    //   firstName: "asd",
-    //   address: "asd",
-    //   phoneNumber: "1123123",
-    //   status: "payment",
-    // },
-    // {
-    //   id: 12313,
-    //   image: `${API_URL}/REWARD/REWARD1.jpg`,
-    //   programName: "Save Earth",
-    //   firstName: "asd",
-    //   address: "asd",
-    //   phoneNumber: "1123123",
-    //   status: "payment",
-    // },
-    // {
-    //   id: 12313,
-    //   image: `${API_URL}/REWARD/REWARD1.jpg`,
-    //   programName: "Save Earth",
-    //   firstName: "asd",
-    //   address: "asd",
-    //   phoneNumber: "1123123",
-    //   status: "payment",
-    // },
-    // {
-    //   id: 12313,
-    //   image: `${API_URL}/REWARD/REWARD1.jpg`,
-    //   programName: "Save Earth",
-    //   firstName: "asd",
-    //   address: "asd",
-    //   phoneNumber: "1123123",
-    //   status: "payment",
-    // },
-    // {
-    //   id: 12313,
-    //   image: `${API_URL}/REWARD/REWARD1.jpg`,
-    //   programName: "Save Earth",
-    //   firstName: "asd",
-    //   address: "asd",
-    //   phoneNumber: "1123123",
-    //   status: "payment",
-    // },
-    // {
-    //   id: 12313,
-    //   image: `${API_URL}/REWARD/REWARD1.jpg`,
-    //   programName: "Save Earth",
-    //   firstName: "asd",
-    //   address: "asd",
-    //   phoneNumber: "1123123",
-    //   status: "payment",
-    // },
-  ]);
+  const [data, setdata] = useState([]);
   const [search, setsearch] = useState([]);
   const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [userPerPage] = useState(5);
   const [uploaded, setuploaded] = useState(true);
   const [image, setImage] = useState({ preview: "", raw: undefined });
-
-  const onClickUploadButton = (e, id) => {
-    e.preventDefault();
-
-    const formData = new FormData();
-    formData.append("image", image.raw);
-    var token = localStorage.getItem("token");
-    var Headers = {
-      headers: {
-        "Content-Type": "multipart/form-data",
-        // Authorization: `Bearer ${token}`,
-      },
-    };
-    Axios.post(`${API_URL}/users/proofimage?id=${id}`, formData, Headers)
-      .then((result) =>
-        Swal.fire({
-          title: "Image has been uploaded",
-        })
-      )
-      .catch((err) => console.log(err));
-  };
-  const imageInput = (e) => {
-    console.log(e.target.files[0]);
-    if (e.target.files.length) {
-      setImage({
-        preview: URL.createObjectURL(e.target.files[0]),
-        raw: e.target.files[0],
-      });
-      console.log(image);
-    } else {
-      setImage({
-        preview: "",
-        raw: undefined,
-      });
-    }
-  };
 
   const renderCard = () => {
     return currentUser.map((val, index) => {

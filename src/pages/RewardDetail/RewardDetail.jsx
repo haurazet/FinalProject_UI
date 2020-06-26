@@ -11,7 +11,7 @@ import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 
 const RewardDetail = ({
-  Auth: { points, id },
+  Auth: { points, id, isLogin },
   match: {
     params: { idreward },
   },
@@ -53,34 +53,41 @@ const RewardDetail = ({
   };
 
   const onClickRedeem = () => {
-    Swal.fire({
-      title: "Add this item to cart?",
-      showCancelButton: true,
-      confirmButtonText: "Yes",
-      cancelButtonText: "No",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        let obj = {
-          rewardId: idreward,
-          userId: id,
-          status: "oncart",
-          categoryid: Data.categoryid,
-          decreasedPoints: Data.priceDescription,
-          qty: 1,
-        };
-        Axios.post(`${API_URL}/reward/buyreward`, obj)
-          .then((result) =>
-            Swal.fire({
-              position: "top-end",
-              icon: "success",
-              title: "Your reward has been added to cart!",
-              showConfirmButton: false,
-              timer: 1500,
-            })
-          )
-          .catch((err) => console.log(err));
-      }
-    });
+    if (isLogin === false) {
+      Swal.fire({
+        icon: "danger",
+        title: "Please Login before redeem your reward",
+      });
+    } else {
+      Swal.fire({
+        title: "Add this item to cart?",
+        showCancelButton: true,
+        confirmButtonText: "Yes",
+        cancelButtonText: "No",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          let obj = {
+            rewardId: idreward,
+            userId: id,
+            status: "oncart",
+            categoryid: Data.categoryid,
+            decreasedPoints: Data.priceDescription,
+            qty: 1,
+          };
+          Axios.post(`${API_URL}/reward/buyreward`, obj)
+            .then((result) =>
+              Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: "Your reward has been added to cart!",
+                showConfirmButton: false,
+                timer: 1500,
+              })
+            )
+            .catch((err) => console.log(err));
+        }
+      });
+    }
   };
 
   return (
