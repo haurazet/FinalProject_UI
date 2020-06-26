@@ -176,16 +176,14 @@
     flex-direction:row;    
 }
 
-
+.carousel-image{
+    width: 50%;
+    box-sizing: border-box;
+}
 
 .carouseltext-container{
     width: 50%;
     background-color:#9ac84a;
-}
-
-.carousel-image{
-    width: 50%;
-    box-sizing: border-box;
 }
 
 .carouseltext-header{
@@ -197,10 +195,15 @@
 }
 
 
-
 .carouseltext-body{
     padding-left: 20px;
     padding-right: 20px;
     color: white;
     font-size: 20px;
+}
+
+@media (max-width:600px){
+    .carousel-container{
+        flex-direction:column;    
+    }
 }

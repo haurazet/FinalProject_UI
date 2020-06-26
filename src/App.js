@@ -28,6 +28,7 @@ import AboutUs from './pages/AboutUs/aboutus'
 import CollectionPrograms from './pages/CollectionPrograms/CollectionPrograms';
 import MyImpact from './pages/MyImpact/MyImpact'
 import PersonalInfo from './pages/PersonalInfo/PersonalInfo';
+import EditProfile from './pages/EditProfile/EditProfile';
 
 function App({KeepLogin}) {
 
@@ -86,6 +87,8 @@ function App({KeepLogin}) {
         <Route path='/collection-programs' component={CollectionPrograms} exact />
         <Route path='/my-impact' component={MyImpact} exact />
         <Route path='/personal-info' component={PersonalInfo} exact />
+        <Route path='/edit-profile' component={EditProfile} exact />
+        
         <Route  path='/aboutus' component={AboutUs} exact />
         <Route  path='/contactus' component={ContactUs} exact />
         <Route component={Notfound} />
