@@ -266,6 +266,129 @@
   margin: 0 auto;
 }
 
+/* ================= */
+/*   JOIN PROGRAM    */
+/* ================= */
+.join-program-container {
+  /* height: 100vh; */
+  overflow: hidden;
+  background-color: #e4e4e4;
+}
+
+.join-program-box {
+  background-color: white;
+  margin: 0 auto;
+  height: fit-content;
+  width: fit-content;
+  -webkit-box-shadow: 0px 0px 35px -17px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 0px 0px 35px -17px rgba(0, 0, 0, 0.75);
+  box-shadow: 0px 0px 35px -17px rgba(0, 0, 0, 0.75);
+  padding: 6%;
+}
+
+.join-program-title {
+  border-bottom: 3px solid var(--main-green-color);
+  width: fit-content;
+  text-align: center;
+  margin: 0 auto;
+}
+
+.join-section-title {
+  color: var(--main-green-color);
+  font-weight: bolder;
+  padding-bottom: 2%;
+  font-size: 1.4em;
+}
+
+.join-section-container {
+  border-bottom: 1px solid rgb(228, 228, 228);
+  margin: 3% 0 0% 0%;
+  padding-bottom: 1%;
+}
+
+.join-section-container:nth-of-type(1) {
+  margin-top: 10%;
+}
+
+.join-section-container:nth-of-type(4) {
+  border-bottom: none;
+}
+
+.join-program-button {
+  background-color: white;
+  color: black;
+  border: 1px solid var(--main-grey-color);
+  font-weight: 300;
+  padding: 5px 10px 5px 10px;
+  margin: 0% 20px 0 0;
+  border-radius: 2px;
+  font-size: 0.9em;
+}
+
+.join-program-button:hover {
+  border: 1px solid var(--main-tosca-color);
+  color: var(--main-tosca-color);
+  font-weight: bolder;
+  margin: 0% 18px 0 0;
+}
+
+.join-program-button:focus {
+  outline: 0;
+}
+
+.join-program-button.active {
+  border: 1px solid #166e66a9;
+  color: white;
+  background-color: var(--main-green-color);
+  margin: 0% 18px 0 0;
+}
+
+.join-payment-container {
+  border-bottom: 1px solid rgb(228, 228, 228);
+}
+
+/* ========================== */
+/*      TRANSACTIONDETAIL     */
+/* ========================== */
+
+.total-payment {
+  font-size: 1.5em;
+  color: var(--main-green-color);
+  font-weight: bolder;
+}
+
+.payment-account-container {
+  background-color: #3797a41a;
+  width: fit-content;
+  padding: 2%;
+}
+
+.payment-container li {
+  margin-bottom: 2%;
+}
+
+.payment-line {
+  border-bottom: 1px solid rgb(175, 175, 175);
+  height: 1px;
+  width: 97%;
+}
+
+.upload-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  border-width: 2px;
+  border-radius: 2px;
+  border-color: var(--main-green-color);
+  border-style: dashed;
+  background-color: #fafafa;
+  color: #bdbdbd;
+  outline: none;
+  transition: border 0.24s ease-in-out;
+}
+
 /* ================ */
 /*      NOTFOUND    */
 /* ================ */

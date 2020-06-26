@@ -32,7 +32,7 @@ class Productpage extends Component {
     // filter, search, sort
     filter: "",
     search: "",
-    sort: "",
+    sort: "purchased DESC",
   };
 
   componentDidMount() {
@@ -106,7 +106,7 @@ class Productpage extends Component {
     }
     return products.map((val, index) => {
       return (
-        <div key={index} className="p-4 col-md-4 ">
+        <div key={index} className="py-4 px-2 col-md-4 ">
           <Link to={`/programdetail/${val.id}`}>
             <Card>
               <div className="program-picture p-3 row align-items-center">
@@ -132,6 +132,34 @@ class Productpage extends Component {
       );
     });
   };
+  // return products.map((val, index) => {
+  //   return (
+  //     <div key={index} className="p-4 col-md-4 ">
+  //       <Link to={`/programdetail/${val.id}`}>
+  //         <Card>
+  //           <div className="program-picture p-3 row align-items-center">
+  //             <img src={API_URL + val.image} width="100%" height="100%"></img>
+  //           </div>
+  //           <CardBody>
+  //             <CardTitle className="text-center program-card-bottom h5">
+  //               {val.name}
+  //             </CardTitle>
+  //             <div className="d-flex justify-content-between align-self-baseline">
+  //               <div className="program-price col-md-4 col-xs-3 text-center">
+  //                 {"IDR " + Numeral(val.price).format(0.0)}{" "}
+  //               </div>
+  //               <div className="program-reward col-md-7 col-xs-5 text-center">
+  //                 {" "}
+  //                 Get {val.point} RECYC.LY point
+  //               </div>
+  //             </div>
+  //           </CardBody>
+  //         </Card>
+  //       </Link>
+  //     </div>
+  // );
+  // });
+  // };
 
   renderpagination = () => {
     // console.log('masuk pagination')
@@ -166,10 +194,18 @@ class Productpage extends Component {
                 parseInt(activecategory) === val.id ? "category-name" : ""
               }
             >
-              <a onClick={(e) => this.onCategoryClick(val.id)}>
-                {" "}
-                <MdPlayArrow /> {val.name}
-              </a>
+              <div className="mr-1 font-weight-bold">
+                {/* {totalproduct} {totalproduct > 1 ? "Programs" : "Program"} |{" "} */}
+              </div>
+              <div className="sort-title mr-2"> Sort by </div>
+              <select onChange={this.onSortClick}>
+                <option value="purchased DESC">Popularity</option>
+                <option value="create_time">Newest Program</option>
+                <option value="price DESC">Price: High to Low</option>
+                <option value="price ASC">Price: Low to High</option>
+                <option value="point DESC">Reward: High to Low</option>
+                <option value="point ASC">Reward: Low to High</option>
+              </select>
             </div>
           </div>
         </div>
@@ -204,10 +240,8 @@ class Productpage extends Component {
     });
   };
 
-  onCategoryClick = (e) => {
-    var filter = e;
-    this.setState({ page: 0, activecategory: filter, filter }, () => {
-      this.rendercategory();
+  onCategoryClear = () => {
+    this.setState({ page: 0, activecategory: 0, filter: "" }, () => {
       this.getData();
     });
   };
