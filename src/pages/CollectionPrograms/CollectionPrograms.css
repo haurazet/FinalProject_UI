@@ -1,0 +1,96 @@
+
+.profilename-container{
+  width: 100%;
+  height: 150px;
+  background-color: #f3f3f3;
+}
+
+
+.profilename-header{
+    height: 120px;
+    width: 80%;
+    padding-top: 30px;
+    padding-left: 80px;
+}
+
+.profilename-image{
+    border-radius: 60px;
+    height: 80px;
+    width: 100px;
+}
+
+.profilename-name{
+    margin-left: 20px;
+    font-size: 30px;
+    font-family: 'GothamBook'
+}
+
+.buttonsearch{
+    margin-left: 30px;
+    width: 150px;
+    height: 40px;
+    background-color: #9ac84a;
+    color: white;
+}
+
+
+.profilename-getstarted{
+    color: inherit;
+}
+
+.profilename-getstarted:hover{
+    color: black;
+}
+
+.profilemenucp-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding-top: 20px;
+    padding-bottom: 20px; 
+    border-bottom-style: solid;
+    border-bottom-color: #ececec;
+    border-bottom-width: 0.1px;
+}
+
+.profilemenucp-satu{
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 17px;
+    font-weight: bold;
+    color: #b4c84a;
+    letter-spacing: 0.5px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.profilemenucp-dua{
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    letter-spacing: 0.5px;
+    font-size: 17px;
+    font-weight: bold;
+    color: #8cb4b1;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.profilemenucp-tiga{
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 17px;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+    color: #8cb4b1;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.profilemenucp-satu:hover{
+    color: #57918e;
+}
+
+.profilemenucp-dua:hover{
+    color: #b4c84a;
+}
+
+.profilemenucp-tiga:hover{
+    color: #b4c84a;
+}

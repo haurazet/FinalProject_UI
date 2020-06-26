@@ -1,0 +1,82 @@
+/* CSS FOOTER */
+
+.f-containersatu{
+    display: flex;
+    justify-content: space-between;
+    font-family: 'Roboto', sans-serif; 
+    background-color: #3c3c3c;
+}
+
+.f-containerdua{
+    text-align: center;
+    font-family:'GothamLight';
+    background-color: #3c3c3c;
+    font-size: 18px;
+    color: white;
+    width: 100%;
+    height: 10vh;
+}
+
+.footer-body{
+    font-weight: bolder;
+    color: #8ec84a;
+}
+
+.f-header{
+    margin: 50px;
+}
+
+.f-header a{
+    color: black;
+}
+
+.f-header.satu{
+    flex: 2;
+}
+.f-header.dua{
+    flex: 1;
+}
+.f-header.tiga{
+    flex: 1;
+}
+.f-header.empat{
+    flex: 1;
+}
+
+.f.footersatu{
+    text-align: center;
+}
+
+.f.footerdua{
+    flex: 1;
+}
+
+.footer-bodyicon{
+    display:flex;
+    flex-direction:row;
+}
+
+.footer-icon{
+    color: white;
+    padding-right: 10px;
+}
+
+.footer-icon:hover{
+    color:#9ac84a;
+}
+
+@media (max-width:600px){
+    .f-containersatu{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
+    }
+    .footer-body{
+        text-align: center;
+    }
+    .footer-bodyicon{
+        justify-content: center;
+    }
+    
+}
