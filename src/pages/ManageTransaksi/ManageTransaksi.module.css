@@ -11,3 +11,139 @@
   height: 20vh;
   width: 100%;
 }
+.horizontalCardContainer {
+  display: flex;
+  width: 100%;
+  margin-top: 20px;
+  background-color: whitesmoke;
+  /* border: 1px solid black; */
+  border: #043826 2px solid;
+  height: 15vh;
+  border-radius: 10px;
+}
+.transactionNumber {
+  /* border: 1px solid black; */
+  width: 30%;
+  border-right: #043826 1px solid;
+}
+.UserDetail {
+  /* border: 1px solid #000000; */
+  width: 40%;
+  margin-left: 4px;
+  border-right: #043826 1px solid;
+}
+.actionBox {
+  /* border: 1px solid black; */
+  width: 30%;
+}
+.wrappers {
+  display: flex;
+  justify-content: space-between;
+}
+.boxFoto {
+  /* border: 1px solid black; */
+  height: 70px;
+  width: 100px;
+  margin-right: 30px;
+}
+.declineButton {
+  width: 45%;
+  /* border: 1px solid black; */
+  font-family: "sanfransiscobold";
+  margin-top: 20px;
+  border: 1px solid #fa1616;
+  border-radius: 8px;
+  font-size: 13px;
+  display: flex;
+  justify-content: center;
+  margin-right: 5px;
+}
+.acceptButton {
+  width: 45%;
+  /* border: 1px solid black; */
+  font-family: "sanfransiscobold";
+  font-size: 13px;
+  border-radius: 8px;
+  border: 1px solid #2eb872;
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+}
+.declineButton:hover {
+  cursor: pointer;
+  background-color: #fa1616;
+  color: white;
+  transition: 500ms;
+}
+.acceptButton:hover {
+  cursor: pointer;
+  background-color: #2eb872;
+  color: white;
+  transition: 500ms;
+}
+
+/* TRANSACTION HISTORY ADMIN */
+.spaceBetween {
+  width: 120px;
+  height: 24px;
+  /* border: 2px solid green; */
+  justify-content: space-evenly;
+  display: flex;
+  flex-direction: row;
+  /* align-content: space-between; */
+}
+.dot {
+  height: 24px;
+  width: 25px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  text-align: center;
+}
+.dotColor {
+  height: 24px;
+  width: 25px;
+  background-color: #9ac84a;
+  border-radius: 50%;
+  display: inline-block;
+  text-align: center;
+}
+.statusBar {
+  margin-top: 10px;
+  color: whitesmoke;
+  font-weight: bolder;
+  /* border: 1px solid gray; */
+  width: 190px;
+  background-color: gray;
+  border-radius: 2px;
+}
+
+/* MOBILE CSS */
+@media only screen and (max-width: 980px) {
+  .horizontalCardContainer {
+    display: flex;
+    flex-direction: column;
+    height: fit-content;
+  }
+  .transactionNumber {
+    /* border: 1px solid black; */
+    width: 100%;
+    border-bottom: #043826 1px solid;
+
+    height: fit-content;
+  }
+  .boxFoto {
+    margin-right: 20px;
+  }
+  .UserDetail {
+    /* border: 1px solid #000000; */
+    width: 100%;
+    height: fit-content;
+  }
+  .actionBox {
+    /* border: 1px solid black; */
+    height: fit-content;
+    width: 100%;
+    margin-bottom: 20px;
+  }
+}
