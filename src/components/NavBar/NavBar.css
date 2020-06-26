@@ -15,6 +15,17 @@
     padding: 5px;
 }
 
+.headermenu-containerislogin{
+    position: absolute; 
+    display: flex; 
+    flex-direction: row; 
+    text-align: center;
+    margin-left:60%;
+    background-color:#9ac84a;
+    z-index:9; 
+    padding: 5px;
+}
+
 .headermenu-item{
     padding-top: 10px; 
     padding-bottom: 10px; 
@@ -34,6 +45,11 @@
     font-family: Lato ;
 }
 
+.holdingheart{
+    font-size: 1.5em;
+    color: white;
+}
+
 
 .search-container{
     display: flex;
@@ -41,6 +57,15 @@
     margin: 0px 40px;
     height: 35px;
 }
+
+.headermenu-item:hover{
+    color: black;
+}
+
+.headermenu-itemlast:hover{
+    color: black; 
+}
+
 
 @media (max-width:600px){
     .headersearch-container{
@@ -62,6 +87,16 @@
         flex-direction: row; 
         text-align: center;
         margin-left:25%;
+        background-color:#9ac84a;
+        z-index:9; 
+        padding: 5px;
+    }
+    .headermenu-containerislogin{
+        position: absolute; 
+        display: flex; 
+        flex-direction: row; 
+        text-align: center;
+        margin-left:10%;
         background-color:#9ac84a;
         z-index:9; 
         padding: 5px;

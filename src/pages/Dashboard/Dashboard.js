@@ -4,7 +4,6 @@ import ManageTransaksi from "../ManageTransaksi/ManageTransaksi";
 import { MDBContainer, MDBRow, MDBCol } from "mdbreact";
 import Report from "../Report/Report";
 import ManageUser from "../ManageUser/ManageUser";
-import NavbarPage from "../../components/NavBar/NavBar";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faAddressBook,
@@ -57,7 +56,7 @@ const Dashboard = () => {
     <MDBContainer fluid className={styles.wrappers}>
       <MDBRow>
         <MDBCol className="ml-0 pl-0">
-          <NavbarPage />
+          
         </MDBCol>
       </MDBRow>
       <MDBRow>

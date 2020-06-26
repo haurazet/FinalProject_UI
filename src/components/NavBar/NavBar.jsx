@@ -15,7 +15,7 @@ import {
   NavbarText
 } from 'reactstrap';
 import './NavBar.css'
-import {FaSearch} from 'react-icons/fa'
+import {FaSearch, FaHandHoldingHeart} from 'react-icons/fa'
 import {connect} from 'react-redux'
 
 const NavBar = (props) => {
@@ -77,24 +77,27 @@ const NavBar = (props) => {
 
       {
           props.User.isLogin?
-          <div className='headermenu-container'>
+          <div className='headermenu-containerislogin'>
               <div className='headermenu-item'>
                   <a href='/profile' style={{color:'inherit'}}>PROFILE</a>
               </div>
-              <div className='headermenu-itemlast'>
+              <div className='headermenu-item'>
                   <a href='/home' style={{color:'inherit'}}>SIGN OUT</a>
               </div>
-          </div>
-          :
-          <div className='headermenu-container'>
-              <div className='headermenu-item'>
-                  <a href='/register' style={{color:'inherit'}}>SIGN UP</a>
-              </div>
               <div className='headermenu-itemlast'>
-                  <a href='/login' style={{color:'inherit'}}>SIGN IN</a>
+                  <a href='/cart' style={{color:'inherit'}}><FaHandHoldingHeart className='holdingheart'/> (0)</a>
               </div>
           </div>
-        }
+           :
+           <div className='headermenu-container'>
+               <div className='headermenu-item'>
+                   <a href='/register' style={{color:'inherit'}}>SIGN UP</a>
+               </div>
+               <div className='headermenu-itemlast'>
+                   <a href='/login' style={{color:'inherit'}}>SIGN IN</a>
+               </div>
+           </div>
+         }
 
     </div>
   );

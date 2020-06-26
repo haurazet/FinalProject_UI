@@ -55,8 +55,11 @@
     .f-containersatu{
         display: flex;
         flex-direction: column;
+        justify-content: center;
+        text-align: center;
     }
     .footer-body{
         text-align: center;
     }
+    
 }
