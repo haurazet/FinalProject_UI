@@ -46,7 +46,7 @@
 .headersearch-container{
     display: flex;
     flex-direction: row;
-    justify-content: space-evenly;
+    justify-content: center;
     padding-left: 20%;
     padding-right: 20%;
     opacity: 1;

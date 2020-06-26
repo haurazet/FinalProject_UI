@@ -19,15 +19,8 @@ const Home=()=>{
     console.log(search)
   }
 
-  //Onchange untuk Location
-  const onChangeSearchLocation=(e)=>{
-    setSearch({...search,[e.target.name]:e.target.value})
-    console.log(search)
-  }
-
   const [search,setSearch] = useState({
-    searchInputWaste:'',
-    searchInputLocation:''
+    searchInputWaste:''
   })
 
     return(
@@ -48,14 +41,9 @@ const Home=()=>{
                             <input type="text" name='searchInputWaste' onChange={onChangeSearchWaste} className="form-control form-control-md" style={{width:'300px'}}/>
                         </div>
 
-                        <div className="headersearch-item.dua">
-                            <label style={{color:'#7dbe4a', textAlign:"left", fontWeight:'bold',fontFamily:'Verdana' }}>LOCATION</label>
-                            <input type="text" name='searchInputLocation' onChange={onChangeSearchLocation} className="form-control form-control-md" style={{width:'300px'}}/>
-                        </div>
-
                         <div className="headersearch-item.tiga">
                             <button className="buttonsearch">
-                                SEARCH
+                                <a href='/program' style={{color:'inherit'}}>SEARCH</a>
                             </button>
                         </div>
                     </Fragment>
@@ -208,9 +196,7 @@ const Home=()=>{
                         </div>
                     </div>
                 </div>
-            </div>
-
-
+        </div>
 
         </div>
        
