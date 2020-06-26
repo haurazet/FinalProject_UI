@@ -24,8 +24,10 @@ import { API_URL } from './support/Apiurl'
 import NavBar from './components/NavBar/NavBar'
 import Footer from './components/Footer/footer'
 import ContactUs from './pages/ContactUs/contactus';
-import Profile from './pages/Profile/profile'
 import AboutUs from './pages/AboutUs/aboutus'
+import CollectionPrograms from './pages/CollectionPrograms/CollectionPrograms';
+import MyImpact from './pages/MyImpact/MyImpact'
+import PersonalInfo from './pages/PersonalInfo/PersonalInfo';
 
 function App({KeepLogin}) {
 
@@ -81,7 +83,9 @@ function App({KeepLogin}) {
         <Route path="/dashboard" component={Dashboard} exact />
         <Route path="/transactionhistory" component={TransactionHistory} exact />
         <Route path="/programdetail/:idprog" exact component={ProgramDetail}/>
-        <Route  path='/profile' component={Profile} exact />
+        <Route path='/collection-programs' component={CollectionPrograms} exact />
+        <Route path='/my-impact' component={MyImpact} exact />
+        <Route path='/personal-info' component={PersonalInfo} exact />
         <Route  path='/aboutus' component={AboutUs} exact />
         <Route  path='/contactus' component={ContactUs} exact />
         <Route component={Notfound} />

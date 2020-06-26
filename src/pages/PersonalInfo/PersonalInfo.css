@@ -1,0 +1,198 @@
+
+.profilename-container{
+  width: 100%;
+  height: 150px;
+  background-color: #f3f3f3;
+}
+
+
+.profilename-header{
+    height: 120px;
+    width: 80%;
+    padding-top: 30px;
+    padding-left: 80px;
+}
+
+.profilename-image{
+    border-radius: 60px;
+    height: 80px;
+    width: 100px;
+}
+
+.profilename-name{
+    margin-left: 20px;
+    font-size: 30px;
+    font-family: 'GothamBook'
+}
+
+.buttonsearch{
+    margin-left: 30px;
+    width: 150px;
+    height: 40px;
+    background-color: #9ac84a;
+    color: white;
+    border: blanchedalmond;
+}
+
+
+.profilename-getstarted{
+    color: inherit;
+}
+
+.profilename-getstarted:hover{
+    color: black;
+}
+
+.profilemenupi-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding-top: 20px;
+    padding-bottom: 20px; 
+    border-bottom-style: solid;
+    border-bottom-color: #ececec;
+    border-bottom-width: 0.1px;
+}
+
+.profilemenupi-satu{
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 17px;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+    color: #8cb4b1;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.profilemenupi-dua{
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    letter-spacing: 0.5px;
+    font-size: 17px;
+    font-weight: bold;
+    color: #8cb4b1;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.profilemenupi-tiga{
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 17px;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+    color: #b4c84a;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.profilemenupi-satu:hover{
+    color: #b4c84a;    
+}
+
+.profilemenupi-dua:hover{
+    color: #b4c84a;
+}
+
+.profilemenupi-tiga:hover{
+    color: #57918e;
+}
+
+.editprofile-container{
+    display: flex;
+    flex-direction: row;
+    border-bottom-style: solid;
+    border-bottom-color: #ececec;
+    border-bottom-width: 0.1px;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 100%;
+    height: 150px;
+}
+
+.editprofile-text{
+    font-size: 30px
+}
+
+.editprofile-button{
+    width: 200px;
+    height: 40px;
+    background-color: #9ac84a;
+    color: white;
+    border: blanchedalmond;
+}
+
+.editprofile-buttontext{
+    color: inherit;
+}
+
+.editprofile-buttontext:hover{
+    color: black;
+}
+
+
+.showdata-container{
+    padding-top: 60px;
+    margin-left: 25%;
+    margin-right: 25%;
+    height: 100%;
+}
+
+.showdata-title{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: #58a5c5;
+    font-size: 26px;
+}
+
+
+.showdata-bodycontainer1{
+    width: 100%;
+    height: 100%;
+}
+
+.showdata-email{
+    margin-top: 20px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: black;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.showdata-1{
+    margin-top: 20px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: black;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.showdata-2{
+    margin-top: 20px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: black;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.showdata-3{
+
+    margin-top: 20px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: black;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+
+.showdata-emaildata{
+    padding-top: 20px;
+    padding-left: 20px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: black;
+    font-size: 15px;
+}
+
+.showdata-title2{
+    margin-top: 10px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: #58a5c5;
+    font-size: 26px;
+}

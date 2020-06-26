@@ -67,7 +67,7 @@ const NavBar = (props) => {
             <div>
                 <input type="text" name='searchInput' onChange={onChangeSearch}/> &nbsp; 
                 <a href='/search'>
-                <button style={{width:'35px'}}><FaSearch/></button>
+                <button style={{width:'35px', border:'black', borderRadius:'30px'}}><FaSearch/></button>
                 </a>
             </div>
           </div>
@@ -79,7 +79,7 @@ const NavBar = (props) => {
           props.User.isLogin?
           <div className='headermenu-containerislogin'>
               <div className='headermenu-item'>
-                  <a href='/profile' style={{color:'inherit'}}>PROFILE</a>
+                  <a href='/collection-programs' style={{color:'inherit'}}>PROFILE</a>
               </div>
               <div className='headermenu-item'>
                   <a href='/home' style={{color:'inherit'}}>SIGN OUT</a>
