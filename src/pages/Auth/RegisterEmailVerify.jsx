@@ -27,6 +27,19 @@ const RegisterEmailVerify = ({Auth, ResendEmailVerification}) => {
                     </div>
                 </div>
                 :
+                Auth.isVerified===0?
+                <div className='emailverify-container'>
+                    <div className="row emailverify-top"></div>
+                    <div className="row register-middle">
+                        <div className="emailverify-box p-4 px-5" style={{position:'relative', top:-150, zIndex:2}}>
+                            <div className="h4 mb-5 text-center">Activate your RECYC.LY account!</div>
+                            <div>To join program, you account has to be verified. Please click the link below to get your verification link.</div>
+                            <div className="text-center my-4"><Button text={Auth.loading?'loading..':Auth.isEmailSent?'Email Sent!':"Send Email Verification"} onclick={()=>ResendEmailVerification(data)}/></div>
+                            <div className="text-center"><a className="go-back-link" href="javascript:history.back()">Go back to Program Detail</a></div>
+                        </div>
+                    </div>
+                </div>
+                :
                 <Redirect to='/notfound' />
             }
         </div>

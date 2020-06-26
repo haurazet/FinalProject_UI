@@ -36,6 +36,14 @@ const Verified = (props) => {
                             <div className="text-center mt-4"><Button text="Go To Homepage" onclick={()=> history.push('/')}/></div>
                         </div>
                     :
+                    props.Auth.is_verified===1?
+                        <div>
+                            <div className="h4 mb-5 text-center">Account Verification Success!</div>
+                            <div>Congratulations. Your account has been verified. Go back to homepage to start your RECYC.LY program!</div>
+                            <div className="text-center mt-3">Happy <span className='font-weight-bold'>RECYC.LY</span>ing ^‿^</div>
+                            <div className="text-center mt-4"><Button text="Go To Homepage" onclick={()=> history.push('/')}/></div>
+                        </div>
+                    :
                         <div>
                             <div className="h4 mb-5 text-center">Link has expired!</div>
                             <div>Please login to get your new email verification link.</div>
@@ -51,6 +59,7 @@ const Verified = (props) => {
 }
 
 const MapstatetoProps=({Auth})=>{
+    console.log({Auth})
     return{
         Auth
     }

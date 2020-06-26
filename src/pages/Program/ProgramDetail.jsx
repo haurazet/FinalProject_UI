@@ -32,8 +32,11 @@ const ProgramDetail = ( props ) => {
                         <div className="h3 mb-3">Recycling in partnership with {data.brand}</div>
                         <div className="p mb-5">Send your {data.brand} packaging back to {data.brand} factory to help it recycled in the correct way. Therefore, you become part on saving our nature. This program is only for {data.brand} packaging only.  </div>
                         {
-                            props.Auth.isLogin?
-                            <Button text="Join Program" onclick={event => window.location.href=`/joinprogram/${data.id}`}/>:
+                            props.Auth.isLogin?(props.Auth.is_verified===1?
+                            <Button text="Join Program" onclick={event => window.location.href=`/joinprogram/${data.id}`}/>
+                            :
+                            <Button text="Verify Account to Join Program" onclick={event => window.location.href=`/registeremailverify`}/>)
+                            :
                             <Button text="Sign Up to Join" onclick={event => window.location.href='/register'} />
                         }   
                         <div className="mt-5">One program is for one shipment only</div>
