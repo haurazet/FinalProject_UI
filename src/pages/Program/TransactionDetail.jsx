@@ -138,7 +138,7 @@ const TransactionDetail = ( props ) => {
                                     <div className="mb-5 font-weight-bold">Status: Waiting for Payment Verification</div>
                                     <div className="text-center">Upload Payment Receipt Success!</div>
                                     <div className="grey-text mb-4 font-smaller text-center">Please wait for 24 hour for payment verification</div>
-                                    <div className="text-center mt-5"><Button text="browse another program" onclick={onUploadPayment}/></div>
+                                    <div className="text-center mt-5"><Button text="browse another program" onclick={event => window.location.href='/programpage'}/></div>
                                 </>
                             :
                             null
