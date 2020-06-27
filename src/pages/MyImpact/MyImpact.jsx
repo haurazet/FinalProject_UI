@@ -1,11 +1,26 @@
-import React from 'react';
+import React,{useEffect} from 'react';
 import '../MyImpact/MyImpact.css'
 import {Table,thead,tr,td} from 'reactstrap'
 import {useSelector} from 'react-redux'
+import Axios from 'axios'
+import { API_URL } from '../../support/Apiurl';
+import { useState } from 'react';
 
 const MyImpact = () => {
 
+    useEffect(()=>{
+        let id = Auth.id
+        Axios.get(`${API_URL}/users/getpoints/${id}`)
+            .then((res)=>{
+                setPoints(res.data[0])
+            }).catch((err)=>{
+                console.log(err)
+            })
+    },[])
+
     const Auth = useSelector(state=> state.Auth)
+    
+    const [point,setPoints]=useState([])
 
     return ( 
         <div>
@@ -40,7 +55,7 @@ const MyImpact = () => {
              <div className='myimpactdata-container'>
                 
                 <div className='myimpactdata-text'>
-                    <p>You have earned <span style={{fontWeight:'bold'}}>0 points ($0.00) </span>
+                    <p>You have earned <span style={{fontWeight:'bold'}}>{point.points} points </span>
                      and redeemed <span style={{fontWeight:'bold'}}>0 points ($0.00)</span> so far.</p>
                 </div>
 
