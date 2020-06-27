@@ -34,34 +34,37 @@ const NavBar = (props) => {
     
   return (
     <div>
+      
+      {/* Jika role=admin / role=users */}
+      {props.User.role==1||props.User.role==''?
       <Navbar color="white" light expand="md">
-      <NavbarBrand href="/">
-      <img fixed='top' src={logoheader} alt='logo' height='45px' style={{paddingLeft:'50px'}}></img>
-      </NavbarBrand>
+        <NavbarBrand href="/">
+            <img fixed='top' src={logoheader} alt='logo' height='45px' style={{paddingLeft:'50px'}}></img>
+        </NavbarBrand>
         
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
-          <Nav className="mr-auto" navbar>
-            <NavItem>
-              <NavLink className='headernavlink' href="/program">ALL PROGRAM</NavLink>
-            </NavItem>
-            <NavItem>
-              <NavLink className='headernavlink' href="/reward">REWARD</NavLink>
-            </NavItem>
-            <UncontrolledDropdown className='headernavlink' nav inNavbar>
-              <DropdownToggle nav caret>
-                ABOUT
-              </DropdownToggle>
-              <DropdownMenu right>
-                <DropdownItem>
-                  <NavLink href="/aboutus">About Us</NavLink>
-                </DropdownItem>
-                <DropdownItem>
-                  <NavLink href="/contactus">Contact Us</NavLink>
-                </DropdownItem>
-              </DropdownMenu>
-            </UncontrolledDropdown>
-          </Nav>
+            <Nav className="mr-auto" navbar>
+              <NavItem>
+                  <NavLink className='headernavlink' href="/program">ALL PROGRAM</NavLink>
+              </NavItem>
+              <NavItem>
+                    <NavLink className='headernavlink' href="/reward">REWARD</NavLink>
+              </NavItem>
+              <UncontrolledDropdown className='headernavlink' nav inNavbar>
+                  <DropdownToggle nav caret>
+                    ABOUT
+                  </DropdownToggle>
+                  <DropdownMenu right>
+                      <DropdownItem>
+                          <NavLink href="/aboutus">About Us</NavLink>
+                      </DropdownItem>
+                      <DropdownItem>
+                          <NavLink href="/contactus">Contact Us</NavLink>
+                      </DropdownItem>
+                  </DropdownMenu>
+              </UncontrolledDropdown>
+            </Nav>
           
           <div className='search-container'>
             <div>
@@ -74,29 +77,55 @@ const NavBar = (props) => {
 
         </Collapse>
       </Navbar>
+      
+      :
 
-      {
-          props.User.isLogin?
-          <div className='headermenu-containerislogin'>
-              <div className='headermenu-item'>
-                  <a href='/collection-programs' style={{color:'inherit'}}>PROFILE</a>
-              </div>
-              <div className='headermenu-item'>
-                  <a href='/home' style={{color:'inherit'}}>SIGN OUT</a>
-              </div>
-              <div className='headermenu-itemlast'>
-                  <a href='/cart' style={{color:'inherit'}}><FaHandHoldingHeart className='holdingheart'/> (0)</a>
-              </div>
+      //JIKA ROLE = ADMIN
+      <Navbar color="white" light expand="md">
+          <NavbarBrand href="/dashboard">
+              <img fixed='top' src={logoheader} alt='logo' height='45px' style={{paddingLeft:'50px'}}></img>
+          </NavbarBrand>
+          <div className='headernav-admin'>
+              ADMIN PAGE
           </div>
-           :
-           <div className='headermenu-container'>
-               <div className='headermenu-item'>
-                   <a href='/register' style={{color:'inherit'}}>SIGN UP</a>
-               </div>
-               <div className='headermenu-itemlast'>
-                   <a href='/login' style={{color:'inherit'}}>SIGN IN</a>
-               </div>
-           </div>
+      </Navbar>
+      
+      }
+      
+      {
+          //JIKA USER SUDAH LOGIN
+          props.User.isLogin&&props.User.role==1?
+              <div className='headermenu-containerislogin'>
+                  <div className='headermenu-item'>
+                      <a href='/collection-programs' style={{color:'inherit'}}>PROFILE</a>
+                  </div>
+                  <div className='headermenu-item'>
+                      <a href='/' style={{color:'inherit'}}>SIGN OUT</a>
+                  </div>
+                  <div className='headermenu-itemlast'>
+                      <a href='/cart' style={{color:'inherit'}}><FaHandHoldingHeart className='holdingheart'/> (0)</a>
+                  </div>
+              </div>
+          
+          //JIKA ADMIN SUDAH LOGIN
+          :props.User.isLogin&&props.User.role==0?
+            <div className='headermenu-container'>
+                <div className='headermenu-item'>
+                    <a href='/register' style={{color:'inherit'}}>SIGN OUT</a>
+                </div>
+            </div>
+          
+          //JIKA BELUM LOGIN
+          :
+            <div className='headermenu-container'>
+                <div className='headermenu-item'>
+                    <a href='/register' style={{color:'inherit'}}>SIGN UP</a>
+                </div>
+                <div className='headermenu-itemlast'>
+                    <a href='/login' style={{color:'inherit'}}>SIGN IN</a>
+                </div>
+            </div>
+          
          }
 
     </div>

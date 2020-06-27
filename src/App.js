@@ -65,12 +65,15 @@ function App({KeepLogin}) {
     },[KeepLogin])
 
     if(Loading){
-      return <div style={{width:'100%',height:'100vh',display:'flex',textAlign:'center', alignItems:'center', justifyContent:'center'}}>
+      return <div style={{width:'100%',height:'100vh',display:'flex',textAlign:'center', alignItems:'center', justifyContent:'center', flexDirection:'column'}}>
         <img 
         src={logo}
         width='280px'
         height='150px'
         ></img>
+        <div style={{paddingTop:'20px', fontWeight:'bold', fontSize:'20px'}}>
+          Loading..
+        </div>
         </div>
     }
 

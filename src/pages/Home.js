@@ -13,14 +13,14 @@ import slide3 from './../images/slide3.PNG'
 
 const Home=()=>{
 
-  //Onchange untuk Waste
-  const onChangeSearchWaste=(e)=>{
+  //Onchange untuk Program
+  const onChangeSearchProgram=(e)=>{
     setSearch({...search,[e.target.name]:e.target.value})
     console.log(search)
   }
 
   const [search,setSearch] = useState({
-    searchInputWaste:''
+    searchInputProgram:''
   })
 
     return(
@@ -37,13 +37,13 @@ const Home=()=>{
                     
                     <Fragment>
                         <div className="headersearch-item.satu">
-                            <label style={{color:'#7dbe4a', textAlign:"left", fontWeight:'bold', fontFamily:'Verdana'}}>WASTE STREAM</label>
-                            <input type="text" name='searchInputWaste' onChange={onChangeSearchWaste} className="form-control form-control-md" style={{width:'300px'}}/>
+                            <label style={{color:'#7dbe4a', textAlign:"left", fontWeight:'bold', fontFamily:'Verdana'}}>PROGRAM</label>
+                            <input type="text" name='searchInputProgram' onChange={onChangeSearchProgram} className="form-control form-control-md" style={{width:'300px'}}/>
                         </div>
 
                         <div className="headersearch-item.tiga">
                             <button className="buttonsearch">
-                                <a href='/program' style={{color:'inherit'}}>SEARCH</a>
+                                <a href='/program' className='buttonsearch-text'>SEARCH</a>
                             </button>
                         </div>
                     </Fragment>
@@ -94,16 +94,16 @@ const Home=()=>{
                 </div>
             </div>
 
-        {/* BODY CAROUSEL 1 */}
-        <div style={{width:'100%', paddingTop:'50px'}}>
-            <MDBContainer>
-                <MDBCarousel
-                    activeItem={1}
-                    length={3}
-                    showControls={false}
-                    showIndicators={true}
-                    className="z-depth-1"
-                >
+            {/* BODY CAROUSEL 1 */}
+            <div style={{width:'100%', paddingTop:'50px'}}>
+                <MDBContainer>
+                    <MDBCarousel
+                        activeItem={1}
+                        length={3}
+                        showControls={false}
+                        showIndicators={true}
+                        className="z-depth-1"
+                    >
                     <MDBCarouselInner>
                     <MDBCarouselItem itemId="1">
                         <MDBView>
@@ -123,7 +123,6 @@ const Home=()=>{
                                 <a href='/program' style={{color:'inherit'}}><p style={{color:'white', fontSize:'15px', fontWeight:'bold', textAlign:'right', paddingRight:'30px'}}>SHOP NOW</p></a>
                             </div>
                         </div>
-
                         </MDBView>
                     </MDBCarouselItem>
                     <MDBCarouselItem itemId="2">
@@ -167,40 +166,36 @@ const Home=()=>{
                         </MDBView>
                     </MDBCarouselItem>
                     </MDBCarouselInner>
-                </MDBCarousel>
-        </MDBContainer>
+                    </MDBCarousel>
+            </MDBContainer>
+            </div>
 
-        </div>
+            {/* BODY TEXT 2 */}
+            <div className='headerbody-container'>
+                    
+                    <div className='headerbodytext2'>
+                            What is Recycly?
+                    </div>
 
-        {/* BODY TEXT 2 */}
-        <div className='headerbody-container'>
-                
-                <div className='headerbodytext2'>
-                        What is Recycly?
-                </div>
-
-                <div className='headerbodytext2-container'>
-                    <div>
+                    <div className='headerbodytext2-container'>
                         <div>
-                            <p className='bodytext'>Recycly® is a social enterprise <span style={{fontWeight:'bold'}}>Eliminating the Idea of Waste®</span>.
-                            In 20 countries, we tackle the issue from many angles. We have found that nearly everything we 
-                            touch can be recycled and collect typically non-recyclable items through national, 
-                            first-of-their-kind recycling platforms.</p>
-                            <p className='bodytext'>Leading companies work with us to take hard-to-recycle materials from our programs, 
-                            such as ocean plastic, and turn them into new products, and our new Loop platform aims 
-                            to change the way the world shops with favorite brands in refillable packaging offered 
-                            with convenience and style.</p>
-                            <p className='bodytext'>With your help, we’ve diverted millions of pounds of valuable resources from 
-                            landfills all over the world, and we’re just getting started.</p>
-                            <p className='bodytext'><span style={{fontWeight:'bold'}}>#RecycleEverything</span> using the search bar above and tell us what you want to recycle.</p>
+                            <div>
+                                <p className='bodytext'>Recycly® is a social enterprise <span style={{fontWeight:'bold'}}>Eliminating the Idea of Waste®</span>.
+                                In 20 countries, we tackle the issue from many angles. We have found that nearly everything we 
+                                touch can be recycled and collect typically non-recyclable items through national, 
+                                first-of-their-kind recycling platforms.</p>
+                                <p className='bodytext'>Leading companies work with us to take hard-to-recycle materials from our programs, 
+                                such as ocean plastic, and turn them into new products, and our new Loop platform aims 
+                                to change the way the world shops with favorite brands in refillable packaging offered 
+                                with convenience and style.</p>
+                                <p className='bodytext'>With your help, we’ve diverted millions of pounds of valuable resources from 
+                                landfills all over the world, and we’re just getting started.</p>
+                                <p className='bodytext'><span style={{fontWeight:'bold'}}>#RecycleEverything</span> using the search bar above and tell us what you want to recycle.</p>
+                            </div>
                         </div>
                     </div>
-                </div>
+            </div>
         </div>
-
-        </div>
-       
-
     )
 }
 
