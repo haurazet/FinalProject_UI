@@ -29,6 +29,7 @@ import CollectionPrograms from './pages/CollectionPrograms/CollectionPrograms';
 import MyImpact from './pages/MyImpact/MyImpact'
 import PersonalInfo from './pages/PersonalInfo/PersonalInfo';
 import EditProfile from './pages/EditProfile/EditProfile';
+import logo from './images/recyly_nobg.png'
 
 function App({KeepLogin}) {
 
@@ -64,7 +65,13 @@ function App({KeepLogin}) {
     },[KeepLogin])
 
     if(Loading){
-      return <div>loading....</div>
+      return <div style={{width:'100%',height:'100vh',display:'flex',textAlign:'center', alignItems:'center', justifyContent:'center'}}>
+        <img 
+        src={logo}
+        width='280px'
+        height='150px'
+        ></img>
+        </div>
     }
 
   return (
