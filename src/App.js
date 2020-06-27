@@ -87,7 +87,7 @@ function App({ KeepLogin }) {
         <Route path="/manageuser" component={ManageUser} exact />
         <Route path="/rewarddetails/:idreward" component={RewardDetail} exact />
         <Route
-          path="/transactionhistory"
+          path="/transactionhistory/:id"
           component={TransactionHistory}
           exact
         />

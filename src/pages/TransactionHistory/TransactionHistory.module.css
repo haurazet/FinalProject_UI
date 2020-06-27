@@ -124,7 +124,7 @@ b {
   color: whitesmoke;
   font-weight: bolder;
   /* border: 1px solid gray; */
-  width: 190px;
+  width: fit-content;
   background-color: gray;
   border-radius: 2px;
 }

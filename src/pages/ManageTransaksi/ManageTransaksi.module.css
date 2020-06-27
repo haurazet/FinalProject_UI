@@ -119,6 +119,9 @@
   background-color: gray;
   border-radius: 2px;
 }
+.redColor {
+  color: #fa1616;
+}
 
 /* MOBILE CSS */
 @media only screen and (max-width: 980px) {

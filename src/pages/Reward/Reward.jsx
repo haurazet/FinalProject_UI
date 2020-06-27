@@ -35,46 +35,6 @@ const Reward = ({ Auth }) => {
       });
   };
 
-  // const OnClickCard = (id, title, price) => {
-  //   console.log(Auth.isLogin);
-  //   console.log(Auth.points);
-  //   if (Auth.isLogin === false) {
-  //     Swal.fire({
-  //       title: "Please Login your account before redeem the reward",
-  //     });
-  //   }
-  //   if (Auth.points < price) {
-  //     Swal.fire({
-  //       title: "Sorry, your RECYCLY Points is not enough.",
-  //     });
-  //   }
-  //   if (Auth.points >= price) {
-  //     Swal.fire({
-  //       title: `Redeem`,
-  //       text: `This reward will cost you ${price} points.
-  //               Do you want to proceed? `,
-  //       confirmButtonText: "Yes",
-  //       showCancelButton: true,
-  //     }).then((result) => {
-  //       if (result.isConfirmed) {
-  //         let obj = {
-  //           status: "completed",
-  //           userId: Auth.id,
-  //           rewardId: id,
-  //           decreasedPoints: price,
-  //         };
-  //         Axios.post(`${API_URL}/reward/buyreward`, obj).then((result) => {
-  //           Swal.fire(
-  //             "Redeem Success!",
-  //             "Thank you for helping us to make world a better place.",
-  //             "success"
-  //           );
-  //         });
-  //       }
-  //     });
-  //   }
-  // };
-
   const renderCardCat1 = () => {
     return datacat1.map((val, index) => (
       <NiceCard

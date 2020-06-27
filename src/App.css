@@ -24,6 +24,9 @@
   .program-top-subtitle {
     font-size: 0.9em;
   }
+  .manage_transaksi_button {
+    font-size: 12px;
+  }
 }
 
 /* Large Screen */
