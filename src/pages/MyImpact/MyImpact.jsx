@@ -5,6 +5,7 @@ import {useSelector} from 'react-redux'
 import Axios from 'axios'
 import { API_URL } from '../../support/Apiurl';
 import { useState } from 'react';
+import { Redirect } from "react-router-dom";
 
 const MyImpact = () => {
 
@@ -24,6 +25,14 @@ const MyImpact = () => {
 
     return ( 
         <div>
+
+            {/* Jika tidak login dan role=admin, balik ke home */}
+            {!Auth.isLogin||Auth.role===0?
+            <Redirect to='/'></Redirect>
+            :
+            null
+            }
+            
             {/* PROFILENAME HEADER */}
             <div className='profilename-container'>
                 <div className='profilename-header'>

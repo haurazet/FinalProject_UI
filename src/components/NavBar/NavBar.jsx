@@ -31,6 +31,10 @@ const NavBar = (props) => {
     setSearch({...search,[e.target.name]:e.target.value})
     console.log(search.searchInput)
   }
+
+  const onClickSignOut=()=>{
+    localStorage.clear()
+  }
     
   return (
     <div>
@@ -100,7 +104,7 @@ const NavBar = (props) => {
                       <a href='/collection-programs' style={{color:'inherit'}}>PROFILE</a>
                   </div>
                   <div className='headermenu-item'>
-                      <a href='/' style={{color:'inherit'}}>SIGN OUT</a>
+                      <a href='/' style={{color:'inherit'}} onClick={onClickSignOut}>SIGN OUT</a>
                   </div>
                   <div className='headermenu-itemlast'>
                       <a href='/cart' style={{color:'inherit'}}><FaHandHoldingHeart className='holdingheart'/> (0)</a>

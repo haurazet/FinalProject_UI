@@ -2,12 +2,22 @@ import React from 'react';
 import '../CollectionPrograms/CollectionPrograms.css'
 import { useSelector } from 'react-redux'
 
+import { Redirect } from "react-router-dom";
+
 const CollectionPrograms = () => {
     
     const Auth = useSelector(state=> state.Auth)
     
     return ( 
         <div>
+
+            {/* Jika tidak login dan role=admin, balik ke home */}
+            {!Auth.isLogin||Auth.role===0?
+            <Redirect to='/'></Redirect>
+            :
+            null
+            }
+
             {/* PROFILENAME HEADER */}
             <div className='profilename-container'>
                 <div className='profilename-header'>

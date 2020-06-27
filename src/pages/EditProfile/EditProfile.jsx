@@ -3,6 +3,8 @@ import './EditProfile.css'
 import Button from '../../components/button'
 import {connect} from 'react-redux'
 import {  MDBRow, MDBCol} from 'mdbreact';
+import { Redirect } from "react-router-dom";
+import {useSelector} from 'react-redux'
 
 const EditProfile =(props)=>{
 
@@ -31,10 +33,19 @@ const EditProfile =(props)=>{
 
     }
 
-
+    const Auth = useSelector(state=> state.Auth)
 
     return(
+
         <div className='editprofile-container'>
+
+            {/* Jika tidak login dan role=admin, balik ke home */}
+            {!Auth.isLogin||Auth.role===0?
+            <Redirect to='/'></Redirect>
+            :
+            null
+            }
+
             <div className='editprofile-headerbg'>
                 <div className='editprofile-formcontainer'>
                     <div style={{paddingLeft:'8%',paddingTop:'10%'}}>

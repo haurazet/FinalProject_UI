@@ -3,8 +3,9 @@ import './../PersonalInfo/PersonalInfo.css'
 import Axios from 'axios'
 import {API_URL} from './../../support/Apiurl'
 import {useSelector} from 'react-redux'
+import { Redirect } from "react-router-dom";
 
-const PersonalInfo = () => {
+const PersonalInfo = (props) => {
 
     useEffect(()=>{
         let id = Auth.id
@@ -19,11 +20,17 @@ const PersonalInfo = () => {
     const [data,setData]=useState([])
 
     const Auth = useSelector(state=> state.Auth)
-   
-
+    
     return ( 
-        
         <div>
+
+            {/* Jika tidak login dan role=admin, balik ke home */}
+            {!Auth.isLogin||Auth.role===0?
+            <Redirect to='/'></Redirect>
+            :
+            null
+            }
+            
             {/* PROFILENAME HEADER */}
             <div className='profilename-container'>
                 <div className='profilename-header'>
