@@ -17,6 +17,7 @@ const TransactionDetail = ( props ) => {
     const [notloading, setnotloading]=useState(false)
     const [paymentmethod, setpaymentmethod]=useState({})
     const [uploadpayment, setuploadpayment]=useState(false)
+    const [program, setprogram] = useState ()
 
     useEffect(()=>{
         // ============ GET TRANSACTION DETAIL WITH AUTH ============= //
@@ -42,7 +43,15 @@ const TransactionDetail = ( props ) => {
             Axios.get(`${API_URL}/transaction/selectedpayment/${res.data[0].paymentmethod_id}`)
             .then((res1)=>{
                 setpaymentmethod(res1.data[0])
-                setnotloading(true)
+                // ============ GET PROGRAM DETAIL ============= //
+                Axios.get(`${API_URL}/programs/programdetail/${res.data[0].program_id}`)
+                .then((res2)=>{
+                    setprogram(res2.data)
+                    console.log(res2.data)
+                    setnotloading(true)
+                }).catch((err2)=>{
+                    console.log(err2)
+                })
             }).catch((err1)=>{
                 console.log(err1)
             })
@@ -284,6 +293,13 @@ const TransactionDetail = ( props ) => {
                             :
                             null
                             }
+                             {/* <div className="mt-4 text-center"><a>See Product Detail</a></div>
+                            
+                                <>
+                                <div className="col-md-3 font-weight-bold p-0">{address[i].name+' ('+address[i].phonenumber+')'}</div>
+                                <div className="col-md-8">{address[i].address+', '+address[i].city+', '+address[i].state+', '+address[i].zipcode}</div>
+                                <div className="col-md-1"><a className="go-back-link" onClick={()=>seteditaddress(true)}>Change</a></div>
+                                </> */}
                             </>
                         </div>
                     </div>
