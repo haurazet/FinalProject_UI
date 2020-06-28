@@ -34,6 +34,7 @@ import EditProfile from './pages/EditProfile/EditProfile'
 import AboutUs from './pages/AboutUs/aboutus'
 import ContactUs from './pages/ContactUs/contactus'
 import logo from './images/recyly_nobg.png'
+import NavBar from './components/NavBar/NavBar'
 import Footer from './components/Footer/footer'
 
 function App({ KeepLogin }) {
@@ -84,6 +85,9 @@ function App({ KeepLogin }) {
   return (
     <div>
       <ScrollToTop />
+
+      <NavBar/>
+
       <Switch>
         <Route path="/" component={Home} exact />
         <Route path="/login" component={Login} exact />

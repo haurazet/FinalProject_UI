@@ -84,15 +84,15 @@ const NavBar = (props) => {
       
       :
 
-      //JIKA ROLE = ADMIN
-      <Navbar color="white" light expand="md">
-          <NavbarBrand href="/dashboard">
-              <img fixed='top' src={logoheader} alt='logo' height='45px' style={{paddingLeft:'50px'}}></img>
-          </NavbarBrand>
-          <div className='headernav-admin'>
-              ADMIN PAGE
-          </div>
-      </Navbar>
+          //JIKA ROLE = ADMIN
+          <Navbar color="white" light expand="md">
+              <NavbarBrand href="/dashboard">
+                  <img fixed='top' src={logoheader} alt='logo' height='45px' style={{paddingLeft:'50px'}}></img>
+              </NavbarBrand>
+              <div className='headernav-admin'>
+                  ADMIN PAGE
+              </div>
+          </Navbar>
       
       }
       
