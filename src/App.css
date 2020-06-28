@@ -1,6 +1,6 @@
 :root {
   --main-bg-color: rgb(255, 255, 255);
-  --main-green-color:  #9ac84a;
+  --main-green-color: #9ac84a;
   --main-tosca-color: #688830;
   --main-grey-color: #abacad;
   --main-blue-color: #13686b;
@@ -214,7 +214,6 @@
   margin-bottom: 2%;
   height: 48px;
   font-size: 1.2em;
-
 }
 
 .program-card-bottom:hover {
@@ -259,7 +258,7 @@
   margin: 2% 0 0 0;
 }
 
-.product-card{
+.product-card {
   height: 380px !important;
 }
 
@@ -444,7 +443,8 @@
   border-radius: 0 100px 100px 0;
   animation: rotate-circle 4.25s ease-in;
 }
-.success-checkmark .check-icon::before, .success-checkmark .check-icon::after {
+.success-checkmark .check-icon::before,
+.success-checkmark .check-icon::after {
   content: "";
   height: 100px;
   position: absolute;

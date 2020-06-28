@@ -31,6 +31,10 @@ class Productpage extends Component {
         sort:'purchased DESC'
      }
 
+    componentWillUnmount(){
+        localStorage.removeItem('search')
+    }
+
     componentDidMount(){
         Axios.get(`${API_URL}/programs/category`)
         .then((res)=>{
@@ -216,6 +220,7 @@ class Productpage extends Component {
                                         placeholder="Search" 
                                         aria-label="Search"
                                         onChange={this.dataOnChange}
+                                        defaultValue={localStorage.getItem('search')}
                                         />
                                 <div >
                                     <Button text="search"/>

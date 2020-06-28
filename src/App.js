@@ -57,23 +57,6 @@ function App({KeepLogin}) {
       })
       .catch(err=>{
         console.log(err.message)
-
-// function App({ KeepLogin }) {
-//   const [Loading, setLoading] = useState(true);
-
-//   useEffect(() => {
-//     var token = localStorage.getItem("token");
-//     if (token) {
-//       Axios.get(`${API_URL}/users/keeplogin`, {
-//         headers: {
-//           Authorization: `Bearer ${token}`,
-//         },
-//       })
-//         .then((res) => {
-//           KeepLogin(res.data);
-//         })
-//         .catch((err) => {
-//           console.log(err.message);
         })
         .then((res) => {
           KeepLogin(res.data);
@@ -109,7 +92,7 @@ function App({KeepLogin}) {
     <div>
       <ScrollToTop />
 
-      <NavBar/>
+      <NavBar />
 
       {/* Jika tidak login dan role=admin, balik ke home
       {Auth.role===0?
@@ -174,8 +157,7 @@ function App({KeepLogin}) {
         <Route component={Notfound} />
       </Switch>
 
-      <Footer/>
-
+      <Footer />
     </div>
   );
 }

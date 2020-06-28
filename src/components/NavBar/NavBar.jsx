@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import logoheader from './../../images/recyly_nobg.png'
+import React, { useState } from "react";
+import logoheader from "./../../images/recyly_nobg.png";
 import {
   Collapse,
   Navbar,
@@ -21,9 +21,9 @@ import {UserLogout} from '../../redux/actions/'
 
 const NavBar = (props) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [search,setSearch] = useState({
-    searchInput:''
-  })
+  const [search, setSearch] = useState({
+    searchInput: "",
+  });
 
   const toggle = () => setIsOpen(!isOpen);
 
@@ -81,7 +81,6 @@ const NavBar = (props) => {
                 </a>
             </div>
           </div>
-
         </Collapse>
       </Navbar>
       
@@ -136,13 +135,12 @@ const NavBar = (props) => {
 
     </div>
   );
-}
+};
 
-const MapstatetoProps=(state)=>{
-  return{
-      User:state.Auth,
-  }
-}
-
+const MapstatetoProps = (state) => {
+  return {
+    User: state.Auth,
+  };
+};
 
 export default connect(MapstatetoProps,{UserLogout})(NavBar);
