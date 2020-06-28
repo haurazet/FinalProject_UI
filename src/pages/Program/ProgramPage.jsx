@@ -6,11 +6,8 @@ import {
   MDBPageNav,
   MDBCol,
   MDBRow,
-  MDBBtn,
-  MDBDropdown,
-  MDBDropdownToggle,
-  MDBDropdownMenu,
-  MDBDropdownItem,
+  MDBBadge,
+  MDBContainer,
 } from "mdbreact";
 import Axios from "axios";
 import { API_URL } from "../../support/Apiurl";
@@ -20,6 +17,9 @@ import Button from "../../components/button";
 import { FaBars } from "react-icons/fa";
 import { MdPlayArrow } from "react-icons/md";
 import { connect } from "react-redux";
+import Logo from "./../../images/point.png";
+import Recycle from "./../../images/recycle.png";
+import moment from "moment";
 
 class Productpage extends Component {
   state = {
@@ -36,17 +36,15 @@ class Productpage extends Component {
   };
 
   componentDidMount() {
-    // console.log('masuk componentDidMount')
     Axios.get(`${API_URL}/programs/category`).then((res) => {
       this.setState({ category: res.data });
     });
     this.getData();
+    window.scrollTo(0, 0);
   }
 
   getData = () => {
     const { search, filter, sort, page } = this.state;
-    // console.log(this.state)
-    // console.log('masuk get data')
     window.scrollTo(0, 400);
     Axios.get(
       search && filter
@@ -105,24 +103,32 @@ class Productpage extends Component {
       );
     }
     return products.map((val, index) => {
+      console.log(val.create_time);
       return (
         <div key={index} className="py-4 px-2 col-md-4 ">
           <Link to={`/programdetail/${val.id}`}>
-            <Card>
+            <Card className="product-card">
               <div className="program-picture p-3 row align-items-center">
+                {val.create_time > moment().subtract(3, "days").format() ? (
+                  <MDBBadge color="danger">New</MDBBadge>
+                ) : null}
                 <img src={API_URL + val.image} width="100%" height="100%"></img>
               </div>
               <CardBody>
-                <CardTitle className="text-center program-card-bottom h5">
-                  {val.name}
+                <CardTitle className="text-center program-card-bottom">
+                  {val.name}{" "}
                 </CardTitle>
-                <div className="d-flex justify-content-between align-self-baseline">
-                  <div className="program-price col-md-4 col-xs-3 text-center">
+                <div className="d-flex justify-content-between align-content-end">
+                  <div className="program-price col-md-4 col-xs-3 text-center align-self-baseline">
                     {"IDR " + Numeral(val.price).format(0.0)}{" "}
                   </div>
-                  <div className="program-reward col-md-7 col-xs-5 text-center">
-                    {" "}
-                    Get {val.point} RECYC.LY point
+                  <div className="program-reward col-md-4 col-xs-5 text-center ">
+                    <span className="font-weight-bold"> {val.purchased}</span>{" "}
+                    <img src={Recycle} width="20px" />
+                  </div>
+                  <div className="program-reward col-md-4 col-xs-5 text-center ">
+                    <span className="font-weight-bold"> {val.point}</span>{" "}
+                    <img src={Logo} width="50px" />
                   </div>
                 </div>
               </CardBody>
@@ -132,37 +138,8 @@ class Productpage extends Component {
       );
     });
   };
-  // return products.map((val, index) => {
-  //   return (
-  //     <div key={index} className="p-4 col-md-4 ">
-  //       <Link to={`/programdetail/${val.id}`}>
-  //         <Card>
-  //           <div className="program-picture p-3 row align-items-center">
-  //             <img src={API_URL + val.image} width="100%" height="100%"></img>
-  //           </div>
-  //           <CardBody>
-  //             <CardTitle className="text-center program-card-bottom h5">
-  //               {val.name}
-  //             </CardTitle>
-  //             <div className="d-flex justify-content-between align-self-baseline">
-  //               <div className="program-price col-md-4 col-xs-3 text-center">
-  //                 {"IDR " + Numeral(val.price).format(0.0)}{" "}
-  //               </div>
-  //               <div className="program-reward col-md-7 col-xs-5 text-center">
-  //                 {" "}
-  //                 Get {val.point} RECYC.LY point
-  //               </div>
-  //             </div>
-  //           </CardBody>
-  //         </Card>
-  //       </Link>
-  //     </div>
-  // );
-  // });
-  // };
 
   renderpagination = () => {
-    // console.log('masuk pagination')
     var totalpage = Math.ceil(this.state.totalproduct / 6);
     var arr = [];
     for (var i = 0; i < totalpage; i++) {
@@ -183,7 +160,6 @@ class Productpage extends Component {
 
   rendercategory = () => {
     const { category, activecategory } = this.state;
-    // console.log(category)
     return category.map((val, index) => {
       return (
         <div key={index}>
@@ -194,18 +170,10 @@ class Productpage extends Component {
                 parseInt(activecategory) === val.id ? "category-name" : ""
               }
             >
-              <div className="mr-1 font-weight-bold">
-                {/* {totalproduct} {totalproduct > 1 ? "Programs" : "Program"} |{" "} */}
-              </div>
-              <div className="sort-title mr-2"> Sort by </div>
-              <select onChange={this.onSortClick}>
-                <option value="purchased DESC">Popularity</option>
-                <option value="create_time">Newest Program</option>
-                <option value="price DESC">Price: High to Low</option>
-                <option value="price ASC">Price: Low to High</option>
-                <option value="point DESC">Reward: High to Low</option>
-                <option value="point ASC">Reward: Low to High</option>
-              </select>
+              <a onClick={(e) => this.onCategoryClick(val.id)}>
+                {" "}
+                <MdPlayArrow /> {val.name}
+              </a>
             </div>
           </div>
         </div>
@@ -222,8 +190,8 @@ class Productpage extends Component {
         </div>
         <div className="sort-title mr-2"> Sort by </div>
         <select onChange={this.onSortClick}>
-          <option value="purchased">Popularity</option>
-          <option value="create_time">Newest Program</option>
+          <option value="purchased DESC">Popularity</option>
+          <option value="create_time DESC">Newest Program</option>
           <option value="price DESC">Price: High to Low</option>
           <option value="price ASC">Price: Low to High</option>
           <option value="point DESC">Reward: High to Low</option>
@@ -240,8 +208,10 @@ class Productpage extends Component {
     });
   };
 
-  onCategoryClear = () => {
-    this.setState({ page: 0, activecategory: 0, filter: "" }, () => {
+  onCategoryClick = (e) => {
+    var filter = e;
+    this.setState({ page: 0, activecategory: filter, filter }, () => {
+      this.rendercategory();
       this.getData();
     });
   };
@@ -255,8 +225,9 @@ class Productpage extends Component {
   };
 
   onCategoryClear = () => {
-    this.setState({ page: 0, activecategory: 0 });
-    this.getData();
+    this.setState({ page: 0, activecategory: 0, filter: "" }, () => {
+      this.getData();
+    });
   };
 
   render() {
@@ -265,12 +236,11 @@ class Productpage extends Component {
       <div className="program-page-container">
         {/* ================= TOP ================= */}
         <div className="program-top-container">
-          <div className="program-top-title h4">Browse Recycling Program</div>
+          <div className="program-top-title h3">Browse Recycling Program</div>
           <div className="program-top-subtitle">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat.
+            These programs are not free, but national recycling solutions for
+            typically hard-to-recycle waste streams. Join as many programs as
+            you like to help reduce your impact on our planet.
           </div>
         </div>
         <div className="program-bottom-container ">
@@ -318,7 +288,7 @@ class Productpage extends Component {
             <MDBCol>
               <MDBPagination
                 className="mb-5 mr-5 pr-5 float-right"
-                color="teal"
+                color="dark"
               >
                 <MDBPageItem
                   disabled={this.state.page === 0}
