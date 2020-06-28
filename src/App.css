@@ -24,6 +24,9 @@
   .program-top-subtitle {
     font-size: 0.9em;
   }
+  .manage_transaksi_button {
+    font-size: 12px;
+  }
 }
 
 /* Large Screen */
@@ -153,11 +156,11 @@
 /*   PROGRAMPAGE    */
 /* ================ */
 
-.program-page-container{
+.program-page-container {
   overflow: hidden;
 }
 
-.program-top-container{
+.program-top-container {
   height: 60vh;
   margin: 0;
   text-align: center;
@@ -236,25 +239,22 @@
   /* width: fit-content; */
 }
 
-.program-card-filter-container{
+.program-card-filter-container {
   margin: 2% 0 0 0;
 }
 
-.category-name{
+.category-name {
   color: var(--main-green-color);
   font-weight: bold;
 }
 
-.sort-container{
+.sort-container {
   padding: 0 4%;
 }
-
 
 /* ================= */
 /*   PROGRAMDETAIL   */
 /* ================= */
-
-
 
 .program-detail-container {
   /* height: 100vh; */
@@ -263,7 +263,8 @@
 }
 .program-detail-top {
   height: 70vh;
-  background-image: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url("./images/registertop.jpg");
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url("./images/registertop.jpg");
   background-size: cover;
   margin: 0 auto;
 }
@@ -277,7 +278,7 @@
   background-color: #e4e4e4;
 }
 
-.join-program-box{
+.join-program-box {
   background-color: white;
   margin: 0 auto;
   height: fit-content;
@@ -288,31 +289,31 @@
   padding: 6%;
 }
 
-.join-program-title{
+.join-program-title {
   border-bottom: 3px solid var(--main-green-color);
   width: fit-content;
   text-align: center;
   margin: 0 auto;
 }
 
-.join-section-title{
+.join-section-title {
   color: var(--main-green-color);
   font-weight: bolder;
   padding-bottom: 2%;
   font-size: 1.4em;
 }
 
-.join-section-container{
-  border-bottom: 1px solid rgb(228, 228, 228) ;
+.join-section-container {
+  border-bottom: 1px solid rgb(228, 228, 228);
   margin: 3% 0 0% 0%;
   padding-bottom: 1%;
 }
 
-.join-section-container:nth-of-type(1){
+.join-section-container:nth-of-type(1) {
   margin-top: 10%;
 }
 
-.join-section-container:nth-of-type(4){
+.join-section-container:nth-of-type(4) {
   border-bottom: none;
 }
 
@@ -338,28 +339,28 @@
   outline: 0;
 }
 
-.join-program-button.active{
+.join-program-button.active {
   border: 1px solid #166e66a9;
   color: white;
-  background-color:var(--main-green-color);
+  background-color: var(--main-green-color);
   margin: 0% 18px 0 0;
 }
 
-.join-payment-container{
-  border-bottom: 1px solid rgb(228, 228, 228) ;
+.join-payment-container {
+  border-bottom: 1px solid rgb(228, 228, 228);
 }
 
 /* ========================== */
 /*      TRANSACTIONDETAIL     */
 /* ========================== */
 
-.total-payment{
+.total-payment {
   font-size: 1.5em;
   color: var(--main-green-color);
   font-weight: bolder;
 }
 
-.payment-account-container{
+.payment-account-container {
   background-color: #3797a41a;
   width: fit-content;
   padding: 2%;
@@ -369,13 +370,13 @@
   margin-bottom: 2%;
 }
 
-.payment-line{
+.payment-line {
   border-bottom: 1px solid rgb(175, 175, 175);
   height: 1px;
   width: 97%;
 }
 
-.upload-container{
+.upload-container {
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -388,7 +389,7 @@
   background-color: #fafafa;
   color: #bdbdbd;
   outline: none;
-  transition: border .24s ease-in-out;
+  transition: border 0.24s ease-in-out;
 }
 
 /* ========================== */
@@ -423,7 +424,8 @@
   border-radius: 0 100px 100px 0;
   animation: rotate-circle 4.25s ease-in;
 }
-.success-checkmark .check-icon::before, .success-checkmark .check-icon::after {
+.success-checkmark .check-icon::before,
+.success-checkmark .check-icon::after {
   content: "";
   height: 100px;
   position: absolute;
@@ -538,9 +540,6 @@
   }
 }
 
-
-
-
 /* ================ */
 /*      NOTFOUND    */
 /* ================ */
@@ -654,75 +653,29 @@
   background-color: green;
   font-size: 30px;
   /* width: 100px; */
+  margin-right: 2px;
+  width: 140px;
   border: 1px solid black;
 }
-/* BUTTON HOVER */
-.text-box {
-  margin-left: 44vw;
-  margin-top: 42vh;
+
+/* FONTS */
+@font-face {
+  font-family: "sanfransisco";
+  src: url("./fonts/SFProDisplay-Regular.ttf") format("truetype");
+  font-family: "sanfransiscobold";
+  src: url("./fonts/SFProText-Bold.ttf") format("truetype");
 }
 
-.btn:link,
-.btn:visited {
-  text-transform: uppercase;
+/* BUTTON MANAGE TRANSAKSI */
+.manage_transaksi_button {
+  font-family: "sanfransiscobold";
+  font-size: 18px;
   text-decoration: none;
-  padding: 15px 40px;
-  display: inline-block;
-  border-radius: 100px;
-  transition: all 0.2s;
-  position: absolute;
+  border-bottom: 2px solid green;
 }
-
-.btn:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-}
-
-.btn:active {
-  transform: translateY(-1px);
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
-}
-
-.btn-white {
-  background-color: #fff;
-  color: #777;
-}
-
-.btn::after {
-  content: "";
-  display: inline-block;
-  height: 100%;
-  width: 100%;
-  border-radius: 100px;
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: -1;
-  transition: all 0.4s;
-}
-
-.btn-white::after {
-  background-color: #fff;
-}
-
-.btn:hover::after {
-  transform: scaleX(1.4) scaleY(1.6);
-  opacity: 0;
-}
-
-.btn-animated {
-  animation: moveInBottom 5s ease-out;
-  animation-fill-mode: backwards;
-}
-
-@keyframes moveInBottom {
-  0% {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-
-  100% {
-    opacity: 1;
-    transform: translateY(0px);
-  }
+.manage_transaksi_button:hover {
+  cursor: pointer;
+  border-bottom: var(--main-tosca-color) 3.2px solid;
+  transition: 400ms;
+  color: #9ac84a;
 }

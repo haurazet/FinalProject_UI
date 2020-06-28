@@ -1,0 +1,180 @@
+.TitleBox {
+  height: 390px;
+  width: 1170px;
+  background-color: #9fc662;
+  color: whitesmoke;
+  z-index: 8;
+}
+.lineHeight {
+  height: 34px;
+}
+.fontsizetitle {
+  font-size: 18px;
+  font-weight: bolder;
+  background-color: #2e8b57;
+  /* background-color: transparent; */
+}
+.containerTitleBox {
+  display: flex;
+  background-color: seagreen;
+  background-image: url("../../images/linear-white-green-gradient-1920x1080-c2-90ee90-f0f8ff-a-90-f-14.jpg");
+  height: 495px;
+  justify-content: center;
+  font-family: "sanfransisco";
+  align-items: flex-end;
+}
+.boxTtileandphotos {
+  height: 340px;
+  display: flex;
+}
+.titleBoxes {
+  width: 70%;
+  height: "auto";
+  display: flex;
+  flex-direction: column;
+  flex-shrink: inherit;
+}
+.titleFont {
+  font-size: 35px;
+  margin-top: 60px;
+  font-family: "sanfransiscobold";
+}
+.priceandbuttonbox {
+  height: 100px;
+  margin-top: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+.photos {
+  width: 50vh;
+  height: auto;
+  background-color: salmon;
+}
+.contentMid {
+  display: flex;
+  flex-direction: column;
+  height: fit-content;
+  width: 750px;
+  background-color: whitesmoke;
+}
+.contentMid p {
+  font-size: 24px;
+  font-family: "sanfransisco";
+}
+.wrappers {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.otherGiftContainer {
+  height: 400px;
+  display: flex;
+  align-content: center;
+  text-align: center;
+  flex-direction: column;
+}
+.otherGiftFont {
+  margin-top: 80px;
+  align-items: center;
+  font-family: "sanfransiscobold";
+  font-size: 25px;
+  /* border: 1px solid salmon; */
+}
+.otherGiftCard {
+  display: flex;
+}
+
+@media only screen and (max-width: 980px) {
+  .TitleBox {
+    height: 390px;
+    /* background-color: #85a945; */
+    z-index: 8;
+    color: black;
+  }
+  .fontsizetitle {
+    /* z-index: 9; */
+  }
+  .lineHeight {
+    height: 34px;
+  }
+  .fontsizetitle {
+    font-size: 25px;
+    font-weight: bolder;
+  }
+  .containerTitleBox {
+    display: flex;
+    background-color: seagreen;
+    height: 495px;
+    justify-content: center;
+    font-family: "sanfransisco";
+    align-items: flex-end;
+  }
+  .boxTtileandphotos {
+    height: 100vh;
+    flex-direction: column-reverse;
+    display: flex;
+  }
+  .titleBoxes {
+    width: 70%;
+    height: "auto";
+    display: flex;
+    flex-direction: column;
+  }
+  .titleFont {
+    font-size: 25px;
+    font-family: "sanfransiscobold";
+  }
+  .priceandbuttonbox {
+    height: 100px;
+    width: fit-content;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+  .photos {
+    width: 100%;
+    height: 60%;
+    background-color: salmon;
+  }
+  .contentMid {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 100%;
+    height: fit-content;
+    margin-top: 390px;
+  }
+  .contentMid p {
+    font-size: 15px;
+    font-family: "sanfransisco";
+  }
+  .wrappers {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .otherGiftCard {
+    display: flex;
+    flex-direction: column;
+    margin-left: 50px;
+  }
+}
+
+@media only screen and (max-width: 420px) {
+  .contentMid {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 100%;
+    height: fit-content;
+    margin-top: 460px;
+  }
+  .otherGiftCard {
+    display: flex;
+    flex-direction: column;
+    margin-left: 0px;
+  }
+}

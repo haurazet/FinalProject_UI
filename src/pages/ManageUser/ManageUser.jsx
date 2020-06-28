@@ -1,53 +1,83 @@
 import React, { useState, useEffect } from "react";
 import styles from "./ManageUser.module.css";
-import ButtonNeon from "../../components/ButtonNeon/ButtonNeon";
 import Axios from "axios";
 import { FaSearch } from "react-icons/fa";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
-import Pagination from "../../components/Pagination/Pagination";
 import { API_URL } from "../../support/Apiurl";
+import {
+  MDBPageNav,
+  MDBPageItem,
+  MDBRow,
+  MDBCol,
+  MDBPagination,
+  MDBContainer,
+} from "mdbreact";
 
 const ManageUser = () => {
   const [filter, setfilter] = useState("");
-  const [count, setcount] = useState(false);
-  const [inputid, setinputid] = useState(null);
-  const [search, setsearch] = useState([]);
+  const [search, setsearch] = useState("");
   const [loading, setLoading] = useState(false);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [userPerPage] = useState(5);
   const [data, setdata] = useState([]);
-
-  useEffect(() => {
-    getData();
-  }, []);
-
-  const handleFilter = (e) => {
-    setfilter(e.target.value);
-  };
+  const [page, setpage] = useState(0);
+  const [totaluser, setotaluser] = useState(0);
 
   const getData = () => {
-    Axios.get(`${API_URL}/users/getusers`)
-      .then((result) => {
-        setsearch(result.data);
+    Axios.get(
+      search
+        ? `${API_URL}/users/gettotaluser?search=${search}`
+        : `${API_URL}/users/gettotaluser`,
+      {}
+    )
+      .then((res) => {
+        console.log(res.data.total);
+        setotaluser(res.data.total);
+        Axios.get(
+          search
+            ? `${API_URL}/users/getusers?search=${search}&page=${page}`
+            : `${API_URL}/users/getusers?page=${page}`
+        )
+          .then((result) => {
+            setdata(result.data);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
       })
-      .catch((error) => {
-        console.log(error);
-      });
+      .catch((error1) => console.log(error1));
   };
 
-  const onClickButton = () => {
-    setcount(!count);
-    console.log(count);
+  const getpaginationdata = (val) => {
+    setpage(val * 6);
+    getData();
+  };
+
+  const renderpagination = () => {
+    // console.log('masuk pagination')
+    var totalpage = Math.ceil(totaluser / 6);
+    var arr = [];
+    for (var i = 0; i < totalpage; i++) {
+      arr.push(i);
+    }
+    return arr.map((val, index) => {
+      return (
+        <div key={index}>
+          <MDBPageItem active={page / 6 === val}>
+            <MDBPageNav onClick={() => getpaginationdata(val)}>
+              {val + 1}
+            </MDBPageNav>
+          </MDBPageItem>
+        </div>
+      );
+    });
   };
 
   const renderData = () => {
-    return currentUser.map((val, index) => {
+    return data.map((val, index) => {
       return (
         <tr key={index + 1}>
           <td>{val.id}</td>
           <td>{val.username}</td>
-          {/* <td>{val.report}</td> */}
           <td>
             <button
               className={styles.buttonRed}
@@ -61,18 +91,9 @@ const ManageUser = () => {
     });
   };
   const handleSearch = (e) => {
-    setsearch(e.target.value);
-    console.log(e.target.value);
-    if ((e.target.value = "")) {
-      setsearch(data);
-    }
-
-    let stringify = e.target.value.toString();
-    console.log(stringify);
-    let userFilter = data.filter((val) =>
-      val.id.toString().includes(stringify)
-    );
-    setsearch(userFilter);
+    let search = e.target.value;
+    setsearch(search);
+    getData();
   };
 
   const onClickBanUser = (id) => {
@@ -103,21 +124,20 @@ const ManageUser = () => {
   };
 
   useEffect(() => {
-    setsearch(data);
-  }, []);
-
-  // Get Current Post
-  const indexOfLastUser = currentPage * userPerPage;
-  const indexOfFirstUser = indexOfLastUser - userPerPage;
-  const currentUser = search.slice(indexOfFirstUser, indexOfLastUser);
-  // Change page
-  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+    getData();
+  }, [search]);
 
   return (
-    <div className={styles.containers}>
+    // <div className={styles.containers}>
+    <MDBContainer fluid>
       <div className={styles.manageUser}>
-        <div>
+        <div style={{ backgroundColor: "whitesmoke" }}>
           <h1>Manage User</h1>
+          <h5>This page is for admin only</h5>
+          <h6 style={{ fontStyle: "italic" }}>
+            Be careful ,once you ban user. The decision is final and cant be
+            retrieved.
+          </h6>
         </div>
       </div>
       <div className={styles.table_container}>
@@ -142,16 +162,31 @@ const ManageUser = () => {
             <tbody>{renderData()}</tbody>
           </table>
         </div>
-        <div className="d-flex justify-content-center mt-4">
-          <Pagination
-            className="color_pagination"
-            userPerPage={userPerPage}
-            totalUser={search.length}
-            paginate={paginate}
-          />
-        </div>
+        <MDBRow>
+          <MDBCol>
+            <MDBPagination className="mb-5 mr-5 pr-5 float-right" color="teal">
+              <MDBPageItem
+                disabled={page === 0}
+                onClick={() => getpaginationdata(page / 6 - 1)}
+              >
+                {/* <MDBPageNav aria-label="Previous">
+                  <span aria-hidden="true">Previous</span>
+                </MDBPageNav> */}
+              </MDBPageItem>
+              {renderpagination()}
+              <MDBPageItem
+                disabled={Math.ceil(totaluser / 6) === page / 6 + 1}
+                onClick={() => getpaginationdata(page / 6 + 1)}
+              >
+                {/* <MDBPageNav aria-label="Previous">
+                  <span aria-hidden="true">Next</span>
+                </MDBPageNav> */}
+              </MDBPageItem>
+            </MDBPagination>
+          </MDBCol>
+        </MDBRow>
       </div>
-    </div>
+    </MDBContainer>
   );
 };
 
