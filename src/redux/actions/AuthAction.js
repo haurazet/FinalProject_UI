@@ -10,6 +10,7 @@ import {
         USER_LOGIN_START, 
         USER_LOGIN_FAILED, 
         USER_LOGIN_SUCCESS,
+        USER_LOGOUT,
         SEND_EMAIL_PASSWORD_START,
         SEND_EMAIL_PASSWORD_FAILED,
         SEND_EMAIL_PASSWORD_SUCCESS,
@@ -234,3 +235,10 @@ export const KeepLogin=(data)=>{
         payload:data
     }
 }
+
+export const UserLogout=()=>{
+    return{
+        type:USER_LOGOUT,
+    }
+}
+

@@ -31,3 +31,6 @@ export const RESET_PASSWORD_FAILED= 'RESET_PASSWORD_FAILED'
 // Check if token exist
 export const TOKEN_EXIST='TOKEN_EXIST'
 export const TOKEN_NOT_EXIST='TOKEN_NOT_EXIST'
+
+// Logout
+export const USER_LOGOUT='USER_LOGOUT'

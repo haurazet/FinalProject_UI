@@ -36,6 +36,8 @@ import ContactUs from './pages/ContactUs/contactus'
 import logo from './images/recyly_nobg.png'
 import NavBar from './components/NavBar/NavBar'
 import Footer from './components/Footer/footer'
+import {useSelector} from 'react-redux'
+import { Redirect } from "react-router-dom";
 
 function App({ KeepLogin }) {
   const [Loading, setLoading] = useState(true);
@@ -68,6 +70,8 @@ function App({ KeepLogin }) {
     }
   }, [KeepLogin]);
 
+    const Auth = useSelector(state=> state.Auth)
+
 
     if(Loading){
       return <div style={{width:'100%',height:'100vh',display:'flex',textAlign:'center', alignItems:'center', justifyContent:'center', flexDirection:'column'}}>
@@ -88,7 +92,17 @@ function App({ KeepLogin }) {
 
       <NavBar/>
 
+      {/* Jika tidak login dan role=admin, balik ke home
+      {Auth.role===0?
+        <Redirect to='/dashboard'></Redirect>
+          :
+        <Redirect to='/dashboard'></Redirect>
+            } */}
+
+
+
       <Switch>
+        
         <Route path="/" component={Home} exact />
         <Route path="/login" component={Login} exact />
         <Route path="/register" component={Register} exact />
@@ -97,6 +111,7 @@ function App({ KeepLogin }) {
           component={RegisterEmailVerify}
           exact
         />
+        <Route path="/dashboard" component={Dashboard} exact />
         <Route path="/verified" component={Verified} exact />
         <Route path="/forgotpassword" component={ForgotPassword} exact />
         <Route path="/resetpassword" component={ResetPassword} exact />
@@ -104,7 +119,6 @@ function App({ KeepLogin }) {
         <Route path="/program" component={Program} exact />
         <Route path="/cart/:userid" component={Cart} exact />
         <Route path="/rewardcheckout" component={RewardCheckout} exact />
-        <Route path="/dashboard" component={Dashboard} exact />
         <Route path="/transactionhistory" component={TransactionHistory} exact />
         <Route path="/programdetail/:idprog" exact component={ProgramDetail}/>
         <Route path='/collection-programs' component={CollectionPrograms} exact />

@@ -5,6 +5,7 @@ import {
   USER_LOGIN_START,
   USER_LOGIN_FAILED,
   USER_LOGIN_SUCCESS,
+  USER_LOGOUT,
   SEND_EMAIL_START,
   SEND_EMAIL_SUCCESS,
   VERIFY_START,
@@ -77,6 +78,8 @@ export default (state = INITIAL_STATE, action) => {
       return { ...state, loading: false, ...action.payload, isLogin: true };
     case USER_LOGIN_FAILED:
       return { ...state, loading: false, errormes: action.payload };
+    case USER_LOGOUT:
+      return { INITIAL_STATE };
     case SEND_EMAIL_START:
       return { ...state, loading: true };
     case SEND_EMAIL_SUCCESS:

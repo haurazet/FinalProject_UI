@@ -8,7 +8,8 @@ import { MDBCarousel, MDBCarouselInner, MDBCarouselItem, MDBView, MDBContainer }
 import slide1 from './../images/slide1.PNG'
 import slide2 from './../images/slide2.PNG'
 import slide3 from './../images/slide3.PNG'
-
+import {useSelector} from 'react-redux'
+import { Redirect } from "react-router-dom";
 
 
 const Home=()=>{
@@ -19,12 +20,22 @@ const Home=()=>{
     console.log(search)
   }
 
+  const Auth = useSelector(state=> state.Auth)
+
   const [search,setSearch] = useState({
     searchInputProgram:''
   })
 
     return(
         <div className='headerhome'>
+
+        {/* Jika tidak role=admin, ke home dashboard*/}
+        {Auth.role===0?
+            <Redirect to='/dashboard'></Redirect>
+            :
+            null
+            }
+
 
             {/* HEADER IMG */}
             <div className='headerhomeimg'>

@@ -9,11 +9,25 @@ import { Redirect } from "react-router-dom";
 
 const MyImpact = () => {
 
+
+
     useEffect(()=>{
         let id = Auth.id
         Axios.get(`${API_URL}/users/getpoints/${id}`)
             .then((res)=>{
-                setPoints(res.data[0])
+                setPointTotal(res.data[0])
+                Axios.get(`${API_URL}/users/getrewardredeemed/${id}`)
+                .then((res1)=>{
+                    setPointRedeemed(res1.data[0])
+                    Axios.get(`${API_URL}/programs/getprogrambyuser/${id}`)
+                    .then((res2)=>{
+                        setProgram(res2.data)
+                    }).catch((err)=>{
+                        console.log(err)
+                    })
+                }).catch((err)=>{
+                    console.log(err)
+                })
             }).catch((err)=>{
                 console.log(err)
             })
@@ -21,7 +35,21 @@ const MyImpact = () => {
 
     const Auth = useSelector(state=> state.Auth)
     
-    const [point,setPoints]=useState([])
+    const [pointTotal,setPointTotal]=useState([])
+    const [pointRedeemed,setPointRedeemed]=useState([])
+    const [program,setProgram]=useState([])
+
+    const renderProgram=()=>{
+        return program.map((val,index)=>{
+            return(                
+                <tr key={index}>
+                    <th scope="row">{index+1}</th>
+                    <td>{val.name}</td>
+                    <td>{val.purchased}</td>
+                </tr>
+            )
+        })
+    }
 
     return ( 
         <div>
@@ -64,8 +92,8 @@ const MyImpact = () => {
              <div className='myimpactdata-container'>
                 
                 <div className='myimpactdata-text'>
-                    <p>You have earned <span style={{fontWeight:'bold'}}>{point.points} points </span>
-                     and redeemed <span style={{fontWeight:'bold'}}>0 points ($0.00)</span> so far.</p>
+                    <p>You have earned <span style={{fontWeight:'bold'}}>{pointTotal.points} points </span>
+                     and redeemed <span style={{fontWeight:'bold'}}>{pointRedeemed.reedemedPoints} points</span> so far.</p>
                 </div>
 
                 <div style={{display:'flex',justifyContent:'center', paddingBottom:'20px'}}>
@@ -78,22 +106,13 @@ const MyImpact = () => {
                     <Table striped>
                         <thead>
                             <tr>
+                            <th>No</th>
                             <th>Free Recycling Program</th>
                             <th>Units Collected</th>
-                            <th>Points Earned</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>Gilette</td>
-                                <td>2</td>
-                                <td>20 Points</td>
-                            </tr>
-                            <tr>
-                                <td>Dell</td>
-                                <td>3</td>
-                                <td>30 Points</td>
-                            </tr>
+                            {renderProgram()}
                         </tbody>
                     </Table>
                 </div>

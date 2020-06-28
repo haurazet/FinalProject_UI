@@ -17,6 +17,7 @@ import {
 import './NavBar.css'
 import {FaSearch, FaHandHoldingHeart} from 'react-icons/fa'
 import {connect} from 'react-redux'
+import {UserLogout} from '../../redux/actions/'
 
 const NavBar = (props) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -34,13 +35,14 @@ const NavBar = (props) => {
 
   const onClickSignOut=()=>{
     localStorage.clear()
+    UserLogout()
   }
     
   return (
     <div>
       
       {/* Jika role=admin / role=users */}
-      {props.User.role==1||props.User.role==''?
+      {props.User.role===1||props.User.role===''?
       <Navbar color="white" light expand="md">
         <NavbarBrand href="/">
             <img fixed='top' src={logoheader} alt='logo' height='45px' style={{paddingLeft:'50px'}}></img>
@@ -83,17 +85,15 @@ const NavBar = (props) => {
       </Navbar>
       
       :
-
           //JIKA ROLE = ADMIN
           <Navbar color="white" light expand="md">
               <NavbarBrand href="/dashboard">
                   <img fixed='top' src={logoheader} alt='logo' height='45px' style={{paddingLeft:'50px'}}></img>
               </NavbarBrand>
               <div className='headernav-admin'>
-                  ADMIN PAGE
+                  ADMIN DASHBOARD
               </div>
           </Navbar>
-      
       }
       
       {
@@ -107,15 +107,16 @@ const NavBar = (props) => {
                       <a href='/' style={{color:'inherit'}} onClick={onClickSignOut}>SIGN OUT</a>
                   </div>
                   <div className='headermenu-itemlast'>
-                      <a href='/cart' style={{color:'inherit'}}><FaHandHoldingHeart className='holdingheart'/> (0)</a>
+                      
+                      <a href={'/cart/' + props.User.id} style={{color:'inherit'}}><FaHandHoldingHeart className='holdingheart'/></a>
                   </div>
               </div>
           
           //JIKA ADMIN SUDAH LOGIN
           :props.User.isLogin&&props.User.role==0?
             <div className='headermenu-container'>
-                <div className='headermenu-item'>
-                    <a href='/register' style={{color:'inherit'}}>SIGN OUT</a>
+                <div className='headermenu-itemlast'>
+                    <a href='/' style={{color:'inherit'}} onClick={onClickSignOut}>SIGN OUT</a>
                 </div>
             </div>
           
@@ -143,4 +144,4 @@ const MapstatetoProps=(state)=>{
 }
 
 
-export default connect(MapstatetoProps,{})(NavBar);
+export default connect(MapstatetoProps,{UserLogout})(NavBar);

@@ -4,6 +4,8 @@ import ManageTransaksi from "../ManageTransaksi/ManageTransaksi";
 import { MDBContainer, MDBRow, MDBCol } from "mdbreact";
 import Report from "../Report/Report";
 import ManageUser from "../ManageUser/ManageUser";
+import ManageProgram from '../ManageProgram/ManageProgram'
+import ManageReward from '../ManageReward/ManageReward'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faAddressBook,
@@ -19,7 +21,9 @@ const Dashboard = () => {
   const [isManageProgram, setIsManageProgram] = useState(false);
   const [isReport, setReport] = useState(false);
 
+
   const handleContent = ({ value }) => {
+    //Report
     if (value === 1) {
       setIsManageUser(false);
       setManageTransaksi(false);
@@ -27,6 +31,7 @@ const Dashboard = () => {
       setIsManageProgram(false);
       setReport(true);
     }
+    //Manage User
     if (value === 2) {
       console.log("masuk2");
       setIsManageUser(true);
@@ -35,6 +40,7 @@ const Dashboard = () => {
       setIsManageProgram(false);
       setReport(false);
     }
+    //Manage Transaksi
     if (value === 3) {
       console.log("masuk2");
       setIsManageUser(false);
@@ -43,7 +49,17 @@ const Dashboard = () => {
       setIsManageProgram(false);
       setReport(false);
     }
+    //Manage Reward
     if (value === 4) {
+      console.log("masuk2");
+      setIsManageUser(false);
+      setManageTransaksi(false);
+      setIsManageReward(true);
+      setIsManageProgram(false);
+      setReport(false);
+    }
+    //Manage Program
+    if (value === 5) {
       console.log("masuk2");
       setIsManageUser(false);
       setManageTransaksi(false);
@@ -105,10 +121,22 @@ const Dashboard = () => {
             >
               <div
                 onClick={() => handleContent({ value: 4 })}
-                name="manageprogram"
+                name="managereward"
               >
                 <FontAwesomeIcon icon={faCalendar} style={{ fontSize: 20 }} />{" "}
                 Manage Reward
+              </div>
+            </div>
+            <div
+              className={styles.Box2}
+              onClick={() => handleContent({ value: 5 })}
+            >
+              <div
+                onClick={() => handleContent({ value: 5 })}
+                name="manageprogram"
+              >
+                <FontAwesomeIcon icon={faDollarSign} style={{ fontSize: 20 }} />{" "}
+                Manage Program
               </div>
             </div>
           </div>
@@ -121,12 +149,17 @@ const Dashboard = () => {
               <ManageTransaksi />
             ) : isReport ? (
               <Report />
-            ) : null}
+            ) : isManageReward ? (
+                <ManageReward/>
+              )
+              : isManageProgram ? (
+                <ManageProgram/>
+              ) : null
+}
           </div>
         </MDBCol>
       </MDBRow>
       <MDBRow>
-        <MDBCol>Footer</MDBCol>
       </MDBRow>
     </MDBContainer>
     // </div>
