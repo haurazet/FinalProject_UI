@@ -80,7 +80,16 @@ const TransactionDetail = ( props ) => {
             window.scrollTo(0,0)
             console.log(res.data)
             console.log("berhasil upload")
-            Axios.get(`${API_URL}/transaction/transactiondetail/${props.match.params.idtrans}`)
+            var token=localStorage.getItem('token')
+            var databody={
+                headers:{
+                    'Authorization': `Bearer ${token}`
+                },
+                params: {
+                    idtrans:props.match.params.idtrans
+                }
+            }
+            Axios.get(`${API_URL}/transaction/transactiondetail`,databody)
             .then ((res)=>{
                 settransaction(res.data[0])
             }).catch((err)=>{
