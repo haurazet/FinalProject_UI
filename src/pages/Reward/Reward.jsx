@@ -1,378 +1,182 @@
-import React, { useEffect, useState, useReducer } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./Reward.module.css";
 import { MDBContainer, MDBRow, MDBCol } from "mdbreact";
 import { NiceCard } from "../../components/NiceCard/NiceCard";
-import Pagination from "../../components/Pagination/Pagination";
 import { API_URL } from "../../support/Apiurl";
 import Axios from "axios";
 import { connect } from "react-redux";
-import Swal from "sweetalert2";
-import withReactContent from "sweetalert2-react-content";
 
 const Reward = ({ Auth }) => {
-  const [filterPaket, setFilterPaket] = useState([]);
-  const [filter, setfilter] = useState([]);
-  const [search, setsearch] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [userPerPage] = useState(6);
-  const [data, setdata] = useState([]);
+  const [datacat1, setdatacat1] = useState([]);
+  const [datacat2, setdatacat2] = useState([]);
+  const [datacat3, setdatacat3] = useState([]);
+  const [datacat4, setdatacat4] = useState([]);
 
   useEffect(() => {
     getData();
-    console.log(Auth.username);
+    console.log(Auth.points);
   }, []);
 
   const getData = () => {
-    Axios.get(`${API_URL}/users/getreward`)
-      .then((result) => {
-        console.log(result.data);
-        setsearch(result.data);
+    Axios.all([
+      Axios.get(`${API_URL}/reward/getrewarduser?categoryid=${1}`),
+      Axios.get(`${API_URL}/reward/getrewarduser?categoryid=${2}`),
+      Axios.get(`${API_URL}/reward/getrewarduser?categoryid=${3}`),
+      Axios.get(`${API_URL}/reward/getrewarduser?categoryid=${4}`),
+    ])
+      .then((result1) => {
+        setdatacat1(result1[0].data);
+        setdatacat2(result1[1].data);
+        setdatacat3(result1[2].data);
+        setdatacat4(result1[3].data);
       })
-      .catch((error) => {
-        console.log(error);
+      .catch((err) => {
+        console.log(err);
       });
   };
 
-  const OnClickCard = (id, title, price) => {
-    Swal.fire({
-      // title: `How many piece do you want?`,
-      text: `Quantity of ${title}`,
-      input: "number",
-      showCancelButton: true,
-      confirmButtonText: "Ok",
-      cancelButtonText: "Cancel",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        Swal.fire({
-          title: "Checkout",
-          text: `Detail redeemed reward:
-                  ${result.value}x${price} Points =${
-            result.value * price
-          } RECYCLY POINTS `,
-          showCancelButton: true,
-          cancelButtonText: "Cancel",
-          confirmButtonText: "Redeem",
-        }).then((result1) => {
-          let obj = {
-            rewardId: id,
-            userId: localStorage.getItem("iduser"),
-            status: "waiting_send",
-            decreasedPoints: result.value * price,
-            decreasedStock: result.value,
-          };
-          Axios.put(`${API_URL}/users/buyreward`, obj)
-            .then((result) => {
-              console.log(result);
-            })
-            .catch((error) => {
-              console.log(error);
-            });
-        });
-      }
-    });
-  };
-  const handleSearch = (e) => {
-    e.preventDefault();
-    setsearch(e.target.value);
-    if (e.target.value === "") {
-      setsearch(data);
-    }
-
-    let stringify = e.target.value.toLowerCase();
-    let transactionFilter = data.filter((data) =>
-      data.title.toLowerCase().includes(stringify)
-    );
-    setsearch(transactionFilter);
-    const currentUser = transactionFilter.slice(
-      indexOfFirstUser,
-      indexOfLastUser
-    );
-    return currentUser.map((val, index) => (
+  const renderCardCat1 = () => {
+    return datacat1.map((val, index) => (
       <NiceCard
         key={val.id}
-        onClick={() => OnClickCard(val.id, val.title, val.priceDescription)}
+        onClick={`/rewarddetails/${val.id}`}
         title={val.title}
         description={val.description}
         imageAdress={API_URL + val.image}
         price="Price"
         priceDescription={val.priceDescription}
-        type="Stock"
-        typeDescription={val.stok}
+        // type="Stock"
+        // typeDescription={val.stok}
       />
     ));
   };
-  useEffect(() => {
-    setsearch(data);
-  }, []);
-
-  const handleFilter = (e) => {
-    setFilterPaket(e.target.value);
-    console.log(filterPaket);
-  };
-
-  const handleSortBy = (e) => {
-    setfilter(e.target.value);
-    setsearch("");
-    console.log(filter);
-  };
-
-  const renderCard = () => {
-    // if(filterPaket==''){
-    //     return currentUser.map((val,index)=>(
-    //         // <MDBCol >
-    //                 <NiceCard key={index} onClick={OnClickCard} title={val.title} description={val.description}
-    //                         about={val.about} price={val.price} priceDescription={val.priceDescription} type={val.type} typeDescription={val.typeDescription} />
-    //         // </MDBCol>
-
-    //     ))
-    // }
-    if (filterPaket === "satuan") {
-      const filteredData = data.filter(
-        (val) => val.typeDescription === "Satuan"
-      );
-      const currentUser = filteredData.slice(indexOfFirstUser, indexOfLastUser);
-      return currentUser.map((val, index) => (
-        <NiceCard
-          key={val.id}
-          onClick={() => OnClickCard(val.id, val.title, val.priceDescription)}
-          title={val.title}
-          description={val.description}
-          imageAdress={API_URL + val.image}
-          price="Price"
-          priceDescription={val.priceDescription}
-          type="Stock"
-          typeDescription={val.stok}
-        />
-      ));
-    } else if (filterPaket === "paketan") {
-      const filteredData = data.filter(
-        (val) => val.typeDescription === "Paketan"
-      );
-      const currentUser = filteredData.slice(indexOfFirstUser, indexOfLastUser);
-      return currentUser.map((val, index) => (
-        <NiceCard
-          key={val.id}
-          onClick={() => OnClickCard(val.id, val.title, val.priceDescription)}
-          title={val.title}
-          description={val.description}
-          imageAdress={API_URL + val.image}
-          price="Price"
-          priceDescription={val.priceDescription}
-          type="Stock"
-          typeDescription={val.stok}
-        />
-      ));
-    }
-
-    // if(filter==''){
-    //     return currentUser.map((val,index)=>(
-    //         // <MDBCol >
-    //                 <NiceCard key={index} onClick={OnClickCard} title={val.title} description={val.description}
-    //                         about={val.about} price={val.price} priceDescription={val.priceDescription} type={val.type} typeDescription={val.typeDescription} />
-    //         // </MDBCol>
-
-    //     ))
-    else if (filter === "cheapest") {
-      console.log("masuk");
-      function compare(a, b) {
-        if (a.priceDescription < b.priceDescription) {
-          return -1;
-        }
-        if (a.priceDescription > b.priceDescription) {
-          return 1;
-        }
-        return 0;
-      }
-      const sortedItem = data.sort(compare);
-      const currentUser = sortedItem.slice(indexOfFirstUser, indexOfLastUser);
-      return currentUser.map((val, index) => (
-        <NiceCard
-          key={val.id}
-          onClick={() => OnClickCard(val.id, val.title, val.priceDescription)}
-          title={val.title}
-          description={val.description}
-          imageAdress={API_URL + val.image}
-          price="Price"
-          priceDescription={val.priceDescription}
-          type="Stock"
-          typeDescription={val.stok}
-        />
-      ));
-    } else if (filter === "mostexpensive") {
-      console.log("masuk");
-      function compare(a, b) {
-        if (a.priceDescription < b.priceDescription) {
-          return 1;
-        }
-        if (a.priceDescription > b.priceDescription) {
-          return -1;
-        }
-        return 0;
-      }
-      const sortedItem = data.sort(compare);
-      const currentUser = sortedItem.slice(indexOfFirstUser, indexOfLastUser);
-      return currentUser.map((val, index) => (
-        <NiceCard
-          key={val.id}
-          onClick={() => OnClickCard(val.id, val.title, val.priceDescription)}
-          title={val.title}
-          description={val.description}
-          imageAdress={API_URL + val.image}
-          price="Price"
-          priceDescription={val.priceDescription}
-          type="Stock"
-          typeDescription={val.stok}
-        />
-      ));
-    } else if (filter === "nameza") {
-      function compare(a, b) {
-        if (a.title < b.title) {
-          return 1;
-        }
-        if (a.title > b.title) {
-          return -1;
-        }
-        return 0;
-      }
-      const sortedItem = data.sort(compare);
-      const currentUser = sortedItem.slice(indexOfFirstUser, indexOfLastUser);
-      return currentUser.map((val, index) => (
-        <NiceCard
-          key={val.id}
-          onClick={() => OnClickCard(val.id, val.title, val.priceDescription)}
-          title={val.title}
-          description={val.description}
-          imageAdress={API_URL + val.image}
-          price="Price"
-          priceDescription={val.priceDescription}
-          type="Stock"
-          typeDescription={val.stok}
-        />
-      ));
-    } else if (filter === "nameaz") {
-      function compare(a, b) {
-        if (a.title < b.title) {
-          return -1;
-        }
-        if (a.title > b.title) {
-          return 1;
-        }
-        return 0;
-      }
-      const sortedItem = data.sort(compare);
-      const currentUser = sortedItem.slice(indexOfFirstUser, indexOfLastUser);
-      return currentUser.map((val, index) => (
-        <NiceCard
-          key={val.id}
-          onClick={() => OnClickCard(val.id, val.title, val.priceDescription)}
-          title={val.title}
-          description={val.description}
-          imageAdress={API_URL + val.image}
-          price="Price"
-          priceDescription={val.priceDescription}
-          type="Stock"
-          typeDescription={val.stok}
-        />
-      ));
-    }
-    if (filterPaket === "" && filter === "" && search === "") {
-      return data.map((val, index) => (
-        <NiceCard
-          key={val.id}
-          onClick={() => OnClickCard(val.id, val.title, val.priceDescription)}
-          title={val.title}
-          description={val.description}
-          imageAdress={API_URL + val.image}
-          price="Price"
-          priceDescription={val.priceDescription}
-          type="Stock"
-          typeDescription={val.stok}
-        />
-      ));
-    }
-    return currentUser.map((val, index) => (
+  const renderCardCat2 = () => {
+    return datacat2.map((val, index) => (
       <NiceCard
         key={val.id}
-        onClick={() => OnClickCard(val.id, val.title, val.priceDescription)}
+        onClick={`/rewarddetails/${val.id}`}
         title={val.title}
         description={val.description}
         imageAdress={API_URL + val.image}
         price="Price"
         priceDescription={val.priceDescription}
-        type="Stock"
-        typeDescription={val.stok}
+        // type="Stock"
+        // typeDescription={val.stok}
+      />
+    ));
+  };
+  const renderCardCat3 = () => {
+    return datacat3.map((val, index) => (
+      <NiceCard
+        key={val.id}
+        onClick={`/rewarddetails/${val.id}`}
+        title={val.title}
+        description={val.description}
+        imageAdress={API_URL + val.image}
+        price="Price"
+        priceDescription={val.priceDescription}
+        // type="Stock"
+        // typeDescription={val.stok}
+      />
+    ));
+  };
+  const renderCardCat4 = () => {
+    return datacat4.map((val, index) => (
+      <NiceCard
+        key={val.id}
+        onClick={`/rewarddetails/${val.id}`}
+        title={val.title}
+        description={val.description}
+        imageAdress={API_URL + val.image}
+        price="Price"
+        priceDescription={val.priceDescription}
+        // type="Stock"
+        // typeDescription={val.stok}
       />
     ));
   };
 
-  // Get Current Post
-  const indexOfLastUser = currentPage * userPerPage;
-  const indexOfFirstUser = indexOfLastUser - userPerPage;
-  const currentUser = search.slice(indexOfFirstUser, indexOfLastUser);
-  // Change page
-  const paginate = (pageNumber) => setCurrentPage(pageNumber);
   return (
-    <div className={styles.marginTop}>
-      <MDBContainer className={styles.container}>
-        <MDBRow>
-          <MDBCol className="d-flex justify-content-center">
-            <h1>Reward</h1>
-          </MDBCol>
-        </MDBRow>
-        <MDBRow>
-          <MDBCol>
-            {" "}
-            <div className="active-pink-3 active-pink-4 mb-4">
-              <input
-                className="form-control"
-                type="text"
-                placeholder="Search by Name "
-                aria-label="Search"
-                onChange={handleSearch}
-              />
-            </div>
-          </MDBCol>
-          <MDBCol>
-            {" "}
-            <div>
-              <select
-                className="browser-default custom-select"
-                onChange={handleFilter}
-              >
-                <option value="">Filter By</option>
-                <option value="satuan">Satuan</option>
-                <option value="paketan">Paket</option>
-              </select>
-            </div>
-          </MDBCol>
-          <MDBCol>
-            <div>
-              <select
-                className="browser-default custom-select"
-                onChange={handleSortBy}
-                defaultValue=""
-              >
-                <option value="">Sort By</option>
-                <option value="cheapest">Cheapest</option>
-                <option value="mostexpensive">Most Expensive</option>
-                <option value="nameaz">Name A-Z</option>
-                <option value="nameza">Name Z-A</option>
-              </select>
-            </div>
-          </MDBCol>
-        </MDBRow>
-        <MDBRow>{renderCard()}</MDBRow>
-        <MDBRow>
-          <MDBCol className="d-flex justify-content-center mt-4">
-            <Pagination
-              userPerPage={userPerPage}
-              totalUser={search.length}
-              paginate={paginate}
-            />
-          </MDBCol>
-        </MDBRow>
-      </MDBContainer>
-    </div>
+    <MDBContainer fluid>
+      <MDBRow className={styles.RowReward}>
+        <MDBCol lg="5" className={styles.flexDir}>
+          <div className={styles.redeemBox}>Redeem Your Points</div>
+          <div className={styles.descBox}>
+            Through many of our programs, we reward you with RECYCLY points for
+            qualifying waste. These points are redeemable for a cash payment to
+            the non-profit organization or school of your choice and other
+            charitable gifts.
+          </div>
+          <div className={styles.pointBox}>
+            Your Current RECYCLY Points:{Auth.points ? Auth.points : 0}
+          </div>
+        </MDBCol>
+      </MDBRow>
+      <MDBRow className={styles.rewardDescriptions}>
+        <MDBCol className="d-flex justify-content-center">
+          <div className={styles.boxtoMiddle}>
+            <MDBRow>
+              <MDBCol className={styles.colorHelp}>Help the Environment</MDBCol>
+            </MDBRow>
+            <MDBRow>
+              <MDBCol className={styles.descriptionText}>
+                Donate your points to protect the atmosphere and promote
+                environmental research and appreciation.
+              </MDBCol>
+            </MDBRow>
+          </div>
+        </MDBCol>
+      </MDBRow>
+      <MDBRow className={styles.BoxMiddle}>{renderCardCat1()}</MDBRow>
+      <MDBRow className={styles.rewardDescriptions}>
+        <MDBCol className="d-flex justify-content-center">
+          <div className={styles.boxtoMiddle}>
+            <MDBRow>
+              <MDBCol className={styles.colorHelp}>Animal</MDBCol>
+            </MDBRow>
+            <MDBRow>
+              <MDBCol className={styles.descriptionText}>
+                Donate your points to provide people in need with direct
+                services.
+              </MDBCol>
+            </MDBRow>
+          </div>
+        </MDBCol>
+      </MDBRow>
+      <MDBRow className={styles.BoxMiddle}>{renderCardCat2()}</MDBRow>
+      <MDBRow className={styles.rewardDescriptions}>
+        <MDBCol className="d-flex justify-content-center">
+          <div className={styles.boxtoMiddle}>
+            <MDBRow>
+              <MDBCol className={styles.colorHelp}>Human Services</MDBCol>
+            </MDBRow>
+            <MDBRow>
+              <MDBCol className={styles.descriptionText}>
+                Donate your points to provide people in need with direct
+                services.
+              </MDBCol>
+            </MDBRow>
+          </div>
+        </MDBCol>
+      </MDBRow>
+      <MDBRow className={styles.BoxMiddle}>{renderCardCat3()}</MDBRow>
+      <MDBRow className={styles.rewardDescriptions}>
+        <MDBCol className="d-flex justify-content-center">
+          <div className={styles.boxtoMiddle}>
+            <MDBRow>
+              <MDBCol className={styles.colorHelp}>Education</MDBCol>
+            </MDBRow>
+            <MDBRow>
+              <MDBCol className={styles.descriptionText}>
+                Donate your points to create education opportunities for
+                students and provide ongoing support for our schools.
+              </MDBCol>
+            </MDBRow>
+          </div>
+        </MDBCol>
+      </MDBRow>
+      <MDBRow className={styles.BoxMiddle}>{renderCardCat4()}</MDBRow>
+    </MDBContainer>
   );
 };
 

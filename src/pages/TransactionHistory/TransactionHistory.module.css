@@ -1,8 +1,32 @@
+* {
+  padding: 0;
+  margin: 0;
+}
 .container {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
+  padding: 0;
+  margin: 0;
+
+  /* font-family: "sanfransisco"; */
+}
+.Title_box {
+  display: flex;
+  justify-content: center;
+  font-family: "sanfransiscobold";
+  align-items: flex-end;
+  font-size: 40px;
+  height: 20vh;
+  background-color: #abacad;
+  color: whitesmoke;
+  margin-bottom: 10px;
+  /* border: 2px solid salmon; */
+  border-bottom: 3px solid slategray;
+  padding: 0;
+  margin-top: 10vh;
+  /* margin: 0; */
 }
 
 .descriptionbox {
@@ -26,12 +50,19 @@
 }
 
 .horizontalCard {
+  background-color: #f5f5f5;
+
   size: 80vh;
   border: 1px solid #9ac84a;
   height: 10vw;
   display: flex;
   flex-direction: row;
   border-radius: 10px;
+  /* font-family: "sanfransisco"; */
+  font-family: "sanfransisco";
+}
+b {
+  font-family: "sanfransiscobold";
 }
 
 .CardBoxLeft {
@@ -93,7 +124,7 @@
   color: whitesmoke;
   font-weight: bolder;
   /* border: 1px solid gray; */
-  width: 190px;
+  width: fit-content;
   background-color: gray;
   border-radius: 2px;
 }
@@ -148,7 +179,5 @@
     margin-top: 30px;
     width: 400px;
     height: 90px;
-  }
-  .spaceBetween {
   }
 }

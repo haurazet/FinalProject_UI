@@ -1,19 +1,10 @@
-
-
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;500&display=swap');
 
 /* HOME CSS */
 
-.a{
-    color: inherit;
-}
-
-
 .headermenu{
     display: flex;
 }
-
-
 
 .headerhomeimg{
     background-image: 
@@ -46,7 +37,7 @@
 .headersearch-container{
     display: flex;
     flex-direction: row;
-    justify-content: space-evenly;
+    justify-content: center;
     padding-left: 20%;
     padding-right: 20%;
     opacity: 1;
@@ -68,6 +59,17 @@
     opacity: 1;
 }
 
+.buttonsearch-text{
+    color: inherit;
+}
+
+.buttonsearch-text:hover{
+    color: black;
+}
+
+.a{
+    color: inherit;
+}
 
 .headerhometext2{
     display: flex;
