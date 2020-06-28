@@ -13,6 +13,8 @@ import {
   faDollarSign,
   faCalendar,
 } from "@fortawesome/free-solid-svg-icons";
+import {useSelector} from 'react-redux'
+import {Redirect} from 'react-router-dom'
 
 const Dashboard = () => {
   const [isManageTransaksi, setManageTransaksi] = useState(false);
@@ -21,6 +23,7 @@ const Dashboard = () => {
   const [isManageProgram, setIsManageProgram] = useState(false);
   const [isReport, setReport] = useState(false);
 
+  const Auth = useSelector(state=>state.Auth)
 
   const handleContent = ({ value }) => {
     //Report
@@ -70,6 +73,14 @@ const Dashboard = () => {
   };
   return (
     <MDBContainer fluid className={styles.wrappers}>
+
+      {/* Jika belum login, ke home biasa*/}
+      {!Auth.isLogin||Auth.role===1?
+        <Redirect to='/'></Redirect>
+        :
+        null
+      }
+
       <MDBRow>
         <MDBCol className="ml-0 pl-0">
           

@@ -11,6 +11,7 @@ import {
         USER_LOGIN_FAILED, 
         USER_LOGIN_SUCCESS,
         USER_LOGOUT,
+        USER_SEARCH,
         SEND_EMAIL_PASSWORD_START,
         SEND_EMAIL_PASSWORD_FAILED,
         SEND_EMAIL_PASSWORD_SUCCESS,
@@ -242,3 +243,9 @@ export const UserLogout=()=>{
     }
 }
 
+export const UserSearch=(data)=>{
+    return{
+        type:USER_SEARCH,
+        payload:data
+    }
+}

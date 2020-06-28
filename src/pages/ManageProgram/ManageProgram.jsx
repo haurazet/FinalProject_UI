@@ -58,9 +58,7 @@ const ManageProgram=(props)=>{
             )
         })
     }
-
-
-
+    
     return(
         <div className='manageprogram-container'>
             

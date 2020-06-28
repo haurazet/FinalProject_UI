@@ -33,6 +33,7 @@ const NavBar = (props) => {
     console.log(search.searchInput)
   }
 
+
   const onClickSignOut=()=>{
     localStorage.clear()
     UserLogout()
@@ -75,8 +76,8 @@ const NavBar = (props) => {
           <div className='search-container'>
             <div>
                 <input type="text" name='searchInput' onChange={onChangeSearch}/> &nbsp; 
-                <a href='/search'>
-                <button style={{width:'35px', border:'black', borderRadius:'30px'}}><FaSearch/></button>
+                <a href='/program'>
+                <button style={{width:'35px', border:'black', borderRadius:'30px'}} onClick={()=> localStorage.setItem('search',search.searchInput)}><FaSearch/></button>
                 </a>
             </div>
           </div>

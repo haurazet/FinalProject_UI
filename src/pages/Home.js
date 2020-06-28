@@ -10,14 +10,23 @@ import slide2 from './../images/slide2.PNG'
 import slide3 from './../images/slide3.PNG'
 import {useSelector} from 'react-redux'
 import { Redirect } from "react-router-dom";
+import { connect } from "react-redux";
+import {UserSearch} from '../redux/actions/index'
 
 
-const Home=()=>{
+const Home=(props)=>{
 
   //Onchange untuk Program
   const onChangeSearchProgram=(e)=>{
+   
     setSearch({...search,[e.target.name]:e.target.value})
     console.log(search)
+  }
+
+  //Onclick untuk Search
+  const onCLickSearch=()=>{
+    // props.UserSearch(search.searchInputProgram)
+    localStorage.setItem('search',search.searchInputProgram)
   }
 
   const Auth = useSelector(state=> state.Auth)
@@ -29,7 +38,7 @@ const Home=()=>{
     return(
         <div className='headerhome'>
 
-        {/* Jika tidak role=admin, ke home dashboard*/}
+        {/* Jika role=admin, ke home dashboard*/}
         {Auth.role===0?
             <Redirect to='/dashboard'></Redirect>
             :
@@ -54,7 +63,8 @@ const Home=()=>{
 
                         <div className="headersearch-item.tiga">
                             <button className="buttonsearch">
-                                <a href='/program' className='buttonsearch-text'>SEARCH</a>
+                                <a href='/program' className='buttonsearch-text' onClick={onCLickSearch}>SEARCH</a>
+                                
                             </button>
                         </div>
                     </Fragment>
@@ -210,4 +220,4 @@ const Home=()=>{
     )
 }
 
-export default Home;
+export default connect(null, {UserSearch})(Home);

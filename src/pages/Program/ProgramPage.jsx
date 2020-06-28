@@ -43,6 +43,11 @@ class Productpage extends Component {
     this.getData();
   }
 
+  //Ketika keluar page, localstorage search bakal dihapus.
+  componentWillUnmount(){
+    localStorage.removeItem('search')
+}
+
   getData = () => {
     const { search, filter, sort, page } = this.state;
     // console.log(this.state)
@@ -281,6 +286,7 @@ class Productpage extends Component {
                 className="form-control my-0 py-2 lime-border"
                 name="search"
                 type="text"
+                defaultValue={localStorage.getItem('search')}
                 placeholder="Search"
                 aria-label="Search"
                 onChange={this.dataOnChange}
