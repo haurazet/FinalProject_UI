@@ -9,8 +9,6 @@ import { Redirect } from "react-router-dom";
 
 const MyImpact = () => {
 
-
-
     useEffect(()=>{
         let id = Auth.id
         Axios.get(`${API_URL}/users/getpoints/${id}`)
@@ -19,7 +17,7 @@ const MyImpact = () => {
                 Axios.get(`${API_URL}/users/getrewardredeemed/${id}`)
                 .then((res1)=>{
                     setPointRedeemed(res1.data[0])
-                    Axios.get(`${API_URL}/programs/getprogrambyuser/${id}`)
+                    Axios.get(`${API_URL}/users/getrewardcompletedbyuser/${id}`)
                     .then((res2)=>{
                         setProgram(res2.data)
                     }).catch((err)=>{
@@ -92,13 +90,13 @@ const MyImpact = () => {
              <div className='myimpactdata-container'>
                 
                 <div className='myimpactdata-text'>
-                    <p>You have earned <span style={{fontWeight:'bold'}}>{pointTotal.points} points </span>
-                     and redeemed <span style={{fontWeight:'bold'}}>{pointRedeemed.reedemedPoints} points</span> so far.</p>
+                    <p>You have earned <span style={{fontWeight:'bold'}}>{pointTotal.points>0?pointTotal.points:0} points </span>
+                     and redeemed <span style={{fontWeight:'bold'}}>{pointRedeemed.reedemedPoints>0?pointRedeemed.reedemedPoints:0} points</span> so far.</p>
                 </div>
 
                 <div style={{display:'flex',justifyContent:'center', paddingBottom:'20px'}}>
                     <button className="myimpactdata-button">
-                            <a href='/reward' className='myimpactdata-buttontext'>REDEEM</a>
+                            <a href={'/cart/' + Auth.id} className='myimpactdata-buttontext'>REDEEM</a>
                     </button>
                 </div>
                 
