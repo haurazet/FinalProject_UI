@@ -1,6 +1,6 @@
 :root {
   --main-bg-color: rgb(255, 255, 255);
-  --main-green-color:  #9ac84a;
+  --main-green-color: #9ac84a;
   --main-tosca-color: #688830;
   --main-grey-color: #abacad;
   --main-blue-color: #13686b;
@@ -214,7 +214,6 @@
   margin-bottom: 2%;
   height: 48px;
   font-size: 1.2em;
-
 }
 
 .program-card-bottom:hover {
@@ -255,15 +254,22 @@
   /* width: fit-content; */
 }
 
-.program-card-filter-container{
+.program-card-filter-container {
   margin: 2% 0 0 0;
 }
 
-.product-card{
+/* .category-name {
+} */
+
+.program-card-filter-container {
+  margin: 2% 0 0 0;
+}
+
+.product-card {
   height: 380px !important;
 }
 
-.category-name{
+.category-name {
   color: var(--main-green-color);
   font-weight: bold;
 }
@@ -309,14 +315,20 @@
   padding: 6%;
 }
 
-.join-program-title{
+.join-program-title {
+  border-bottom: 3px solid var(--main-green-color);
+}
+.join-program-title {
   border-bottom: 3px solid var(--main-blue-color);
   width: fit-content;
   text-align: center;
   margin: 0 auto;
 }
 
-.join-section-title{
+.join-section-title {
+  color: var(--main-green-color);
+}
+.join-section-title {
   color: var(--main-blue-color);
   font-weight: bolder;
   padding-bottom: 2%;
@@ -359,10 +371,15 @@
   outline: 0;
 }
 
-.join-program-button.active{
+.join-program-button.active {
+  border: 1px solid #166e66a9;
+  color: white;
+  background-color: var(--main-green-color);
+}
+.join-program-button.active {
   border: 1px solid var(--main-blue-color);
   color: white;
-  background-color:var(--main-blue-color);
+  background-color: var(--main-blue-color);
   margin: 0% 18px 0 0;
 }
 
@@ -444,7 +461,8 @@
   border-radius: 0 100px 100px 0;
   animation: rotate-circle 4.25s ease-in;
 }
-.success-checkmark .check-icon::before, .success-checkmark .check-icon::after {
+.success-checkmark .check-icon::before,
+.success-checkmark .check-icon::after {
   content: "";
   height: 100px;
   position: absolute;
@@ -558,7 +576,6 @@
     top: 38px;
   }
 }
-
 
 /* ================ */
 /*      NOTFOUND    */
@@ -691,10 +708,11 @@
   font-family: "sanfransiscobold";
   font-size: 18px;
   text-decoration: none;
+  border-bottom: 2px solid green;
 }
 .manage_transaksi_button:hover {
   cursor: pointer;
-  border-bottom: var(--main-tosca-color) 1.2px solid;
+  border-bottom: var(--main-tosca-color) 3.2px solid;
   transition: 400ms;
   color: #9ac84a;
 }

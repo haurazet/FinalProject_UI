@@ -1,20 +1,34 @@
-.marginTop{
-    /* margin-top: 100px; */
-    /* height: 100vh; */
-    /* background-color: seagreen; */
-    display: flex;
-    justify-content: center;
-    align-content: center;
-    padding: 0;
-    /* border: 2px solid salmon; */
-    /* background-color: salmon; */
-    margin-bottom: 200px;
-  }
+.marginTop {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  padding: 0;
+  margin-bottom: 200px;
+}
 
-  
-  .toMiddle{
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-  }
+.toMiddle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+.adminOverview {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  border-bottom: 1px solid green;
+  width: 100%;
+  height: 200px;
+  background-color: #9ac84a;
+}
+.backgroundColor {
+  background-color: whitesmoke;
+  justify-content: center;
+  display: flex;
+  height: 300px;
+}
+.flexing {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}

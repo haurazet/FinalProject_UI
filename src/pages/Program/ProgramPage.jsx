@@ -31,7 +31,6 @@ class Productpage extends Component {
         sort:'purchased DESC'
      }
 
-    //Ketika keluar page, localstorage search bakal dihapus.
     componentWillUnmount(){
         localStorage.removeItem('search')
     }

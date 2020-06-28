@@ -10,7 +10,20 @@ import {
 import { Container, Row, Col } from "reactstrap";
 import Pagination from "../../components/Pagination/Pagination";
 import Axios from "axios";
-import { MDBBtn, MDBPageItem, MDBPageNav } from "mdbreact";
+import {
+  MDBTable,
+  MDBTableBody,
+  MDBTableHead,
+  MDBContainer,
+  MDBRow,
+  MDBCol,
+  MDBBtn,
+  MDBBtnGroup,
+  MDBInput,
+  MDBPagination,
+  MDBPageItem,
+  MDBPageNav,
+} from "mdbreact";
 import { API_URL } from "../../support/Apiurl";
 import Swal from "sweetalert2";
 import { connect } from "react-redux";
@@ -114,6 +127,7 @@ const TransactionHistory = ({ match: { params } }) => {
 
   const getpaginationdata = (val) => {
     setPage(val * 6);
+    setRefresh(!refresh);
   };
   const renderpagination = () => {
     // console.log('masuk pagination')
@@ -252,8 +266,18 @@ const TransactionHistory = ({ match: { params } }) => {
                         : null}
                       {val.status === "on_pickup" ? "On pick up truck" : null}
                       {val.status === "completed" ? "Completed" : null}
-                      {val.status === "canceled" ? "Transaction Failed" : null}
+                      {val.status === "canceled"
+                        ? "Transaction Canceled"
+                        : null}
                     </div>
+                    {val.reject_reason && val.status === "canceled" ? (
+                      <div>
+                        <div>
+                          <b>Reject Reason:</b>
+                          {val.reject_reason}
+                        </div>
+                      </div>
+                    ) : null}
                   </div>
                   {val.status === "waiting_payment" ||
                   val.status === "canceled" ? (
@@ -339,6 +363,29 @@ const TransactionHistory = ({ match: { params } }) => {
         </Col>
       </Row>
       {renderCard()}
+      <MDBRow>
+        <MDBCol>
+          <MDBPagination className="mb-5 mr-5 pr-5 float-right" color="teal">
+            <MDBPageItem
+              disabled={page === 0}
+              onClick={() => getpaginationdata(page / 6 - 1)}
+            >
+              <MDBPageNav aria-label="Previous">
+                <span aria-hidden="true">Previous</span>
+              </MDBPageNav>
+            </MDBPageItem>
+            {renderpagination()}
+            <MDBPageItem
+              disabled={Math.ceil(page / 6) === page / 6 + 1}
+              onClick={() => getpaginationdata(page / 6 + 1)}
+            >
+              <MDBPageNav aria-label="Previous">
+                <span aria-hidden="true">Next</span>
+              </MDBPageNav>
+            </MDBPageItem>
+          </MDBPagination>
+        </MDBCol>
+      </MDBRow>
     </Container>
   );
 };
