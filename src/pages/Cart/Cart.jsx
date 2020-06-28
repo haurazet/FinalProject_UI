@@ -97,6 +97,10 @@ class Cart extends Component {
         icon: "error",
         title: "Sorry, your points is not enough to redeem this reward",
       });
+    } else if (this.state.data.length === 0) {
+      Swal.fire({
+        title: "Cart Kosong",
+      });
     } else {
       Swal.fire({
         title: "Do you want to checkout?",
