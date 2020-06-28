@@ -1,14 +1,64 @@
-import React from 'react';
+import React,{useEffect} from 'react';
 import '../MyImpact/MyImpact.css'
 import {Table,thead,tr,td} from 'reactstrap'
 import {useSelector} from 'react-redux'
+import Axios from 'axios'
+import { API_URL } from '../../support/Apiurl';
+import { useState } from 'react';
+import { Redirect } from "react-router-dom";
 
 const MyImpact = () => {
 
+    useEffect(()=>{
+        let id = Auth.id
+        Axios.get(`${API_URL}/users/getpoints/${id}`)
+            .then((res)=>{
+                setPointTotal(res.data[0])
+                Axios.get(`${API_URL}/users/getrewardredeemed/${id}`)
+                .then((res1)=>{
+                    setPointRedeemed(res1.data[0])
+                    Axios.get(`${API_URL}/users/getrewardcompletedbyuser/${id}`)
+                    .then((res2)=>{
+                        setProgram(res2.data)
+                    }).catch((err)=>{
+                        console.log(err)
+                    })
+                }).catch((err)=>{
+                    console.log(err)
+                })
+            }).catch((err)=>{
+                console.log(err)
+            })
+    },[])
+
     const Auth = useSelector(state=> state.Auth)
+    
+    const [pointTotal,setPointTotal]=useState([])
+    const [pointRedeemed,setPointRedeemed]=useState([])
+    const [program,setProgram]=useState([])
+
+    const renderProgram=()=>{
+        return program.map((val,index)=>{
+            return(                
+                <tr key={index}>
+                    <th scope="row">{index+1}</th>
+                    <td>{val.name}</td>
+                    <td>{val.purchased}</td>
+                </tr>
+            )
+        })
+    }
 
     return ( 
         <div>
+
+            {/* Jika tidak login dan role=admin, balik ke home */}
+            {!Auth.isLogin||Auth.role===0?
+            <Redirect to='/'></Redirect>
+            :
+            null
+            }
+            
             {/* PROFILENAME HEADER */}
             <div className='profilename-container'>
                 <div className='profilename-header'>
@@ -40,13 +90,13 @@ const MyImpact = () => {
              <div className='myimpactdata-container'>
                 
                 <div className='myimpactdata-text'>
-                    <p>You have earned <span style={{fontWeight:'bold'}}>0 points ($0.00) </span>
-                     and redeemed <span style={{fontWeight:'bold'}}>0 points ($0.00)</span> so far.</p>
+                    <p>You have earned <span style={{fontWeight:'bold'}}>{pointTotal.points>0?pointTotal.points:0} points </span>
+                     and redeemed <span style={{fontWeight:'bold'}}>{pointRedeemed.reedemedPoints>0?pointRedeemed.reedemedPoints:0} points</span> so far.</p>
                 </div>
 
                 <div style={{display:'flex',justifyContent:'center', paddingBottom:'20px'}}>
                     <button className="myimpactdata-button">
-                            <a href='/reward' className='myimpactdata-buttontext'>REDEEM</a>
+                            <a href={'/cart/' + Auth.id} className='myimpactdata-buttontext'>REDEEM</a>
                     </button>
                 </div>
                 
@@ -54,22 +104,13 @@ const MyImpact = () => {
                     <Table striped>
                         <thead>
                             <tr>
+                            <th>No</th>
                             <th>Free Recycling Program</th>
                             <th>Units Collected</th>
-                            <th>Points Earned</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>Gilette</td>
-                                <td>2</td>
-                                <td>20 Points</td>
-                            </tr>
-                            <tr>
-                                <td>Dell</td>
-                                <td>3</td>
-                                <td>30 Points</td>
-                            </tr>
+                            {renderProgram()}
                         </tbody>
                     </Table>
                 </div>

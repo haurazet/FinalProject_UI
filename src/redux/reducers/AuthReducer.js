@@ -5,6 +5,7 @@ import {
   USER_LOGIN_START,
   USER_LOGIN_FAILED,
   USER_LOGIN_SUCCESS,
+  USER_LOGOUT,
   SEND_EMAIL_START,
   SEND_EMAIL_SUCCESS,
   VERIFY_START,
@@ -18,6 +19,7 @@ import {
   RESET_PASSWORD_SUCCESS,
   TOKEN_EXIST,
   TOKEN_NOT_EXIST,
+  USER_SEARCH,
 } from "../actions/type";
 
 const INITIAL_STATE = {
@@ -50,6 +52,8 @@ const INITIAL_STATE = {
   isResetLinkExpired: false,
   // Check Existing Token
   isTokenExist: false,
+  // User Search
+  search:''
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -77,6 +81,10 @@ export default (state = INITIAL_STATE, action) => {
       return { ...state, loading: false, ...action.payload, isLogin: true };
     case USER_LOGIN_FAILED:
       return { ...state, loading: false, errormes: action.payload };
+    case USER_LOGOUT:
+      return { INITIAL_STATE };
+    case USER_SEARCH:
+      return {...state, search: action.payload}
     case SEND_EMAIL_START:
       return { ...state, loading: true };
     case SEND_EMAIL_SUCCESS:

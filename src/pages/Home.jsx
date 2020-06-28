@@ -8,30 +8,43 @@ import { MDBCarousel, MDBCarouselInner, MDBCarouselItem, MDBView, MDBContainer }
 import slide1 from './../images/slide1.PNG'
 import slide2 from './../images/slide2.PNG'
 import slide3 from './../images/slide3.PNG'
+import {useSelector} from 'react-redux'
+import { Redirect } from "react-router-dom";
+import { connect } from "react-redux";
+import {UserSearch} from '../redux/actions/index'
 
 
+const Home=(props)=>{
 
-const Home=()=>{
-
-  //Onchange untuk Waste
-  const onChangeSearchWaste=(e)=>{
+  //Onchange untuk Program
+  const onChangeSearchProgram=(e)=>{
+   
     setSearch({...search,[e.target.name]:e.target.value})
     console.log(search)
   }
 
-  //Onchange untuk Location
-  const onChangeSearchLocation=(e)=>{
-    setSearch({...search,[e.target.name]:e.target.value})
-    console.log(search)
+  //Onclick untuk Search
+  const onCLickSearch=()=>{
+    // props.UserSearch(search.searchInputProgram)
+    localStorage.setItem('search',search.searchInputProgram)
   }
+
+  const Auth = useSelector(state=> state.Auth)
 
   const [search,setSearch] = useState({
-    searchInputWaste:'',
-    searchInputLocation:''
+    searchInputProgram:''
   })
 
     return(
         <div className='headerhome'>
+
+        {/* Jika role=admin, ke home dashboard*/}
+        {Auth.role===0?
+            <Redirect to='/dashboard'></Redirect>
+            :
+            null
+            }
+
 
             {/* HEADER IMG */}
             <div className='headerhomeimg'>
@@ -44,18 +57,14 @@ const Home=()=>{
                     
                     <Fragment>
                         <div className="headersearch-item.satu">
-                            <label style={{color:'#7dbe4a', textAlign:"left", fontWeight:'bold', fontFamily:'Verdana'}}>WASTE STREAM</label>
-                            <input type="text" name='searchInputWaste' onChange={onChangeSearchWaste} className="form-control form-control-md" style={{width:'300px'}}/>
-                        </div>
-
-                        <div className="headersearch-item.dua">
-                            <label style={{color:'#7dbe4a', textAlign:"left", fontWeight:'bold',fontFamily:'Verdana' }}>LOCATION</label>
-                            <input type="text" name='searchInputLocation' onChange={onChangeSearchLocation} className="form-control form-control-md" style={{width:'300px'}}/>
+                            <label style={{color:'#7dbe4a', textAlign:"left", fontWeight:'bold', fontFamily:'Verdana'}}>PROGRAM</label>
+                            <input type="text" name='searchInputProgram' onChange={onChangeSearchProgram} className="form-control form-control-md" style={{width:'300px'}}/>
                         </div>
 
                         <div className="headersearch-item.tiga">
                             <button className="buttonsearch">
-                                SEARCH
+                                <a href='/program' className='buttonsearch-text' onClick={onCLickSearch}>SEARCH</a>
+                                
                             </button>
                         </div>
                     </Fragment>
@@ -106,16 +115,16 @@ const Home=()=>{
                 </div>
             </div>
 
-        {/* BODY CAROUSEL 1 */}
-        <div style={{width:'100%', paddingTop:'50px'}}>
-            <MDBContainer>
-                <MDBCarousel
-                    activeItem={1}
-                    length={3}
-                    showControls={false}
-                    showIndicators={true}
-                    className="z-depth-1"
-                >
+            {/* BODY CAROUSEL 1 */}
+            <div style={{width:'100%', paddingTop:'50px'}}>
+                <MDBContainer>
+                    <MDBCarousel
+                        activeItem={1}
+                        length={3}
+                        showControls={false}
+                        showIndicators={true}
+                        className="z-depth-1"
+                    >
                     <MDBCarouselInner>
                     <MDBCarouselItem itemId="1">
                         <MDBView>
@@ -135,7 +144,6 @@ const Home=()=>{
                                 <a href='/program' style={{color:'inherit'}}><p style={{color:'white', fontSize:'15px', fontWeight:'bold', textAlign:'right', paddingRight:'30px'}}>SHOP NOW</p></a>
                             </div>
                         </div>
-
                         </MDBView>
                     </MDBCarouselItem>
                     <MDBCarouselItem itemId="2">
@@ -179,43 +187,37 @@ const Home=()=>{
                         </MDBView>
                     </MDBCarouselItem>
                     </MDBCarouselInner>
-                </MDBCarousel>
-        </MDBContainer>
-
-        </div>
-
-        {/* BODY TEXT 2 */}
-        <div className='headerbody-container'>
-                
-                <div className='headerbodytext2'>
-                        What is Recycly?
-                </div>
-
-                <div className='headerbodytext2-container'>
-                    <div>
-                        <div>
-                            <p className='bodytext'>Recycly® is a social enterprise <span style={{fontWeight:'bold'}}>Eliminating the Idea of Waste®</span>.
-                            In 20 countries, we tackle the issue from many angles. We have found that nearly everything we 
-                            touch can be recycled and collect typically non-recyclable items through national, 
-                            first-of-their-kind recycling platforms.</p>
-                            <p className='bodytext'>Leading companies work with us to take hard-to-recycle materials from our programs, 
-                            such as ocean plastic, and turn them into new products, and our new Loop platform aims 
-                            to change the way the world shops with favorite brands in refillable packaging offered 
-                            with convenience and style.</p>
-                            <p className='bodytext'>With your help, we’ve diverted millions of pounds of valuable resources from 
-                            landfills all over the world, and we’re just getting started.</p>
-                            <p className='bodytext'><span style={{fontWeight:'bold'}}>#RecycleEverything</span> using the search bar above and tell us what you want to recycle.</p>
-                        </div>
-                    </div>
-                </div>
+                    </MDBCarousel>
+            </MDBContainer>
             </div>
 
+            {/* BODY TEXT 2 */}
+            <div className='headerbody-container'>
+                    
+                    <div className='headerbodytext2'>
+                            What is Recycly?
+                    </div>
 
-
+                    <div className='headerbodytext2-container'>
+                        <div>
+                            <div>
+                                <p className='bodytext'>Recycly® is a social enterprise <span style={{fontWeight:'bold'}}>Eliminating the Idea of Waste®</span>.
+                                In 20 countries, we tackle the issue from many angles. We have found that nearly everything we 
+                                touch can be recycled and collect typically non-recyclable items through national, 
+                                first-of-their-kind recycling platforms.</p>
+                                <p className='bodytext'>Leading companies work with us to take hard-to-recycle materials from our programs, 
+                                such as ocean plastic, and turn them into new products, and our new Loop platform aims 
+                                to change the way the world shops with favorite brands in refillable packaging offered 
+                                with convenience and style.</p>
+                                <p className='bodytext'>With your help, we’ve diverted millions of pounds of valuable resources from 
+                                landfills all over the world, and we’re just getting started.</p>
+                                <p className='bodytext'><span style={{fontWeight:'bold'}}>#RecycleEverything</span> using the search bar above and tell us what you want to recycle.</p>
+                            </div>
+                        </div>
+                    </div>
+            </div>
         </div>
-       
-
     )
 }
 
-export default Home;
+export default connect(null, {UserSearch})(Home);

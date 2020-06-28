@@ -43,6 +43,21 @@
     color: black;
 }
 
+
+@media (max-width:600px){
+    .profilename-container{
+        padding-top: 50px;
+        width: 100%;
+        height: 100%;
+        background-color: #f3f3f3;
+      }
+      .profilename-header{
+          display: flex;
+          justify-content: center;
+          align-items: center;
+      }
+}
+
 .profilemenupi-container{
     display: flex;
     flex-direction: row;
@@ -103,6 +118,8 @@
     border-bottom-color: #ececec;
     border-bottom-width: 0.1px;
     justify-content: space-evenly;
+    padding-top: 40px;
+    padding-bottom: 40px;
     align-items: center;
     width: 100%;
     height: 150px;
@@ -196,3 +213,4 @@
     color: #58a5c5;
     font-size: 26px;
 }
+

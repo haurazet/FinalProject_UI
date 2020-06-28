@@ -33,6 +33,12 @@
     color: white;
 }
 
+.buttondetails{
+    width: 100px;
+    height: 40px;
+    background-color: #9ac84a;
+    color: white;
+}
 
 .profilename-getstarted{
     color: inherit;
@@ -93,4 +99,16 @@
 
 .profilemenucp-tiga:hover{
     color: #b4c84a;
+}
+
+
+.mycollectionprogram-container{
+    padding-top: 20px;
+    margin-left: 25%;
+    margin-right: 25%;
+}
+
+.mycollectionprogram-text{
+    font-size: 29px;
+    text-align: center;
 }
