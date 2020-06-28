@@ -20,6 +20,7 @@ class Cart extends Component {
   state = {
     data: [],
     redirect: false,
+    loading: true,
   };
 
   componentDidMount() {
@@ -32,6 +33,9 @@ class Cart extends Component {
       })
       .catch((err) => {
         console.log(err);
+      })
+      .finally(() => {
+        this.setState({ loading: false });
       });
   }
 
@@ -94,6 +98,12 @@ class Cart extends Component {
         title: "Sorry, your points is not enough to redeem this reward",
       });
     } else {
+      Swal.fire({
+        title: "Do you want to checkout?",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        confirmButtonText: "Yes",
+      });
       Axios.put(
         `${API_URL}/reward/checkoutreward?userId=${
           this.props.Auth.id
@@ -108,6 +118,8 @@ class Cart extends Component {
     const { points } = this.props.Auth;
     if (this.state.redirect) {
       return <Redirect to="/rewardcheckout" />;
+    } else if (this.state.loading) {
+      return <div>Loading..</div>;
     } else {
       return (
         <MDBContainer fluid>
@@ -139,7 +151,7 @@ class Cart extends Component {
                       fontFamily: "sanfransiscobold",
                     }}
                   >
-                    Shopping Chart Instructions
+                    Shopping Cart Instructions
                   </div>
                   <div>
                     <a

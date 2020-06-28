@@ -83,6 +83,7 @@ function App({ KeepLogin }) {
         <Route path="/cart/:userid" component={Cart} exact />
         <Route path="/rewardcheckout" component={RewardCheckout} exact />
         <Route path="/dashboard" component={Dashboard} exact />
+        <Route path="/report" component={Report} exact />
         <Route path="/managetransaksi" component={ManageTransaksi} exact />
         <Route path="/manageuser" component={ManageUser} exact />
         <Route path="/rewarddetails/:idreward" component={RewardDetail} exact />

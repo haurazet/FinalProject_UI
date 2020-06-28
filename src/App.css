@@ -523,10 +523,11 @@
   font-family: "sanfransiscobold";
   font-size: 18px;
   text-decoration: none;
+  border-bottom: 2px solid green;
 }
 .manage_transaksi_button:hover {
   cursor: pointer;
-  border-bottom: var(--main-tosca-color) 1.2px solid;
+  border-bottom: var(--main-tosca-color) 3.2px solid;
   transition: 400ms;
   color: #9ac84a;
 }

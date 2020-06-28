@@ -56,9 +56,7 @@ const Dashboard = () => {
   return (
     <MDBContainer fluid className={styles.wrappers}>
       <MDBRow>
-        <MDBCol className="ml-0 pl-0">
-          <NavbarPage />
-        </MDBCol>
+        <MDBCol className="ml-0 pl-0"></MDBCol>
       </MDBRow>
       <MDBRow>
         <MDBCol className="ml-0 pl-0 mr-0 pr-0" md="12" lg="2">
