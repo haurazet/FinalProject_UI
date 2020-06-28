@@ -7,6 +7,7 @@ import Numeral from 'numeral'
 import Button from '../../components/button'
 import {useDropzone} from 'react-dropzone';
 import { BsCloudUpload } from 'react-icons/bs'
+import moment from 'moment'
 
 const TransactionDetail = ( props ) => {
 
@@ -112,15 +113,15 @@ const TransactionDetail = ( props ) => {
                                     <div className="grey-text mb-4 font-smaller">Payment checked max. 24 hours after payment receipt uploaded.</div>
                                     <div className="payment-container mb-4 ml-3">
                                         <ol>
-                                            <div> <li>Send your payment to our Recyc.ly account below:</li>
+                                            <div> <li>Send your payment to our Recycly account below:</li>
                                                 <div className="payment-account-container ml-2 mb-2">
                                                     <div>{paymentmethod.name}</div>
                                                     <div>Account Number: {paymentmethod.number}</div>
                                                     <div>Account Name: PT. Recycly Waste Management</div>
                                                 </div>
                                             </div>
-                                            <div><li>Upload payment receipt before {transaction.create_time}</li></div>
-                                            <div><li>For transaction safety, please do not share your payment receipt to others except upload it to Recyc.ly</li></div>
+                                            <div><li>Upload payment receipt before <span className="font-weight-bold">{moment(transaction.expired_time).format('MMMM Do YYYY, h:mm:ss a')}</span></li></div>
+                                            <div><li>For transaction safety, please do not share your payment receipt to others except upload it to Recycly</li></div>
                                         </ol>
                                         <div className={uploadpayment?"payment-line":""}></div>
                                     </div>
@@ -189,7 +190,7 @@ const TransactionDetail = ( props ) => {
                                     <div className="grey-text mb-4 font-smaller">Payment checked max. 24 hours after payment receipt uploaded.</div>
                                     <div className="payment-container mb-4 ml-3">
                                         <ol>
-                                            <div> <li>Send your payment to our Recyc.ly account below:</li>
+                                            <div> <li>Send your payment to our Recycly account below:</li>
                                                 <div className="payment-account-container ml-2 mb-2">
                                                     <div>{paymentmethod.name}</div>
                                                     <div>Account Number: {paymentmethod.number}</div>
@@ -197,7 +198,7 @@ const TransactionDetail = ( props ) => {
                                                 </div>
                                             </div>
                                             <div><li>Upload payment receipt before {transaction.create_time}</li></div>
-                                            <div><li>For transaction safety, please do not share your payment receipt to others except upload it to Recyc.ly</li></div>
+                                            <div><li>For transaction safety, please do not share your payment receipt to others except upload it to Recycly</li></div>
                                         </ol>
                                         <div className={uploadpayment?"payment-line":""}></div>
                                     </div>

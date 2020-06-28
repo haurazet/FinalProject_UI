@@ -24,7 +24,6 @@ import ScrollToTop from './components/scrolltop'
 import {KeepLogin} from './redux/actions'
 import { API_URL } from './support/Apiurl'
 import TransactionDetail from './pages/Program/TransactionDetail'
-
 import NavBar from './components/NavBar/NavBar'
 import Footer from './components/Footer/footer'
 import ContactUs from './pages/ContactUs/contactus';
@@ -96,11 +95,9 @@ function App({KeepLogin}) {
         <Route path='/my-impact' component={MyImpact} exact />
         <Route path='/personal-info' component={PersonalInfo} exact />
         <Route path='/edit-profile' component={EditProfile} exact />
-        
         <Route  path='/aboutus' component={AboutUs} exact />
         <Route  path='/contactus' component={ContactUs} exact />
         <Route component={Notfound} />
-
       </Switch>
 
       <Footer/>
