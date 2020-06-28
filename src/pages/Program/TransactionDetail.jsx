@@ -41,6 +41,7 @@ const TransactionDetail = ( props ) => {
             .then((res1)=>{
                 setpaymentmethod(res1.data[0])
                 setnotloading(true)
+
             }).catch((err1)=>{
                 console.log(err1)
             })
@@ -101,6 +102,8 @@ const TransactionDetail = ( props ) => {
             console.log(err)
         })
     }
+
+
 
     return ( 
         <>

@@ -3,6 +3,7 @@ import Axios from 'axios'
 import { API_URL } from '../../support/Apiurl';
 import {connect} from 'react-redux'
 import Button from '../../components/button'
+import ImageFlow from './../../images/Flow.png'
 
 const ProgramDetail = ( props ) => {
 
@@ -39,7 +40,7 @@ const ProgramDetail = ( props ) => {
                             :
                             <Button text="Sign Up to Join" onclick={event => window.location.href='/register'} />
                         }   
-                        <div className="mt-5">One program is for one shipment only</div>
+                        <div className="mt-5">Shipments in this program can be any weight to earn points, and {data.point} points per shipment will be awarded.</div>
                     </div>
                     <div className="program-image col-md-6">
                         <img src={API_URL+data.image} width="100%"/>
@@ -47,7 +48,7 @@ const ProgramDetail = ( props ) => {
                 </div>
                 <div className="program-detail-bottom mx-5 p-2">
                     <div className="h3 ">How it works</div>
-                    <div className="my-5"> 1. Join Program 2. Pay Program Fee 3. Collect 5. Trash Picked Up</div>
+                    <div className="my-5 text-center"> <img src={ImageFlow} width='70%'></img> </div>
                 </div>
             </div>
         </div>

@@ -1,8 +1,9 @@
 :root {
   --main-bg-color: rgb(255, 255, 255);
-  --main-green-color: #3797a4;
-  --main-tosca-color: #25656d;
+  --main-green-color:  #9ac84a;
+  --main-tosca-color: #688830;
   --main-grey-color: #abacad;
+  --main-blue-color: #13686b;
 }
 
 * {
@@ -91,7 +92,7 @@
 /* ================ */
 
 .styled-button {
-  background-color: #3797a4;
+  background-color: var(--main-green-color);
   color: white;
   border: none;
   font-weight: 300;
@@ -101,7 +102,7 @@
 }
 
 .styled-button:hover {
-  background-color: #25656d !important;
+  background-color: var(--main-tosca-color) !important;
 }
 
 /* ================ */
@@ -207,27 +208,31 @@
 .program-card-bottom {
   text-decoration: none;
   color: var(--main-green-color);
-  margin-bottom: 9%;
+  margin-bottom: 2%;
+  height: 48px;
+  font-size: 1.2em;
+
 }
 
 .program-card-bottom:hover {
-  color: var(--main-tosca-color);
+  color: var(--main-blue-color);
 }
 
 .program-price {
-  color: white;
-  background-color: var(--main-green-color);
+  color: black;
+  /* background-color: var(--main-green-color); */
   height: 40px;
   line-height: 40px;
   padding: 0 2%;
   border-radius: 3px;
   /* width: fit-content; */
-  font-size: 0.8em;
+  font-size: 0.9em;
+  font-weight: bold;
 }
 
 .program-reward {
-  color: white;
-  background-color: rgb(216, 188, 62);
+  color: black;
+  /* background-color: rgb(216, 188, 62); */
   height: 40px;
   line-height: 40px;
   padding: 0 2%;
@@ -236,8 +241,25 @@
   /* width: fit-content; */
 }
 
+.program-reward {
+  color: black;
+  /* background-color: rgb(216, 188, 62); */
+  height: 40px;
+  line-height: 40px;
+  padding: 0 2%;
+  border-radius: 3px;
+  font-size: 0.8em;
+  /* width: fit-content; */
+}
+
+
+
 .program-card-filter-container{
   margin: 2% 0 0 0;
+}
+
+.product-card{
+  height: 380px !important;
 }
 
 .category-name{
@@ -289,14 +311,14 @@
 }
 
 .join-program-title{
-  border-bottom: 3px solid var(--main-green-color);
+  border-bottom: 3px solid var(--main-blue-color);
   width: fit-content;
   text-align: center;
   margin: 0 auto;
 }
 
 .join-section-title{
-  color: var(--main-green-color);
+  color: var(--main-blue-color);
   font-weight: bolder;
   padding-bottom: 2%;
   font-size: 1.4em;
@@ -319,7 +341,7 @@
 .join-program-button {
   background-color: white;
   color: black;
-  border: 1px solid var(--main-grey-color);
+  border: 1px solid var(--main-blue-color);
   font-weight: 300;
   padding: 5px 10px 5px 10px;
   margin: 0% 20px 0 0;
@@ -328,8 +350,8 @@
 }
 
 .join-program-button:hover {
-  border: 1px solid var(--main-tosca-color);
-  color: var(--main-tosca-color);
+  border: 1px solid var(--main-blue-color);
+  color: var(--main-blue-color);
   font-weight: bolder;
   margin: 0% 18px 0 0;
 }
@@ -339,9 +361,9 @@
 }
 
 .join-program-button.active{
-  border: 1px solid #166e66a9;
+  border: 1px solid var(--main-blue-color);
   color: white;
-  background-color:var(--main-green-color);
+  background-color:var(--main-blue-color);
   margin: 0% 18px 0 0;
 }
 

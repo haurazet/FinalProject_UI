@@ -3,7 +3,7 @@ import {
     Card, CardBody,
     CardTitle, CardSubtitle, Spinner
   } from 'reactstrap';
-import { MDBPagination, MDBPageItem, MDBPageNav, MDBCol, MDBRow ,MDBBtn, MDBDropdown, MDBDropdownToggle, MDBDropdownMenu, MDBDropdownItem } from "mdbreact";
+import { MDBPagination, MDBPageItem, MDBPageNav, MDBCol, MDBRow , MDBBadge, MDBContainer } from "mdbreact";
 import Axios from 'axios'
 import { API_URL } from '../../support/Apiurl';
 import Numeral from 'numeral'
@@ -12,6 +12,9 @@ import Button from '../../components/button'
 import { FaBars } from 'react-icons/fa'
 import { MdPlayArrow } from 'react-icons/md'
 import {connect} from 'react-redux'
+import Logo from './../../images/point.png'
+import Recycle from './../../images/recycle.png'
+import moment from 'moment'
 
 
 class Productpage extends Component {
@@ -30,11 +33,13 @@ class Productpage extends Component {
 
     componentDidMount(){
         // console.log('masuk componentDidMount')
+        
         Axios.get(`${API_URL}/programs/category`)
         .then((res)=>{
             this.setState({category:res.data})
         })
         this.getData()
+        window.scrollTo(0,0)
     }
 
     getData=()=>{
@@ -82,18 +87,27 @@ class Productpage extends Component {
             )
         }
         return products.map((val,index)=>{
+            console.log(val.create_time)
             return(
                 <div key={index} className="py-4 px-2 col-md-4 " >
                     <Link to={`/programdetail/${val.id}`}>
-                        <Card>
+                        <Card className="product-card">
                             <div className="program-picture p-3 row align-items-center">
-                                <img src={API_URL+val.image}  width="100%" height="100%"></img>
+                            {
+                                val.create_time>moment().subtract(3, 'days').format()?
+                                <MDBBadge color="danger">New</MDBBadge>
+                                :
+                                null
+
+                            }
+                                <img src={API_URL+val.image}  width="100%" height="100%"></img> 
                             </div>
                             <CardBody>
-                                <CardTitle className="text-center program-card-bottom h5">{val.name}</CardTitle>
-                                <div className="d-flex justify-content-between align-self-baseline">
-                                    <div className="program-price col-md-4 col-xs-3 text-center">{'IDR '+Numeral(val.price).format(0.0)} </div>
-                                    <div className="program-reward col-md-7 col-xs-5 text-center"> Get {val.point} RECYC.LY point</div>
+                                <CardTitle className="text-center program-card-bottom">{val.name} </CardTitle>
+                                <div className="d-flex justify-content-between align-content-end">
+                                    <div className="program-price col-md-4 col-xs-3 text-center align-self-baseline">{'IDR '+Numeral(val.price).format(0.0)} </div>
+                                    <div className="program-reward col-md-4 col-xs-5 text-center "><span className="font-weight-bold"> {val.purchased}</span> <img src={Recycle} width='20px'/></div>
+                                    <div className="program-reward col-md-4 col-xs-5 text-center "><span className="font-weight-bold"> {val.point}</span> <img src={Logo} width='50px'/></div>
                                 </div>
                             </CardBody>
                         </Card>
@@ -148,7 +162,7 @@ class Productpage extends Component {
                 <div className="sort-title mr-2"> Sort by </div>
                 <select onChange={this.onSortClick}>
                     <option value="purchased DESC" >Popularity</option>
-                    <option value="create_time" >Newest Program</option>
+                    <option value="create_time DESC" >Newest Program</option>
                     <option value="price DESC">Price: High to Low</option>
                     <option value="price ASC">Price: Low to High</option>
                     <option value="point DESC">Reward: High to Low</option>
@@ -195,8 +209,8 @@ class Productpage extends Component {
                     
                 {/* ================= TOP ================= */}
                     <div className="program-top-container">
-                        <div className="program-top-title h4">Browse Recycling Program</div>
-                        <div className="program-top-subtitle">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</div>
+                        <div className="program-top-title h3">Browse Recycling Program</div>
+                        <div className="program-top-subtitle">These programs are not free, but national recycling solutions for typically hard-to-recycle waste streams. Join as many programs as you like to help reduce your impact on our planet.</div>
                     </div>
                     <div className="program-bottom-container ">
                         {/* ================= SEARCH ================= */}
@@ -241,7 +255,7 @@ class Productpage extends Component {
                         {/* ================= PAGINATION ================= */}
                         <MDBRow>
                             <MDBCol>
-                                <MDBPagination className="mb-5 mr-5 pr-5 float-right" color='teal'>
+                                <MDBPagination className="mb-5 mr-5 pr-5 float-right" color='dark'>
                                 <MDBPageItem disabled={this.state.page===0} onClick={()=>this.getpaginationdata((page/6)-1)}>
                                     <MDBPageNav aria-label="Previous">
                                     <span aria-hidden="true">Previous</span>
