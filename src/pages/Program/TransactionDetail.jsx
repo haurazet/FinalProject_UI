@@ -8,6 +8,8 @@ import Button from '../../components/button'
 import {useDropzone} from 'react-dropzone';
 import { BsCloudUpload } from 'react-icons/bs'
 import moment from 'moment'
+import { GiCardboardBox } from 'react-icons/gi'
+import { RiErrorWarningLine } from 'react-icons/ri'
 
 const TransactionDetail = ( props ) => {
 
@@ -170,22 +172,23 @@ const TransactionDetail = ( props ) => {
                                             <div class="icon-circle"></div>
                                             <div class="icon-fix"></div>
                                         </div>
-                                        </div>
+                                    </div>
                                     <div className="grey-text mb-4 font-smaller text-center">Please wait for 24 hour for payment verification</div>
-                                    <div className="text-center mt-5"><Button text="browse another program" onclick={event => window.location.href='/program'}/></div>
+                                    <div className="text-center mt-5"><Button text="Join another program" onclick={event => window.location.href='/program'}/></div>
                                 </>
-                            : transaction.status==='payment_approved'?
+                            : transaction.status==='onpickup'?
                                 <>
                                 {
                                     // ============ TRANSACTION STATUS: PAYMENT APPROVED ============= //
                                 }
                                     <div className="">Order ID #{props.match.params.idtrans}</div>
                                     <div className="mb-5 font-weight-bold">Status: Payment Approved</div>
-                                    <div className="text-center">Upload Payment Receipt Success!</div>
-                                    <div className="grey-text mb-4 font-smaller text-center">Please wait for 24 hour for payment verification</div>
-                                    <div className="text-center mt-5"><Button text="browse another program" onclick={event => window.location.href='/program'}/></div>
+                                    <div className="text-center mb-3">Payment Approved!</div>
+                                    <div className="text-center mb-3"><GiCardboardBox size={'5em'}/></div>
+                                    <div className="mb-4 font-smaller">Please prepare your trash and our team will pick up your trash in 1-3 days!</div>
+                                    <div className="text-center mt-5"><Button text="join another program" onclick={event => window.location.href='/program'}/></div>
                                 </>
-                            : transaction.status==='payment_rejected'?
+                            : transaction.status==='canceled'?
                                 <>
                                 {
                                     // ============ TRANSACTION STATUS: PAYMENT REJECTED ============= //
@@ -206,7 +209,7 @@ const TransactionDetail = ( props ) => {
                                                     <div>Account Name: PT. Recycly Waste Management</div>
                                                 </div>
                                             </div>
-                                            <div><li>Upload payment receipt before {transaction.create_time}</li></div>
+                                            <div><li>Upload payment receipt before <span className="font-weight-bold">{moment(transaction.expired_time).format('MMMM Do YYYY, h:mm:ss a')}</span></li></div>
                                             <div><li>For transaction safety, please do not share your payment receipt to others except upload it to Recycly</li></div>
                                         </ol>
                                         <div className={uploadpayment?"payment-line":""}></div>
@@ -232,38 +235,47 @@ const TransactionDetail = ( props ) => {
                                         <div className="text-center"><Button text="Re-upload payment receipt" onclick={onUploadPayment}/></div>
                                     }
                                 </>
-                            : transaction.status==='on_pickup'?
+                            : transaction.status==='completed'?
                                 <>
                                 {
                                     // ============ TRANSACTION STATUS: ON PICKUP ============= //
                                 }
                                     <div className="">Order ID #{props.match.params.idtrans}</div>
-                                    <div className="mb-5 font-weight-bold">Status: On Pickup </div>
-                                    <div className="text-center">Upload Payment Receipt Success!</div>
-                                    <div className="grey-text mb-4 font-smaller text-center">Please wait for 24 hour for payment verification</div>
-                                    <div className="text-center mt-5"><Button text="browse another program" onclick={event => window.location.href='/program'}/></div>
+                                    <div className="mb-5 font-weight-bold">Status: Completed </div>
+                                    <div className="text-center mb-3">Pick Up Success!</div>
+                                    <div class="success-checkmark">
+                                        <div class="check-icon">
+                                            <span class="icon-line line-tip"></span>
+                                            <span class="icon-line line-long"></span>
+                                            <div class="icon-circle"></div>
+                                            <div class="icon-fix"></div>
+                                        </div>
+                                    </div>
+                                    <div className="text-center">Your trash picked up and waiting to be recycled. Point added to your account. Thank you for using recycly!</div>
+                                    <div className="text-center mt-5"><Button text="Join another program" onclick={event => window.location.href='/program'}/></div>
                                 </>
-                            : transaction.status==='completed'?
-                                <>
-                                {
-                                    // ============ TRANSACTION STATUS: COMPLETED ============= //
-                                }
-                                    <div className="">Order ID #{props.match.params.idtrans}</div>
-                                    <div className="mb-5 font-weight-bold">Status: Completed</div>
-                                    <div className="text-center">Upload Payment Receipt Success!</div>
-                                    <div className="grey-text mb-4 font-smaller text-center">Please wait for 24 hour for payment verification</div>
-                                    <div className="text-center mt-5"><Button text="browse another program" onclick={event => window.location.href='/program'}/></div>
-                                </>
-                            : transaction.status==='cancelled'?
-                                <>
+                            : transaction.status==='failed'?
+                            <>
                             {
-                                // ============ TRANSACTION STATUS: CANCELLED ============= //
+                                // ============ TRANSACTION STATUS: ON PICKUP ============= //
+                            }
+                                <div className="">Order ID #{props.match.params.idtrans}</div>
+                                <div className="mb-1 font-weight-bold">Status: Pick Up Failed</div>
+                                <div className="grey-text">Rejected reason: {transaction.reject_reason}</div>
+                                <div className="text-center mt-2 ">Pick Up Failed!</div>
+                                <div className='text-center mt-2'><RiErrorWarningLine size={'6em'}/></div>
+                                <div className="text-center mt-2">Your program fee will be transfered back to your bank account within 3 x 24 hours.</div>
+                                <div className="text-center mt-5"><Button text="Join another program" onclick={event => window.location.href='/program'}/></div>
+                            </>
+                            : transaction.status==='cancelled_by_system'?
+                            <>
+                            {
+                                // ============ TRANSACTION STATUS: CANCELLED_BY_SYSTEM ============= //
                             }
                                     <div className="">Order ID #{props.match.params.idtrans}</div>
-                                    <div className="mb-5 font-weight-bold">Status: Cancelled</div>
-                                    <div className="text-center">Upload Payment Receipt Success!</div>
-                                    <div className="grey-text mb-4 font-smaller text-center">Please wait for 24 hour for payment verification</div>
-                                    <div className="text-center mt-5"><Button text="browse another program" onclick={event => window.location.href='/program'}/></div>
+                                    <div className="mb-3 font-weight-bold">Status: Cancelled by System</div>
+                                    <div className="">User failed to upload payment before <span className="font-weight-bold">{moment(transaction.expired_time).format('MMMM Do YYYY, h:mm:ss a')}</span> </div>
+                                    <div className="text-center mt-5"><Button text="join another program" onclick={event => window.location.href='/program'}/></div>
                                 </>
                             :
                             null
@@ -273,7 +285,13 @@ const TransactionDetail = ( props ) => {
                     </div>
                 </div>
             </div>
-        :null
+        :
+            <>            
+                <div className="">Order ID #</div>
+                <div className="mb-3 font-weight-bold">Status:</div>
+                <div className=""> Loading </div>
+                <div className="text-center mt-5"><Button text="join another program" onclick={event => window.location.href='/program'}/></div>
+            </>
         }
         </>
      );
