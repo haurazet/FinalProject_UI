@@ -32,8 +32,6 @@ class Productpage extends Component {
      }
 
     componentDidMount(){
-        // console.log('masuk componentDidMount')
-        
         Axios.get(`${API_URL}/programs/category`)
         .then((res)=>{
             this.setState({category:res.data})
@@ -44,8 +42,6 @@ class Productpage extends Component {
 
     getData=()=>{
         const {search,filter,sort,page} = this.state
-        // console.log(this.state)
-        // console.log('masuk get data')
         window.scrollTo(0,400)
         Axios.get(  search&&filter?`${API_URL}/programs/totalprogram?search=${search}&filter=${filter}`:
                     search?`${API_URL}/programs/totalprogram?search=${search}`:
@@ -118,7 +114,6 @@ class Productpage extends Component {
     }
 
     renderpagination=()=>{ 
-        // console.log('masuk pagination')
         var totalpage = Math.ceil(this.state.totalproduct/6)
         var arr=[]
         for ( var i = 0; i < totalpage; i++){
@@ -137,7 +132,6 @@ class Productpage extends Component {
 
     rendercategory=()=>{
         const {category,activecategory}=this.state
-        // console.log(category)
         return category.map((val,index)=>{
             return(
                 <div key={index}>

@@ -36,12 +36,13 @@ const TransactionDetail = ( props ) => {
                 window.location.href='/pagenotfound'
             }
             settransaction(res.data[0])
+            console.log(res.data[0])
+            
             // ============ GET PAYMENT METHOD DETAIL ============= //
             Axios.get(`${API_URL}/transaction/selectedpayment/${res.data[0].paymentmethod_id}`)
             .then((res1)=>{
                 setpaymentmethod(res1.data[0])
                 setnotloading(true)
-
             }).catch((err1)=>{
                 console.log(err1)
             })
