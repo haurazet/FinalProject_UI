@@ -103,14 +103,17 @@ class Cart extends Component {
         showCancelButton: true,
         confirmButtonColor: "#3085d6",
         confirmButtonText: "Yes",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          Axios.put(
+            `${API_URL}/reward/checkoutreward?userId=${
+              this.props.Auth.id
+            }&totalPoints=${this.renderTotal()}`
+          )
+            .then((result) => this.setState({ redirect: true }))
+            .catch((err) => console.log(err));
+        }
       });
-      Axios.put(
-        `${API_URL}/reward/checkoutreward?userId=${
-          this.props.Auth.id
-        }&totalPoints=${this.renderTotal()}`
-      )
-        .then((result) => this.setState({ redirect: true }))
-        .catch((err) => console.log(err));
     }
   };
 

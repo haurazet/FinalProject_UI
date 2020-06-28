@@ -262,7 +262,7 @@ const ManageTransaksi = () => {
       })
       .catch((err) => console.log(err));
   };
-  const onClickDeclinePickUp = (id) => {
+  const onClickDeclinePickUp = (id, email) => {
     Swal.fire({
       icon: "error",
       title: "Do you want to reject this transaction?",
@@ -277,7 +277,7 @@ const ManageTransaksi = () => {
         if (result.isConfirmed) {
           console.log(id, result.value);
           Axios.put(
-            `${API_URL}/transaction/declinepickup?id=${id}&reject_reason=${result.value}`
+            `${API_URL}/transaction/declinepickup?id=${id}&reject_reason=${result.value}&email=${email}`
           ).then((result) => {
             Swal.fire({
               title: "Transaction has been reject",
@@ -423,7 +423,7 @@ const ManageTransaksi = () => {
             <div className="d-flex ml-4">
               <div
                 className={styles.declineButton}
-                onClick={() => onClickDeclinePickUp(val.id)}
+                onClick={() => onClickDeclinePickUp(val.id, val.email)}
               >
                 DECLINE
               </div>
