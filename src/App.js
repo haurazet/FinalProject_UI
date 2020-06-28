@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
 import { Route, Switch } from "react-router-dom";
-// import { connect } from "react-redux";
+import { connect } from "react-redux";
 import Axios from "axios";
 import Login from "./pages/Auth/Login";
 import Register from "./pages/Auth/Register";
@@ -51,7 +51,7 @@ import RewardCheckout from "./pages/RewardCheckout/RewardCheckout";
 // import JoinProgram from './pages/Program/JoinProgram'
 // import ScrollToTop from './components/scrolltop'
 // import {KeepLogin} from './redux/actions'
-import { API_URL } from './support/Apiurl'
+// import { API_URL } from './support/Apiurl'
 // import TransactionDetail from './pages/Program/TransactionDetail'
 import NavBar from './components/NavBar/NavBar'
 import Footer from './components/Footer/footer'
