@@ -14,6 +14,7 @@ const RegisterEmailVerify = ({Auth, ResendEmailVerification}) => {
     return ( 
         <div>
             {Auth.isRegister?
+            // ========== FROM REGISTER PAGE WHEN REGISTER SUCCESS ============ //
                 <div className='emailverify-container'>
                     <div className="row emailverify-top"></div>
                     <div className="row register-middle">
@@ -28,6 +29,7 @@ const RegisterEmailVerify = ({Auth, ResendEmailVerification}) => {
                 </div>
                 :
                 Auth.isVerified===0?
+                // ========== FROM PROGRAM DETAIL PAGE WHEN JOIN PROGRAM ============ //
                 <div className='emailverify-container'>
                     <div className="row emailverify-top"></div>
                     <div className="row register-middle">

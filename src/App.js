@@ -27,17 +27,17 @@ import TransactionDetail from "./pages/Program/TransactionDetail";
 import RewardDetail from "./pages/RewardDetail/RewardDetail";
 import Cart from "./pages/Cart/Cart";
 import RewardCheckout from "./pages/RewardCheckout/RewardCheckout";
-import MyImpact from './pages/MyImpact/MyImpact'
-import CollectionPrograms from './pages/CollectionPrograms/CollectionPrograms'
-import PersonalInfo from './pages/PersonalInfo/PersonalInfo'
-import EditProfile from './pages/EditProfile/EditProfile'
-import AboutUs from './pages/AboutUs/aboutus'
-import ContactUs from './pages/ContactUs/contactus'
+import MyImpact from './pages/MyImpact/MyImpact' 
+import CollectionPrograms from './pages/CollectionPrograms/CollectionPrograms' 
+import PersonalInfo from './pages/PersonalInfo/PersonalInfo' 
+import EditProfile from './pages/EditProfile/EditProfile' 
+import AboutUs from './pages/AboutUs/aboutus' 
+import ContactUs from './pages/ContactUs/contactus' 
 import logo from './images/recyly_nobg.png'
 import NavBar from './components/NavBar/NavBar'
 import Footer from './components/Footer/footer'
-import {useSelector} from 'react-redux'
-import { Redirect } from "react-router-dom";
+// import {useSelector} from 'react-redux'
+// import { Redirect } from "react-router-dom";
 
 function App({KeepLogin}) {
 
@@ -72,7 +72,7 @@ function App({KeepLogin}) {
     }
   }, [KeepLogin]);
 
-    const Auth = useSelector(state=> state.Auth)
+    // const Auth = useSelector(state=> state.Auth)
 
 
     if(Loading){
@@ -81,6 +81,7 @@ function App({KeepLogin}) {
         src={logo}
         width='280px'
         height='150px'
+        alt='logo'
         ></img>
         <div style={{paddingTop:'20px', fontWeight:'bold', fontSize:'20px'}}>
           Loading..

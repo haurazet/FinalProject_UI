@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import Button from '../../components/button'
 import { connect} from 'react-redux'
 import { useHistory} from 'react-router-dom'
-import { Redirect } from 'react-router-dom'
+// import { Redirect } from 'react-router-dom'
 import { Verify, CheckToken } from '../../redux/actions'
 
 const Verified = (props) => {
@@ -29,6 +29,7 @@ const Verified = (props) => {
                         <div>Loading..</div>
                     :
                     props.Auth.isVerifySuccess?
+                    // ========== VERIFY SUCCESS FROM REGISTER ============ //
                         <div>
                             <div className="h4 mb-5 text-center">Account Verification Success!</div>
                             <div>Congratulations. Your account has been verified. Go back to homepage to start your RECYC.LY program!</div>
@@ -37,6 +38,7 @@ const Verified = (props) => {
                         </div>
                     :
                     props.Auth.is_verified===1?
+                    // ========== VERIFY SUCCESS FROM PROGRAM DETAIL ============ //
                         <div>
                             <div className="h4 mb-5 text-center">Account Verification Success!</div>
                             <div>Congratulations. Your account has been verified. Go back to homepage to start your RECYC.LY program!</div>
@@ -44,6 +46,7 @@ const Verified = (props) => {
                             <div className="text-center mt-4"><Button text="Go To Homepage" onclick={()=> history.push('/')}/></div>
                         </div>
                     :
+                        // ========== VERIFY TOKEN EXPIRED ============ //
                         <div>
                             <div className="h4 mb-5 text-center">Link has expired!</div>
                             <div>Please login to get your new email verification link.</div>

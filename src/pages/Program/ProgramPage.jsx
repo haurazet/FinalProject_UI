@@ -36,10 +36,12 @@ class Productpage extends Component {
     }
 
     componentDidMount(){
+        // ============ GET PROGRAM CATEGORY FOR FILTER ============= //
         Axios.get(`${API_URL}/programs/category`)
         .then((res)=>{
             this.setState({category:res.data})
         })
+        // ============ GET PROGRAM LIST ============= //
         this.getData()
         window.scrollTo(0,0)
     }
@@ -47,12 +49,14 @@ class Productpage extends Component {
     getData=()=>{
         const {search,filter,sort,page} = this.state
         window.scrollTo(0,400)
+        // ============ GET TOTAL PROGRAM TO COUNT PAGE ============= //
         Axios.get(  search&&filter?`${API_URL}/programs/totalprogram?search=${search}&filter=${filter}`:
                     search?`${API_URL}/programs/totalprogram?search=${search}`:
                     filter?`${API_URL}/programs/totalprogram?filter=${filter}`:
                             `${API_URL}/programs/totalprogram`,{}
             ).then((res)=>{
             this.setState({totalproduct:res.data.total})
+            // ============ GET PROGRAM BASED ON CURRENT PAGE TO SET LIMIT ============= //
             Axios.get(  search&&filter&&sort?`${API_URL}/programs/getprogramuser?search=${search}&filter=${filter}&sort=${sort}&page=${page}`:
                         search&&filter?`${API_URL}/programs/getprogramuser?search=${search}&filter=${filter}&page=${page}`:
                         search&&sort?`${API_URL}/programs/getprogramuser?search=${search}&sort=${sort}&page=${page}`:
@@ -72,7 +76,7 @@ class Productpage extends Component {
     }
 
     getpaginationdata=(val)=>{
-        this.setState({page:val*6, isLoading:true}, function(){
+        this.setState({page:val*6, isLoading:true}, function(){ // *6 for be LIMIT purpose
             this.getData()
         })
     }
@@ -94,7 +98,7 @@ class Productpage extends Component {
                         <Card className="product-card">
                             <div className="program-picture p-3 row align-items-center">
                             {
-                                val.create_time>moment().subtract(3, 'days').format()?
+                                val.create_time>moment().subtract(3, 'days').format()? //uploaded in the last 3 days
                                 <MDBBadge color="danger">New</MDBBadge>
                                 :
                                 null
@@ -118,11 +122,14 @@ class Productpage extends Component {
     }
 
     renderpagination=()=>{ 
-        var totalpage = Math.ceil(this.state.totalproduct/6)
-        var arr=[]
+        console.log(this.state.page)
+        // ============ COUNT PAGE: 6 PER PAGE ============= //
+        var totalpage = Math.ceil(this.state.totalproduct/6) // ex totalproduct=15, totalpage=3
+        var arr=[] // empty array to store pages. ex total page=3. arr=[0,1,2]
         for ( var i = 0; i < totalpage; i++){
             arr.push(i)
         }
+        console.log(arr)
         return arr.map((val,index)=>{
             return(
                 <div key={index}>
@@ -255,17 +262,24 @@ class Productpage extends Component {
                         <MDBRow>
                             <MDBCol>
                                 <MDBPagination className="mb-5 mr-5 pr-5 float-right" color='dark'>
-                                <MDBPageItem disabled={this.state.page===0} onClick={()=>this.getpaginationdata((page/6)-1)}>
+                                {/* ================= PREVIOUS ================= */}
+                                <MDBPageItem 
+                                    disabled={this.state.page===0} // page=0 means fisrt page
+                                    onClick={()=>this.getpaginationdata((page/6)-1)}>
                                     <MDBPageNav aria-label="Previous">
-                                    <span aria-hidden="true">Previous</span>
+                                        <span aria-hidden="true">Previous</span>
                                     </MDBPageNav>
                                 </MDBPageItem>
+                                {/* ================= NUMBER ================= */}
+
                                     {this.renderpagination()}
+
+                                {/* ================= NEXT ================= */}
                                 <MDBPageItem 
-                                    disabled={Math.ceil(totalproduct/6)===(page/6)+1} 
+                                    disabled={Math.ceil(totalproduct/6)===(page/6)+1} // page=totalpage+1 means last page
                                     onClick={()=>this.getpaginationdata((page/6)+1)}>
                                     <MDBPageNav aria-label="Previous">
-                                    <span aria-hidden="true">Next</span>
+                                        <span aria-hidden="true">Next</span>
                                     </MDBPageNav>
                                 </MDBPageItem>
                                 </MDBPagination>

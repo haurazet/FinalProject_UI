@@ -43,12 +43,12 @@ const ProgramDetail = ( props ) => {
                         <div className="mt-5">Shipments in this program can be any weight to earn points, and {data.point} points per shipment will be awarded.</div>
                     </div>
                     <div className="program-image col-md-6">
-                        <img src={API_URL+data.image} width="100%"/>
+                        <img src={API_URL+data.image} alt='logo' width="100%"/>
                     </div>
                 </div>
                 <div className="program-detail-bottom mx-5 p-2">
                     <div className="h3 ">How it works</div>
-                    <div className="my-5 text-center"> <img src={ImageFlow} width='70%'></img> </div>
+                    <div className="my-5 text-center"> <img src={ImageFlow} width='70%' alt='logo'></img> </div>
                 </div>
             </div>
         </div>
