@@ -40,6 +40,14 @@
     color: white;
 }
 
+.buttondetails2{
+    width: 150px;
+    height: 50px;
+    background-color: #9ac84a;
+    color: white;
+    border-color: white;
+}
+
 .profilename-getstarted{
     color: inherit;
 }

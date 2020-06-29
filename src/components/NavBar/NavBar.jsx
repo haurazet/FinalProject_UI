@@ -12,7 +12,6 @@ import {
   DropdownToggle,
   DropdownMenu,
   DropdownItem,
-  NavbarText
 } from 'reactstrap';
 import './NavBar.css'
 import {FaSearch, FaHandHoldingHeart} from 'react-icons/fa'
@@ -98,7 +97,7 @@ const NavBar = (props) => {
       
       {
           //JIKA USER SUDAH LOGIN
-          props.User.isLogin&&props.User.role==1?
+          props.User.isLogin&&props.User.role===1?
               <div className='headermenu-containerislogin'>
                   <div className='headermenu-item'>
                       <a href='/collection-programs' style={{color:'inherit'}}>PROFILE</a>
@@ -113,7 +112,7 @@ const NavBar = (props) => {
               </div>
           
           //JIKA ADMIN SUDAH LOGIN
-          :props.User.isLogin&&props.User.role==0?
+          :props.User.isLogin&&props.User.role===0?
             <div className='headermenu-container'>
                 <div className='headermenu-itemlast'>
                     <a href='/' style={{color:'inherit'}} onClick={onClickSignOut}>SIGN OUT</a>

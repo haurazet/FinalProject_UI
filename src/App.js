@@ -142,7 +142,6 @@ function App({KeepLogin}) {
           component={TransactionHistory}
           exact
         />
-        <Route path="/programdetail/:idprog" exact component={ProgramDetail} />
         <Route
           path="/transactionhistory"
           component={TransactionHistory}
