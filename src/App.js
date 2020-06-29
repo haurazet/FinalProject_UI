@@ -38,8 +38,7 @@ import Footer from "./components/Footer/footer";
 import { useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
 
-function App({ KeepLogin }) {
-  const [Loading, setLoading] = useState(true);
+function App({KeepLogin}) {
 
   useEffect(() => {
     console.log(Auth);
@@ -50,11 +49,12 @@ function App({ KeepLogin }) {
           Authorization: `Bearer ${token}`,
         },
       })
-        .then((res) => {
-          KeepLogin(res.data);
-        })
-        .catch((err) => {
-          console.log(err.message);
+      .then(res=>{
+        console.log(res.data)
+        KeepLogin(res.data)
+      })
+      .catch(err=>{
+        console.log(err.message)
         })
         .then((res) => {
           KeepLogin(res.data);
@@ -118,6 +118,11 @@ function App({ KeepLogin }) {
         <Route path="/program" component={Program} exact />
         <Route path="/cart/:userid" component={Cart} exact />
         <Route path="/rewardcheckout" component={RewardCheckout} exact />
+        <Route path="/dashboard" component={Dashboard} exact />
+        {/* <Route path="/transactionhistory" component={TransactionHistory} exact /> */}
+        <Route path="/programdetail/:idprog" exact component={ProgramDetail}/>
+        <Route path="/joinprogram/:idprog" exact component={JoinProgram}/>
+        <Route path="/transactiondetail/:idtrans" exact component={TransactionDetail}/>
         <Route path='/collection-programs' component={CollectionPrograms} exact />
         <Route path='/my-impact' component={MyImpact} exact />
         <Route path='/personal-info' component={PersonalInfo} exact />
@@ -138,13 +143,13 @@ function App({ KeepLogin }) {
           component={TransactionHistory}
           exact
         />
-        <Route path="/programdetail/:idprog" exact component={ProgramDetail} />
+        {/* <Route path="/programdetail/:idprog" exact component={ProgramDetail} />
         <Route path="/joinprogram/:idprog" exact component={JoinProgram} />
         <Route
           path="/transactiondetail/:idtrans"
           exact
           component={TransactionDetail}
-        />
+        /> */}
 
         <Route
           path="/managetransaksi"

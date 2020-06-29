@@ -3,7 +3,7 @@ import {  MDBRow, MDBCol} from 'mdbreact';
 import Button from '../../components/button'
 import {connect} from 'react-redux'
 import {RegisterUser} from '../../redux/actions'
-import {Redirect, useHistory} from 'react-router-dom'
+import {Redirect} from 'react-router-dom'
 
 
 const Register = ({RegisterUser, Auth}) => {
@@ -32,7 +32,7 @@ const Register = ({RegisterUser, Auth}) => {
         RegisterUser(data)
     }
 
-    const history = useHistory()
+    // const history = useHistory()
 
     if(Auth.isRegister){
         return <Redirect to='/registeremailverify' />
@@ -284,7 +284,7 @@ const Register = ({RegisterUser, Auth}) => {
                                             id="defaultFormRegisterNameEx9"
                                             className= "form-control"
                                             name="password"
-                                            pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$"
+                                            pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$" //Min 8 character angka dan huruf
                                             required
                                         />
                                         <div className="invalid-tooltip">

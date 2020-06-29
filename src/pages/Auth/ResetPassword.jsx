@@ -43,6 +43,7 @@ const ResetPassword = (props) => {
                 <div className="row register-middle">
                     <div className="emailverify-box p-4 px-5 text-center" style={{position:'relative', top:-150, zIndex:2}}>
                         {props.Auth.isResetLinkExpired?
+                        // ============ RESET PASSWORD FAILED BECAUSE LINK EXPIRED ============= //
                             <div>
                                 <div className="h4 mb-3 text-center">Link has expired!</div>
                                 <div>Please send new reset password request</div>
@@ -50,6 +51,7 @@ const ResetPassword = (props) => {
                                 <div className="text-center"><a className="go-back-link" href="/">Go back to homepage</a></div>
                             </div>
                         :props.Auth.isResetSuccess?
+                        // ============ RESET PASSWORD SUCESS ============= //
                             <div>
                                 <div className="h4 mb-3 text-center">Change password success!</div>
                                 <div>Now, you can sign in with your new password</div>
@@ -57,6 +59,7 @@ const ResetPassword = (props) => {
                                 <div className="text-center"><a className="go-back-link" href="/">Go back to homepage</a></div>
                             </div>
                         :
+                            // ============ ON RESET PASSWORD ============= //
                             <div>
                                 <div className="h4 mb-3 text-center">Reset RECYC.LY password</div>
                                 <div className="mb-3">Enter your new RECYC.LY password:</div>
