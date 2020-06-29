@@ -14,10 +14,10 @@ const MyImpact = () => {
         Axios.get(`${API_URL}/users/getpoints/${id}`)
             .then((res)=>{
                 setPointTotal(res.data[0])
-                Axios.get(`${API_URL}/users/getrewardredeemed/${id}`)
+                Axios.get(`${API_URL}/reward/getrewardredeemed/${id}`)
                 .then((res1)=>{
                     setPointRedeemed(res1.data[0])
-                    Axios.get(`${API_URL}/users/getrewardcompletedbyuser/${id}`)
+                    Axios.get(`${API_URL}/reward/getrewardcompletedbyuser/${id}`)
                     .then((res2)=>{
                         setProgram(res2.data)
                     }).catch((err)=>{
@@ -43,7 +43,7 @@ const MyImpact = () => {
                 <tr key={index}>
                     <th scope="row">{index+1}</th>
                     <td>{val.name}</td>
-                    <td>{val.purchased}</td>
+                    <td>{val.trash_qty}</td>
                 </tr>
             )
         })

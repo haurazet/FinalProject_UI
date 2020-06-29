@@ -2,42 +2,84 @@ import React,{useState} from 'react';
 import './EditProfile.css'
 import Button from '../../components/button'
 import {connect} from 'react-redux'
-import {  MDBRow, MDBCol} from 'mdbreact';
+import {  MDBRow, MDBCol,MDBInput, MDBBtn,MDBAlert} from 'mdbreact';
 import { Redirect } from "react-router-dom";
 import {useSelector} from 'react-redux'
+import { useEffect } from 'react';
+import Axios from 'axios';
+import { API_URL } from '../../support/Apiurl';
+import {EditContactInformation,EditPasswordInformation} from '../../redux/actions/'
 
-const EditProfile =(props)=>{
+const EditProfile =({EditContactInformation,EditPasswordInformation})=>{
 
-    const [data,setdata]=useState({
-        firstname:'',
-        lastname:'',
+    useEffect(()=>{
+        let id=Auth.id
+        Axios.get(`${API_URL}/users/getalluserinfo/${id}`)
+        .then((res)=>{
+            console.log(res.data[0])
+            setContactInformation({...contactInformation,
+                first_name:res.data[0].first_name,
+                last_name:res.data[0].last_name,
+                username:res.data[0].username,
+                address:res.data[0].address,
+                city:res.data[0].city,
+                state:res.data[0].state,
+                zipcode:res.data[0].zipcode,
+                phonenumber:res.data[0].phonenumber
+            })
+            setEditPassword({...editPassword,email:res.data[0].email})
+        }).catch((err)=>{
+            console.log(err)
+        })
+    },[])
+
+    const [contactInformation,setContactInformation]=useState({
+        first_name:'',
+        last_name:'',
         username:'',
         address:'',
         city:'',
         state:'',
         zipcode:'',
         phonenumber:'',
+    })
+
+    const [editPassword,setEditPassword]=useState({
         email:'',
         currentpassword:'',
         newpassword:'',
         newconfirmpassword:''
     })
-    const changeHandler=(e)=>{
-        setdata({...data,[e.target.name]:e.target.value})
-        // console.log(data)
+    
+    //On Change Contact Information
+    const changeHandlerCI=(e)=>{
+        setContactInformation({...contactInformation,[e.target.name]:e.target.value})
+        console.log(contactInformation)
+    }
+
+    //On Change Edit Password
+    const changeHandlerEP=(e)=>{
+        setEditPassword({...editPassword,[e.target.name]:e.target.value})
+        console.log(editPassword)
     }
 
     const submitHandler=(e)=>{
         e.preventDefault()  
         e.target.className += " was-validated";
-
     }
 
     const Auth = useSelector(state=> state.Auth)
 
-    return(
 
+    return(
+        
         <div className='editprofile-container'>
+
+            {/* Jika belum verified tidak bisa edit profile */}
+            {!Auth.isVerified===1?
+            <Redirect to='/'></Redirect>
+            :null
+            }            
 
             {/* Jika tidak login dan role=admin, balik ke home */}
             {!Auth.isLogin||Auth.role===0?
@@ -52,29 +94,27 @@ const EditProfile =(props)=>{
                         <div style={{fontSize:'20px', color:'#9ac84a',fontFamily:'Verdana', fontWeight:'bold'}}>
                             Contact Information
                         </div>
-        
+
                         <form
-                                className="needs-validation register"
-                                onSubmit={submitHandler}
-                                noValidate
+                         className="needs-validation"
+                         onSubmit={submitHandler}
+                         noValidate
                         >
 
                         {/* FIRST NAME */}
                         <MDBRow>
                             <MDBCol md="8" className="mb-3">
                             <label
-                                htmlFor="defaultFormRegisterNameEx"
                                 className="mt-4 text-lowercase "
                                 style={{color:'#62accc'}}
                             >
                                 First name
                             </label>
                             <input
-                                value={data.firstname}
-                                name="firstname"
-                                onChange={changeHandler}
+                                value={contactInformation.first_name}
+                                name="first_name"
+                                onChange={changeHandlerCI}
                                 type="text"
-                                id="defaultFormRegisterNameEx"
                                 className="form-control"
                                 // pattern="/^[A-Za-z]+$/"
                                 required
@@ -89,18 +129,16 @@ const EditProfile =(props)=>{
                         <MDBRow>
                             <MDBCol md="8" className="mb-3">
                                 <label
-                                    htmlFor="defaultFormRegisterNameEx1"
                                     className="mt-2 text-lowercase "
                                     style={{color:'#62accc'}}
                                 >
                                     Last name
                                 </label>
                                 <input
-                                    value={data.lastname}
-                                    name="lastname"
-                                    onChange={changeHandler}
+                                    value={contactInformation.last_name}
+                                    name="last_name"
+                                    onChange={changeHandlerCI}
                                     type="text"
-                                    id="defaultFormRegisterNameEx1"
                                     className="form-control"
                                     // pattern = "[A-Za-z]"
                                     required
@@ -116,18 +154,16 @@ const EditProfile =(props)=>{
                         <MDBRow>
                             <MDBCol md="8" className="mb-3">
                                 <label
-                                    htmlFor="defaultFormRegisterNameEx2"
                                     className="mt-2 text-lowercase "
                                     style={{color:'#62accc'}}
                                 >
                                     Username
                                 </label>
                                 <input
-                                    value={data.username}
+                                    value={contactInformation.username}
                                     name="username"
-                                    onChange={changeHandler}
+                                    onChange={changeHandlerCI}
                                     type="text"
-                                    id="defaultFormRegisterNameEx2"
                                     className='form-control'
                                     required
                                 />
@@ -143,18 +179,16 @@ const EditProfile =(props)=>{
                         <MDBRow>
                             <MDBCol md="8" className="mb-3">
                                 <label
-                                    htmlFor="defaultFormRegisterNameEx3"
                                     className="mt-2 text-lowercase "
                                     style={{color:'#62accc'}}
                                 >
                                     Address
                                 </label>
                                 <input
-                                    value={data.address}
+                                    value={contactInformation.address}
                                     name="address"
-                                    onChange={changeHandler}
+                                    onChange={changeHandlerCI}
                                     type="text"
-                                    id="defaultFormRegisterNameEx3"
                                     className="form-control"
                                     required
                                 />
@@ -169,17 +203,15 @@ const EditProfile =(props)=>{
                         <MDBRow>
                             <MDBCol md="8" className="mb-3">
                                 <label
-                                    htmlFor="defaultFormRegisterNameEx4"
                                     className="mt-2 text-lowercase "
                                     style={{color:'#62accc'}}
                                 >
                                     City
                                 </label>
                                 <input
-                                    value={data.city}
-                                    onChange={changeHandler}
+                                    value={contactInformation.city}
+                                    onChange={changeHandlerCI}
                                     type="text"
-                                    id="defaultFormRegisterNameEx4"
                                     className="form-control"
                                     name="city"
                                     required
@@ -195,17 +227,15 @@ const EditProfile =(props)=>{
                         <MDBRow>
                             <MDBCol md="8" className="mb-3">
                                 <label
-                                    htmlFor="defaultFormRegisterNameEx5"
                                     className="mt-2 text-lowercase "
                                     style={{color:'#62accc'}}
                                 >
                                     State
                                 </label>
                                 <input
-                                    value={data.state}
-                                    onChange={changeHandler}
+                                    value={contactInformation.state}
+                                    onChange={changeHandlerCI}
                                     type="text"
-                                    id="defaultFormRegisterNameEx5"
                                     className="form-control"
                                     name="state"
                                     required
@@ -221,17 +251,15 @@ const EditProfile =(props)=>{
                         <MDBRow>
                             <MDBCol md="8" className="mb-3">
                                 <label
-                                    htmlFor="defaultFormRegisterNameEx6"
                                     className="mt-2 text-lowercase "
                                     style={{color:'#62accc'}}
                                 >
                                     Zip
                                 </label>
                                 <input
-                                    value={data.zipcode}
-                                    onChange={changeHandler}
+                                    value={contactInformation.zipcode}
+                                    onChange={changeHandlerCI}
                                     type="text"
-                                    id="defaultFormRegisterNameEx6"
                                     className="form-control"
                                     name="zipcode"
                                     pattern="^[0-9]*$"
@@ -248,18 +276,16 @@ const EditProfile =(props)=>{
                         <MDBRow>
                             <MDBCol md="8" className="mb-3">
                                 <label
-                                    htmlFor="defaultFormRegisterNameEx7"
                                     className="mt-2 text-lowercase"
                                     style={{color:'#62accc'}}
                                 >
                                     Phone Number
                                 </label>
                                 <input
-                                    value={data.phonenumber}
+                                    value={contactInformation.phonenumber}
                                     name="phonenumber"
-                                    onChange={changeHandler}
+                                    onChange={changeHandlerCI}
                                     type="number"
-                                    id="defaultFormRegisterNameEx7"
                                     className="form-control mb-4"
                                     pattern="\+?([ -]?\d+)+|\(\d+\)([ -]\d+)"
                                     required
@@ -271,25 +297,33 @@ const EditProfile =(props)=>{
                             </MDBCol>
                         </MDBRow>
 
-                        <div style={{fontSize:'20px', color:'#9ac84a',fontFamily:'Verdana', fontWeight:'bold',marginBottom:'20px'}}>
+                        <Button text='Edit Contact Information'/>
+
+                        </form>
+
+                        <div style={{fontSize:'20px', color:'#9ac84a',fontFamily:'Verdana', fontWeight:'bold',marginBottom:'20px', marginTop:'40px'}}>
                             Account Information
                         </div>
 
+                        <form
+                                className="needs-validation"
+                                onSubmit={submitHandler}
+                                noValidate
+                        >
+                        
                         {/* EMAIL */}
                         <MDBRow>
                             <MDBCol md="8" className="mb-3">
                                 <label
-                                    htmlFor="defaultFormRegisterNameEx8"
                                     className="mt-3 text-lowercase"
                                     style={{color:'#62accc'}}
                                 >
                                     Email
                                 </label>
                                 <input
-                                    value={data.email}
-                                    onChange={changeHandler}
+                                    value={editPassword.email}
+                                    onChange={changeHandlerEP}
                                     type="email"
-                                    id="defaultFormRegisterNameEx8"
                                     className='form-control'
                                     name="email"
                                     required
@@ -305,7 +339,6 @@ const EditProfile =(props)=>{
                             <MDBCol md="8" className="mb-3">
 
                                 <label
-                                    htmlFor="defaultFormRegisterNameEx9"
                                     className="mt-2 text-lowercase"
                                     style={{color:'#62accc'}}
                                 >
@@ -313,17 +346,16 @@ const EditProfile =(props)=>{
                                 </label>
 
                                 <input
-                                    value={data.password}
-                                    onChange={changeHandler}
+                                    value={editPassword.password}
+                                    onChange={changeHandlerEP}
                                     type="password"
-                                    id="defaultFormRegisterNameEx9"
                                     className= "form-control"
                                     name="currentpassword"
                                     pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$"
                                     required
                                 />
                                 <div className="invalid-tooltip">
-                                    {data.password?"Password must contain minimum eight characters, at least one letter and one number":"Please provide password."}
+                                    {editPassword.password?"Password must contain minimum eight characters, at least one letter and one number":"Please provide password."}
                                 </div>
                             </MDBCol>
                         </MDBRow>
@@ -332,20 +364,18 @@ const EditProfile =(props)=>{
                         <MDBRow>
                             <MDBCol md="8" className="mb-3">
                                 <label
-                                    htmlFor="defaultFormRegisterNameEx10"
                                     className="mt-2 text-lowercase"
                                     style={{color:'#62accc'}}
                                 >
                                     Confirm Password
                                 </label>
                                 <input
-                                    value={data.confirmpassword}
-                                    onChange={changeHandler}
+                                    value={editPassword.confirmpassword}
+                                    onChange={changeHandlerEP}
                                     type="password"
-                                    id="defaultFormRegisterNameEx10"
                                     className='form-control'
                                     name="newpassword"
-                                    // pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$"
+                                    pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$"
                                     required
                                 />
                                 <div className="invalid-tooltip">
@@ -365,13 +395,12 @@ const EditProfile =(props)=>{
                                     New Password Confirmation
                                 </label>
                                 <input
-                                    value={data.confirmpassword}
-                                    onChange={changeHandler}
+                                    value={editPassword.confirmpassword}
+                                    onChange={changeHandlerEP}
                                     type="password"
-                                    id="defaultFormRegisterNameEx11"
                                     className='form-control mb-3'
                                     name="newconfirmpassword"
-                                    // pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$"
+                                    pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$"
                                     required
                                 />
                                 <div className="invalid-tooltip">
@@ -379,13 +408,18 @@ const EditProfile =(props)=>{
                                 </div>
                             </MDBCol>
                         </MDBRow>
-                        
-                        <Button text='Edit Profile'/>
 
-                        <div style={{paddingBottom:'30px'}}></div>
+                        <div>
+                            {Auth.errormes}
+                        </div>
+                        
+                        <div><a className="go-back-link mb-2 pl-1" href="/forgotpassword">Forgot password?</a></div>
+                        
+                        <Button text='Edit Password' onClick={()=>EditPasswordInformation(editPassword.email,editPassword.currentpassword,editPassword.newpassword,editPassword.newconfirmpassword)}/>
 
                         </form>
-                        
+
+                        <div style={{paddingBottom:'30px'}}></div>
                     </div>
                 </div>
             </div>
@@ -400,4 +434,4 @@ const MapstatetoProps=(state)=>{
     }
 }
 
-export default connect(MapstatetoProps,{})(EditProfile);
+export default connect(MapstatetoProps,{EditContactInformation,EditPasswordInformation})(EditProfile);

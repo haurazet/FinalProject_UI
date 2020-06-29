@@ -12,12 +12,11 @@ import {
   DropdownToggle,
   DropdownMenu,
   DropdownItem,
-  NavbarText,
-} from "reactstrap";
-import "./NavBar.css";
-import { FaSearch, FaHandHoldingHeart } from "react-icons/fa";
-import { connect } from "react-redux";
-import { UserLogout } from "../../redux/actions/";
+} from 'reactstrap';
+import './NavBar.css'
+import {FaSearch, FaHandHoldingHeart} from 'react-icons/fa'
+import {connect} from 'react-redux'
+import {UserLogout} from '../../redux/actions/'
 
 const NavBar = (props) => {
   const [isOpen, setIsOpen] = useState(false);

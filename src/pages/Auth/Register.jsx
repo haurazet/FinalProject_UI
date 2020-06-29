@@ -38,6 +38,9 @@ const Register = ({RegisterUser, Auth}) => {
         return <Redirect to='/registeremailverify' />
     }
 
+    if(Auth.isLogin){
+        return <Redirect to='/' />
+    }
 
     return ( 
             <div className='register-container'>
