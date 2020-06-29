@@ -94,6 +94,10 @@ const CollectionPrograms = () => {
                 <div className='mycollectionprogram-text'>
                     <p>Program Transaction History</p>
                 </div>
+
+                <button className="buttondetails2">
+                    <a href={`/transactionhistory/`+Auth.id} className='profilename-getstarted'>More Detailed History</a>
+                </button>
                 
                 <div style={{paddingBottom:'40px'}}>
                     <Table striped>

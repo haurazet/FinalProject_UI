@@ -119,7 +119,6 @@ function App({ KeepLogin }) {
         <Route path="/program" component={Program} exact />
         <Route path="/cart/:userid" component={Cart} exact />
         <Route path="/rewardcheckout" component={RewardCheckout} exact />
-        <Route path="/programdetail/:idprog" exact component={ProgramDetail}/>
         <Route path='/collection-programs' component={CollectionPrograms} exact />
         <Route path='/my-impact' component={MyImpact} exact />
         <Route path='/personal-info' component={PersonalInfo} exact />

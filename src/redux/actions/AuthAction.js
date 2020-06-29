@@ -92,6 +92,21 @@ export const RegisterUser=(
     }
 }
 
+export const EditContactInformation=({first_name,last_name,username,address,city,state,zipcode,phonenumber})=>{
+  return(dispatch)=>{
+
+  }  
+}
+
+export const EditPasswordInformation=({email,currentpassword,newpassword,newconfirmpassword})=>{
+    return(dispatch)=>{
+        if(newpassword!==newconfirmpassword){
+            console.log('bedapass')
+        }
+    }
+
+}
+
 export const ResendEmailVerification=({username,email,userid})=>{
     return(dispatch)=>{
         dispatch({type:SEND_EMAIL_START})
@@ -249,3 +264,5 @@ export const UserSearch=(data)=>{
         payload:data
     }
 }
+
+
