@@ -1,6 +1,7 @@
 import React,{useState,useEffect} from 'react';
 import './ManageProgram.css'
 import { Table, Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import { MDBPagination, MDBPageItem, MDBPageNav, MDBCol, MDBRow , MDBBadge, MDBContainer } from "mdbreact";
 import Axios from 'axios';
 import { API_URL } from '../../support/Apiurl';
 import { FaRegEdit } from 'react-icons/fa';
@@ -24,6 +25,10 @@ const ManageProgram=(props)=>{
         point:'',
         description:''
     })
+
+    //pagination
+    const [ totalProgram, setTotalProgram ] = useState()
+    const [ page, setPage ] = useState(0)
 
     const changeHandler=(e)=>{
         setAddData({...addData,[e.target.name]:e.target.value})
@@ -74,15 +79,47 @@ const ManageProgram=(props)=>{
 
     useEffect(()=>{
         getData()
-    },[])
+    },[page])
 
     const getData=()=>{
-        Axios.get(`${API_URL}/programs/getprogram`)
-        .then((res)=>{
-            console.log(res.data)
-            setData(res.data)
-        }).catch((err)=>{
-            console.log(err)
+        window.scrollTo(0,0)
+        Axios.get(`${API_URL}/programs/totalprogram`,{})
+        .then((res1)=>{
+            setTotalProgram(res1.data.total)
+            console.log(res1.data.total)
+            Axios.get(`${API_URL}/programs/getprogramuser?page=${page}`)
+            .then((res)=>{
+                console.log(res.data)
+                setData(res.data)
+            }).catch((err)=>{
+                console.log(err)
+            })
+        })
+        .catch((err1)=>{
+            console.log(err1)
+        })
+    }
+
+    const getpaginationdata=(val)=>{
+        setPage(val*6)
+    }
+
+    const renderpagination=()=>{ 
+        // ============ COUNT PAGE: 6 PER PAGE ============= //
+        var totalpage = Math.ceil(totalProgram/6) // ex totalProgram=15, totalpage=3
+        var arr=[] // empty array to store pages. ex total page=3. arr=[0,1,2]
+        for ( var i = 0; i < totalpage; i++){
+            arr.push(i)
+        }
+        console.log(arr)
+        return arr.map((val,index)=>{
+            return(
+                <div key={index}>
+                    <MDBPageItem active={page/6===val} >
+                        <MDBPageNav onClick={()=>getpaginationdata(val)}>{val+1}</MDBPageNav>
+                    </MDBPageItem>
+                </div>
+            )
         })
     }
 
@@ -90,7 +127,7 @@ const ManageProgram=(props)=>{
         return data.map((val,index)=>{
             return(
                 <tr key={index}>
-                    <th scope="row">{index+1}</th>
+                    <th scope="row">{page+index+1}</th>
                     <td>{val.name}</td>
                     <td>{val.brand}</td>
                     <td>{val.price}</td>
@@ -130,7 +167,33 @@ const ManageProgram=(props)=>{
                 </tbody>
             </Table>
         
+        
+            <MDBRow>
+                <MDBCol>
+                    <MDBPagination className="mb-5 mr-5 pr-5 float-right" color='dark'>
+                    {/* ================= PREVIOUS ================= */}
+                    <MDBPageItem 
+                        disabled={page===0} // page=0 means fisrt page
+                        onClick={()=>getpaginationdata((page/6)-1)}>
+                        <MDBPageNav aria-label="Previous">
+                            <span aria-hidden="true">Previous</span>
+                        </MDBPageNav>
+                    </MDBPageItem>
+                    {/* ================= NUMBER ================= */}
 
+                        {renderpagination()}
+
+                    {/* ================= NEXT ================= */}
+                    <MDBPageItem 
+                        disabled={Math.ceil(totalProgram/6)===(page/6)+1} // page=totalpage+1 means last page
+                        onClick={()=>getpaginationdata((page/6)+1)}>
+                        <MDBPageNav aria-label="Previous">
+                            <span aria-hidden="true">Next</span>
+                        </MDBPageNav>
+                    </MDBPageItem>
+                    </MDBPagination>
+                </MDBCol>
+            </MDBRow>
 
             </div>
             
