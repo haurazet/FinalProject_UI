@@ -4,13 +4,15 @@ import { MDBContainer, MDBRow, MDBCol } from "mdbreact";
 import { NiceCard } from "../../components/NiceCard/NiceCard";
 import { API_URL } from "../../support/Apiurl";
 import Axios from "axios";
-import { connect } from "react-redux";
+import { connect} from "react-redux";
+import {Redirect} from "react-router-dom"
 
 const Reward = ({ Auth }) => {
   const [datacat1, setdatacat1] = useState([]);
   const [datacat2, setdatacat2] = useState([]);
   const [datacat3, setdatacat3] = useState([]);
   const [datacat4, setdatacat4] = useState([]);
+
 
   useEffect(() => {
     getData();
@@ -98,6 +100,14 @@ const Reward = ({ Auth }) => {
 
   return (
     <MDBContainer fluid>
+
+      { 
+        Auth.isLogin && Auth.role == 1 ?
+        null
+        :
+        <Redirect to='/'></Redirect>
+      }
+
       <MDBRow className={styles.RowReward}>
         <MDBCol lg="5" className={styles.flexDir}>
           <div className={styles.redeemBox}>Redeem Your Points</div>

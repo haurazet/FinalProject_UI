@@ -7,6 +7,7 @@ import Button from '../../components/button'
 // import { validate, add } from 'numeral';
 import Numeral from 'numeral'
 import { IoIosPin } from 'react-icons/io'
+import {Redirect} from 'react-router-dom'
 
 const ProgramJoin = (props) => {
     
@@ -119,6 +120,14 @@ const ProgramJoin = (props) => {
 
     return ( 
         <div className='join-program-container'>
+
+        { 
+        props.Auth.isLogin && props.Auth.role == 1 ?
+        null
+        :
+        <Redirect to='/'></Redirect>
+        }
+
             <div className="row emailverify-top"></div>
             <div className="row register-middle">
                 <div className="join-program-box text-center w-75" style={{position:'relative', top:-150, zIndex:2}}> 

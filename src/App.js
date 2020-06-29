@@ -101,13 +101,6 @@ function App({ KeepLogin }) {
 
       <NavBar />
 
-      {/* Jika tidak login dan role=admin, balik ke home
-      {Auth.role===0?
-        <Redirect to='/dashboard'></Redirect>
-          :
-        <Redirect to='/dashboard'></Redirect>
-            } */}
-
       <Switch>
         <Route path="/" component={Home} exact />
         <Route path="/login" component={Login} exact />
