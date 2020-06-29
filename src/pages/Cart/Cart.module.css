@@ -14,12 +14,10 @@
 .flexboxHeader {
   display: flex;
   justify-content: center;
-  /* width: 90px; */
+  border-bottom: 1px solid black;
   height: 86px;
-  border: 1px solid black;
 }
 .boxHeader {
-  border: 1px solid black;
   width: 1000px;
   display: flex;
   justify-content: space-between;
@@ -36,12 +34,11 @@
   height: fit-content;
   margin-left: 100px;
   margin-right: 100px;
-  border: 1px solid black;
 }
 .contentBox {
   width: 750px;
   height: fit-content;
-  border: 1px solid black;
+
   display: flex;
   flex-direction: column;
 }
@@ -54,7 +51,6 @@
   font-family: "sanfransisco";
   font-size: 20px;
   margin-top: 50px;
-  /* margin-bottom: auto; */
 }
 .paragraph {
   font-family: "sanfransisco";

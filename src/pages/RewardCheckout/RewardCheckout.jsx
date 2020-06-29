@@ -25,6 +25,12 @@ const RewardCheckout = ({ Auth: { first_name } }) => {
             <div>Thank you</div>
           </div> */}
           <div className={styles.boxFlex}>
+            <div style={{ fontFamily: "sanfransiscobold", color: "white" }}>
+              Back to{" "}
+              <a href="/" style={{ color: "yellow" }}>
+                HOME
+              </a>
+            </div>
             <div
               style={{
                 fontSize: 25,

@@ -9,8 +9,6 @@
   height: 100vh;
   padding: 0;
   margin: 0;
-
-  /* font-family: "sanfransisco"; */
 }
 .Title_box {
   display: flex;
@@ -19,21 +17,18 @@
   align-items: flex-end;
   font-size: 40px;
   height: 20vh;
-  background-color: #abacad;
-  color: whitesmoke;
+  background-color: #9ac84a;
+  color: white;
   margin-bottom: 10px;
-  /* border: 2px solid salmon; */
-  border-bottom: 3px solid slategray;
+  border-bottom: 3px solid #3797a4;
   padding: 0;
-  margin-top: 10vh;
-  /* margin: 0; */
+  /* margin-top: 100; */
 }
 
 .descriptionbox {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  /* align-items: center; */
 }
 .flexboxTitle {
   flex-direction: row;
@@ -46,7 +41,6 @@
 .marginTop {
   margin-top: 100px;
   height: 100vh;
-  /* background-color: seagreen; */
 }
 
 .horizontalCard {
@@ -58,7 +52,6 @@
   display: flex;
   flex-direction: row;
   border-radius: 10px;
-  /* font-family: "sanfransisco"; */
   font-family: "sanfransisco";
 }
 b {
@@ -74,11 +67,9 @@ b {
   width: 30%;
 }
 .CardBoxRight {
-  /* width: 40%; */
   width: 500px;
   height: 100%;
   display: flex;
-  /* border: 2px solid blue; */
   margin-left: 20px;
 }
 .imageStyles {
@@ -87,7 +78,6 @@ b {
 }
 .boxLeft {
   width: 50%;
-  /* border: 2px solid brown; */
 }
 .boxRight {
   width: 50%;
@@ -97,11 +87,9 @@ b {
 .spaceBetween {
   width: 120px;
   height: 24px;
-  /* border: 2px solid green; */
   justify-content: space-evenly;
   display: flex;
   flex-direction: row;
-  /* align-content: space-between; */
 }
 .dot {
   height: 24px;
@@ -123,7 +111,6 @@ b {
   margin-top: 10px;
   color: whitesmoke;
   font-weight: bolder;
-  /* border: 1px solid gray; */
   width: fit-content;
   background-color: gray;
   border-radius: 2px;
@@ -134,27 +121,19 @@ b {
 .uploadButton {
   height: 30px;
   display: flex;
-  /* justify-content: center; */
   align-items: center;
-  /* text-align: center; */
-  /* border: 2px solid saddlebrown; */
   background-color: #e9ecef;
   border-radius: 5px;
   font-weight: bolder;
-  /* border: 1px solid gray; */
 }
 .uploadButton:hover {
   cursor: pointer;
 }
 
 @media only screen and (max-width: 980px) {
-  /* .CardBoxLeft .CardBoxMid .CardBoxRight {
-    
-  } */
   .horizontalCard {
     display: flex;
     flex-direction: column;
-    /* justify-content: center; */
     align-content: center;
     width: 100%;
     height: 65vh;
@@ -163,8 +142,6 @@ b {
     border-bottom: gray 0.5px solid;
     width: 100%;
     height: 30%;
-    /* display: flex;
-    flex-direction: row; */
   }
   .CardBoxMid {
     border-bottom: gray 0.5px solid;
@@ -173,9 +150,6 @@ b {
   }
   .CardBoxRight {
     display: flex;
-    /* flex-direction: row; */
-    /* justify-content: center; */
-    /* align-items: center; */
     margin-top: 30px;
     width: 400px;
     height: 90px;

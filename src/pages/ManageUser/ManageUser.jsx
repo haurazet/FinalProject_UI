@@ -11,6 +11,7 @@ import {
   MDBRow,
   MDBCol,
   MDBPagination,
+  MDBContainer,
 } from "mdbreact";
 
 const ManageUser = () => {
@@ -127,10 +128,16 @@ const ManageUser = () => {
   }, [search]);
 
   return (
-    <div className={styles.containers}>
+    // <div className={styles.containers}>
+    <MDBContainer fluid>
       <div className={styles.manageUser}>
-        <div>
+        <div style={{ backgroundColor: "whitesmoke" }}>
           <h1>Manage User</h1>
+          <h5>This page is for admin only</h5>
+          <h6 style={{ fontStyle: "italic" }}>
+            Be careful ,once you ban user. The decision is final and cant be
+            retrieved.
+          </h6>
         </div>
       </div>
       <div className={styles.table_container}>
@@ -179,7 +186,7 @@ const ManageUser = () => {
           </MDBCol>
         </MDBRow>
       </div>
-    </div>
+    </MDBContainer>
   );
 };
 

@@ -262,7 +262,7 @@ const ManageTransaksi = () => {
       })
       .catch((err) => console.log(err));
   };
-  const onClickDeclinePickUp = (id) => {
+  const onClickDeclinePickUp = (id, email) => {
     Swal.fire({
       icon: "error",
       title: "Do you want to reject this transaction?",
@@ -275,13 +275,15 @@ const ManageTransaksi = () => {
     })
       .then((result) => {
         if (result.isConfirmed) {
+          console.log(id, result.value);
           Axios.put(
-            `${API_URL}/transaction/declinepickup?id=${id}&reject_reason=${result.value}`
+            `${API_URL}/transaction/declinepickup?id=${id}&reject_reason=${result.value}&email=${email}`
           ).then((result) => {
             Swal.fire({
               title: "Transaction has been reject",
               icon: "success",
             });
+            setRefresh(!refresh);
           });
         }
       })
@@ -303,6 +305,7 @@ const ManageTransaksi = () => {
               icon: "success",
               title: "Transaction has been completed",
             });
+            setRefresh(!refresh);
           })
           .catch((err) => console.log(err));
       }
@@ -391,13 +394,13 @@ const ManageTransaksi = () => {
           </div>
           <div className={styles.UserDetail}>
             <div style={{ fontFamily: "sanfransiscobold", fontSize: 18 }}>
-              Payment Detail
+              Adress Detail
             </div>
             <div className={styles.wrappers}>
               <div>
                 <div>Payment method: {val.paymentmethod} </div>
-                <div>First Name: {val.username}</div>
-                <div>Phone Number: {val.phonenumber}</div>
+                <div>City:{val.city}</div>
+                <div>State: {val.state}</div>
               </div>
               <div>
                 <div className={styles.boxFoto}>
@@ -420,7 +423,7 @@ const ManageTransaksi = () => {
             <div className="d-flex ml-4">
               <div
                 className={styles.declineButton}
-                onClick={() => onClickDeclinePickUp(val.id)}
+                onClick={() => onClickDeclinePickUp(val.id, val.email)}
               >
                 DECLINE
               </div>
@@ -555,7 +558,8 @@ const ManageTransaksi = () => {
                   : null}
                 {val.status === "on_pickup" ? "On pick up truck" : null}
                 {val.status === "completed" ? "Completed" : null}
-                {val.status === "canceled" ? "Transaction Failed" : null}
+                {val.status === "canceled" ? "Transaction Declined" : null}
+                {val.status === "failed" ? "Transaction Failed" : null}
 
                 {/* Waiting Verification ,On Pick Up, Completed */}
               </div>
@@ -646,17 +650,56 @@ const ManageTransaksi = () => {
       </MDBRow>
       <MDBRow>
         <MDBCol>
-          {confirmPayment
-            ? renderDataWaitForPayment()
-            : // HORIZONTAL CARD START
-            confirmPickUp
-            ? renderDataConfirmPickup()
-            : // HORIZONTAL CARD END
-            ProgramTransaction
-            ? renderDataAllProgram()
-            : RewardTransaction
-            ? renderDataReward()
-            : null}
+          {confirmPayment && dataWaitForPayment.length ? (
+            renderDataWaitForPayment()
+          ) : confirmPayment ? (
+            <center
+              style={{
+                fontFamily: "sanfransiscobold",
+                marginTop: 10,
+                fontSize: 30,
+              }}
+            >
+              No Transaction Data
+            </center>
+          ) : // HORIZONTAL CARD START
+          confirmPickUp && dataConfirmPickup.length ? (
+            renderDataConfirmPickup()
+          ) : confirmPickUp ? (
+            <center
+              style={{
+                fontFamily: "sanfransiscobold",
+                marginTop: 70,
+                fontSize: 30,
+              }}
+            >
+              No Transaction Data
+            </center>
+          ) : ProgramTransaction && dataAllTransaction ? (
+            renderDataAllProgram()
+          ) : ProgramTransaction ? (
+            <center
+              style={{
+                fontFamily: "sanfransiscobold",
+                marginTop: 70,
+                fontSize: 30,
+              }}
+            >
+              No Transaction Data
+            </center>
+          ) : RewardTransaction && dataRewardTransaction ? (
+            renderDataReward()
+          ) : RewardTransaction ? (
+            <center
+              style={{
+                fontFamily: "sanfransiscobold",
+                marginTop: 70,
+                fontSize: 30,
+              }}
+            >
+              No Transaction Data
+            </center>
+          ) : null}
         </MDBCol>
       </MDBRow>
       {confirmPayment ? (

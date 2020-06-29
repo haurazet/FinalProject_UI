@@ -126,6 +126,7 @@ function App({ KeepLogin }) {
         <Route path='/edit-profile' component={EditProfile} exact />
         <Route  path='/aboutus' component={AboutUs} exact />
         <Route  path='/contactus' component={ContactUs} exact />
+        <Route path="/report" component={Report} exact />
         <Route path="/managetransaksi" component={ManageTransaksi} exact />
         <Route path="/manageuser" component={ManageUser} exact />
         <Route path="/rewarddetails/:idreward" component={RewardDetail} exact />
@@ -134,7 +135,6 @@ function App({ KeepLogin }) {
           component={TransactionHistory}
           exact
         />
-        <Route path="/programdetail/:idprog" exact component={ProgramDetail} />
         <Route
           path="/transactionhistory"
           component={TransactionHistory}

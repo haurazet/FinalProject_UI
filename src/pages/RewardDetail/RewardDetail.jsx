@@ -19,10 +19,11 @@ const RewardDetail = ({
   const [Data, setData] = useState({});
   const [otherData, setOtherData] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [refresh, setRefresh] = useState(true);
 
   useEffect(() => {
     getData();
-  }, []);
+  }, [refresh]);
 
   const getData = () => {
     console.log("getdata");
@@ -61,6 +62,7 @@ const RewardDetail = ({
     } else {
       Swal.fire({
         title: "Add this item to cart?",
+        icon: "question",
         showCancelButton: true,
         confirmButtonText: "Yes",
         cancelButtonText: "No",
@@ -75,15 +77,14 @@ const RewardDetail = ({
             qty: 1,
           };
           Axios.post(`${API_URL}/reward/buyreward`, obj)
-            .then((result) =>
+            .then((result) => {
               Swal.fire({
-                position: "top-end",
                 icon: "success",
                 title: "Your reward has been added to cart!",
                 showConfirmButton: false,
                 timer: 1500,
-              })
-            )
+              });
+            })
             .catch((err) => console.log(err));
         }
       });
