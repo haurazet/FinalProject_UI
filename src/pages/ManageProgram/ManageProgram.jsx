@@ -17,7 +17,9 @@ const ManageProgram=(props)=>{
     const [data,setData]=useState([])
     const [addData,setAddData]=useState({
         name:'',
+        image:'',
         brand:'',
+        categoryid:'',
         price:'',
         point:'',
         description:''
@@ -101,7 +103,6 @@ const ManageProgram=(props)=>{
             )
         })
     }
-
    
     return(
         <div className='manageprogram-container'>
@@ -137,9 +138,9 @@ const ManageProgram=(props)=>{
          <Modal isOpen={modalAdd} toggle={toggleAdd} className={className}>
             <ModalHeader toggle={toggleAdd}>Add Program</ModalHeader>
             <ModalBody>
-                <input name='name' type='text' placeholder='Program Name' className='form-control mt-2 '></input>
-                <input type='file' placeholder='Image' className='form-control mt-2'></input>
-                <input name='brand' type='text' placeholder='Brand' className='form-control mt-2'></input>
+                <input name='name' type='text' placeholder='Program Name' className='form-control mt-2' onChange={changeHandler}></input>
+                <input name='image' type='file' placeholder='Image' className='form-control mt-2' onChange={changeHandler}></input>
+                <input name='brand' type='text' placeholder='Brand' className='form-control mt-2' onChange={changeHandler}></input>
                 <select className='form-control mt-2'>
                     <option value="" hidden>categoryID</option>
                     <option value='1'>Health And Beauty (1)</option>
@@ -148,9 +149,9 @@ const ManageProgram=(props)=>{
                     <option value='4'>Food Grocery (4)</option>
                     <option value='5'>Other (5)</option>
                 </select>
-                <input name='price' type='number' placeholder='Price' className='form-control mt-2'></input>
-                <input name='point' type='number' placeholder='Point' className='form-control mt-2'></input>
-                <input name='description' type='text' placeholder='Description' className='form-control mt-2'></input>
+                <input name='price' type='number' placeholder='Price' className='form-control mt-2' onChange={changeHandler}></input>
+                <input name='point' type='number' placeholder='Point' className='form-control mt-2' onChange={changeHandler}></input>
+                <input name='description' type='text' placeholder='Description' className='form-control mt-2' onChange={changeHandler}></input>
             </ModalBody>
             <ModalFooter>
             <Button color="primary" onClick={toggleAdd}>Add Program</Button>{' '}
