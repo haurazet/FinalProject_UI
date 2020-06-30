@@ -13,6 +13,8 @@ import {
   MDBPagination,
   MDBContainer,
 } from "mdbreact";
+import { useSelector } from "react-redux";
+import {Redirect} from 'react-router-dom'
 
 const ManageUser = () => {
   const [filter, setfilter] = useState("");
@@ -21,6 +23,8 @@ const ManageUser = () => {
   const [data, setdata] = useState([]);
   const [page, setpage] = useState(0);
   const [totaluser, setotaluser] = useState(0);
+
+  const Auth = useSelector(state=>state.Auth)
 
   const getData = () => {
     Axios.get(
@@ -130,6 +134,13 @@ const ManageUser = () => {
   return (
     // <div className={styles.containers}>
     <MDBContainer fluid>
+
+    {!Auth.role===0||!Auth.isLogin?
+    <Redirect to='/'></Redirect>
+      :
+      null
+    }
+
       <div className={styles.manageUser}>
         <div style={{ backgroundColor: "whitesmoke" }}>
           <h1>Manage User</h1>

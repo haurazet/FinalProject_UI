@@ -153,11 +153,17 @@ const NavBar = (props) => {
                     <NavLink href="/managetransaksi">Manage Transaksi</NavLink>
                   </DropdownItem>
                   <DropdownItem>
-                    <NavLink href="/report">Report</NavLink>
-                  </DropdownItem>
-                  <DropdownItem>
                     <NavLink href="/manageuser">Manage User</NavLink>
                   </DropdownItem>
+                  <DropdownItem>
+                    <NavLink href="/manageprogram">Manage Program</NavLink>
+                  </DropdownItem>
+                  <DropdownItem>
+                    <NavLink href="/managereward">Manage Reward</NavLink>
+                  </DropdownItem>
+                  <DropdownItem>
+                    <NavLink href="/report">Report</NavLink>
+                    </DropdownItem>  
                 </DropdownMenu>
               </UncontrolledDropdown>
             </Nav>

@@ -37,8 +37,11 @@ import NavBar from "./components/NavBar/NavBar";
 import Footer from "./components/Footer/footer";
 import { useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
+import ManageProgram from './pages/ManageProgram/ManageProgram'
+import ManageReward from './pages/ManageReward/ManageReward'
 
-function App({KeepLogin}) {
+function App({ KeepLogin }) {
+  const [Loading, setLoading] = useState(true);
 
   useEffect(() => {
     console.log(Auth);
@@ -49,12 +52,11 @@ function App({KeepLogin}) {
           Authorization: `Bearer ${token}`,
         },
       })
-      .then(res=>{
-        console.log(res.data)
-        KeepLogin(res.data)
-      })
-      .catch(err=>{
-        console.log(err.message)
+        .then((res) => {
+          KeepLogin(res.data);
+        })
+        .catch((err) => {
+          console.log(err.message);
         })
         .then((res) => {
           KeepLogin(res.data);
@@ -101,6 +103,13 @@ function App({KeepLogin}) {
 
       <NavBar />
 
+      {/* Jika tidak login dan role=admin, balik ke home
+      {Auth.role===0?
+        <Redirect to='/dashboard'></Redirect>
+          :
+        <Redirect to='/dashboard'></Redirect>
+            } */}
+
       <Switch>
         <Route path="/" component={Home} exact />
         <Route path="/login" component={Login} exact />
@@ -118,11 +127,6 @@ function App({KeepLogin}) {
         <Route path="/program" component={Program} exact />
         <Route path="/cart/:userid" component={Cart} exact />
         <Route path="/rewardcheckout" component={RewardCheckout} exact />
-        <Route path="/dashboard" component={Dashboard} exact />
-        {/* <Route path="/transactionhistory" component={TransactionHistory} exact /> */}
-        <Route path="/programdetail/:idprog" exact component={ProgramDetail}/>
-        <Route path="/joinprogram/:idprog" exact component={JoinProgram}/>
-        <Route path="/transactiondetail/:idtrans" exact component={TransactionDetail}/>
         <Route path='/collection-programs' component={CollectionPrograms} exact />
         <Route path='/my-impact' component={MyImpact} exact />
         <Route path='/personal-info' component={PersonalInfo} exact />
@@ -143,19 +147,20 @@ function App({KeepLogin}) {
           component={TransactionHistory}
           exact
         />
-        {/* <Route path="/programdetail/:idprog" exact component={ProgramDetail} />
+        <Route path="/programdetail/:idprog" exact component={ProgramDetail} />
         <Route path="/joinprogram/:idprog" exact component={JoinProgram} />
         <Route
           path="/transactiondetail/:idtrans"
           exact
           component={TransactionDetail}
-        /> */}
-
-        <Route
-          path="/managetransaksi"
-          component={Auth.role === 0 ? ManageTransaksi : Notfound}
-          exact
         />
+
+        <Route 
+          path="/managetransaksi" 
+          exact 
+          component={Auth.role === 0 ? ManageTransaksi : Notfound}
+        />
+     
         <Route
           path="/manageuser"
           component={Auth.role === 0 ? ManageUser : Notfound}
@@ -165,6 +170,15 @@ function App({KeepLogin}) {
           path="/report"
           component={Auth.role === 0 ? Report : Notfound}
           exact
+        />
+         <Route 
+          path="/manageprogram" 
+          component={Auth.role === 0 ? ManageProgram : Notfound} exact 
+        />
+          
+        <Route 
+          path="/managereward" 
+          component={Auth.role === 0 ? ManageReward : Notfound} exact 
         />
 
         <Route component={Notfound} />

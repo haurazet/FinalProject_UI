@@ -30,25 +30,62 @@ const ManageProgram=(props)=>{
     const [ totalProgram, setTotalProgram ] = useState()
     const [ page, setPage ] = useState(0)
 
+    //Handler Add Data
     const changeHandler=(e)=>{
         setAddData({...addData,[e.target.name]:e.target.value})
         console.log(addData)
     }
 
-
     const [modalAdd, setModalAdd] = useState(false);
-    const [modalDelete, setModalDelete] = useState(false)
     const [modalEdit, setModalEdit] = useState(false);
     const [indexEdit, setIndexEdit] = useState(0)
 
-    const toggleAdd = () => setModalAdd(!modalAdd);
-    const toggleDelete = () => setModalDelete(!modalDelete);
+
+    const toggleAdd = () => setModalAdd(!modalAdd,addData.name='',addData.image='',addData.brand='',addData.categoryid='',addData.price='',addData.point='',addData.description='');
     const toggleEdit = () => setModalEdit(!modalEdit);
 
     const onEditClick=(index)=>{
         setModalEdit(!modalEdit)
         setIndexEdit(index)
     }
+
+    // const onSaveaddDataClick = () => {
+    //     var formdata = new FormData()
+    //     var typeadd = this.refs.typeadd.value.toString().toLowerCase()
+    //     var discountrateadd = parseInt(this.refs.discountrateadd.value)
+    //     var startdateadd = this.refs.startdateadd.value
+    //     var expireddateadd = this.refs.expireddateadd.value
+    //     const obj = {
+    //         type: typeadd,
+    //         discount_rate: discountrateadd,
+    //         start_date: startdateadd,
+    //         expired_date: expireddateadd
+    //     }
+    //     var token = this.props.User.token
+    //     var Headers = {
+    //         headers:
+    //         {
+    //             'Content-Type': 'multipart/form-data',
+    //             'Authorization': `Bearer ${token}`
+    //         },
+    //     }
+    //     if (this.state.addimagefile && typeadd && discountrateadd && startdateadd && expireddateadd) {
+    //         formdata.append('image', this.state.addimagefile)
+    //         formdata.append('data', JSON.stringify(obj))
+    //         // console.log(obj)
+    //         Axios.post(`${APIURL}/discount/adddiscount`, formdata, Headers)
+    //             .then((res) => {
+    //                 console.log(res.data)
+    //                 this.setState({ diskon: res.data, isModaladdOpen: false, addimagefile: undefined })
+    //                 // setTimeout(function () { window.location.reload() }, 100)
+    //                 // this.componentDidMount(this.state.sortNama)
+    //             }).catch((err) => {
+    //                 console.log(err)
+    //             })
+    //     } else {
+    //         alert('Mohon Lengkapi Data')
+    //     }
+    // }
 
     const onConfirmDelete=(index,id,name)=>{
         Swal.fire({
@@ -61,7 +98,7 @@ const ManageProgram=(props)=>{
             confirmButtonText: 'Yes, delete it!'
         }).then((res)=>{
             if(res.value){
-                // Axios.delete(`${API_URL}/products/${id}`)
+                // Axios.delete(`${API_URL}/programs/deleteprogram/${id}`)
                 Swal.fire(
                     'Deleted!',
                     'Your program has been deleted.',
@@ -205,7 +242,7 @@ const ManageProgram=(props)=>{
                 <input name='image' type='file' placeholder='Image' className='form-control mt-2' onChange={changeHandler}></input>
                 <input name='brand' type='text' placeholder='Brand' className='form-control mt-2' onChange={changeHandler}></input>
                 <select className='form-control mt-2'>
-                    <option value="" hidden>categoryID</option>
+                    <option value="" hidden id='categoryID'>categoryID</option>
                     <option value='1'>Health And Beauty (1)</option>
                     <option value='2'>Household Grocery (2)</option>
                     <option value='3'>Electronic (3)</option>
@@ -225,7 +262,7 @@ const ManageProgram=(props)=>{
         {/* Modal Edit Program */}
         <Modal isOpen={modalEdit} toggle={toggleEdit} className={className}>
             <ModalHeader toggle={toggleEdit}>Edit Program</ModalHeader>
-            <input name='name' type='text' placeholder='Program Name' className='form-control mt-2 '></input>
+                <input name='name' type='text' placeholder='Program Name' className='form-control mt-2 '></input>
                 <input type='file' placeholder='Image' className='form-control mt-2'></input>
                 <input name='brand' type='text' placeholder='Brand' className='form-control mt-2'></input>
                 <select className='form-control mt-2'>

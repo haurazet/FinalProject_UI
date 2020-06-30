@@ -19,12 +19,20 @@ import {
         RESET_PASSWORD_FAILED,
         RESET_PASSWORD_SUCCESS,
         TOKEN_EXIST,
-        TOKEN_NOT_EXIST
+        TOKEN_NOT_EXIST,
+        USER_EDITPASS_START,
+        USER_EDITPASS_FAILED,
+        USER_EDITPASS_SUCCESS,
+        USER_EDITCONTACT_START,
+        USER_EDITCONTACT_FAILED,
+        USER_EDITCONTACT_SUCCESS
     } from './type'
 import Axios from 'axios'
 import { API_URL } from './../../support/Apiurl'
 import querystring from 'query-string'
-
+import Swal from 'sweetalert2';
+import withReactContent from 'sweetalert2-react-content';
+const MySwal = withReactContent(Swal);
 
 export const RegisterUser=(
     {
@@ -92,19 +100,98 @@ export const RegisterUser=(
     }
 }
 
-export const EditContactInformation=({first_name,last_name,username,address,city,state,zipcode,phonenumber})=>{
-  return(dispatch)=>{
-
-  }  
-}
-
-export const EditPasswordInformation=({email,currentpassword,newpassword,newconfirmpassword})=>{
+export const EditContactInformation=(id, contactInformation)=>{
+    const {first_name,last_name,username,address,city,state,zipcode,phonenumber} = contactInformation
     return(dispatch)=>{
-        if(newpassword!==newconfirmpassword){
-            console.log('bedapass')
+        dispatch({type:USER_EDITCONTACT_START})
+        if(
+            first_name===''||
+            last_name===''||
+            username===''||
+            address===''||
+            city===''||
+            state===''||
+            zipcode===''||
+            phonenumber===''
+        ){
+            dispatch({type:USER_EDITCONTACT_FAILED,payload:{errormes2:'Please Input All Data'}})
+            console.log('masih ad yg kosong')
+        }else{
+            console.log('isisemuaa')
+            Axios.put(`${API_URL}/users/updateuser/${id}`, contactInformation)
+            .then((res)=>{
+                if(res.data.status){
+                    console.log(res.data)
+                    MySwal.fire({
+                        icon:'success',
+                        title:'data berhasil diubah'
+                      }).then((res)=>{
+                        dispatch({type:USER_EDITCONTACT_SUCCESS,payload:res.data})
+                      }) 
+                }else{
+                    dispatch({type: USER_EDITCONTACT_FAILED,payload:'Gagal rubah data'})
+                }
+            }).catch((err)=>{
+                console.log(err)
+                dispatch({type:USER_EDITCONTACT_FAILED,payload:{errormes2:'Gagal masuk axios'}})
+            })
         }
     }
+}
 
+export const EditPasswordInformation=({
+    currentpassword,
+    newpassword,
+    newconfirmpassword,
+    token
+    })=>{
+    return(dispatch)=>{
+        dispatch({type:USER_EDITPASS_START})
+        if(
+            currentpassword===''||
+            newpassword===''||
+            newconfirmpassword===''
+        ){
+            dispatch({type:USER_EDITPASS_FAILED,payload:{errormes:'Please Input All Data'}})
+        }else{
+            if(newpassword!==newconfirmpassword){
+                dispatch({type:USER_EDITPASS_FAILED,payload:{errormes:'Password Berbeda',isPassSame:false}})
+                console.log('passbedaa')
+            }else{
+                console.log('passsama')
+
+                Axios.get(`${API_URL}/users/changepassword`,{
+                    params:{
+                        password:currentpassword,
+                        newpassword:newpassword    
+                    },
+                    headers:{
+                      'Authorization':`Bearer ${token}`
+                    }
+                  })
+                  .then((res)=>{
+                    if(res.data.status){
+                        console.log(res.data)
+                        MySwal.fire({
+                          icon:'success',
+                          title:'password berhasil diubah'
+                        }).then((res)=>{
+                          dispatch({type:USER_EDITPASS_SUCCESS,payload:{errormes:'berhasil masuk!'}})
+                        })
+                    }else{
+                      console.log('masuk sini')
+                        dispatch({type: USER_EDITPASS_FAILED,payload:{errormes:'data masuk sini dan tidak berhasil dirubah'}})
+                    }
+                }).catch((err)=>{
+                    console.log(err)
+                    dispatch({type:USER_EDITPASS_FAILED,payload:{errormes:'Gagal masuk axios'}})
+                }) 
+                
+            }    
+        }
+
+
+    }
 }
 
 export const ResendEmailVerification=({username,email,userid})=>{

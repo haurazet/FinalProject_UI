@@ -13,6 +13,7 @@ import {EditContactInformation,EditPasswordInformation} from '../../redux/action
 const EditProfile =({EditContactInformation,EditPasswordInformation})=>{
 
     useEffect(()=>{
+        var token = localStorage.getItem('token')
         let id=Auth.id
         Axios.get(`${API_URL}/users/getalluserinfo/${id}`)
         .then((res)=>{
@@ -25,9 +26,10 @@ const EditProfile =({EditContactInformation,EditPasswordInformation})=>{
                 city:res.data[0].city,
                 state:res.data[0].state,
                 zipcode:res.data[0].zipcode,
-                phonenumber:res.data[0].phonenumber
+                phonenumber:res.data[0].phonenumber,
+                token:token
             })
-            setEditPassword({...editPassword,email:res.data[0].email})
+            setEditPassword({...editPassword,token:token})
         }).catch((err)=>{
             console.log(err)
         })
@@ -42,19 +44,27 @@ const EditProfile =({EditContactInformation,EditPasswordInformation})=>{
         state:'',
         zipcode:'',
         phonenumber:'',
+        token:''
     })
 
     const [editPassword,setEditPassword]=useState({
-        email:'',
         currentpassword:'',
         newpassword:'',
-        newconfirmpassword:''
+        newconfirmpassword:'',
+        token:''
     })
     
     //On Change Contact Information
     const changeHandlerCI=(e)=>{
         setContactInformation({...contactInformation,[e.target.name]:e.target.value})
+    }
+
+    //Submit Handler Contact Information
+    const submitHandlerCI=(e)=>{
+        e.preventDefault()  
+        e.target.className += " was-validated";
         console.log(contactInformation)
+        EditContactInformation(Auth.id, contactInformation)
     }
 
     //On Change Edit Password
@@ -63,9 +73,12 @@ const EditProfile =({EditContactInformation,EditPasswordInformation})=>{
         console.log(editPassword)
     }
 
-    const submitHandler=(e)=>{
+    //Submit Handler Edit Password
+    const submitHandlerEP=(e)=>{
         e.preventDefault()  
         e.target.className += " was-validated";
+        EditPasswordInformation(editPassword)
+        // setEditPassword({...editPassword, currentpassword:'', newpassword:'', newconfirmpassword:''})
     }
 
     const Auth = useSelector(state=> state.Auth)
@@ -97,7 +110,7 @@ const EditProfile =({EditContactInformation,EditPasswordInformation})=>{
 
                         <form
                          className="needs-validation"
-                         onSubmit={submitHandler}
+                         onSubmit={submitHandlerCI}
                          noValidate
                         >
 
@@ -298,6 +311,9 @@ const EditProfile =({EditContactInformation,EditPasswordInformation})=>{
                         </MDBRow>
 
                         <Button text='Edit Contact Information'/>
+                        <div>
+                            {Auth.errormes2}
+                        </div>
 
                         </form>
 
@@ -307,32 +323,10 @@ const EditProfile =({EditContactInformation,EditPasswordInformation})=>{
 
                         <form
                                 className="needs-validation"
-                                onSubmit={submitHandler}
+                                onSubmit={submitHandlerEP}
                                 noValidate
                         >
                         
-                        {/* EMAIL */}
-                        <MDBRow>
-                            <MDBCol md="8" className="mb-3">
-                                <label
-                                    className="mt-3 text-lowercase"
-                                    style={{color:'#62accc'}}
-                                >
-                                    Email
-                                </label>
-                                <input
-                                    value={editPassword.email}
-                                    onChange={changeHandlerEP}
-                                    type="email"
-                                    className='form-control'
-                                    name="email"
-                                    required
-                                />
-                                <div className="invalid-tooltip">
-                                    Please provide email
-                                </div>
-                            </MDBCol>
-                        </MDBRow>
 
                         {/* CURRENT PASSWORD */}
                         <MDBRow>
@@ -367,10 +361,10 @@ const EditProfile =({EditContactInformation,EditPasswordInformation})=>{
                                     className="mt-2 text-lowercase"
                                     style={{color:'#62accc'}}
                                 >
-                                    Confirm Password
+                                    New Password
                                 </label>
                                 <input
-                                    value={editPassword.confirmpassword}
+                                    value={editPassword.newpassword}
                                     onChange={changeHandlerEP}
                                     type="password"
                                     className='form-control'
@@ -379,7 +373,7 @@ const EditProfile =({EditContactInformation,EditPasswordInformation})=>{
                                     required
                                 />
                                 <div className="invalid-tooltip">
-                                    Please Provide New Password
+                                    {editPassword.newpassword?"Password must contain minimum eight characters, at least one letter and one number":"Please provide password."}
                                 </div>
                             </MDBCol>
                         </MDBRow>
@@ -388,7 +382,6 @@ const EditProfile =({EditContactInformation,EditPasswordInformation})=>{
                         <MDBRow>
                             <MDBCol md="8" className="mb-3">
                                 <label
-                                    htmlFor="defaultFormRegisterNameEx11"
                                     className="mt-2 text-lowercase"
                                     style={{color:'#62accc'}}
                                 >
@@ -404,18 +397,21 @@ const EditProfile =({EditContactInformation,EditPasswordInformation})=>{
                                     required
                                 />
                                 <div className="invalid-tooltip">
-                                    Please Provide New Confirm Password
+                                    {Auth.isPassSame===false?"Password and confirm password do not match":"Please provide confirm password."}
                                 </div>
                             </MDBCol>
                         </MDBRow>
+
+                        
+                        
+                        <div><a className="go-back-link mb-2 pl-1" href="/forgotpassword">Forgot password?</a></div>
+                    
+                        <Button text='Edit Password'/>
 
                         <div>
                             {Auth.errormes}
                         </div>
                         
-                        <div><a className="go-back-link mb-2 pl-1" href="/forgotpassword">Forgot password?</a></div>
-                        
-                        <Button text='Edit Password' onClick={()=>EditPasswordInformation(editPassword.email,editPassword.currentpassword,editPassword.newpassword,editPassword.newconfirmpassword)}/>
 
                         </form>
 
